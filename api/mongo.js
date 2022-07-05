@@ -7,8 +7,8 @@ const connectionString = `mongodb+srv://jalugj:${DB_PASS}@cluster0.ncpug.mongodb
 //conneccion con mongoDB
 
 mongoose.connect(connectionString)
-    .then(()=>{
+    .then(() => {
         console.log('Database connected')
-    }).catch(err=>{
+    }).catch((err) => {
         console.error(err)
-    })
+})
