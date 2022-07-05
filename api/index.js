@@ -1,20 +1,23 @@
-//coneccion tipica, express, para 
-// const server = require('./app.js')
-// const { conn } = require('./db.js')
-
 require('dotenv').config()
+
+// en la linea 4 al cachear los modulos se logra hacer la conexion con mongoDB ;)
+require('./mongo.js')
+
+
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const { PORT } = process.env
+const Product = require('./src/models/product/productSchema.js')
 
 app.use(cors())
 app.use(express.json())
 
-//coneccion con la mongoose para luego hacer los "esquemas"
+app.get('/products', (req, res, next) => {
 
-conn.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`listening on port ${PORT}`)
-    })
 })
+
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
+})
+
