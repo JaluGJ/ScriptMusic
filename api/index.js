@@ -11,6 +11,7 @@ const { PORT } = process.env
 const errorsHandlers = require('./src/middlewares/errorsHandlers.js')
 
 app.use(cors())
+app.use(express.static('public'))
 app.use(express.json())
 
 app.use('/', router)
