@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose')
 
 const userSchema = new Schema({
-  firsName: {
+  firstName: {
     type: String,
     required: true,
   },
@@ -17,15 +17,23 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  bought: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    }
+  ]
 });
 
-userSchema.set("toJSON", {
+userSchema.set('toJSON', {
   transform: (doc, ret) => {
-    delete ret.password;
-    return ret;
-  },
-});
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+      delete ret.password
+  }
+})
 
-const userModel = model("user", userSchema);
+const userModel = model("User", userSchema)
 
-module.exports = userModel;
+module.exports = userModel
