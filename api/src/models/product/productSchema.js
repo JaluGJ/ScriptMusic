@@ -45,7 +45,7 @@ const productSchema = new Schema({
     }
 })
 
-// ens la db aun existe el _id y el __v, la cosa es que al hacer el send al front lo enviemos como id y lo demas se borra
+// en la db aun existe el _id y el __v, la cosa es que al hacer el send al front lo enviemos como id y lo demas se borra
 // para hacer cualquier peticion en base al id en el back van a tener que usar _id, si no no va a encontrar nada.
 productSchema.set('toJSON', {
     transform: (doc, ret) => {
