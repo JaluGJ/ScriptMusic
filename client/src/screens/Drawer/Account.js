@@ -16,7 +16,7 @@ export default Account
 const styles = StyleSheet.create({
   wrapper: {
     height: "100%",
-    backgroundColor: "#000000",
+    backgroundColor: "#1e1c1b",
   },
   container: {
     flex: 1,
