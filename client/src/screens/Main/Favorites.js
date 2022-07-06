@@ -17,7 +17,7 @@ export default Favorites
 const styles = StyleSheet.create({
   wrapper: {
     height: "100%",
-    backgroundColor: "#000000",
+    backgroundColor: "#1e1c1b",
   },
   container: {
     backgroundColor:"white",
