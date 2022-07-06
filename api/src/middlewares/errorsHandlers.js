@@ -1,5 +1,5 @@
 module.exports = (error, request, response, next) => {
-    console.error(err)
+    console.error(error)
 
     if(error.name === "CastError"){
         return response.status(400).json({
