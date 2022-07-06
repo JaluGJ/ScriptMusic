@@ -1,12 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import 'react-native-gesture-handler';
+import AuthStack from "./src/Wrappers/AuthStack";
+import AppStack from "./src/Wrappers/AppStack";
+import { Provider } from 'react-redux';
+import store from './src/redux/store.js';
+
 
 export default function App() {
   return (
-    <View>
-      <Text>PROYECTO FINAL</Text>
-      <h1>Hola</h1>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+
+      <SafeAreaProvider>
+        <NavigationContainer >
+          {/* <AuthStack/> */}
+          <AppStack />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
+

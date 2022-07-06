@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "final-project",
-    "slug": "final-project",
+    "name": "ScriptMusic",
+    "slug": "ScriptMusic",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
