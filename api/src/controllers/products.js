@@ -2,7 +2,7 @@ const Product = require("../models/product/productSchema.js");
 
 module.exports = {
   getAllProducts: (req, res, next) => {
-    const { search, category } = req.query;
+    const { search, category, price } = req.query;
     if (search) {
       return Product.find({ model: { $regex: search, $options: "i" } })
         .then((products) => {
@@ -15,7 +15,23 @@ module.exports = {
           next(error);
         });
     }
-    if (category) {
+    if (!category && price) {
+      if (price === "higher") {
+        return Product.find({})
+          .sort({ price: 1 })
+          .then((products) => {
+            return res.json(products).end();
+          });
+      }
+      if (price === "lower") {
+        return Product.find({})
+          .sort({ price: -1 })
+          .then((products) => {
+            return res.json(products).end();
+          });
+      }
+    }
+    if (category && !price) {
       return Product.find({ category: category }).then((products) => {
         if (products.length === 0) {
           return res
@@ -25,6 +41,33 @@ module.exports = {
         return res.json(products).end();
       });
     }
+    if (category && price) {
+      if (price === "higher") {
+        return Product.find({ category: category })
+          .sort({ price: 1 })
+          .then((products) => {
+            if (products.length === 0) {
+              return res
+                .status(404)
+                .send("No existen productos con esta categoria");
+            }
+            return res.json(products).end();
+          });
+      }
+      if (price === "lower") {
+        return Product.find({ category: category })
+          .sort({ price: -1 })
+          .then((products) => {
+            if (products.length === 0) {
+              return res
+                .status(404)
+                .send("No existen productos con esta categoria");
+            }
+            return res.json(products).end();
+          });
+      }
+    }
+
     Product.find()
       .then((products) => {
         return res.json(products).end();
