@@ -2,6 +2,7 @@ const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
 const { createUser, getAllUsers } = require('../controllers/user')
+const { paymentCard } = require('../controllers/payment')
 const routes = Router()
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
@@ -23,5 +24,11 @@ routes.post('/user', createUser)
 
 routes.get('/user', getAllUsers)
 // USER ROUTES
+
+//PAYMENT ROUTES
+
+routes.post('/create-payment-intent', paymentCard )
+
+//PAYMENT ROUTES
 
 module.exports = routes
