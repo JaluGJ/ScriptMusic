@@ -1,12 +1,66 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, FlatList, TextInput, SafeAreaView } from 'react-native'
-
+import { View, FlatList, TextInput, SafeAreaView, StatusBar, Image } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import { Ionicons } from '@expo/vector-icons';
+import { getAllProducts } from '../../redux/slices/products'
+import styles from './Styles/Home.jsx'
+import user from '../../../assets/user.png'
+import Product from './modules/Product';
+import Categories from './modules/Categories';
+//import FilterModal from './modules/FilterModal';
 
 const Home = () => {
+
+  const { list: products } = useSelector(state => state.products)
+  const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllProducts())
+
+  }, []);
+
+
   return (
     <View style={styles.wrapper}>
+      <StatusBar />
       <SafeAreaView style={styles.container}>
-           <Text>HOME</Text>
+        <View style={styles.containerNav}>
+          <Image
+            style={{
+              width: 50,
+              height: 50,
+            }}
+            source={user}
+          />
+          <TextInput style={styles.input} placeholder='🔎 Buscar' />
+
+          <Ionicons
+            name="filter-sharp"
+            size={34}
+            color="#DD8643"
+            onPress={() => setModal(!modal)}
+          />
+        </View>
+
+
+        <Categories />
+
+        <View>
+          <FlatList
+            data={products}
+            key={(item) => item.id}
+            renderItem={({ item }) => {
+              return (
+                <Product item={item} />
+              )
+            }} />
+        </View>
+
+        {/* <FilterModal
+          modal={modal}
+          setModal={setModal}
+        /> */}
       </SafeAreaView>
     </View>
 
@@ -15,18 +69,3 @@ const Home = () => {
 
 export default Home
 
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: "#1e1c1b",
-  },
-  container: {
-    backgroundColor:"white",
-    // width: "100%",
-    height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-    alignItems: "center",
-  }
-})
