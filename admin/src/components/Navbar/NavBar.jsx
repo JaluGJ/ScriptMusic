@@ -15,13 +15,16 @@ export default function NavBar(){
 
             <div className="items">
                 <div className="item">
-                <DarkModeOutlinedIcon />            
+                <DarkModeOutlinedIcon className='icon'/>            
                 </div>
                 <div className="item">
-                <LightModeOutlinedIcon />
+                <LightModeOutlinedIcon className='icon'/>
                 </div>
                 <div className="item">
-                <NotificationsIcon />
+                <NotificationsIcon className='icon'/>
+                </div>
+                <div className="item">
+                <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" className="avatar" />
                 </div>
             </div>
 

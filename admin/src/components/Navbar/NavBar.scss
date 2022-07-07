@@ -8,26 +8,51 @@
 
     .wrapper{
         width: 100%;
-        padding: 20px;
+        padding: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: rgb(0, 255, 47);
+        background-color: #2B2B2B;
 
         .search{
             display: flex;
             align-items: center;
             border: 0.5px solid lightgray;
             padding: 3px;
+            
 
             input{
                 border: none;
                 outline: none;
+                background: transparent;
+                color: #FEFEFE;
+                
+
+                &::placeholder{
+                    font-size: 12px;
+                }
             }
         }
 
         .items{
             display: flex;
+            align-items: center;
+
+            .item{
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+            }
+
+            .icon{
+                font-size: 20px;
+            }
+
+            .avatar{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
         }
     }
 }
