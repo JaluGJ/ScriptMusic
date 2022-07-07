@@ -1,30 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { View, Text, Image, StatusBar } from "react-native";
+import React from "react";
+import emptyCart from "../../../assets/carrito1.png";
+import styles from "./Styles/ShoppingCart.jsx";
 
-const ShoppingCart = () => {
+export default function EmptyCart() {
   return (
     <View style={styles.wrapper}>
-    <View style={styles.container}>
-      <Text>ShoppingCart</Text>
+      <View style={styles.container}>
+        <StatusBar />
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.title}>CARRITO</Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Image source={emptyCart} style={styles.image} />
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.text}>Tu carrito está vacío.</Text>
+        </View>
+        <View style={styles.containerText}>
+          <Text style={styles.text}>¡Explora nuestros</Text>
+          <View style={styles.containerTextLinked}>
+            <Text style={styles.text}>productos</Text>
+            <Text style={styles.textLinked}> aquí</Text>
+            <Text style={styles.text}>!</Text>
+          </View>
+        </View>
+      </View>
     </View>
-    </View>
-    
-  )
+  );
 }
-
-export default ShoppingCart
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: "#1e1c1b",
-  },
-  container: {
-    backgroundColor:"white",
-    // width: "100%",
-    height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-    alignItems: "center",
-  }
-})
