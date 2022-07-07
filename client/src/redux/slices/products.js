@@ -10,7 +10,7 @@ export const productsSlice = createSlice({
         setProductsList: (state, action)=>{
             state.list = action.payload;
         }
-    }   
+    }
 });
 
 export const {setProductsList} = productsSlice.actions;
@@ -23,7 +23,17 @@ export const getAllProducts = ()=> (dispatch) =>{
     let products = dispatch(setProductsList(guitarras))
 
     return products
+}
 
+export const getAllFilterProducts = (filter)=> (dispatch) =>{
+    let {category,price} = filter;
+    axios.get(`http://localhost:3001/filter?category=${category}&price=${price}`)
+    .then(res=>{
+        dispatch(setProductsList(res.data))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 }
 /* 
 export const getAllProductsd = ()=>{
