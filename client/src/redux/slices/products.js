@@ -25,6 +25,17 @@ export const getAllProducts = ()=> (dispatch) =>{
     return products
 
 }
+
+
+export const searchProducts = (name) => (dispatch) => {
+    axios.get(`http://localhost:3001/products?search=${name}`)
+    .then(res =>{
+        dispatch(setProductsList(res.data))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
 /* 
 export const getAllProductsd = ()=>{
     axios.get('url').then((
