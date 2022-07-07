@@ -1,13 +1,17 @@
 import React from 'react';
+import NavBar from '../Navbar/NavBar';
 import SideBar from '../SideBar/SideBar';
-import styles from './Home.module.css';
+import './Home.scss';
 
 
 export default function Home(){
     return (
-    <div className={styles.home}>
+    <div className='home'>
         <SideBar/>
-        <div className={styles.container}>container</div>
+        <div className='homecontainer'>
+            <NavBar/>
+            homecontainer
+        </div>
     </div>
     )
 }
