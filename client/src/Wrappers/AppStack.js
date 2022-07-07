@@ -23,8 +23,8 @@ const AppStack = () => {
           tabBarStyle: {
             height: 55,
             paddingTop: 12,
-            backgroundColor: "#1e1c1b",
-            borderTopColor: "#1e1c1b",
+            backgroundColor: "#000000",
+            borderTopColor: "#000000",
           },
         }}
       >
