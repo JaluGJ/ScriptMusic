@@ -15,12 +15,13 @@ import user from "../../../assets/user.png";
 import Product from "./modules/Product";
 import Categories from "./modules/Categories";
 import Pagination from "../../components/Pagination";
-//import FilterModal from './modules/FilterModal';
+import FilterModal from './modules/FilterModal';
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [search, setSearch] = useState('');
 
   const { page } = useSelector((state) => state.pagination);
   const instrumentsPerPage = 12;
@@ -32,6 +33,9 @@ const Home = () => {
     indexOfLastInstrument
   ); //12 - 24
 
+  const submitHandle=()=> {
+    setSearch('')
+  }
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
@@ -48,7 +52,13 @@ const Home = () => {
             }}
             source={user}
           />
-          <TextInput style={styles.input} placeholder="🔎 Buscar" />
+          <TextInput
+            style={styles.input}
+            placeholder=" Buscar"
+            value={search}
+            onChangeText={setSearch}
+            onSubmitEditing={() => submitHandle()}
+          />
 
           <Ionicons
             name="filter-sharp"
@@ -72,10 +82,10 @@ const Home = () => {
           />
         </View>
 
-        {/* <FilterModal
+        <FilterModal
           modal={modal}
           setModal={setModal}
-        /> */}
+        />
       </SafeAreaView>
     </View>
   );

@@ -1,4 +1,10 @@
-import { View, FlatList, Button, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { setCurrentPage } from "../redux/slices/pagination";
@@ -28,6 +34,25 @@ export default function Pagination({ allInstruments }) {
           >
             <Text style={styles.buttonText}>PREV</Text>
           </TouchableOpacity>
+
+          {/* <ScrollView horizontal={true}>
+            <FlatList
+              data={pageNumbers.toString().replace(/\,/g, "")}
+              key={(item) => item}
+              contentContainerStyle={styles.containerButtonNumber}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    style={styles.buttonNumber}
+                    onPress={() => dispatch(setCurrentPage(Number(item)))}
+                  >
+                    <Text>{item}</Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </ScrollView> */}
+
           <TouchableOpacity
             style={
               currentPage === totalPages ? styles.buttonDisabled : styles.button
@@ -38,19 +63,6 @@ export default function Pagination({ allInstruments }) {
             <Text style={styles.buttonText}>NEXT</Text>
           </TouchableOpacity>
         </View>
-        <FlatList
-          data={totalPages}
-          key={(item) => item}
-          renderItem={({ item }) => {
-            console.log("ITEM", item);
-            return (
-              <Button
-                title={item}
-                onPress={() => dispatch(setCurrentPage(item))}
-              />
-            );
-          }}
-        />
       </View>
     </View>
   );
