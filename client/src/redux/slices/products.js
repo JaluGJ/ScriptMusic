@@ -45,6 +45,7 @@ export const searchProducts = (name) => (dispatch) => {
     })
     .catch(err=>{
         dispatch(setProductsStatusCode(err.response.status))
+        dispatch(setCurrentPage(1))
         console.log(err)
     })
 }
