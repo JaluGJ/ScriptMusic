@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  Text,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,6 +20,8 @@ import FilterModal from './modules/FilterModal';
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
+  const { statusCode : statusCode } = useSelector((state) => state.products);
+  console.log(statusCode)
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [search, setSearch] = useState('');
@@ -73,13 +76,17 @@ const Home = () => {
         <Pagination allInstruments={products.length} />
 
         <View style={styles.cartonblanco}>
-          <FlatList
+         { statusCode<400 ? <FlatList
             data={currentInstruments}
             key={(item) => item.id}
             renderItem={({ item }) => {
               return <Product item={item} />;
             }}
-          />
+          /> : 
+          <View style={styles.containerNoProducts}>
+          <Text style={styles.notProducts}>No exiten coincidencias</Text>
+          </View>
+          }
         </View>
 
         <FilterModal

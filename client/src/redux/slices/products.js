@@ -4,16 +4,20 @@ const apiUrl = 'http://192.168.0.12:3001/';
 export const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        list: []
+        list: [],
+        statusCode: 200,
     },
     reducers: {
         setProductsList: (state, action)=>{
             state.list = action.payload;
+        },
+        setProductsStatusCode: (state, action)=>{
+            state.statusCode = action.payload;
         }
     }   
 });
 
-export const {setProductsList} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode} = productsSlice.actions;
 
 
 
@@ -23,6 +27,7 @@ export const getAllProducts = ()=> (dispatch) =>{
     axios.get(`${apiUrl}products`)
     .then(res=>{
         dispatch(setProductsList(res.data))
+        dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
         console.log(err)
@@ -33,19 +38,34 @@ export const searchProducts = (name) => (dispatch) => {
     axios.get(`${apiUrl}products?search=${name}`)
     .then(res =>{
         dispatch(setProductsList(res.data))
+        dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
+        dispatch(setProductsStatusCode(err.response.status))
         console.log(err)
     })
 }
 
 export const getAllFilterProducts = (filter)=> (dispatch) =>{
+   
     let {category,price} = filter;
-    axios.get(`${apiUrl}products?category=${category}&price=${price}`)
-    .then(res=>{
-        dispatch(setProductsList(res.data))
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+    if(price === undefined){
+        axios.get(`${apiUrl}products?category=${category}`)
+        .then(res=>{
+            dispatch(setProductsList(res.data))
+            dispatch(setProductsStatusCode(res.status))
+        })
+        .catch(err=>{
+           console.log(err)
+        })
+    }else{
+        axios.get(`${apiUrl}products?category=${category}&price=${price}`)
+        .then(res=>{
+            dispatch(setProductsList(res.data))
+            dispatch(setProductsStatusCode(res.status))
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 }
