@@ -1,0 +1,91 @@
+.new{
+    width: 100%;
+    display: flex;
+    
+    .newcontainer{
+         flex:6;
+
+         .top,
+         .bottom{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+
+            .title{
+                color:#DD8643;
+                font-size: 20px;
+            }
+            .left{
+                flex:1;
+                text-align: center;
+                            
+
+                img{
+                    width: 250px;
+                    height: 250px;
+                    border-radius:50%;
+                }
+            }
+
+            .rigth{
+                flex:2;               
+
+                form{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 30px;
+                    justify-content: space-around;
+
+                    .formInput{
+                        width: 40%;
+
+                        label{
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #FFC680;
+                        }
+
+
+                        input{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                        }
+
+                        textarea{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            
+                        }
+
+                        
+                    }
+
+                    button{
+                        width: 150px;
+                        background-color: #DD8643;
+                        padding: 10px;
+                        border: none;
+                        color: white;
+                        font-weight: bold;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        border-radius: 10px;
+                        
+                    }
+
+                }
+            }
+        }
+    }
+
+    
+}
