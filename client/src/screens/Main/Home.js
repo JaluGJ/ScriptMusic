@@ -33,7 +33,7 @@ const Home = () => {
     indexOfLastInstrument
   ); //12 - 24
 
-  const submitHandle=()=> {
+  const submitHandle = () => {
     setSearch('')
   }
   useEffect(() => {
@@ -72,7 +72,7 @@ const Home = () => {
 
         <Pagination allInstruments={products.length} />
 
-        <View>
+        <View style={styles.cartonblanco}>
           <FlatList
             data={currentInstruments}
             key={(item) => item.id}

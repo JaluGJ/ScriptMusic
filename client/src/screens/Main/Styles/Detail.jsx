@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         marginHorizontal:5
     },
     containerImg:{
-        height: 350,
+        height: 800,
         width: '100%',
     },
     brand:{
