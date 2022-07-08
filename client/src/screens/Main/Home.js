@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
-import { getAllProducts } from "../../redux/slices/products";
+import { getAllProducts, searchProducts } from "../../redux/slices/products";
 import styles from "./Styles/Home.jsx";
 import user from "../../../assets/user.png";
 import Product from "./modules/Product";
@@ -33,8 +33,8 @@ const Home = () => {
     indexOfLastInstrument
   ); //12 - 24
 
-  const submitHandle = () => {
-    setSearch('')
+  const submitHandle = (search) => {
+    dispatch(searchProducts(search));
   }
   useEffect(() => {
     dispatch(getAllProducts());
@@ -57,7 +57,7 @@ const Home = () => {
             placeholder=" Buscar"
             value={search}
             onChangeText={setSearch}
-            onSubmitEditing={() => submitHandle()}
+            onSubmitEditing={() => submitHandle(search)}
           />
 
           <Ionicons

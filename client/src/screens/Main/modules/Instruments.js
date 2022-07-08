@@ -13,7 +13,7 @@ const instruments = [
     },
     {
         id: 3,
-        name: 'Teclados',
+        name: 'Teclado',
         imageLight: 'https://i.postimg.cc/kXCSh1Lc/piano2.png',
         imageDark: 'https://i.postimg.cc/kXCSh1Lc/piano2.png',
     },
@@ -25,7 +25,7 @@ const instruments = [
     },
     {
         id: 5,
-        name: 'Percusion',
+        name: 'Percusión',
         imageLight: 'https://i.postimg.cc/SKP8Typ2/percusion2.png',
         imageDark: 'https://i.postimg.cc/SKP8Typ2/percusion2.png',
     },
