@@ -60,7 +60,9 @@ export default function SideBar(){
                     </li>
                 </ul>
             </div>
-            <div className="bottom">BUTTOM</div>
+            <div className="bottom">
+                BOTTOM
+            </div>
         </div>
     )
 }
