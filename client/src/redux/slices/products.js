@@ -1,7 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCurrentPage } from './pagination';
-const apiUrl = 'http://192.168.0.12:3001/';
+
+const apiUrl = 'http://62.108.35.100:3001/';
+
 export const productsSlice = createSlice({
     name: 'products',
     initialState: {
@@ -51,7 +53,7 @@ export const searchProducts = (name) => (dispatch) => {
 }
 
 export const getAllFilterProducts = (filter)=> (dispatch) =>{
-   
+    
     let {category,price} = filter;
     if(price === undefined){
         axios.get(`${apiUrl}products?category=${category}`)

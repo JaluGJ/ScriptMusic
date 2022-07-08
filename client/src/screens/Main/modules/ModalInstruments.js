@@ -1,4 +1,4 @@
-const instruments = [
+export const instruments = [
     {
         id: 1,
         name: 'Todos',
@@ -34,7 +34,9 @@ const instruments = [
         name: 'Viento',
         imageLight: 'https://i.postimg.cc/7P3G71bT/viento2.png',
         imageDark: 'https://i.postimg.cc/7P3G71bT/viento2.png',
-    },
+    }
+]
+export const instrumentstwo=[
     {
         id: 7,
         name: 'Ukelele',
@@ -48,5 +50,3 @@ const instruments = [
         imageDark: 'https://i.postimg.cc/qvRz99w8/violin2.png',
     },
 ]
-
-export default instruments
