@@ -1,9 +1,15 @@
 module.exports = (error, request, response, next) => {
-    console.error(error)
+    console.error(error.name)
 
     if(error.name === "CastError"){
         return response.status(400).json({
-            error: "Invalid ID",
+            error: "ID Invalido",
+            message: error.message
+        }).end()
+    }
+    if(error.name === "TypeError"){
+        return response.status(400).json({
+            error: "Master... Escribí bien",
             message: error.message
         }).end()
     }

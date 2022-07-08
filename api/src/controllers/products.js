@@ -37,21 +37,18 @@ module.exports = {
 
     if (category && !price) {
       if (category === "Todos") {
-        return Product.find({})
+        return Product.find()
           .then((products) => {
             return res.json(products).end();
           })
           .catch((error) => {
             next(error);
           })
-          .end();
       }
 
       return Product.find({ category: category }).then((products) => {
         if (products.length === 0) {
-          return res
-            .status(404)
-            .send("No existen productos con esta categoria");
+          return res.status(404).send("No existen productos con esta categoria");
         }
         return res.json(products).end();
       });
@@ -59,7 +56,7 @@ module.exports = {
 
     if (category && price) {
       if (category === "Todos" && price === "higher") {
-        return Product.find({})
+        return Product.find()
           .sort({ price: -1 })
           .then((products) => {
             return res.json(products).end();
@@ -67,7 +64,6 @@ module.exports = {
           .catch((error) => {
             next(error);
           })
-          .end();
       }
 
       if (price === "higher") {
@@ -75,9 +71,7 @@ module.exports = {
           .sort({ price: -1 })
           .then((products) => {
             if (products.length === 0) {
-              return res
-                .status(404)
-                .send("No existen productos con esta categoria");
+              return res.status(404).send("No existen productos con esta categoria");
             }
             return res.json(products).end();
           });
@@ -92,7 +86,6 @@ module.exports = {
           .catch((error) => {
             next(error);
           })
-          .end();
       }
 
       if (price === "lower") {
@@ -100,9 +93,7 @@ module.exports = {
           .sort({ price: 1 })
           .then((products) => {
             if (products.length === 0) {
-              return res
-                .status(404)
-                .send("No existen productos con esta categoria");
+              return res.status(404).send("No existen productos con esta categoria");
             }
             return res.json(products).end();
           });
@@ -131,19 +122,9 @@ module.exports = {
 
   updateProduct: (req, res, next) => {
     const { id } = req.params;
-    const { model, brand, price, type, category, stock, image, description } =
-      req.body;
+    const { model, brand, price, type, category, stock, image, description } = req.body;
 
-    if (
-      !model ||
-      !brand ||
-      !price ||
-      !type ||
-      !category ||
-      !stock ||
-      !image ||
-      !description
-    ) {
+    if (!model || !brand || !price || !type || !category || !stock || !image || !description) {
       return res.status(400).send("Falta informacion necesaria");
     }
 
@@ -182,16 +163,7 @@ module.exports = {
     const { model, brand, price, type, category, stock, image, description } =
       req.body;
 
-    if (
-      !model ||
-      !brand ||
-      !price ||
-      !type ||
-      !category ||
-      !stock ||
-      !image ||
-      !description
-    ) {
+    if (!model || !brand || !price || !type || !category || !stock || !image || !description) {
       return res.status(400).send("Falta informacion necesaria");
     }
 
@@ -206,8 +178,7 @@ module.exports = {
       description,
     });
 
-    product
-      .save()
+    product.save()
       .then(() => {
         return res.send("Producto guardado");
       })
