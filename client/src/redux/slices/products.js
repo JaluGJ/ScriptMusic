@@ -30,7 +30,6 @@ export const getAllProducts = ()=> (dispatch) =>{
 }
 
 export const searchProducts = (name) => (dispatch) => {
-    console.log(name)
     axios.get(`${apiUrl}products?search=${name}`)
     .then(res =>{
         dispatch(setProductsList(res.data))
@@ -44,7 +43,6 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
     let {category,price} = filter;
     axios.get(`${apiUrl}products?category=${category}&price=${price}`)
     .then(res=>{
-        console.log(res.data)
         dispatch(setProductsList(res.data))
     })
     .catch(err=>{
