@@ -4,7 +4,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { getAllFilterProducts } from '../../../redux/slices/products.js'
 
-const Categories = () => {
+const HomeCategories = () => {
     const dispatch = useDispatch()
     return (
         <View style={styles.categories}>
@@ -54,4 +54,4 @@ const Categories = () => {
     )
 }
 
-export default Categories
+export default HomeCategories

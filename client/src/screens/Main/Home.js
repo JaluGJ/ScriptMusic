@@ -14,13 +14,13 @@ import { getAllProducts, searchProducts } from "../../redux/slices/products";
 import styles from "./Styles/Home.jsx";
 import user from "../../../assets/user.png";
 import Product from "./modules/Product";
-import Categories from "./modules/Categories";
+import HomeCategories from "./modules/HomeCategories.js";
 import Pagination from "../../components/Pagination";
-import FilterModal from './modules/FilterModal';
+import ModalFilter from './modules/ModalFilter.js';
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
-  const { statusCode : statusCode } = useSelector((state) => state.products);
+  const { statusCode: statusCode } = useSelector((state) => state.products);
   console.log(statusCode)
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -71,25 +71,25 @@ const Home = () => {
           />
         </View>
 
-        <Categories />
+        <HomeCategories />
 
         <Pagination allInstruments={products.length} />
 
         <View style={styles.cartonblanco}>
-         { statusCode<400 ? <FlatList
+          {statusCode < 400 ? <FlatList
             data={currentInstruments}
             key={(item) => item.id}
             renderItem={({ item }) => {
               return <Product item={item} />;
             }}
-          /> : 
-          <View style={styles.containerNoProducts}>
-          <Text style={styles.notProducts}>No exiten coincidencias</Text>
-          </View>
+          /> :
+            <View style={styles.containerNoProducts}>
+              <Text style={styles.notProducts}>No exiten coincidencias</Text>
+            </View>
           }
         </View>
 
-        <FilterModal
+        <ModalFilter
           modal={modal}
           setModal={setModal}
         />
