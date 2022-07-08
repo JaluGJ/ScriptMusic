@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
         fontSize:20,
         letterSpacing:6,
         color: '#fff6e8',
+    },
+    containerInstruments:{
+        flex: 1,
+        flexWrap: 'wrap',
+        // backgroundColor: 'red',
+    },
+    button:{
+        width:120,
+        backgroundColor: '#fff6e8',
     }
 })
 export default styles
+
+
