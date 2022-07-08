@@ -17,6 +17,7 @@ export const { setPage } = paginationSlice.actions;
 export default paginationSlice.reducer;
 
 export const setCurrentPage = (payload) => (dispatch) => {
+    console.log(payload)
     dispatch(setPage(payload));
 }
 // export const setCurrentPage = (payload) => {

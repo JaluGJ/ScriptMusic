@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setCurrentPage } from './pagination';
 const apiUrl = 'http://192.168.0.12:3001/';
 export const productsSlice = createSlice({
     name: 'products',
@@ -27,6 +28,7 @@ export const getAllProducts = ()=> (dispatch) =>{
     axios.get(`${apiUrl}products`)
     .then(res=>{
         dispatch(setProductsList(res.data))
+        dispatch(setCurrentPage(1))
         dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
@@ -38,6 +40,7 @@ export const searchProducts = (name) => (dispatch) => {
     axios.get(`${apiUrl}products?search=${name}`)
     .then(res =>{
         dispatch(setProductsList(res.data))
+        dispatch(setCurrentPage(1))
         dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
@@ -52,6 +55,7 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
     if(price === undefined){
         axios.get(`${apiUrl}products?category=${category}`)
         .then(res=>{
+            dispatch(setCurrentPage(1))
             dispatch(setProductsList(res.data))
             dispatch(setProductsStatusCode(res.status))
         })
@@ -62,6 +66,7 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
         axios.get(`${apiUrl}products?category=${category}&price=${price}`)
         .then(res=>{
             dispatch(setProductsList(res.data))
+            dispatch(setCurrentPage(1))
             dispatch(setProductsStatusCode(res.status))
         })
         .catch(err=>{
