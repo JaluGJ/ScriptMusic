@@ -3,6 +3,7 @@ const Product = require("../models/product/productSchema.js");
 module.exports = {
   getAllProducts: (req, res, next) => {
     const { search, category, price } = req.query;
+
     if (search) {
       return Product.find({ model: { $regex: search, $options: "i" } })
         .then((products) => {
@@ -15,6 +16,7 @@ module.exports = {
           next(error);
         });
     }
+
     if (!category && price) {
       if (price === "higher") {
         return Product.find({})
@@ -23,6 +25,7 @@ module.exports = {
             return res.json(products).end();
           });
       }
+
       if (price === "lower") {
         return Product.find({})
           .sort({ price: 1 })
@@ -31,15 +34,19 @@ module.exports = {
           });
       }
     }
+
     if (category && !price) {
-      if(category === "todos"){
+      if (category === "Todos") {
         return Product.find({})
-        .then((products) => {
-          return res.json(products).end();
-        }).catch((error) => {
-          next(error);
-        }).end();
+          .then((products) => {
+            return res.json(products).end();
+          })
+          .catch((error) => {
+            next(error);
+          })
+          .end();
       }
+
       return Product.find({ category: category }).then((products) => {
         if (products.length === 0) {
           return res
@@ -49,16 +56,18 @@ module.exports = {
         return res.json(products).end();
       });
     }
-    if (category && price) {
 
-      if(category === "todos" && price === "higher"){
+    if (category && price) {
+      if (category === "Todos" && price === "higher") {
         return Product.find({})
-        .sort({ price: -1 })
-        .then((products) => {
-          return res.json(products).end();
-        }).catch((error) => {
-          next(error);
-        }).end();
+          .sort({ price: -1 })
+          .then((products) => {
+            return res.json(products).end();
+          })
+          .catch((error) => {
+            next(error);
+          })
+          .end();
       }
 
       if (price === "higher") {
@@ -74,14 +83,16 @@ module.exports = {
           });
       }
 
-      if(category === "todos" && price === "lower"){
+      if (category === "Todos" && price === "lower") {
         return Product.find({})
-        .sort({ price: 1 })
-        .then((products) => {
-          return res.json(products).end();
-        }).catch((error) => {
-          next(error);
-        }).end();
+          .sort({ price: 1 })
+          .then((products) => {
+            return res.json(products).end();
+          })
+          .catch((error) => {
+            next(error);
+          })
+          .end();
       }
 
       if (price === "lower") {
