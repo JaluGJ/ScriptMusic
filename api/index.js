@@ -7,10 +7,13 @@ const express = require('express')
 const app = express()
 const router = require('./src/routes')
 const cors = require('cors')
+const morgan = require('morgan')
 const { PORT } = process.env
 const errorsHandlers = require('./src/middlewares/errorsHandlers.js')
 
+
 app.use(cors())
+app.use(morgan("dev"))
 app.use(express.static('public'))
 app.use(express.json())
 
