@@ -9,20 +9,20 @@ import { getAllFilterProducts } from '../../../redux/slices/products';
 
 
 const ModalFilter = ({ modal, setModal }) => {
-    
+
     const dispatch = useDispatch();
     const [filters, setFilters] = useState({
         category: '',
         price: '',
     })
-    console.log(filters)
+    //console.log(filters)
     return (
         <Modal
             animationType='slide'
             visible={modal}>
             <View style={styles.background} >
 
-                
+
                 <View style={styles.containerNav}>
 
                     <Text style={styles.textNav}>FILTRAJE</Text>
@@ -32,7 +32,7 @@ const ModalFilter = ({ modal, setModal }) => {
                         }>
                         <Ionicons name="filter-sharp" size={34} color="white" />
                     </TouchableOpacity>
-                    
+
                 </View>
 
 
@@ -44,25 +44,31 @@ const ModalFilter = ({ modal, setModal }) => {
                 />
 
 
-                
+
 
                 <View style={styles.containerPrice}>
+
                     <Text style={styles.textPrice}>Ordenar por precio</Text>
-                    <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'lower' })} style={styles.button}>
-                        <Text style={styles.textButton}>Menor</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'higher' })} style={styles.button}>
-                        <Text style={styles.textButton}>Mayor</Text>
-                    </TouchableOpacity>
+                    <View style={styles.containerLowerHigher}>
+
+                        <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'lower' })} style={styles.button}>
+                            <Text style={styles.textButton}>Menor</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'higher' })} style={styles.button}>
+                            <Text style={styles.textButton}>Mayor</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
-                <View>
-                    <TouchableOpacity 
-                    onPress={() => {
-                        dispatch(getAllFilterProducts(filters))
-                        setModal(!modal)
-                    }} 
-                    
-                    style={styles.button}>
+
+                <View style={styles.buttonFilter}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            dispatch(getAllFilterProducts(filters))
+                            setModal(!modal)
+                        }}
+
+                        style={styles.button}>
                         <Text style={styles.textButton}>Filtrar</Text>
                     </TouchableOpacity>
                 </View>
