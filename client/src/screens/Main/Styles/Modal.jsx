@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     background: {
         flex: 1,
+        height: '100%',
         backgroundColor: '#1e1c1b',
     },
     containerNav: {
@@ -17,11 +18,12 @@ const styles = StyleSheet.create({
         color: '#fff6e8',
     },
     containerInstruments: {
+        marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    containerbuttons:{
-        flexDirection:'row'
+    containerbuttons: {
+        flexDirection: 'row'
     },
     button: {
         margin: 3,
@@ -32,8 +34,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         alignItems: 'center',
-        backgroundColor: '#141413'
+        backgroundColor: '#1e1c1b',
+        borderColor: '#fff',
+        borderWidth: 1,
     },
+
     name: {
         color: '#fff6e8',
     },
@@ -41,8 +46,35 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         // backgroundColor:'red'
+    },
+    containerPrice: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    containerLowerHigher: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent:'space-around'
+    },
+    buttonFilter:{
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent:'center'
+    },
+    textPrice: {
+        fontSize:20,
+        color: '#fff6e8',
+    },
+    textButton: {
+        marginTop:20,
+        textAlign: 'center',
+        color: 'white',
+        paddingTop: 20,
+        paddingBottom: 20,
+        color: '#fff',
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 10,
+        fontSize:15,
     }
 })
-export default styles
-
-
