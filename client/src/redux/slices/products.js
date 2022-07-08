@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
-//import axios from 'axios';
-import guitarras from '../../../guitarra.json'
+import axios from 'axios';
+const apiUrl = 'http://192.168.0.12:3001/';
 export const productsSlice = createSlice({
     name: 'products',
     initialState: {
@@ -20,15 +20,17 @@ export const {setProductsList} = productsSlice.actions;
 export default productsSlice.reducer;
 
 export const getAllProducts = ()=> (dispatch) =>{
-    let products = dispatch(setProductsList(guitarras))
-
-    return products
-
+    axios.get(`${apiUrl}products`)
+    .then(res=>{
+        dispatch(setProductsList(res.data))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 }
 
-
 export const searchProducts = (name) => (dispatch) => {
-    axios.get(`http://localhost:3001/products?search=${name}`)
+    axios.get(`${apiUrl}products?search=${name}`)
     .then(res =>{
         dispatch(setProductsList(res.data))
     })
@@ -36,12 +38,14 @@ export const searchProducts = (name) => (dispatch) => {
         console.log(err)
     })
 }
-/* 
-export const getAllProductsd = ()=>{
-    axios.get('url').then((
-        response => {}
-    ).catch(
-        error => console.log(error)
-    ))
-} 
-*/
+
+export const getAllFilterProducts = (filter)=> (dispatch) =>{
+    let {category,price} = filter;
+    axios.get(`${apiUrl}products?category=${category}&price=${price}`)
+    .then(res=>{
+        dispatch(setProductsList(res.data))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}

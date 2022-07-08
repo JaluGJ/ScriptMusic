@@ -15,7 +15,7 @@ const Details = () => {
     "type": "Guitarra Eléctrica",
     "categoria": "Guitarra",
     "stock": 14,
-    "image": "https://cdn.shopify.com/s/files/1/1049/5162/products/ST-M24-NAT-LH-NSG1copy.png?v=1629246382",
+    "image": "https://images.squarespace-cdn.com/content/v1/56c240a0d51cd440f4c3f6ca/1554744430295-Z33A2QVJFZ8SL4FI1KN2/timThumb.php.png?format=500w",
     "description": "Si buscas todo lo que te ofrece una Les Paul Special DC original de 1960, apreciarás esta magnífica reproducción de Gibson. Desde un mástil y un diapasón pegados con pegamento de piel hasta afinadores Kluson cuya autenticidad se ha analizado hasta el nivel molecular, la atención de Gibson por los detalles hace que la Les Paul Special Double Cut Reissue de 1960 sea una de las recreaciones más precisas del mercado.",
     "id": 21
   }
@@ -45,9 +45,9 @@ const Details = () => {
               <Image
                 style={{
                   width: '100%',
-                  height: 350,
+                  height: 800,
                 }}
-                source={detail.image}
+                source={{ uri: detail.image }}
               />
             </View>
             <Text style={styles.brand}>{detail.brand}</Text>

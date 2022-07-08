@@ -18,20 +18,28 @@ module.exports = {
     if (!category && price) {
       if (price === "higher") {
         return Product.find({})
-          .sort({ price: 1 })
+          .sort({ price: -1 })
           .then((products) => {
             return res.json(products).end();
           });
       }
       if (price === "lower") {
         return Product.find({})
-          .sort({ price: -1 })
+          .sort({ price: 1 })
           .then((products) => {
             return res.json(products).end();
           });
       }
     }
     if (category && !price) {
+      if(category === "todos"){
+        return Product.find({})
+        .then((products) => {
+          return res.json(products).end();
+        }).catch((error) => {
+          next(error);
+        }).end();
+      }
       return Product.find({ category: category }).then((products) => {
         if (products.length === 0) {
           return res
@@ -42,9 +50,20 @@ module.exports = {
       });
     }
     if (category && price) {
+
+      if(category === "todos" && price === "higher"){
+        return Product.find({})
+        .sort({ price: -1 })
+        .then((products) => {
+          return res.json(products).end();
+        }).catch((error) => {
+          next(error);
+        }).end();
+      }
+
       if (price === "higher") {
         return Product.find({ category: category })
-          .sort({ price: 1 })
+          .sort({ price: -1 })
           .then((products) => {
             if (products.length === 0) {
               return res
@@ -54,9 +73,20 @@ module.exports = {
             return res.json(products).end();
           });
       }
+
+      if(category === "todos" && price === "lower"){
+        return Product.find({})
+        .sort({ price: 1 })
+        .then((products) => {
+          return res.json(products).end();
+        }).catch((error) => {
+          next(error);
+        }).end();
+      }
+
       if (price === "lower") {
         return Product.find({ category: category })
-          .sort({ price: -1 })
+          .sort({ price: 1 })
           .then((products) => {
             if (products.length === 0) {
               return res
