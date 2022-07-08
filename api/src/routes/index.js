@@ -20,9 +20,9 @@ routes.put('/products/:id', updateProduct)
 // PRODUCTS ROUTES
 
 // USER ROUTES
-routes.post('/user', createUser)
+routes.post('/users', createUser)
 
-routes.get('/user', getAllUsers)
+routes.get('/users', getAllUsers)
 // USER ROUTES
 
 //PAYMENT ROUTES

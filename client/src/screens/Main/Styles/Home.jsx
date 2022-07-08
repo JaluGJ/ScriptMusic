@@ -39,7 +39,9 @@ const styles = StyleSheet.create({
         height:40,
         letterSpacing: 2,
     },
-
+    cartonblanco: {
+        height: 1000,
+    }
 })
 
 export default styles
