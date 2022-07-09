@@ -25,9 +25,9 @@ const Details = ({route}) => {
   }, [])
 
   const addToCart = () => {
-    const { name, price , id } = details;
+    const {model, price , id } = details;
     const product = {
-      name,
+      model,
       price,
       id,
       count: countProducts

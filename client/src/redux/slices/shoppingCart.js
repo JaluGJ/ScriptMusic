@@ -11,8 +11,9 @@ export const shoppingCartSlice = createSlice({
             state.productsCart = [...state.productsCart, action.payload]
         },
         setTotal: (state, action) => {
-            state.total = state.total + action.payload
-            console.log(state.total)
+            state.totalPrice = state.totalPrice + action.payload
+            console.log(state.totalPrice)
+            console.log(state.productsCart)
         }
     }
 })
@@ -26,6 +27,5 @@ export const postProductsCart = (payload) => (dispatch) => {
 }
 
 export const setTotalPrice = (payload) => (dispatch) => {
-    console.log(payload)
     dispatch(setTotal(payload))
 }
