@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, Text, View, ScrollView, TouchableOpacity, Pressable } from 'react-native'
 import { Image } from "@rneui/themed";
 import { AntDesign } from '@expo/vector-icons';
@@ -7,32 +7,35 @@ import styles from './Styles/Detail.jsx'
 import { useSelector, useDispatch  } from 'react-redux'
 import { getProductDetails } from '../../redux/slices/products.js';
 import { useEffect } from 'react';
+import { postProductsCart, setTotalPrice } from '../../redux/slices/shoppingCart.js';
 
 const Details = ({route}) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const {details} = useSelector(state => state.products);
-  // let detail = {
-  //   "model": "1960 Les Paul Special Double Cut",
-  //   "brand": "Gibson",
-  //   "price": '3390,00',
-  //   "type": "Guitarra Eléctrica",
-  //   "categoria": "Guitarra",
-  //   "stock": 14,
-  //   "image": "https://images.squarespace-cdn.com/content/v1/56c240a0d51cd440f4c3f6ca/1554744430295-Z33A2QVJFZ8SL4FI1KN2/timThumb.php.png?format=500w",
-  //   "description": "Si buscas todo lo que te ofrece una Les Paul Special DC original de 1960, apreciarás esta magnífica reproducción de Gibson. Desde un mástil y un diapasón pegados con pegamento de piel hasta afinadores Kluson cuya autenticidad se ha analizado hasta el nivel molecular, la atención de Gibson por los detalles hace que la Les Paul Special Double Cut Reissue de 1960 sea una de las recreaciones más precisas del mercado.",
-  //   "id": 21
-  // }
+  const {productsCart, totalPrice} = useSelector(state => state.shoppingCart);
+  console.log(totalPrice);
+  const [countProducts, setCountProducts] = useState(1)
   useEffect(() => {
     dispatch(getProductDetails(itemId))
     return () => {
       dispatch(getProductDetails())
     }
   }, [])
-  
 
-
+  const addToCart = () => {
+    const { name, price , id } = details;
+    const product = {
+      name,
+      price,
+      id,
+      count: countProducts
+    }
+    dispatch(postProductsCart(product))
+    dispatch(setTotalPrice(price * countProducts))
+    navigation.goBack()
+  }
 
   return (
 
@@ -75,14 +78,14 @@ const Details = ({route}) => {
               </View>
 
               <View style={styles.minumPlus}>
-                <AntDesign name="minuscircleo" size={24} color="#000000e2" />
-                <Text style={styles.num}>1</Text>
-                <AntDesign name="pluscircleo" size={24} color="#000000e2" />
+                <AntDesign onPress={()=>setCountProducts(countProducts>2?countProducts-1:1)} name="minuscircleo" size={24} color="#000000e2" />
+                <Text style={styles.num}>{countProducts}</Text>
+                <AntDesign onPress={()=>setCountProducts(countProducts+1)} name="pluscircleo" size={24} color="#000000e2" />
               </View>
             </View>
 
             <View>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={()=>addToCart()}>
                 <Text style={styles.buttonText}>AL CARRITO</Text>
               </TouchableOpacity>
             </View>

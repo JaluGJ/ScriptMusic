@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     },
     cartonblanco: {
         height: 1000,
+        paddingBottom: 15,
     },
     containerNoProducts:{
         flex: 1,
