@@ -13,7 +13,7 @@ const Product = ({ item }) => {
             <TouchableOpacity
                 style={styles.container}
                 onPress={() =>
-                    navigation.navigate('Details')
+                    navigation.navigate('Details',{itemId: item.id})
                 }
             >
                 <View style={styles.image}>
