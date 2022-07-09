@@ -2,13 +2,16 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: "#000000",
+        height: "100%",
     },
     container: {
         height: "100%",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#F9F9F9",
         // width: "100%",
+        padding: 5,
         borderBottomEndRadius: 40,
         borderBottomStartRadius: 40,
+        
     },
     containerNav: {
         flexDirection: 'row',
@@ -40,8 +43,7 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
     },
     cartonblanco: {
-        height: 1000,
-        paddingBottom: 15,
+        flex: 1,
     },
     containerNoProducts:{
         flex: 1,

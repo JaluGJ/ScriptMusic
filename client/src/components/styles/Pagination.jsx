@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  containerButton: {
+    justifyContent: "space-around",
+    flexDirection: "row",
+  },
   button: {
     alignItems: "center",
     justifyContent: "center",
@@ -19,10 +23,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 10,
     width: 50,
-  },
-  containerButton: {
-    justifyContent: "space-around",
-    flexDirection: "row",
   },
   buttonText: {
     color: "#fff6e8",

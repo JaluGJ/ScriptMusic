@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Modal, FlatList, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
-import styles from '../Styles/Modal'
+import styles from './Styles/Modal'
 import { useState } from 'react';
-import ModalButtons from './ModalButtons';
+import ModalButtons from './modules/ModalButtons';
 import { useDispatch } from "react-redux";
-import { getAllFilterProducts } from '../../../redux/slices/products';
+import { getAllFilterProducts } from '../../redux/slices/products';
 
 
 const ModalFilter = ({ modal, setModal }) => {
