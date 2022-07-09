@@ -3,36 +3,37 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 110,
         marginHorizontal: 9,
         shadowColor: "#00000076",
         shadowOffset: {
-            width: 0,
+            width: 3,
             height: 1,
         },
         shadowOpacity: 0.29,
         shadowRadius: 1.65,
+        width: 220,
         elevation: 3,
+        borderRadius:30,
         marginVertical: 10,
-        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'white'
     },
     image: {
-        marginHorizontal: 25,
-        marginVertical:5,
-        width: 60,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textProduct:{
         marginVertical:8,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     model: {
-        flex: 1,
-        width: 230,
-        flexWrap: 'wrap',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     modelText: {
-        flex: 1,
-        flexWrap: 'wrap'
+        textAlign:'center'
     },
     brand: {
         marginVertical: 3,
@@ -42,8 +43,7 @@ const styles = StyleSheet.create({
     },
     priceFav: {
         flexDirection: 'row',
-        width: 340,
-        alignItems: 'flex-end',
+        width: 180,
         justifyContent: 'space-between'
     },
     price: {

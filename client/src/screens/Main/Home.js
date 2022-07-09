@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  FlatList,
   TextInput,
-  SafeAreaView,
   StatusBar,
   Image,
-  Text,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,7 +13,9 @@ import user from "../../../assets/user.png";
 import Product from "./modules/Product";
 import HomeCategories from "./modules/HomeCategories.js";
 import Pagination from "../../components/Pagination";
-import ModalFilter from './modules/ModalFilter.js';
+import ModalFilter from './ModalFilter.js';
+import HomeProducts from "./modules/HomeProducts";
+import HomeNav from "./modules/HomeNav";
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -45,54 +44,34 @@ const Home = () => {
   return (
     <View style={styles.wrapper}>
       <StatusBar />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.containerNav}>
-          <Image
-            style={{
-              width: 50,
-              height: 50,
-            }}
-            source={user}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder=" Buscar"
-            value={search}
-            onChangeText={setSearch}
-            onSubmitEditing={() => submitHandle(search)}
-          />
+      <View style={styles.container}>
 
-          <Ionicons
-            name="filter-sharp"
-            size={34}
-            color="#DD8643"
-            onPress={() => setModal(!modal)}
-          />
-        </View>
+        <HomeNav
+          search={search}
+          modal={modal}
+          setSearch={setSearch}
+          setModal={setModal}
+        />
+
 
         <HomeCategories />
 
-        <Pagination allInstruments={products.length} />
 
-        <View style={styles.cartonblanco}>
-          {statusCode < 400 ? <FlatList
-            data={currentInstruments}
-            key={(item) => item.id}
-            renderItem={({ item }) => {
-              return <Product item={item} />;
-            }}
-          /> :
-            <View style={styles.containerNoProducts}>
-              <Text style={styles.notProducts}>No exiten coincidencias</Text>
-            </View>
-          }
-        </View>
+        <HomeProducts
+          statusCode={statusCode}
+          currentInstruments={currentInstruments}
+          allInstruments={products.length}
+        />
+
+
+        <Pagination allInstruments={products.length} /> 
+
 
         <ModalFilter
           modal={modal}
           setModal={setModal}
         />
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

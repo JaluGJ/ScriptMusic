@@ -1,14 +1,13 @@
 import {
   View,
-  FlatList,
   TouchableOpacity,
   Text,
-  ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { setCurrentPage } from "../redux/slices/pagination";
 import styles from "./styles/Pagination";
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Pagination({ allInstruments }) {
   const currentPage = useSelector((state) => state.pagination.page);
@@ -22,20 +21,18 @@ export default function Pagination({ allInstruments }) {
   }
 
   return (
-    <View>
-      <View>
-        <View style={styles.containerButton}>
-          <TouchableOpacity
-            onPress={() => dispatch(setCurrentPage(currentPage - 1))}
-            style={
-              currentPage - 1 === 0 ? styles.buttonDisabled : styles.button
-            }
-            disabled={currentPage - 1 === 0}
-          >
-            <Text style={styles.buttonText}>PREV</Text>
-          </TouchableOpacity>
+    <View style={styles.containerButton}>
+      <TouchableOpacity
+        onPress={() => dispatch(setCurrentPage(currentPage - 1))}
+        style={
+          currentPage - 1 === 0 ? styles.buttonDisabled : styles.button
+        }
+        disabled={currentPage - 1 === 0}
+      >
+        <AntDesign name="left" size={24} color="white" />
+      </TouchableOpacity>
 
-          {/* <ScrollView horizontal={true}>
+      {/* <ScrollView horizontal={true}>
             <FlatList
               data={pageNumbers.toString().replace(/\,/g, "")}
               key={(item) => item}
@@ -53,17 +50,15 @@ export default function Pagination({ allInstruments }) {
             />
           </ScrollView> */}
 
-          <TouchableOpacity
-            style={
-              currentPage === totalPages ? styles.buttonDisabled : styles.button
-            }
-            onPress={() => dispatch(setCurrentPage(currentPage + 1))}
-            disabled={currentPage === totalPages}
-          >
-            <Text style={styles.buttonText}>NEXT</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <TouchableOpacity
+        style={
+          currentPage === totalPages ? styles.buttonDisabled : styles.button
+        }
+        onPress={() => dispatch(setCurrentPage(currentPage + 1))}
+        disabled={currentPage === totalPages}
+      >
+        <AntDesign name="right" size={24} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }

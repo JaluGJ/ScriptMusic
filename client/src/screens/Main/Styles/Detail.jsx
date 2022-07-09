@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize:15,
         letterSpacing:2,
-        wordSpacing:2,
         opacity: .7,
 
     },
