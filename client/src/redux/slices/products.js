@@ -9,6 +9,7 @@ export const productsSlice = createSlice({
     initialState: {
         list: [],
         statusCode: 200,
+        details: {},
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -16,11 +17,14 @@ export const productsSlice = createSlice({
         },
         setProductsStatusCode: (state, action)=>{
             state.statusCode = action.payload;
+        },
+        setProductsDetails: (state, action)=>{
+            state.details = action.payload;
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails} = productsSlice.actions;
 
 
 
@@ -36,6 +40,21 @@ export const getAllProducts = ()=> (dispatch) =>{
     .catch(err=>{
         console.log(err)
     })
+}
+
+export const getProductDetails = (id)=> (dispatch) =>{
+    if(id){
+    axios.get(`${apiUrl}products/${id}`)
+    .then(res=>{
+        dispatch(setProductsStatusCode(res.status))
+        dispatch(setProductsDetails(res.data))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+  }else{
+    dispatch(setProductsDetails({}))
+  }
 }
 
 export const searchProducts = (name) => (dispatch) => {
