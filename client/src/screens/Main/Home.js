@@ -21,7 +21,6 @@ import ModalFilter from './modules/ModalFilter.js';
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
   const { statusCode: statusCode } = useSelector((state) => state.products);
-  console.log(statusCode)
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [search, setSearch] = useState('');
