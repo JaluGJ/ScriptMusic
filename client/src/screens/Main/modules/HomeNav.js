@@ -9,7 +9,7 @@ import styles from "../Styles/Home.jsx";
 import user from "../../../../assets/user.png";
 
 
-const HomeNav = ({search, setSearch, setModal, modal}) => {
+const HomeNav = ({search, setSearch, setModal, modal, submitHandle}) => {
     return (
         <View style={styles.containerNav}>
             <Image
