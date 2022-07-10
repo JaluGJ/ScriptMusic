@@ -23,7 +23,7 @@ const HomeProducts = ({statusCode, currentInstruments, allInstruments }) => {
                 /> :
                 <View style={styles.containerNoProducts}>
 
-                    <Text style={styles.notProducts}>No exiten coincidencias</Text>
+                    <Text style={styles.notProducts}>No existen coincidencias.</Text>
 
                 </View>
             }
