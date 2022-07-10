@@ -34,6 +34,8 @@ const Home = () => {
     indexOfLastInstrument
   ); //12 - 24
 
+
+
   const submitHandle = (search) => {
     dispatch(searchProducts(search));
   }
