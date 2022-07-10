@@ -12,25 +12,25 @@ const HomeCategories = () => {
         <View style={styles.categories}>
             <ScrollView horizontal={true}> 
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Todos'}))} style={category==='Todos' ? styles.buttonActive : styles.button}>
-                    <Text style={ category==='Todos' ? styles.buttonTextActive : styles.buttonText}>TOTAL</Text>
+                    <Text style={ category==='Todos' ? styles.buttonTextActive : styles.buttonText}>TODOS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Guitarra'}))}  style={category==='Guitarra' ? styles.buttonActive : styles.button}>
-                    <Text  style={ category==='Guitarra' ? styles.buttonTextActive : styles.buttonText}>GUITARRA</Text>
+                    <Text  style={ category==='Guitarra' ? styles.buttonTextActive : styles.buttonText}>GUITARRAS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Teclado'}))}  style={category==='Teclado' ? styles.buttonActive : styles.button}>
                     <Text  style={ category==='Teclado' ? styles.buttonTextActive : styles.buttonText}>TECLADOS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Bajos'}))}  style={category==='Bajos' ? styles.buttonActive : styles.button}>
-                    <Text  style={ category==='Todos' ? styles.buttonTextActive : styles.buttonText}>BAJOS</Text>
+                    <Text  style={ category==='Bajos' ? styles.buttonTextActive : styles.buttonText}>BAJOS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Percusión'}))}  style={category==='Percusión' ? styles.buttonActive : styles.button}>
-                    <Text  style={ category==='Percusión' ? styles.buttonTextActive : styles.buttonText}>PERCUSION</Text>
+                    <Text  style={ category==='Percusión' ? styles.buttonTextActive : styles.buttonText}>PERCUSIÓN</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Viento'}))}  style={category==='Viento' ? styles.buttonActive : styles.button}>
                     <Text  style={ category==='Viento' ? styles.buttonTextActive : styles.buttonText}>VIENTO</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Ukelele'}))}  style={category==='Ukelele' ? styles.buttonActive : styles.button}>
-                    <Text  style={ category==='Ukelele' ? styles.buttonTextActive : styles.buttonText}>UKELELE</Text>
+                    <Text  style={ category==='Ukelele' ? styles.buttonTextActive : styles.buttonText}>UKELELES</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Arco'}))}  style={category==='Arco' ? styles.buttonActive : styles.button}>
                     <Text  style={ category==='Arco' ? styles.buttonTextActive : styles.buttonText}>ARCO</Text>

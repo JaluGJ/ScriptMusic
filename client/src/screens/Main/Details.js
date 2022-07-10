@@ -59,8 +59,9 @@ const Details = ({route}) => {
               <Image
                 style={{
                   width: '100%',
-                  height: 800,
+                  height: "100%",
                 }}
+                resizeMode="contain"
                 source={{ uri: details.image }}
               />
             </View>
