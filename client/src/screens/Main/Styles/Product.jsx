@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     },
     textProduct:{
         marginVertical:8,
+        width:'100%',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -43,8 +44,9 @@ const styles = StyleSheet.create({
     },
     priceFav: {
         flexDirection: 'row',
-        width: 180,
-        justifyContent: 'space-between'
+        width: '100%',
+        paddingHorizontal: 10,
+        justifyContent: 'space-between',
     },
     priceFav2: {
         flexDirection: 'row',
