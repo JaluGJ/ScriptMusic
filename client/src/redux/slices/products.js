@@ -10,6 +10,7 @@ export const productsSlice = createSlice({
         list: [],
         statusCode: 200,
         details: {},
+        category: 'Todos',
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -20,15 +21,18 @@ export const productsSlice = createSlice({
         },
         setProductsDetails: (state, action)=>{
             state.details = action.payload;
+        },
+        setCategory: (state, action)=>{
+            state.category = action.payload;
+            console.log(state.category)
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails} = productsSlice.actions;
-
-
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory} = productsSlice.actions;
 
 export default productsSlice.reducer;
+
 
 export const getAllProducts = ()=> (dispatch) =>{
     axios.get(`${apiUrl}products`)
@@ -77,6 +81,7 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
     if(price === undefined){
         axios.get(`${apiUrl}products?category=${category}`)
         .then(res=>{
+            dispatch(setCategory(category))
             dispatch(setCurrentPage(1))
             dispatch(setProductsList(res.data))
             dispatch(setProductsStatusCode(res.status))
@@ -87,6 +92,7 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
     }else{
         axios.get(`${apiUrl}products?category=${category}&price=${price}`)
         .then(res=>{
+            dispatch(setCategory(category))
             dispatch(setProductsList(res.data))
             dispatch(setCurrentPage(1))
             dispatch(setProductsStatusCode(res.status))
@@ -96,3 +102,7 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
         })
     }
 }
+
+// export const getCategory = (category)=> (dispatch) =>{
+//     dispatch(setCategory(category))
+// }
