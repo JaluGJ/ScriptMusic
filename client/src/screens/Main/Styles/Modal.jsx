@@ -26,26 +26,33 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     button: {
-        margin: 3,
-        width: 120,
-        height: 145
+        margin: 5,
+        width: 110,
+        height: 100
     },
     container: {
-        backgroundColor: '#fff',
         borderRadius: 10,
         alignItems: 'center',
-        backgroundColor: '#1e1c1b',
-        borderColor: '#fff',
+        padding: 5,
         borderWidth: 1,
+        borderColor: 'gray',
+        // backgroundColor: 'gray',
     },
-
+    container2: {
+        borderRadius: 10,
+        alignItems: 'center',
+        padding: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'gray',
+    },
     name: {
         color: '#fff6e8',
     },
     image: {
-        width: 100,
-        height: 100,
-        // backgroundColor:'red'
+        width: 70,
+        height: 70,
+        
     },
     containerPrice: {
         justifyContent: 'center',
@@ -60,10 +67,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         justifyContent:'center'
+        
     },
     textPrice: {
         fontSize:20,
         color: '#fff6e8',
+        paddingTop: 15,
     },
     textButton: {
         marginTop:20,
@@ -72,10 +81,23 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
         color: '#fff',
-        borderColor: '#fff',
+        borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 10,
         fontSize:15,
+    },
+    textButtonActive: {
+        marginTop:20,
+        textAlign: 'center',
+        color: 'white',
+        paddingTop: 20,
+        paddingBottom: 20,
+        color: '#fff',
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 10,
+        fontSize:15,
+        backkgroundColor: 'gray'
     }
 })
 export default styles
