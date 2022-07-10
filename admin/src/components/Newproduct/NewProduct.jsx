@@ -5,18 +5,20 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, getAllProducts } from '../../redux/actions'
 import { useState } from 'react';
+import { validate } from './errors';
 
 export default function NewProduct({inputs, title}){
     const categories = useSelector(state => state.categories)
     const types = useSelector(state=> state.types)
     const dispatch  =  useDispatch()
 
-    const [file, setFile] = useState('')
-
+    
     useEffect(() => {
         dispatch(getAllProducts());
     }, [])
-
+    
+    const [error, setError] = useState({})
+    const [file, setFile] = useState('')
     const [input, setInput] = useState({
         model: '',
         brand: '',
@@ -28,13 +30,18 @@ export default function NewProduct({inputs, title}){
         description: '',
     })
 
-    console.log(input)
+    console.log(error)
 
     function handleinput(e){
         setInput({
             ...input,
             [e.target.name] : e.target.value
         })
+
+        setError(validate({
+            ...input,
+            [e.target.name] : e.target.value
+        }))
     }
 
     function handleSubmit(e){
@@ -70,6 +77,9 @@ export default function NewProduct({inputs, title}){
                             value={input.image}
                             onChange={(e) => handleinput(e)}
                             />
+                            {error.image && (
+                            <p>{ error.image }</p>
+                            )}
 
 
                             <label>Modelo</label>
@@ -79,6 +89,9 @@ export default function NewProduct({inputs, title}){
                             name='model'
                             value={input.model}
                             onChange={(e) => handleinput(e)}/>
+                            {error.model && (
+                            <p>{ error.model }</p>
+                            )}
 
                             <label>Marca</label>
                             <input 
@@ -87,6 +100,9 @@ export default function NewProduct({inputs, title}){
                             name='brand'
                             value={input.brand}
                             onChange={(e) => handleinput(e)}/>
+                            {error.brand && (
+                            <p>{ error.brand }</p>
+                            )}
 
                             <label>Precio</label>
                             <input 
@@ -95,6 +111,9 @@ export default function NewProduct({inputs, title}){
                             name='price'
                             value={input.price}
                             onChange={(e) => handleinput(e)}/>
+                            {error.price && (
+                            <p>{ error.price }</p>
+                            )}
 
                             <label>Disponibles</label>
                             <input 
@@ -103,6 +122,9 @@ export default function NewProduct({inputs, title}){
                             name='stock'
                             value={input.stock}
                             onChange={(e) => handleinput(e)}/>
+                            {error.stock && (
+                            <p>{ error.stock }</p>
+                            )}
 
 
                                 <label> Categoria </label>
@@ -111,12 +133,19 @@ export default function NewProduct({inputs, title}){
                                 { categories.map(e =>
                                 <option value={e}>{e}</option>)}
                             </select>
+                            {error.category && (
+                            <p>{ error.category }</p>
+                            )}
+
                                 <label> Tipo </label>
                             <select name='type'
                             onChange={e => handleinput(e)}>
                                 { types.map(e =>
                                 <option value={e}>{e}</option>)}
                             </select>
+                            {error.type && (
+                            <p>{ error.type }</p>
+                            )}
 
                             <label>Descripción</label>
                             <textarea 
@@ -124,7 +153,16 @@ export default function NewProduct({inputs, title}){
                             name='description'
                             value={input.description}
                             onChange={(e) => handleinput(e)}/>
-                            <button>CREAR</button>
+                            {error.description && (
+                            <p>{ error.description }</p>
+                            )}
+                            
+                            
+                            {!Object.keys(error).length ?
+                                <button >CREAR</button> : 
+                                <button disabled >CREAR</button>   
+                            } 
+
                         </div>
                     </form>
                 </div>
