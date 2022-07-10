@@ -41,6 +41,12 @@
                     .formInput{
                         width: 40%;
 
+                        p{
+                            font-size: 10px;
+                            margin-bottom: 5px;
+                            color: red;
+                            
+                        }
                         label{
                             font-size: 18px;
                             font-weight: bold;
@@ -89,7 +95,20 @@
                         cursor: pointer;
                         margin-top: 10px;
                         border-radius: 10px;
+
                         
+                    }
+
+
+                    button[disabled]{
+                        width: 150px;
+                        background-color: #5b5b5b;
+                        padding: 10px;
+                        border: none;
+                        color: white;
+                        font-weight: bold;
+                        margin-top: 10px;
+                        border-radius: 10px;
                     }
 
                 }
