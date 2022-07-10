@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         // backgroundColor: 'gray',
     },
-    container2: {
+    containerActive: {
         borderRadius: 10,
         alignItems: 'center',
         padding: 5,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         fontSize:15,
-        backkgroundColor: 'gray'
+        backgroundColor: 'gray'
     }
 })
 export default styles

@@ -4,12 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles/Modal'
 import { useState } from 'react';
 import ModalButtons from './modules/ModalButtons';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllFilterProducts } from '../../redux/slices/products';
 
 
 const ModalFilter = ({ modal, setModal }) => {
-
     const dispatch = useDispatch();
     const [filters, setFilters] = useState({
         category: '',
@@ -54,12 +53,12 @@ const ModalFilter = ({ modal, setModal }) => {
                         <TouchableOpacity
                             onPress={() => setFilters({ ...filters, price: 'lower' })}
                             style={styles.buttonOrd}>
-                            <Text style={styles.textButton}>Menor</Text>
+                            <Text style={filters.price==='lower'? styles.textButtonActive : styles.textButton}>Menor</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => setFilters({ ...filters, price: 'higher' })}
                             style={styles.buttonOrd}>
-                            <Text style={styles.textButton}>Mayor</Text>
+                            <Text style={filters.price==='higher'? styles.textButtonActive : styles.textButton}>Mayor</Text>
                         </TouchableOpacity>
                     </View>
 

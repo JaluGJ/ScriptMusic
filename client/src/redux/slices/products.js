@@ -24,7 +24,6 @@ export const productsSlice = createSlice({
         },
         setCategory: (state, action)=>{
             state.category = action.payload;
-            console.log(state.category)
         }
     }   
 });
@@ -103,6 +102,6 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
     }
 }
 
-// export const getCategory = (category)=> (dispatch) =>{
-//     dispatch(setCategory(category))
-// }
+export const getCategory = (category)=> (dispatch) =>{
+    dispatch(setCategory(category))
+}
