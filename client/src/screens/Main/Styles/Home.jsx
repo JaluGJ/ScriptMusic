@@ -4,14 +4,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#000000",
         height: "100%",
     },
+    cartonblanco: {
+        flex: 1,
+    },
     container: {
         height: "100%",
         backgroundColor: "#F9F9F9",
-        // width: "100%",
-        padding: 5,
+        padding: 7.3,
         borderBottomEndRadius: 40,
         borderBottomStartRadius: 40,
-        
     },
     containerNav: {
         flexDirection: 'row',
@@ -41,9 +42,6 @@ const styles = StyleSheet.create({
         width: 220,
         height:40,
         letterSpacing: 2,
-    },
-    cartonblanco: {
-        flex: 1,
     },
     containerNoProducts:{
         flex: 1,
