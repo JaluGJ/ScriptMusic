@@ -60,13 +60,12 @@ const Home = () => {
 
         <HomeCategories />
 
-
         <HomeProducts
           statusCode={statusCode}
           currentInstruments={products}
           allInstruments={products.length}
+          
         />
-
 
         {/* <Pagination allInstruments={products.length} />  */}
 
