@@ -24,6 +24,7 @@ const Product = ({ item }) => {
                         width: 150,
                         height: 150,
                     }}
+                    resizeMode="contain"
                     source={{ uri: image }}
                 />
             </View>
