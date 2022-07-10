@@ -38,6 +38,7 @@ const Home = () => {
 
   const submitHandle = (search) => {
     dispatch(searchProducts(search));
+    setSearch('')
   }
   useEffect(() => {
     dispatch(getAllProducts());
@@ -53,6 +54,7 @@ const Home = () => {
           modal={modal}
           setSearch={setSearch}
           setModal={setModal}
+          submitHandle={submitHandle}
         />
 
 
