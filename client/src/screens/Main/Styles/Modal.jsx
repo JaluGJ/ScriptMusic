@@ -18,17 +18,22 @@ const styles = StyleSheet.create({
         color: '#fff6e8',
     },
     containerInstruments: {
+        width: '100%',
         marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    containerbuttons: {
-        flexDirection: 'row'
+    instrumentsSix:{
+        width: '100%',
+    },
+    instrumentstwo:{
+        width: '100%',
+        marginLeft:'32%'
     },
     button: {
-        margin: 5,
-        width: 110,
-        height: 100
+        margin: 2,
+        width: '32%',
+        height: '32%'
     },
     container: {
         borderRadius: 10,
@@ -68,6 +73,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent:'center'
         
+    },
+    buttonOrd:{
+        width: '20%',
     },
     textPrice: {
         fontSize:20,

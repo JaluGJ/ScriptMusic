@@ -51,10 +51,14 @@ const ModalFilter = ({ modal, setModal }) => {
                     <Text style={styles.textPrice}>Ordenar por precio</Text>
                     <View style={styles.containerLowerHigher}>
 
-                        <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'lower' })} style={styles.button}>
+                        <TouchableOpacity
+                            onPress={() => setFilters({ ...filters, price: 'lower' })}
+                            style={styles.buttonOrd}>
                             <Text style={styles.textButton}>Menor</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => setFilters({ ...filters, price: 'higher' })} style={styles.button}>
+                        <TouchableOpacity
+                            onPress={() => setFilters({ ...filters, price: 'higher' })}
+                            style={styles.buttonOrd}>
                             <Text style={styles.textButton}>Mayor</Text>
                         </TouchableOpacity>
                     </View>
@@ -68,7 +72,7 @@ const ModalFilter = ({ modal, setModal }) => {
                             setModal(!modal)
                         }}
 
-                        style={styles.button}>
+                        style={styles.buttonOrd}>
                         <Text style={styles.textButton}>Filtrar</Text>
                     </TouchableOpacity>
                 </View>

@@ -63,12 +63,12 @@ const Home = () => {
 
         <HomeProducts
           statusCode={statusCode}
-          currentInstruments={currentInstruments}
+          currentInstruments={products}
           allInstruments={products.length}
         />
 
 
-        <Pagination allInstruments={products.length} /> 
+        {/* <Pagination allInstruments={products.length} />  */}
 
 
         <ModalFilter
