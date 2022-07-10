@@ -46,10 +46,21 @@ const styles = StyleSheet.create({
         width: 180,
         justifyContent: 'space-between'
     },
+    priceFav2: {
+        flexDirection: 'row',
+        width: 130,
+        justifyContent: 'space-between',
+    },
     price: {
         fontWeight: 'bold',
         fontSize: 15,
         letterSpacing: 2,
+    },
+    price2: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        letterSpacing: 1,
+        marginTop: 2
     },
 })
 
