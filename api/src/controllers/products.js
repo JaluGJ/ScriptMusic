@@ -115,7 +115,7 @@ module.exports = {
       }
     }
 
-    Product.find()
+    return Product.find()
       .then((products) => {
         return res.json(products).end();
       })
@@ -126,7 +126,7 @@ module.exports = {
 
   getProductById: (req, res, next) => {
     const { id } = req.params;
-    Product.findById(id)
+    return Product.findById(id)
       .then((product) => {
         return res.json(product);
       })
@@ -160,7 +160,7 @@ module.exports = {
       description,
     };
 
-    Product.findByIdAndUpdate(id, newProduct, { new: true })
+    return Product.findByIdAndUpdate(id, newProduct, { new: true })
       .then((product) => {
         return res.json(product);
       })
@@ -171,7 +171,7 @@ module.exports = {
 
   deleteProduct: (req, res, next) => {
     const { id } = req.params;
-    Product.findByIdAndDelete(id)
+    return Product.findByIdAndDelete(id)
       .then(() => {
         return res.status(204);
       })
