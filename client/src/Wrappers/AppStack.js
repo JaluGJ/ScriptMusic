@@ -54,7 +54,7 @@ const AppStack = () => {
         }}
       />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="WrapperFavorites"
         component={WrapperFavorites}
         options={{
@@ -76,7 +76,7 @@ const AppStack = () => {
             ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="UserDrawer"
         component={UserDrawer}
         options={{
@@ -97,12 +97,12 @@ const AppStack = () => {
               />
             ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="WrapperCart"
         component={WrapperCart}
         options={{
-          tabBarBadge: countProducts ? countProducts : null,
+          // tabBarBadge: countProducts ? countProducts : null,
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
@@ -120,7 +120,7 @@ const AppStack = () => {
               />
             ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };

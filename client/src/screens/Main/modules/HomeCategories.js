@@ -10,7 +10,7 @@ const HomeCategories = () => {
 
     return (
         <View style={styles.categories}>
-            <ScrollView horizontal={true}> 
+            <ScrollView scrollToOverflowEnabled={false} horizontal={true}> 
                 <TouchableOpacity onPress={()=>dispatch(getAllFilterProducts({category:'Todos'}))} style={category==='Todos' ? styles.buttonActive : styles.button}>
                     <Text style={ category==='Todos' ? styles.buttonTextActive : styles.buttonText}>TODOS</Text>
                 </TouchableOpacity>

@@ -15,16 +15,17 @@ export default function EmptyCart() {
           <Image source={emptyCart} style={styles.image} />
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.text}>Tu carrito está vacío.</Text>
+          {/* <Text style={styles.text}>Tu carrito está vacío.</Text> */}
+          <Text style={styles.text}>Proximamente ....</Text>
         </View>
-        <View style={styles.containerText}>
+        {/* <View style={styles.containerText}>
           <Text style={styles.text}>¡Explora nuestros</Text>
           <View style={styles.containerTextLinked}>
             <Text style={styles.text}>productos</Text>
             <Text style={styles.textLinked}> aquí</Text>
             <Text style={styles.text}>!</Text>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
   );
