@@ -6,15 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, getAllProducts } from '../../redux/actions'
 import { useState } from 'react';
 import { validate } from './errors';
+import { useNavigate } from "react-router-dom";
 
 export default function NewProduct({inputs, title}){
     const categories = useSelector(state => state.categories)
     const types = useSelector(state=> state.types)
     const dispatch  =  useDispatch()
+    const navigate = useNavigate()
 
     
     useEffect(() => {
         dispatch(getAllProducts());
+        setError(validate(input))
     }, [])
     
     const [error, setError] = useState({})
@@ -30,7 +33,7 @@ export default function NewProduct({inputs, title}){
         description: '',
     })
 
-    console.log(error)
+    console.log(input)
 
     function handleinput(e){
         setInput({
@@ -49,18 +52,20 @@ export default function NewProduct({inputs, title}){
     }
     return(
         <div className="new">
-        <SideBar />
+        {/* <SideBar /> */}
         <div className="newcontainer">
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="top">
                 <h1 className="title"> Crear nuevo producto. </h1>
             </div>
             <div className="bottom">
                 <div className="left">
-                    <img 
+                    {/* <img 
                         src={file ? URL.createObjectURL(file) 
                         : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} 
-                    alt="" />
+                    alt="" /> */}
+                    <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
+
                 </div>
                 <div className="rigth">
                     <form onSubmit={e => handleSubmit(e)}>
@@ -110,6 +115,7 @@ export default function NewProduct({inputs, title}){
                             placeholder='135'
                             name='price'
                             value={input.price}
+                            min='1'
                             onChange={(e) => handleinput(e)}/>
                             {error.price && (
                             <p>{ error.price }</p>
@@ -121,6 +127,7 @@ export default function NewProduct({inputs, title}){
                             placeholder='50'
                             name='stock'
                             value={input.stock}
+                            min='0'
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
