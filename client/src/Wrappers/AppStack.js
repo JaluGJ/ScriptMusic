@@ -54,7 +54,7 @@ const AppStack = () => {
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="WrapperFavorites"
         component={WrapperFavorites}
         options={{
@@ -120,7 +120,7 @@ const AppStack = () => {
               />
             ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

@@ -46,7 +46,7 @@ const Details = ({route}) => {
           <View style={styles.containerNav}>
             <Pressable
               onPress={() =>
-                navigation.navigate('Home')
+                navigation.goBack()
               }>
               <AntDesign name="left" size={27} color="black" />
             </Pressable>
