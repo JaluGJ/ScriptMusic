@@ -9,11 +9,12 @@ import { validate } from './errors';
 import { useNavigate } from "react-router-dom";
 
 export default function NewProduct({inputs, title}){
-    const categories = useSelector(state => state.categories)
+    // const categories = useSelector(state => state.categories)
     const types = useSelector(state=> state.types)
     const dispatch  =  useDispatch()
     const navigate = useNavigate()
-
+    // console.log(categories)
+    const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
     
     useEffect(() => {
         dispatch(getAllProducts());
@@ -32,8 +33,9 @@ export default function NewProduct({inputs, title}){
         image: '',
         description: '',
     })
-
-    console.log(input)
+    // saque las validaciones de html y las puse full js, pq me di cuenta que desde la pantalla de inspeccionar se podia romper
+    // pd: te quedo muy bien el codigo, sos bastante ordenado :).
+    // console.log(input)
 
     function handleinput(e){
         setInput({
@@ -48,7 +50,23 @@ export default function NewProduct({inputs, title}){
     }
 
     function handleSubmit(e){
+        e.preventDefault()
+        if(Object.keys(error).length > 0){
+            window.location.reload()
+            return alert('Por favor verifique los campos')
+        }
         dispatch(addProduct(input))
+        setInput({
+            model: '',
+            brand: '',
+            price: '',
+            type: '',
+            category: '',
+            stock: '',
+            image: '',
+            description: '',
+        })
+        window.location.reload()
     }
     return(
         <div className="new">
@@ -115,7 +133,7 @@ export default function NewProduct({inputs, title}){
                             placeholder='135'
                             name='price'
                             value={input.price}
-                            min='1'
+                            // min='1'
                             onChange={(e) => handleinput(e)}/>
                             {error.price && (
                             <p>{ error.price }</p>
@@ -127,7 +145,7 @@ export default function NewProduct({inputs, title}){
                             placeholder='50'
                             name='stock'
                             value={input.stock}
-                            min='0'
+                            // min='0'
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
@@ -135,20 +153,22 @@ export default function NewProduct({inputs, title}){
 
 
                                 <label> Categoria </label>
-                            <select name='category'
+                            <select name='category' defaultValue="Categoria"
                             onChange={e => handleinput(e)}>
+                            <option disabled={true}>Categoria</option>
                                 { categories.map(e =>
-                                <option value={e}>{e}</option>)}
+                                <option value={e} key={e}>{e}</option>)}
                             </select>
                             {error.category && (
                             <p>{ error.category }</p>
                             )}
 
                                 <label> Tipo </label>
-                            <select name='type'
+                            <select name='type' defaultValue="Tipo"
                             onChange={e => handleinput(e)}>
+                            <option disabled={true}>Tipo</option>
                                 { types.map(e =>
-                                <option value={e}>{e}</option>)}
+                                <option value={e} key={e}>{e}</option>)}
                             </select>
                             {error.type && (
                             <p>{ error.type }</p>
