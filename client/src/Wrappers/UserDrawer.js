@@ -7,7 +7,7 @@ import MyShopping from "../screens/Drawer/MyShopping";
 import Account from "../screens/Drawer/Account";
 import Addresses from "../screens/Drawer/Addresses";
 import CustomDrawer from "../components/CustomDrawer";
-import { Icon } from "@rneui/themed";
+import WrapperHome from "./WrapperHome";
 const Drawer = createDrawerNavigator();
 
 const UserDrawer = () => {
@@ -23,7 +23,7 @@ const UserDrawer = () => {
       }}
       drawerContent={(props) => <CustomDrawer {...props} />}
     >
-      <Drawer.Screen name="Account" component={Account} />
+      <Drawer.Screen name="WrapperHome" component={WrapperHome} />
       <Drawer.Screen name="MyProfile" component={MyProfile} />
       <Drawer.Screen name="PaymentMethods" component={PaymentMethods} />
       <Drawer.Screen name="Addresses" component={Addresses} />
