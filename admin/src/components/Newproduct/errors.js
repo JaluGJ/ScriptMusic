@@ -27,6 +27,9 @@ export function validate(input){
     if(!input.description){
         error.description = 'Es necesaria una descripción del producto.'
     }
+    if (!/(https?:\/\/.*\.(?:png))/i.test(input.image)){
+        error.image = 'El formato debe ser .png'
+    }
 
     return error;
 }
