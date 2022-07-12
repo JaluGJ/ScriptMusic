@@ -1,18 +1,23 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
 
-const AboutUs = ({navigation}) => {
+import { View ,Text} from "react-native"
+import styles from "./Styles/CustomDrawer.jsx"
+
+
+const AboutUs = () => {
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <Text>AboutUs</Text>
+    <View styles={styles.wrapper}>
+      <View styles={styles.container}>
+        <Text styles={styles.title}>Sobre nosotros</Text>
+        <Text styles={styles.text}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Pellentesque euismod, nisi eu consectetur consectetur,  
+          nisl nisl consectetur nisl, eget consectetur nisl nisl eget
+          consectetur nisl nisl.
+        </Text>
+      </View>
     </View>
   )
 }
 
 export default AboutUs
 
-const styles = StyleSheet.create({})
