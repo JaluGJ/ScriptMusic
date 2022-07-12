@@ -7,9 +7,18 @@ let styles = StyleSheet.create({
     marginVertical: 30,
   },
   title: {
+    textAlign:'center',
     fontSize: 20,
     letterSpacing: 6,
     padding: 20
+  },
+  navDetail:{
+    alignItems:'center'
+  },
+  navLength:{
+    fontSize: 19,
+    letterSpacing:2,
+    color: '#DD8643'
   },
   containerText: {
     alignItems: "center",
