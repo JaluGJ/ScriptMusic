@@ -15,7 +15,7 @@ const Details = ({route}) => {
   const navigation = useNavigation();
   const {details} = useSelector(state => state.products);
   const {productsCart, totalPrice} = useSelector(state => state.shoppingCart);
-  console.log(totalPrice);
+  /* console.log(totalPrice); */
   const [countProducts, setCountProducts] = useState(1)
   useEffect(() => {
     dispatch(getProductDetails(itemId))

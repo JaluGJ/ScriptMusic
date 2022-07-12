@@ -1,0 +1,95 @@
+import { StyleSheet } from "react-native";
+
+let styles = StyleSheet.create({
+  logoContainer: {
+    alignItems: "center",
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  logo: {
+    height: 50,
+    width: 50,
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 10,
+    letterSpacing: 6,
+    textAlign: "center"
+  },
+  togetherContainer: {
+    flexDirection: "row",
+    maxWidth: "100%",
+    justifyContent: "space-evenly",
+  },
+  inputTogether: {
+    backgroundColor: "#FFF6E8",
+    borderRadius: 100,
+    paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginVertical: 10,
+    paddingLeft: 18,
+    zIndex: 0,
+    paddingRight: 18,
+    width: "45%",
+    letterSpacing: 2,
+  },
+  input: {
+    backgroundColor: "#FFF6E8",
+    borderRadius: 100,
+    marginHorizontal: 30,
+    paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginVertical: 10,
+    paddingLeft: 18,
+    zIndex: 0,
+    paddingRight: 18,
+    letterSpacing: 2,
+  },
+  button: {
+    backgroundColor: "#FFC680",
+    borderRadius: 100,
+    marginHorizontal: 30,
+    paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: "#DD8643",
+    textAlign: "center",
+    shadowColor: "#171717",
+    fontSize: 16,
+    letterSpacing: 2,
+  },
+  containerLoginNow: {
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    width: "100%",
+    height: "100%",
+    bottom: 10,
+  },
+  haveAccount: {
+    opacity: 0.6,
+    letterSpacing: 2,
+  },
+  loginNow: {
+    color: "#DD8643",
+    opacity: 0.6,
+    letterSpacing: 2,
+  },
+});
+
+export default styles;
