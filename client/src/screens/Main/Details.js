@@ -25,9 +25,10 @@ const Details = ({route}) => {
   }, [])
 
   const addToCart = () => {
-    const { price , id } = details;
+    const { price , id, image } = details;
     const product = {
-      price:price,
+      price,
+      image,
       id,
       count: countProducts
     }
