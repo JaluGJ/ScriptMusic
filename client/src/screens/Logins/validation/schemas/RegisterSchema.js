@@ -12,13 +12,13 @@ export const registerSchema = yup.object().shape({
   email: yup
     .string()
     .email("Ingrese un email válido.")
-    .required("Ingrese un mail."),
+    .required("Ingrese su mail."),
   password: yup
     .string()
-    .required("Ingrese una contraseña.")
+    .required("Ingrese su contraseña.")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/,
-      "La contraseña debe incluir, al menos, 8 caracteres, una mayúscula, una minúscula y un número."
+      "Su contraseña debe incluir, al menos, 8 caracteres, una mayúscula, una minúscula y un número."
     ),
   passwordConfirmation: yup
     .string()
