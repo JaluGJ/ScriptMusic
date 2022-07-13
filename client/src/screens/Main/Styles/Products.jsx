@@ -1,28 +1,35 @@
 import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: "#000000",
         height: "100%",
     },
-    container: {
+    cartonblanco: {
         flex: 1,
+    },
+    container: {
+        height: "100%",
         backgroundColor: "#F9F9F9",
-        borderRadius:40,
-        marginTop:65
     },
     containerNav: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding:15,
-        height: 65,
-        backgroundColor: "#000000",
+        padding: 10,
     
-    }, 
+    },
+    containerProducts:{
+        paddingBottom:35
+    },
+    categorieInfo:{
+        backgroundColor: "#000000",
+        height: 35,
+    },
+    categorieInfoText:{
+        letterSpacing: 6,
+        textAlign:'center',
+        color: 'white',
+        fontSize:20,
+    },  
     textNav: {
         fontSize: 20,
         letterSpacing: 6,
