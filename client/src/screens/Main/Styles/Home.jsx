@@ -6,9 +6,9 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        height: 600,
         backgroundColor: "#F9F9F9",
         borderRadius:40,
-        marginTop:65
     },
     containerNav: {
         position: 'absolute',

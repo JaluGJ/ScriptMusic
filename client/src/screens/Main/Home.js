@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   StatusBar,
+  ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, searchProducts } from "../../redux/slices/products";
@@ -9,6 +10,7 @@ import styles from "./Styles/Home.jsx";
 import HomeCategories from "./modules/HomeCategories.js";
 import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
+import MyCarousel from "./modules/HomeCarousel";
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -39,7 +41,9 @@ const Home = () => {
 
   return (
     <View style={styles.wrapper}>
+
       <StatusBar />
+      <ScrollView>
         <HomeNav
           search={search}
           modal={modal}
@@ -47,27 +51,29 @@ const Home = () => {
           setModal={setModal}
           submitHandle={submitHandle}
         />
-      <View style={styles.container}>
+        <MyCarousel />
+        <View style={styles.container}>
 
 
-        
-        <HomeCategories />
 
-        {/* <HomeProducts
+          <HomeCategories />
+          {/* <HomeProducts
           statusCode={statusCode}
           currentInstruments={products}
           allInstruments={products.length}
           
         /> */}
 
-        {/* <Pagination allInstruments={products.length} />  */}
+          {/* <Pagination allInstruments={products.length} />  */}
 
 
-        <ModalFilter
-          modal={modal}
-          setModal={setModal}
-        />
-      </View>
+          <ModalFilter
+            modal={modal}
+            setModal={setModal}
+          />
+        </View>
+      </ScrollView>
+
     </View>
   );
 };
