@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
 
     categories: {
+        padding: 10,
         flexDirection: 'row',
     },
     button: {
