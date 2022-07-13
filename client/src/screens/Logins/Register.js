@@ -6,8 +6,9 @@ import {
   TouchableOpacity,
   StatusBar,
   ScrollView,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles/Register.jsx";
 import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +17,8 @@ import { registerSchema } from "./validation/schemas/RegisterSchema.js";
 import { Formik, useField } from "formik";
 import { FormikInputValue } from "./validation/FormikInputValue.js";
 import { FormikSubmit } from "./validation/FormikSubmit.js";
+import { postUser, setToken } from "../../redux/slices/signup.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialValues = {
   firstName: "",
@@ -27,6 +30,10 @@ const initialValues = {
 
 export default function Register() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.signup.token);
+  const err = useSelector((state) => state.signup.err);
 
   return (
     <>
@@ -40,7 +47,11 @@ export default function Register() {
           <Formik
             validationSchema={registerSchema}
             initialValues={initialValues}
-            onSubmit={(obj) => console.log(obj)}
+            onSubmit={async (obj) => {
+              dispatch(postUser(obj));
+              // Alert.alert("¡Usuario creado correctamente!");
+              // navigation.navigate("Login");
+            }}
           >
             {({ handleSubmit }) => {
               return (
@@ -72,10 +83,7 @@ export default function Register() {
                     placeholder="Repetir contraseña"
                     secureTextEntry={true}
                   />
-                  <FormikSubmit
-                    onPress={handleSubmit}
-                    name="REGISTRARSE"
-                  />
+                  <FormikSubmit onPress={handleSubmit} name="REGISTRARSE" />
                 </>
               );
             }}
