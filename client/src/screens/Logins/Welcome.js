@@ -10,7 +10,7 @@ export default function Welcome() {
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar />
       <View style={{ height: "100%" }}>
         <View style={styles.logoContainer}>
           <Image source={logo} style={styles.logo} />
@@ -25,13 +25,12 @@ export default function Welcome() {
         <View>
           <TouchableOpacity
             style={styles.button}
-            // onPress={() => navigation.navigate("Login")}
-            onPress={() => navigation.navigate("AppStack")}
+            onPress={() => navigation.navigate("Login")}
           >
             <Text style={styles.buttonText}>INGRESAR</Text>
           </TouchableOpacity>
         </View>
-        {/* <View>
+        <View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("Register")}
@@ -42,7 +41,7 @@ export default function Welcome() {
         <View style={styles.containerAboutUs}>
           <Text style={styles.textGrey}>Conoce</Text>
           <Text style={styles.textLinkGrey}> sobre nosotros.</Text>
-        </View> */}
+        </View>
       </View>
     </>
   );

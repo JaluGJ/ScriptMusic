@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const userSchema = new Schema({
   firstName: {
@@ -17,6 +18,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   bought: [
     {
       type: Schema.Types.ObjectId,
@@ -24,6 +29,12 @@ const userSchema = new Schema({
     }
   ]
 });
+
+userSchema.pre('save', async function (next) {
+  const hash = await bcrypt.hash(this.password, 10)
+  this.password = hash
+  next()
+})
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
@@ -33,6 +44,11 @@ userSchema.set('toJSON', {
       delete ret.password
   }
 })
+
+userSchema.methods.isValidPassword = async function (password) {
+  const isMatch = await bcrypt.compare(password, this.password)
+  return isMatch
+}
 
 const userModel = model("User", userSchema)
 

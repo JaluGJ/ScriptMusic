@@ -15,7 +15,7 @@ const Details = ({route}) => {
   const navigation = useNavigation();
   const {details} = useSelector(state => state.products);
   const {productsCart, totalPrice} = useSelector(state => state.shoppingCart);
-  console.log(totalPrice);
+  /* console.log(totalPrice); */
   const [countProducts, setCountProducts] = useState(1)
   useEffect(() => {
     dispatch(getProductDetails(itemId))
@@ -25,10 +25,10 @@ const Details = ({route}) => {
   }, [])
 
   const addToCart = () => {
-    const {model, price , id } = details;
+    const { price , id, image } = details;
     const product = {
-      model,
       price,
+      image,
       id,
       count: countProducts
     }
@@ -46,7 +46,7 @@ const Details = ({route}) => {
           <View style={styles.containerNav}>
             <Pressable
               onPress={() =>
-                navigation.navigate('Home')
+                navigation.goBack()
               }>
               <AntDesign name="left" size={27} color="black" />
             </Pressable>

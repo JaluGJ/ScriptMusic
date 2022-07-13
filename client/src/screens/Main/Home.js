@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  TextInput,
   StatusBar,
-  Image,
+  ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Ionicons } from "@expo/vector-icons";
 import { getAllProducts, searchProducts } from "../../redux/slices/products";
 import styles from "./Styles/Home.jsx";
-import user from "../../../assets/user.png";
-import Product from "./modules/Product";
 import HomeCategories from "./modules/HomeCategories.js";
-import Pagination from "../../components/Pagination";
 import ModalFilter from './ModalFilter.js';
-import HomeProducts from "./modules/HomeProducts";
 import HomeNav from "./modules/HomeNav";
+import MyCarousel from "./modules/HomeCarousel";
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -46,9 +41,9 @@ const Home = () => {
 
   return (
     <View style={styles.wrapper}>
-      <StatusBar />
-      <View style={styles.container}>
 
+      <StatusBar />
+      <ScrollView>
         <HomeNav
           search={search}
           modal={modal}
@@ -56,25 +51,29 @@ const Home = () => {
           setModal={setModal}
           submitHandle={submitHandle}
         />
+        <MyCarousel />
+        <View style={styles.container}>
 
 
-        <HomeCategories />
 
-        <HomeProducts
+          <HomeCategories />
+          {/* <HomeProducts
           statusCode={statusCode}
           currentInstruments={products}
           allInstruments={products.length}
           
-        />
+        /> */}
 
-        {/* <Pagination allInstruments={products.length} />  */}
+          {/* <Pagination allInstruments={products.length} />  */}
 
 
-        <ModalFilter
-          modal={modal}
-          setModal={setModal}
-        />
-      </View>
+          <ModalFilter
+            modal={modal}
+            setModal={setModal}
+          />
+        </View>
+      </ScrollView>
+
     </View>
   );
 };

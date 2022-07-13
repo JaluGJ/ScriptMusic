@@ -1,32 +1,51 @@
+require('dotenv').config()
+const { JWT_SECRET } = process.env
+const jwt = require('jsonwebtoken')
 const User = require('../models/user/userSchema.js')
-const bcrypt = require('bcrypt')
+
 
 module.exports = {
     
-    createUser : (req, res, next) => {
-        const { firstName, lastName, email, password } = req.body
-
-        if(!firstName || !lastName || !email || !password) {
-            return res.status(400).send('Falta informacion necesaria')
-        }
-        
-        const passHash = bcrypt.hashSync(password, 10)
-
-        const newUser = {
-            firstName,
-            lastName,
-            email,
-            password : passHash
-        }
-
-        User.create(newUser)
-            .then((user) => {
-                return res.json(user)
+    registerUser : async (req, res, next) => {
+        let { email, password, firstName, lastName, isAdmin } = req.body
+        try {
+            const user = await User.findOne({ email })
+            if (user) {
+                return res.status(404).json({ message: 'El e-mail ya ha sido tomado' })
             }
-            ).catch((error) => {
-                next(error)
+            isAdmin === undefined ?
+            isAdmin = false :
+            isAdmin = true
+            const newUser = {
+                email,
+                password,
+                firstName,
+                lastName,
+                isAdmin
             }
-        )},
+            const userCreated = await User.create(newUser)
+            return res.status(200).json({ userCreated })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    loginUser : async (req, res, next) => {
+        const { email, password } = req.body
+        try {
+            const user = await User.findOne({ email })
+            let validate = user === null ?
+            false 
+            : await user.isValidPassword(password)
+            if(!validate){
+                return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
+            }
+            const token = jwt.sign({ id: user._id }, JWT_SECRET)
+            return res.json({ token })
+        } catch (error) {
+            next(error)
+        }
+    },
 
     getAllUsers : (req, res, next) => {
         User.find()

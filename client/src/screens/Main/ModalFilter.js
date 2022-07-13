@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, Modal, FlatList, Image } from
 import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles/Modal'
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native'
 import ModalButtons from './modules/ModalButtons';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllFilterProducts } from '../../redux/slices/products';
@@ -10,6 +11,7 @@ import { getAllFilterProducts } from '../../redux/slices/products';
 
 const ModalFilter = ({ modal, setModal }) => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     const [filters, setFilters] = useState({
         category: '',
         price: '',
@@ -21,10 +23,9 @@ const ModalFilter = ({ modal, setModal }) => {
             visible={modal}>
             <View style={styles.background} >
 
-
                 <View style={styles.containerNav}>
 
-                    <Text style={styles.textNav}>FILTRAJE</Text>
+                    <Text style={styles.textNav}>FILTROS</Text>
                     <TouchableOpacity
                         onPress={() =>
                             setModal(!modal)
@@ -69,6 +70,7 @@ const ModalFilter = ({ modal, setModal }) => {
                         onPress={() => {
                             dispatch(getAllFilterProducts(filters))
                             setModal(!modal)
+                            navigation.navigate('Products')
                         }}
 
                         style={styles.buttonOrd}>

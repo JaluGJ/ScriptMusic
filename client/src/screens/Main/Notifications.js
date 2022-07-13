@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const UserInformation = () => {
+const Notifications = () => {
   return (
     <View style={styles.wrapper}>
     <View style={styles.container}>
@@ -12,7 +12,7 @@ const UserInformation = () => {
   )
 }
 
-export default UserInformation
+export default Notifications
 
 const styles = StyleSheet.create({
   wrapper: {

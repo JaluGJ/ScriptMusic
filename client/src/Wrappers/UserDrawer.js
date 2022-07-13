@@ -4,10 +4,11 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import PaymentMethods from "../screens/Drawer/PaymentMethods";
 import MyProfile from "../screens/Drawer/MyProfile";
 import MyShopping from "../screens/Drawer/MyShopping";
-import Account from "../screens/Drawer/Account";
 import Addresses from "../screens/Drawer/Addresses";
-import CustomDrawer from "../components/CustomDrawer";
 import { Icon } from "@rneui/themed";
+import WrapperHome from "./WrapperHome";
+import CustomDrawer from "../screens/Drawer/CustomDrawer";
+import AboutUs from "../screens/Drawer/AboutUs";
 const Drawer = createDrawerNavigator();
 
 const UserDrawer = () => {
@@ -23,11 +24,39 @@ const UserDrawer = () => {
       }}
       drawerContent={(props) => <CustomDrawer {...props} />}
     >
-      <Drawer.Screen name="Account" component={Account} />
-      <Drawer.Screen name="MyProfile" component={MyProfile} />
-      <Drawer.Screen name="PaymentMethods" component={PaymentMethods} />
-      <Drawer.Screen name="Addresses" component={Addresses} />
-      <Drawer.Screen name="MyShopping" component={MyShopping} />
+      <Drawer.Screen name="Home " component={WrapperHome} options={{
+        drawerLabel: 'Home',
+        drawerIcon: ({color}) => (
+          <Icon name="home-outline" type="material-community" size={24} color={color} />
+        )
+      }}/>
+      <Drawer.Screen name="MyProfile" component={MyProfile} options={{
+        drawerLabel: 'Mi Perfil',
+        drawerIcon: ({color}) => (
+          <Icon name="account-circle-outline" type="material-community" size={24} color={color} />
+        )
+      }}/>
+      <Drawer.Screen name="PaymentMethods" component={PaymentMethods}  options={{
+        drawerLabel: 'Métodos de Pago',
+        drawerIcon: ({color}) => (
+          <Icon name="credit-card-outline" type="material-community" size={24} color={color} />
+        )
+      }}/>
+      <Drawer.Screen name="Addresses" component={Addresses} options={{
+        drawerLabel: 'Direcciones',
+        drawerIcon: ({color}) => (
+          <Icon name="map-marker-outline" type="material-community" size={24} color={color} />
+        )
+      }}/>
+      <Drawer.Screen name="MyShopping" component={MyShopping} options={{
+        drawerLabel: 'Mis Compras',
+        drawerIcon: ({color}) => (
+          <Icon name="shopping-outline" type="material-community" size={24} color={color} />
+        )
+      }}/>
+      <Drawer.Screen name="AboutUs" component={AboutUs} options={{
+        drawerLabel: '',
+      }} />
     </Drawer.Navigator>
   );
 };
