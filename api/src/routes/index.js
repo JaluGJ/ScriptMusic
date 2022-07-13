@@ -1,12 +1,8 @@
-require('dotenv').config()
-const { JWT_SECRET } = process.env
-const jwt = require('jsonwebtoken')
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser } = require('../controllers/user')
 const { paymentCard } = require('../controllers/payment')
-const passport = require('passport')
 const routes = Router()
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
@@ -24,18 +20,24 @@ routes.put('/products/:id', updateProduct)
 // PRODUCTS ROUTES
 
 // USER ROUTES
-routes.post('/signup', passport.authenticate('signup', { session: false }),
- async(req, res, next) => {
-    try {
-        const token = jwt.sign({ id: req.user._id }, JWT_SECRET, { expiresIn: 86400 })
-        res.json({
-            token,
-            user: req.user
-        })   
-    } catch (error) {
-        next(error)
-    }
-})
+
+routes.post('/login', loginUser)
+
+routes.post('/signup', registerUser)
+
+
+// routes.post('/signup', passport.authenticate('signup', { session: false }),
+//  async(req, res, next) => {
+//     try {
+//         const token = jwt.sign({ id: req.user._id }, JWT_SECRET, { expiresIn: 86400 })
+//         res.json({
+//             token,
+//             user: req.user
+//         })   
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 // routes.post('/login', passport.authenticate('login', { session: false }),
 //     async(err, user, next) => {

@@ -3,7 +3,7 @@ const { JWT_SECRET } = process.env
 const jwt = require('jsonwebtoken')
 const User = require('../models/user/userSchema')
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+// const LocalStrategy = require('passport-local').Strategy
 // const JWTStrategy = require('passport-jwt').Strategy
 // const ExtractJWT = require('passport-jwt').ExtractJwt
 
@@ -17,36 +17,36 @@ passport.deserializeUser(async (id, done) => {
     })
 })
 
-passport.use('signup', new LocalStrategy(
-    {
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true
-    },
-    async (req, email, password, done) => {
-        let { firstName, lastName, isAdmin } = req.body
-        try {
-            const user = await User.findOne({ email })
-            if (user) {
-                return done(null, false, { message: 'El e-mail ya ha sido tomado' })
-            }
-           isAdmin === undefined ? 
-           isAdmin = false :
-           isAdmin = true
-            const newUser = { 
-                email,
-                password,
-                firstName,
-                lastName,
-                isAdmin
-           }
-           const userCreated = await User.create(newUser)
-           return done(null, userCreated)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-))
+// passport.use('signup', new LocalStrategy(
+//     {
+//       usernameField: 'email',
+//       passwordField: 'password',
+//       passReqToCallback: true
+//     },
+//     async (req, email, password, done) => {
+//         let { firstName, lastName, isAdmin } = req.body
+//         try {
+//             const user = await User.findOne({ email })
+//             if (user) {
+//                 return done(null, false, { message: 'El e-mail ya ha sido tomado' })
+//             }
+//            isAdmin === undefined ? 
+//            isAdmin = false :
+//            isAdmin = true
+//             const newUser = { 
+//                 email,
+//                 password,
+//                 firstName,
+//                 lastName,
+//                 isAdmin
+//            }
+//            const userCreated = await User.create(newUser)
+//            return done(null, userCreated)
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     }
+// ))
 
 // passport.use('login', new LocalStrategy(
 //     {
