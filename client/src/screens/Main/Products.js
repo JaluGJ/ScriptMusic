@@ -11,6 +11,7 @@ const Products = () => {
     const { list: products } = useSelector((state) => state.products);
     const { category } = useSelector((state) => state.products);
     const { statusCode: statusCode } = useSelector((state) => state.products);
+    /* console.log(statusCode) */
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState('');
@@ -48,26 +49,24 @@ const Products = () => {
                 <View style={styles.categorieInfo}>
                     <Text style={styles.categorieInfoText}>{category}</Text>
                 </View>
-                <View style={styles.containerProducts}>
-                    {statusCode < 400 ?
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            numColumns={2}
-                            data={products}
-                            key={(item) => item.id}
-                            renderItem={({ item }) => {
-                                return <Product item={item} />;
-                            }}
-                            onScroll={(e) => {
-                                scrollY.setValue(e.nativeEvent.contentOffset.y)
-                            }}
-                        />
-                        :
+                    {statusCode  > 400 ?
                         <View style={styles.containerNoProducts}>
                             <Text style={styles.notProducts}>No existen coincidencias.</Text>
                         </View>
+                        :
+                        <FlatList
+                        showsVerticalScrollIndicator={false}
+                        numColumns={2}
+                        data={products}
+                        key={(item) => item.id}
+                        renderItem={({ item }) => {
+                            return <Product item={item} />;
+                        }}
+                        onScroll={(e) => {
+                            scrollY.setValue(e.nativeEvent.contentOffset.y)
+                        }}
+                    />
                     }
-                </View>
                 {/*  <Pagination allInstruments={allInstruments}></Pagination> */}
 
                 <ModalFilter
