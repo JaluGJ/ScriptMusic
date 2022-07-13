@@ -3,9 +3,6 @@ const styles = StyleSheet.create({
     wrapper: {
         height: "100%",
     },
-    cartonblanco: {
-        flex: 1,
-    },
     container: {
         height: "100%",
         backgroundColor: "#F9F9F9",
@@ -17,18 +14,15 @@ const styles = StyleSheet.create({
         padding: 10,
     
     },
-    containerProducts:{
-        paddingBottom:35
-    },
     categorieInfo:{
         backgroundColor: "#000000",
-        height: 35,
+        height: 25,
     },
     categorieInfoText:{
         letterSpacing: 6,
         textAlign:'center',
         color: 'white',
-        fontSize:20,
+        fontSize:22,
     },  
     textNav: {
         fontSize: 20,
@@ -53,7 +47,7 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
     },
     containerNoProducts:{
-        flex: 1,
+        marginBottom:40,
         alignItems: 'center',
         paddingTop: 100,
     },
