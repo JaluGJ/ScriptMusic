@@ -2,11 +2,9 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   TouchableOpacity,
   StatusBar,
   ScrollView,
-  Alert,
 } from "react-native";
 import React, { useEffect } from "react";
 import styles from "./styles/Register.jsx";
@@ -14,11 +12,12 @@ import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
 import { vh } from "react-native-expo-viewport-units";
 import { registerSchema } from "./validation/schemas/RegisterSchema.js";
-import { Formik, useField } from "formik";
+import { Formik } from "formik";
 import { FormikInputValue } from "./validation/FormikInputValue.js";
 import { FormikSubmit } from "./validation/FormikSubmit.js";
-import { postUser, setToken } from "../../redux/slices/signup.js";
+import { postUser } from "../../redux/slices/signup.js";
 import { useDispatch, useSelector } from "react-redux";
+import { errFalse } from "../../redux/slices/signup.js";
 
 const initialValues = {
   firstName: "",
@@ -31,9 +30,22 @@ const initialValues = {
 export default function Register() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const { err, token } = useSelector((state) => state.signup);
 
-  const token = useSelector((state) => state.signup.token);
-  const err = useSelector((state) => state.signup.err);
+  let handleErrorCheck = (err, token) => {
+    if (err) {
+      dispatch(errFalse(err));
+      alert("Ya existe un usuario con ese email");
+    }
+    if (token !== "") {
+      alert("Usuario registrado correctamente");
+      navigation.navigate("Login");
+    }
+  };
+
+  useEffect(() => {
+    handleErrorCheck(err, token);
+  }, [err, token]);
 
   return (
     <>
@@ -47,11 +59,7 @@ export default function Register() {
           <Formik
             validationSchema={registerSchema}
             initialValues={initialValues}
-            onSubmit={async (obj) => {
-              dispatch(postUser(obj));
-              // Alert.alert("¡Usuario creado correctamente!");
-              // navigation.navigate("Login");
-            }}
+            onSubmit={(obj) => dispatch(postUser(obj))}
           >
             {({ handleSubmit }) => {
               return (
