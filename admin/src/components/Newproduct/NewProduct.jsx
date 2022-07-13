@@ -5,8 +5,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, getAllProducts } from '../../redux/actions'
 import { useState } from 'react';
-import { validate } from './errors';
+import { validate, checkprops } from './errors';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function NewProduct({inputs, title}){
     // const categories = useSelector(state => state.categories)
@@ -55,7 +57,16 @@ export default function NewProduct({inputs, title}){
             window.location.reload()
             return alert('Por favor verifique los campos')
         }
-        dispatch(addProduct(input))
+        // dispatch(addProduct(input))
+        toast.success('Producto agregado exitosamente', {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
         setInput({
             model: '',
             brand: '',
@@ -66,13 +77,13 @@ export default function NewProduct({inputs, title}){
             image: '',
             description: '',
         })
-        window.location.reload()
     }
     return(
         <div className="new">
-        {/* <SideBar /> */}
+        <SideBar />
+        <ToastContainer />
         <div className="newcontainer">
-            {/* <NavBar /> */}
+            <NavBar />
             <div className="top">
                 <h1 className="title"> Crear nuevo producto. </h1>
             </div>
@@ -152,23 +163,23 @@ export default function NewProduct({inputs, title}){
                             )}
 
 
-                                <label> Categoria </label>
+                            <label> Categoria </label>
                             <select name='category' defaultValue="Categoria"
                             onChange={e => handleinput(e)}>
                             <option disabled={true}>Categoria</option>
-                                { categories.map(e =>
-                                <option value={e} key={e}>{e}</option>)}
+                            { categories.map(e =>
+                            <option value={e} key={e}>{e}</option>)}
                             </select>
                             {error.category && (
                             <p>{ error.category }</p>
                             )}
 
-                                <label> Tipo </label>
+                            <label> Tipo </label>
                             <select name='type' defaultValue="Tipo"
                             onChange={e => handleinput(e)}>
                             <option disabled={true}>Tipo</option>
-                                { types.map(e =>
-                                <option value={e} key={e}>{e}</option>)}
+                            { types.map(e =>
+                            <option value={e} key={e}>{e}</option>)}
                             </select>
                             {error.type && (
                             <p>{ error.type }</p>
@@ -185,11 +196,10 @@ export default function NewProduct({inputs, title}){
                             )}
                             
                             
-                            {!Object.keys(error).length ?
+                            {!Object.keys(error).length && !checkprops(input) ?
                                 <button >CREAR</button> : 
                                 <button disabled >CREAR</button>   
                             } 
-
                         </div>
                     </form>
                 </div>
