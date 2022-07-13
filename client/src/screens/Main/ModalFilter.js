@@ -23,7 +23,6 @@ const ModalFilter = ({ modal, setModal }) => {
             visible={modal}>
             <View style={styles.background} >
 
-
                 <View style={styles.containerNav}>
 
                     <Text style={styles.textNav}>FILTROS</Text>
