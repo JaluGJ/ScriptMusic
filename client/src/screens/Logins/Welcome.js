@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./styles/Welcome.jsx";
 import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
-import AppStack from "../../Wrappers/AppStack.js";
 
 export default function Welcome() {
   const navigation = useNavigation();
@@ -40,7 +39,9 @@ export default function Welcome() {
         </View>
         <View style={styles.containerAboutUs}>
           <Text style={styles.textGrey}>Conoce</Text>
-          <Text style={styles.textLinkGrey}> sobre nosotros.</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("AboutUs")}>
+            <Text style={styles.textLinkGrey}> sobre nosotros.</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </>

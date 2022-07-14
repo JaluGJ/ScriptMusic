@@ -1,6 +1,8 @@
-import { View, Text, ScrollView } from "react-native";
-import styles from "./Styles/AboutUs";
+import { View, Text, ScrollView, Pressable } from "react-native";
+import styles from "./styles/AboutUs";
 import AboutUsCard from "../../components/AboutUsCard";
+import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import hori from "../../../assets/aboutUs/hori.png";
 import jalu from "../../../assets/aboutUs/jalu.png";
 import gus from "../../../assets/aboutUs/gus.png";
@@ -11,12 +13,16 @@ import enzo from "../../../assets/aboutUs/enzo.jpg";
 import facu from "../../../assets/aboutUs/facu.png";
 
 const AboutUs = () => {
+  const navigation = useNavigation();
   return (
     <View styles={styles.wrapper}>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", flexDirection: "row" }}>
+      <Pressable onPress={() => navigation.goBack()}>
+        <AntDesign name="left" size={27} color="black" />
+      </Pressable>
         <Text style={styles.title}>SOBRE NOSOTROS</Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <AboutUsCard
           name="HORACIO"
           stack="FRONT-END"
