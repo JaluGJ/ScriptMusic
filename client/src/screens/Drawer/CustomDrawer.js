@@ -14,8 +14,14 @@ import {
 } from "@react-navigation/drawer";
 import { Icon } from "@rneui/themed";
 import styles from "./Styles/CustomDrawer.jsx";
+import { useDispatch } from "react-redux";
+import { loginUser, logOut } from "../../redux/slices/signin.js";
 
 const CustomDrawer = (props) => {
+
+  const dispatch = useDispatch();
+
+
   return (
     <View style={{ flex: 1 }}>
       {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
@@ -48,10 +54,10 @@ const CustomDrawer = (props) => {
             <Text style={styles.about}>Sobre nosotros</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => dispatch(logOut())}>
           <View style={styles.containerSignOff}>
             <Icon name="login-variant" type="material-community" size={24} />
-            <Text style={styles.signOff}>Cerrar sesion</Text>
+            <Text style={styles.signOff}>Cerrar sesión</Text>
           </View>
         </TouchableOpacity>
         </View>
