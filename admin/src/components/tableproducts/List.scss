@@ -1,0 +1,35 @@
+.list{
+    .top{
+        box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+        padding: 10px;
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .title{
+            color:#000000;
+            font-size: 20px;
+        }
+        
+        .btn{
+            width: 150px;
+            height: 40px;
+            background-color: #DD8643;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    }
+    .bottom{
+        box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+        padding: 10px;
+        margin: 20px;
+}
+}
