@@ -8,11 +8,13 @@ export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
+export const ADMIN_LOGIN = "ADMIN_LOGIN"
+export const DELETE_TOKEN = 'DELETE_TOKEN'
 
 export const GET_ALL_USERS = "GET_ALL_USERS"
 // El one user no esta aun
 export const GET_ONE_USER = "GET_ONE_USER"
-export const ADD_USER = "ADD_USER"
+// export const ADD_USER = "ADD_USER"
 
 
 // PRODUCTS ACTIONS
@@ -98,15 +100,33 @@ export const getOneUser = (id) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const addUser = (user) => (dispatch) => {
-    axios.post(`${baseUrl}/users`, user)
-        .then(res => {
+// export const addUser = (user) => (dispatch) => {
+//     axios.post(`${baseUrl}/users`, user)
+//         .then(res => {
+//             dispatch({
+//                 type: ADD_USER,
+//                 payload: res.data
+//             })
+//         })
+//         .catch(err => console.log(err))
+// }
+
+export const adminLogin = (user) => (dispatch) => {
+    axios.post(`http://localhost:3001/loginAdmin`, user)
+    .then(res => {
+            console.log(res.data.token)
             dispatch({
-                type: ADD_USER,
-                payload: res.data
+                type: ADMIN_LOGIN,
+                payload: res.data.token
             })
         })
         .catch(err => console.log(err))
+}
+
+export const deleteToken = () => {
+    return {
+        type: DELETE_TOKEN
+    }
 }
 
 // USER ACTIONS

@@ -6,7 +6,9 @@ import {
     DELETE_PRODUCT,
     GET_ALL_USERS,
     GET_ONE_USER,
-    ADD_USER,
+    ADMIN_LOGIN,
+    // ADD_USER,
+    DELETE_TOKEN
 } from "../actions"
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
     product: [],
     types: [],
     categories: [],
+    token: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -57,11 +60,24 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload
             }
-        case ADD_USER:
+        // case ADD_USER:
+        //     return {
+        //         ...state,
+        //         users: [...state.users, action.payload]
+        //     }
+
+        case ADMIN_LOGIN:
             return {
                 ...state,
-                users: [...state.users, action.payload]
+                token: action.payload
             }
+
+        case DELETE_TOKEN:
+            return{
+                ...state,
+                token: []
+            }
+
         default:
             return state
     }

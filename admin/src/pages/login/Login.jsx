@@ -4,12 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { loginUser } from '../../redux/actions'
 import logo from '../../assets/logo.png'
 import { useNavigate } from "react-router-dom";
+import { adminLogin } from '../../redux/actions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import loginValidate from './inputs.js'
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // const token = useSelector(state=> state.token)
     const [input, setInput] = useState({
-        username : '',
+        email : '',
         password: ''
     })
 
@@ -20,16 +25,28 @@ const Login = () => {
         })
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
-        dispatch(loginUser(e))
-        navigate('/home')
+        const token = await loginValidate(input)
+        console.log(token)
+        token !== undefined 
+        ? navigate('/home') 
+        : toast.error('Usuario o contraseña incorrecto.', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });  
     }
 
     return (
         <div className="login">
+             <ToastContainer />
             <div className="left">
-                <img src={logo} alt="" />
+                <img src={logo} alt="lol"/>
                 <h1>Script Music</h1>
                 <h2>Panel de administrador</h2>
             </div>
@@ -40,9 +57,9 @@ const Login = () => {
                     <label> Usuario </label>
                     <input 
                     type="text" 
-                    name= 'username'
+                    name= 'email'
                     onChange={e => handleChange(e)} 
-                    value={input.username} 
+                    value={input.email} 
                      />
                     <label > Contraseña </label>
                     <input 
