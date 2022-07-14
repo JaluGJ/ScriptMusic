@@ -59,3 +59,11 @@ export function validate(input){
     }
     return error;
 }
+
+export function checkprops(obj) {
+    for (var key in obj) {
+        if (obj[key] !== null && obj[key] !== '')
+            return false;
+    }
+    return true;
+}

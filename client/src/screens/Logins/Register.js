@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StatusBar,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useEffect } from "react";
 import styles from "./styles/Register.jsx";
@@ -15,7 +16,7 @@ import { registerSchema } from "./validation/schemas/RegisterSchema.js";
 import { Formik } from "formik";
 import { FormikInputValue } from "./validation/FormikInputValue.js";
 import { FormikSubmit } from "./validation/FormikSubmit.js";
-import { postUser } from "../../redux/slices/signup.js";
+import { cleanCache, postUser } from "../../redux/slices/signup.js";
 import { useDispatch, useSelector } from "react-redux";
 import { errFalse } from "../../redux/slices/signup.js";
 
@@ -30,22 +31,24 @@ const initialValues = {
 export default function Register() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { err, token } = useSelector((state) => state.signup);
+  const { err, flag } = useSelector((state) => state.signup);
 
-  let handleErrorCheck = (err, token) => {
+  let handleErrorCheck = (err, flag) => {
     if (err) {
       dispatch(errFalse(err));
-      alert("Ya existe un usuario con ese email");
+      Alert.alert("Ups...", "Ya existe un usuario registrado con ese email, prueba con otro.");
     }
-    if (token !== "") {
-      alert("Usuario registrado correctamente");
+    if (flag) {
+      Alert.alert("¡Usuario registrado correctamente!", "Inicia sesión con tus datos.");
+      // Alert.alert("¡Usuario registrado correctamente!", "Te enviamos un correo para verificar que el email te pertenece.");
       navigation.navigate("Login");
     }
   };
 
   useEffect(() => {
-    handleErrorCheck(err, token);
-  }, [err, token]);
+    handleErrorCheck(err, flag);
+    return dispatch(cleanCache())
+  }, [err, flag]);
 
   return (
     <>
