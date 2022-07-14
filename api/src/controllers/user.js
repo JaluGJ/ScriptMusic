@@ -37,8 +37,28 @@ module.exports = {
             let validate = user === null ?
             false 
             : await user.isValidPassword(password)
-            if(!validate){
+            if(!(validate && user)){
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
+            }
+            const token = jwt.sign({ id: user._id }, JWT_SECRET)
+            return res.json({ token })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    loginAdmin : async (req, res, next) => {
+        const { email, password } = req.body
+        try {
+            const user = await User.findOne({ email })
+            let validate = user === null ?
+            false
+            : await user.isValidPassword(password)
+            if(!(validate && user)){    
+                return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
+            }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const token = jwt.sign({ id: user._id }, JWT_SECRET)
             return res.json({ token })
@@ -55,5 +75,6 @@ module.exports = {
             ).catch((error) => {
                 next(error)
             }
-        )}
+        )
+    }
 }
