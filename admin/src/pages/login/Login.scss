@@ -4,23 +4,32 @@
     .left{
         flex: 4;
         height: 100vh;
-        background-color: #FEFEFE;
-        display: flex;
-        flex-direction: column;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('https://img.freepik.com/foto-gratis/hombre-tocando-guitarra-acustica-piano-cerca-grabando-notas-hermoso-color-fondo-concepto-actividad-musical_169016-4459.jpg?t=st=1657824015~exp=1657824615~hmac=83812a28b4d54fd5555a4b25153ec442107655b962a1676b1580d46a84b0c729&w=1480');
         align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column; 
         flex-wrap: wrap;
-
-        img{
-            width: 80hv;
-            height: 80vh;
-        }
+        text-align: center;
+    
+            img{
+            
+                width: 40hv;
+                height: 40vh;
+            }
+        
+        
     }
+
+
 
     .rigth{
         flex: 3;
         height: 100vh;
         width: 100vw;
-        background-color: #2B2B2B;
+        background-color: #FEFEFE;
         display: flex;
         align-items: center;
         justify-content: center;
