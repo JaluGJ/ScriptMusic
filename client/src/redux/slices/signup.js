@@ -29,12 +29,12 @@ export const postUser = (obj) => (dispatch) => {
     .then((res) => {
       dispatch(setFlag(true));
       dispatch(setErr(false));
-      console.log("User created succesfully");
+      console.log("REGISTER: User created succesfully");
     })
     .catch((e) => {
       dispatch(setFlag(false));
       dispatch(setErr(true));
-      console.log("User already exists");
+      console.log("REGISTER: User already exists");
     });
 };
 
