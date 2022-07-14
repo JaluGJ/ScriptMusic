@@ -13,7 +13,6 @@ import eyeHidden from "../../../assets/welcome/hidden.png";
 import styles from "./styles/Login.jsx";
 import { useNavigation } from "@react-navigation/native";
 import { vh } from "react-native-expo-viewport-units";
-import AppStack from "../../Wrappers/AppStack.js";
 import { Formik } from "formik";
 import loginSchema from "./validation/schemas/LoginSchema";
 import { FormikInputValue } from "./validation/FormikInputValue";

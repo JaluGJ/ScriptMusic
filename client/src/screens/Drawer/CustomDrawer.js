@@ -1,8 +1,6 @@
 import {
   Image,
   ImageBackground,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -15,7 +13,7 @@ import {
 import { Icon } from "@rneui/themed";
 import styles from "./Styles/CustomDrawer.jsx";
 import { useDispatch } from "react-redux";
-import { loginUser, logOut } from "../../redux/slices/signin.js";
+import { logOut } from "../../redux/slices/signin.js";
 
 const CustomDrawer = (props) => {
 
