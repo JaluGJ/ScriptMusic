@@ -81,6 +81,10 @@ routes.post('/signup', registerUser)
 routes.get('/users', getAllUsers)
 // USER ROUTES
 
+// PASSPORT ROUTES
+
+routes.get('/google', (req,res)=> res.send(req.user));
+
 //PAYMENT ROUTES
 
 routes.post('/create-payment-intent', paymentCard )
