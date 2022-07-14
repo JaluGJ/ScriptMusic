@@ -6,12 +6,12 @@ const apiUrl = "http://62.108.35.100:3001/";
 export const signupSlice = createSlice({
   name: "signup",
   initialState: {
-    token: "",
+    flag: false,
     err: false,
   },
   reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
+    setFlag: (state, action) => {
+      state.flag = action.payload;
     },
     setErr: (state, action) => {
       state.err = action.payload;
@@ -19,7 +19,7 @@ export const signupSlice = createSlice({
   },
 });
 
-export const { setToken, setErr } = signupSlice.actions;
+export const { setFlag, setErr } = signupSlice.actions;
 
 export default signupSlice.reducer;
 
@@ -27,17 +27,21 @@ export const postUser = (obj) => (dispatch) => {
   axios
     .post(`${apiUrl}signup`, obj)
     .then((res) => {
-      dispatch(setToken(res.data.token));
+      dispatch(setFlag(true));
       dispatch(setErr(false));
-      console.log("User created succesfully");
+      console.log("REGISTER: User created succesfully");
     })
     .catch((e) => {
-      dispatch(setToken(""));
+      dispatch(setFlag(false));
       dispatch(setErr(true));
-      console.log("User already exists");
+      console.log("REGISTER: User already exists");
     });
 };
 
 export const errFalse = (err) => (dispatch) => {
   dispatch(setErr(!err));
+};
+
+export const cleanCache = () => (dispatch) => {
+  dispatch(setFlag(false));
 };

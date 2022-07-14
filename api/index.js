@@ -3,13 +3,15 @@ const { PORT, JWT_SECRET } = process.env
 
 // en la linea 5 al cachear los modulos se logra hacer la conexion con mongoDB  
 require('./mongo.js')
-require('./src/auth')
+require('./src/auth/google')
 
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
+const routes= require('./src/routes')
+
 
 const errorsHandlers = require('./src/middlewares/errorsHandlers.js')
 const router = require('./src/routes')
@@ -32,7 +34,18 @@ app.use(passport.session())
 
 app.use('/', router)
 
+app.use('/auth', passport.authenticate('auth-google', {
+    scope: [
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+    ],
+    session: false,
+}),
+routes
+)
+
 app.use(errorsHandlers)
+
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
