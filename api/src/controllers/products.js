@@ -1,20 +1,34 @@
 const Product = require("../models/product/productSchema.js");
 
 module.exports = {
-  getAllProducts: (req, res, next) => {
+  getAllProducts: async (req, res, next) => {
     const { search, category, price } = req.query;
 
     if (search) {
-      return Product.find({ model: { $regex: search, $options: "i" } })
-        .then((products) => {
-          if (products.length === 0) {
+      // return Product.find({ model: { $regex: search, $options: "i" } })
+      //   .then((products) => {
+      //     if (products.length === 0) {
+      //         return res.status(404).json({msg:"No se encontro ningun producto"});
+      //       }
+      //     return res.json(products).end();
+      //   })
+      //   .catch((error) => {
+      //     next(error);
+      //   });
+      try {
+        const firstSearch = await Product.find({ model: { $regex: search, $options: "i" } })
+        if(firstSearch.length === 0){
+          const secondSearch = await Product.find({ type: { $regex: search, $options: "i" } })
+          if(secondSearch.length === 0){
             return res.status(404).json({msg:"No se encontro ningun producto"});
           }
-          return res.json(products).end();
-        })
-        .catch((error) => {
-          next(error);
-        });
+          return res.json(secondSearch).end();
+        }
+        return res.json(firstSearch).end();
+      } catch (error) {
+        next(error);
+      }
+
     }
 
     if (!category && price) {
