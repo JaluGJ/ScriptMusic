@@ -1,10 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "@rneui/themed";
 import WrapperNotifications from "./WrapperNotifications";
-import WrapperHome from "./WrapperHome";
 import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
-
 import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
 
