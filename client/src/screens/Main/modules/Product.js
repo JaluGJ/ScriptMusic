@@ -25,6 +25,7 @@ const Product = ({ item }) => {
                     resizeMode="contain"
                     source={{ uri: image }}
                 />
+                <AntDesign style={{position:'absolute', top:3, right:-1}} name="hearto" size={24} color="black" />
             </View>
 
 
@@ -36,9 +37,7 @@ const Product = ({ item }) => {
                     <Text style={styles.textBrand}>{brand}</Text>
                 </View>
                 <View style={styles.priceFav}>
-                    <AntDesign name="shoppingcart" size={24} color="black" />
                     <Text style={styles.price}>${price}</Text>
-                    <AntDesign name="hearto" size={24} color="black" />
                 </View>
 
             </View>

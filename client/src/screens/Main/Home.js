@@ -3,6 +3,7 @@ import {
   View,
   StatusBar,
   ScrollView,
+  Image
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, searchProducts } from "../../redux/slices/products";
@@ -11,6 +12,8 @@ import HomeCategories from "./modules/HomeCategories.js";
 import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
+import HomeItem from "./modules/HomeItem";
+
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -43,36 +46,36 @@ const Home = () => {
     <View style={styles.wrapper}>
 
       <StatusBar />
-      <ScrollView>
-        <HomeNav
-          search={search}
-          modal={modal}
-          setSearch={setSearch}
-          setModal={setModal}
-          submitHandle={submitHandle}
-        />
-        <MyCarousel />
-        <View style={styles.container}>
-
-
-
+      <View style={styles.container}>
+        <ScrollView >
+          <HomeNav
+            search={search}
+            modal={modal}
+            setSearch={setSearch}
+            setModal={setModal}
+            submitHandle={submitHandle}
+          />
+          <MyCarousel />
           <HomeCategories />
-          {/* <HomeProducts
-          statusCode={statusCode}
-          currentInstruments={products}
-          allInstruments={products.length}
-          
-        /> */}
+          <View style={styles.containerMain}>
 
-          {/* <Pagination allInstruments={products.length} />  */}
+            <HomeItem text={'PROMO DE LA SEMANA'} button={'Ver mas promociones'} />
 
+            <Image
+              source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
+              style={{ width: '100%', height: 150, marginVertical: 20, }}
+            />
+
+            <HomeItem text={'OFERTA IMPERDIBLE!'} button={'Ver mas ofertas'} />
+
+          </View>
 
           <ModalFilter
             modal={modal}
             setModal={setModal}
           />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
 
     </View>
   );

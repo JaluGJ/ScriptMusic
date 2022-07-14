@@ -9,7 +9,10 @@ const styles = StyleSheet.create({
     image: {
         width: vw(100),
         height: vh(25),
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        borderRadius:50,
+        borderColor:'white',
+        borderWidth:1
     }
 
 })
