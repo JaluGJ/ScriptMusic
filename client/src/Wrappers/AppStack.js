@@ -14,13 +14,18 @@ const AppStack = () => {
   const [countProducts, setCountProducts] = useState(0);
 
   useEffect(() => {
-    const getCountProducts = async () => {
-      const countProducts = await AsyncStorage.Item("@shoppingCart");
-      if (countProducts !== null) {
-        setCountProducts(JSON.parse(countProducts).length);
+    try {
+      const getCountProducts = async () => {
+        const countProducts = await AsyncStorage.getItem("@shoppingCart");
+        if (countProducts !== null) {
+          setCountProducts(JSON.parse(countProducts).length);
+        }
       }
+      getCountProducts();
+    } catch (error) {
+      console.log(error)
     }
-    getCountProducts();
+    
   }, [newItems]);
 
   return (

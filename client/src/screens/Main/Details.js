@@ -33,14 +33,16 @@ const Details = ({route}) => {
         let existingProduct = cart.find(product => {
           if(product.id === id){
             product.count += countProducts
+            product.price = (product.priceOne * product.count).toFixed(2)
             return true
           }
           return false
         })
+
         if(!existingProduct){
-        cart.push(product)
+          cart.push(product)
         }
-        await AsyncStorage.setItem("@shoppingCart", JSON.stringify(cart));
+        await AsyncStorage.setItem("@shoppingCart", JSON.stringify(cart))
       }
       else {
         console.log('primera ves')

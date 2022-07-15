@@ -13,7 +13,6 @@ export default function EmptyCart() {
   // const { productsCart, totalPrice } = useSelector(state => state.shoppingCart);
   /*   const { model } = productsCart */
   const [ productsCart, setProductsCart] = useState([]);
-  console.log(productsCart);
   const { newItems } = useSelector((state) => state.products);
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {

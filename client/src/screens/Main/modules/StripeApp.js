@@ -1,9 +1,8 @@
 import { Alert, Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import {CardField,useConfirmPayment,AdressFields, useStripe} from '@stripe/stripe-react-native';
-import fetchPaymentIntentClientSecret from "../helpers/paymentIntent.js";
+import {fetchPaymentIntent,fetchStatusPayment} from "../helpers/payments.js";
 import { useSelector } from "react-redux";
-import fetchStatusPayment from "../helpers/statusPayment.js";
 
 
 const StripeApp = ({modal,setModal}) => {
@@ -21,13 +20,13 @@ const StripeApp = ({modal,setModal}) => {
     }
 
     try {
-      const {client_secret,error} = await fetchPaymentIntentClientSecret(body);
+      const {clientSecret,error} = await fetchPaymentIntent(body);
 
       if(error) {
         alert(error);
         return;
       }else{
-        const {paymentIntent,error } = await confirmPayment(client_secret,{
+        const {paymentIntent,error } = await confirmPayment(clientSecret,{
           type: "Card",
           billing_details: {
             email,

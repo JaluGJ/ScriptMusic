@@ -12,25 +12,27 @@ const CardProducts = ({productsCart}) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
 
-  const handleRemove = (id) => {
+  const handleRemove = async (id) => {
     const newProductsCart = productsCart.filter(product => product.id !== id);
-    AsyncStorage.setItem("@shoppingCart", JSON.stringify(newProductsCart));
+    await AsyncStorage.setItem("@shoppingCart", JSON.stringify(newProductsCart));
     dispatch(addItems(-1));
   }
 
   
-  const handleCount = (id,operation) => {
+  const handleCount =(id,operation) => {
     productsCart.forEach(product => {
       if (product.id === id) {
         if(operation === 'add'){
           product.count += 1
-          product.price = product.priceOne * product.count
-        }
-        else{
-          if(product.count <= 1){
-            return 
+          product.price = (product.priceOne * product.count).toFixed(2)
+        }else{
+          if(product.count === 1){
+            console.log('no se puede quitar')
+            return
           }
           product.count -= 1
+          product.price = (product.price - product.priceOne).toFixed(2)
+          console.log(product)
         }
       }
     });
@@ -53,7 +55,7 @@ const CardProducts = ({productsCart}) => {
               </View>
               <View style={styles.containerProductInfo}>
                 <Text style={styles.productName}>{item.model}</Text>
-                <Text style={styles.productPrice}>$ {(item.price*item.count).toFixed(2)}</Text>
+                <Text style={styles.productPrice}>$ {item.price}</Text>
 
                 <View style={styles.containerProductCount}>
                 <TouchableOpacity onPress={()=>handleCount(item.id,'subs')}>
