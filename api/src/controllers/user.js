@@ -28,11 +28,6 @@ module.exports = {
                 isAdmin
             }
             const userCreated = await User.create(newUser)
-            if(userCreated.isAdmin === true) {
-                userCreated.isVerified = true
-                await userCreated.save()
-                return res.status(200).json({ userCreated })
-            }
             const token = getToken(userCreated._id)
             const template = getTemplate(userCreated.firstName, token)
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
