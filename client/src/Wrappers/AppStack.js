@@ -21,6 +21,9 @@ const AppStack = () => {
           let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
             return acc + cur.count;
           } , 0);
+          if(totalCount > 9){
+            totalCount = "9+";
+          }
           setCountProducts(totalCount);
         }
       }
@@ -117,6 +120,11 @@ const AppStack = () => {
         component={WrapperCart}
         options={{
         tabBarBadge: countProducts ? countProducts : null,
+        tabBarBadgeStyle: {
+          backgroundColor: "#fff6e8",
+          color: "#DD8643",
+          marginTop: -7,
+        },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
