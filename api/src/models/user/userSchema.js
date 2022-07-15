@@ -22,6 +22,11 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  isConfirmed: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   bought: [
     {
       type: Schema.Types.ObjectId,
