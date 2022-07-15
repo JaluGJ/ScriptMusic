@@ -93,9 +93,6 @@ let styles = StyleSheet.create({
     paddingRight:30,
     alignItems: 'flex-end',
   },
-  modal:{
-    height:'100%',
-  }
 });
 
 export default styles;

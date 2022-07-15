@@ -18,7 +18,6 @@ const StripeApp = ({modal,setModal}) => {
       alert("Please enter email and card details");
       return;
     }
-
     try {
       const {clientSecret,error} = await fetchPaymentIntent(body);
 
@@ -34,7 +33,7 @@ const StripeApp = ({modal,setModal}) => {
         })
 
         if(error) {
-          const {msg,err} = await fetchStatusPayment(body,'Failed');
+          const {err} = await fetchStatusPayment(body,'Failed');
           if(err) {
             console.log(err);
           }
@@ -59,7 +58,7 @@ const StripeApp = ({modal,setModal}) => {
   }
 
   return (
-    <Modal visible={modal} style={styles.container} animationType='slide'>
+    <Modal visible={modal}  animationType='slide'>
       <TextInput
         autoCapitalize="none"
         keyboardType="email-address"
@@ -89,11 +88,7 @@ const StripeApp = ({modal,setModal}) => {
 export default StripeApp;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    marginTop: 100,
-  },
+ 
   input: {
     backgroundColor: "#efefef",
     borderRadius: 5,

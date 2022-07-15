@@ -42,6 +42,13 @@ const CardProducts = ({productsCart}) => {
 
   return (
     <View style={styles.containerProducts}>
+
+      {
+          modal ?
+          <StripeApp modal={modal} setModal={setModal}/>
+          : null
+        }
+
       <Button title="Comprar" onPress={() => {
         setModal(true)
       }} />
@@ -76,16 +83,7 @@ const CardProducts = ({productsCart}) => {
           )}
           keyExtractor={(item) => item.id.toString()}
         />
-        {
-          modal ?
-          <Modal visible={modal}>
-            <View style={styles.modal}>
-              <StripeApp/>
-              
-            </View>
-          </Modal>
-          : null
-        }
+        
     </View>
   )
 }
