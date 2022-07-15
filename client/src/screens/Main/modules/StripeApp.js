@@ -2,8 +2,9 @@ import { Alert, Button, Modal, StyleSheet, Text, TextInput, View } from "react-n
 import React, { useEffect, useState } from "react";
 import {CardField,useConfirmPayment,CardForm} from '@stripe/stripe-react-native';
 import {fetchPaymentIntent,fetchStatusPayment} from "../helpers/payments.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { removeItems } from "../../../redux/slices/products.js";
 
 
 const StripeApp = ({modal,setModal}) => {
@@ -11,6 +12,7 @@ const StripeApp = ({modal,setModal}) => {
   const [cardDetails, setCardDetails] = useState("");
   const [body, setBody] = useState({});
   const {confirmPayment, loading} = useConfirmPayment()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
@@ -57,10 +59,14 @@ const StripeApp = ({modal,setModal}) => {
           }else if(err){
             console.log(err)
           }
-          Alert.alert("Payment Status", "Payment Successful");
+          Alert.alert('Status Payment', 'Payment Successful',[{text: 'OK', onPress: () => {
+            setModal(false) 
+            dispatch(removeItems())
+          }
+          }]);
         }else{
           await fetchStatusPayment(body,'Failed');
-          Alert.alert("Payment Failed");
+          Alert.alert('Status Payment', 'Payment Failed',[{text: 'OK', onPress: () => console.log('OK Pressed')}]);
         }
       }
     } catch (error) {

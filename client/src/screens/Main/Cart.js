@@ -16,10 +16,18 @@ export default function EmptyCart() {
   const { newItems } = useSelector((state) => state.products);
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
-      setProductsCart(JSON.parse(res))
+      if(res!==null){
+        setProductsCart(JSON.parse(res));
+      }
     }).catch(err => {
       console.log(err);
     });
+    if(newItems===null){
+      AsyncStorage.setItem("@shoppingCart", JSON.stringify([]))
+      .then(() => {
+        setProductsCart([]);
+      })
+    }
   }, [newItems]);
 
   return (

@@ -29,11 +29,14 @@ export const productsSlice = createSlice({
         },
         setItems: (state, action)=>{
             state.newItems =  state.newItems+=action.payload;
+        },
+        remItems: (state, action)=>{
+            state.newItems =  action.payload;
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -113,6 +116,9 @@ export const getCategory = (category)=> (dispatch) =>{
 }
 
 export const addItems = (payload) => (dispatch) =>{
-    console.log('addItems')
     dispatch(setItems(payload))
+}
+
+export const removeItems = () => (dispatch) =>{
+    dispatch(remItems(null))
 }
