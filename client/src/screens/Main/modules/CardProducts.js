@@ -40,15 +40,16 @@ const CardProducts = ({productsCart}) => {
     dispatch(addItems(1));
   }
 
+  if(modal){
+    return (
+      <Modal visible={modal} animationType='slide'>
+        <StripeApp setModal={setModal} modal={modal}/>
+      </Modal>
+    )
+  }
+
   return (
     <View style={styles.containerProducts}>
-
-      {
-          modal ?
-          <StripeApp modal={modal} setModal={setModal}/>
-          : null
-        }
-
       <Button title="Comprar" onPress={() => {
         setModal(true)
       }} />
