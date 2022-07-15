@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCurrentPage } from './pagination';
@@ -11,6 +12,7 @@ export const productsSlice = createSlice({
         statusCode: 200,
         details: {},
         category: 'Todos',
+        newItems: 0,
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -24,11 +26,14 @@ export const productsSlice = createSlice({
         },
         setCategory: (state, action)=>{
             state.category = action.payload;
+        },
+        setItems: (state, action)=>{
+            state.newItems =  state.newItems+=action.payload;
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -104,4 +109,9 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
 
 export const getCategory = (category)=> (dispatch) =>{
     dispatch(setCategory(category))
+}
+
+export const addItems = (payload) => (dispatch) =>{
+    console.log('addItems')
+    dispatch(setItems(payload))
 }

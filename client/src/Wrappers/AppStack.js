@@ -5,11 +5,23 @@ import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
 import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
-  const { productsCart } = useSelector((state) => state.shoppingCart);
-  const countProducts = productsCart.length;
+  const { newItems } = useSelector((state) => state.products);
+  const [countProducts, setCountProducts] = useState(0);
+
+  useEffect(() => {
+    const getCountProducts = async () => {
+      const countProducts = await AsyncStorage.Item("@shoppingCart");
+      if (countProducts !== null) {
+        setCountProducts(JSON.parse(countProducts).length);
+      }
+    }
+    getCountProducts();
+  }, [newItems]);
 
   return (
     <Tab.Navigator

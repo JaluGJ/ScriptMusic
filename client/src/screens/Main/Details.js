@@ -5,17 +5,16 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import styles from './Styles/Detail.jsx'
 import { useSelector, useDispatch  } from 'react-redux'
-import { getProductDetails } from '../../redux/slices/products.js';
+import { addItems,  getProductDetails } from '../../redux/slices/products.js';
 import { useEffect } from 'react';
-import { postProductsCart, setTotalPrice } from '../../redux/slices/shoppingCart.js';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const Details = ({route}) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const {details} = useSelector(state => state.products);
-  const {productsCart, totalPrice} = useSelector(state => state.shoppingCart);
-  /* console.log(totalPrice); */
   const [countProducts, setCountProducts] = useState(1)
   useEffect(() => {
     dispatch(getProductDetails(itemId))
@@ -24,16 +23,33 @@ const Details = ({route}) => {
     }
   }, [])
 
-  const addToCart = () => {
-    const { price , id, image } = details;
-    const product = {
-      price,
-      image,
-      id,
-      count: countProducts
+  const addToCart = async () => {
+    const { price , id, image , model} = details;
+    const product = {priceOne:price,price,image,id,model,count:countProducts}
+    try {
+      let existingCart = await AsyncStorage.getItem("@shoppingCart");
+      if (existingCart !== null) {
+        let cart = JSON.parse(existingCart);
+        let existingProduct = cart.find(product => {
+          if(product.id === id){
+            product.count += countProducts
+            return true
+          }
+          return false
+        })
+        if(!existingProduct){
+        cart.push(product)
+        }
+        await AsyncStorage.setItem("@shoppingCart", JSON.stringify(cart));
+      }
+      else {
+        console.log('primera ves')
+        await AsyncStorage.setItem("@shoppingCart", JSON.stringify([product]));
+      }
+    } catch (e) {
+      console.log(e)
     }
-    dispatch(postProductsCart(product))
-    dispatch(setTotalPrice(price * countProducts))
+    dispatch(addItems(1))
     navigation.goBack()
   }
 
@@ -86,7 +102,7 @@ const Details = ({route}) => {
             </View>
 
             <View>
-              <TouchableOpacity style={styles.button} onPress={()=>addToCart()}>
+              <TouchableOpacity style={styles.button} onPress={addToCart}>
                 <Text style={styles.buttonText}>AL CARRITO</Text>
               </TouchableOpacity>
             </View>
