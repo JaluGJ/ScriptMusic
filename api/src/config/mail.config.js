@@ -1,9 +1,16 @@
 const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 const mail = {
     user: 'script_music@yahoo.com',
     pass: '9658ikJU#',
 }
+// const oAuth2Client=new google.auth.OAuth2(
+//     CLIENTD_ID,
+//     CLIENT_SECRET,
+//     REDIRECT_URI
+//   );
+//   OAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN});
 
 let transporter = nodemailer.createTransport({
     host: "ScriptMusic 🎵",
