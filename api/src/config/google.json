@@ -1,0 +1,10 @@
+{
+    "service": "gmail",
+    "auth": {
+      "type": "OAuth2",
+      "user": "script.music22@gmail.com",
+      "clientId": "958650753115-8m6bon0tkgkr9nihar7a9si7v2a3bp9k.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04YZI6Nb3syN-CgYIARAAGAQSNwF-L9Irm8KLvLn4ANG3Oni4lB-pBDLybnQyoCeRfkmK8B-BH4KhxKFFECNBkOwc9ukvxq1IPyA"
+    }
+  }
