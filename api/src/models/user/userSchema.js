@@ -16,7 +16,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    required:false
   },
   isAdmin: {
     type: Boolean,
@@ -30,7 +30,7 @@ const userSchema = new Schema({
   bought: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Product",
+      ref: "Sold",
     }
   ]
 });
