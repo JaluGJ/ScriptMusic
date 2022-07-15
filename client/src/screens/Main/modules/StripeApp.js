@@ -71,6 +71,7 @@ const StripeApp = ({modal,setModal}) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerCard}>
+        <View style={styles.containerInput}>
       <TextInput
         autoCapitalize="none"
         keyboardType="email-address"
@@ -80,7 +81,8 @@ const StripeApp = ({modal,setModal}) => {
         }}
         style={styles.input}
       />
-      <CardField
+      </View>
+       <CardField
         postalCodeEnabled={true}
         AdressFieldsEnabled={true}
         placeholder='4242 4242 4242 4242'
@@ -89,11 +91,19 @@ const StripeApp = ({modal,setModal}) => {
         onCardChange={(card) => {
           setCardDetails(card);
         }}
-        /> 
-
+        />  
+      
+      {/* <CardForm
+   onFormComplete={(cardDetails) => {
+   console.log('card details', cardDetails);
+     setCard(cardDetails);
+   }}
+   style={{height: 200}}
+ /> */}
      
       <Button title="Pay" onPress={handlerPayPress} disabled={loading} />
       </View>
+   
         <View style={styles.containerButton}>
         <Button title="Close" onPress={()=>setModal(!modal)} />
       </View>
@@ -107,6 +117,9 @@ const styles = StyleSheet.create({
   container:{
     width: '100%',
     height: '100%',
+  },
+  containerInput:{
+    paddingHorizontal: 5,
   },
   containerCard:{
     width: '100%',

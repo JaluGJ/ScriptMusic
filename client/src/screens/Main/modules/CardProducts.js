@@ -7,15 +7,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { addItems } from '../../../redux/slices/products.js';
 import StripeApp from './StripeApp.js';
+import { useNavigation } from '@react-navigation/native';
 
 const CardProducts = ({productsCart}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [modal, setModal] = useState(false);
 
   const handleRemove = async (id) => {
     const newProductsCart = productsCart.filter(product => product.id !== id);
     await AsyncStorage.setItem("@shoppingCart", JSON.stringify(newProductsCart));
     dispatch(addItems(-1));
+    return true
   }
 
   
@@ -27,12 +30,10 @@ const CardProducts = ({productsCart}) => {
           product.price = (product.priceOne * product.count).toFixed(2)
         }else{
           if(product.count === 1){
-            console.log('no se puede quitar')
-            return
+            return 
           }
           product.count -= 1
           product.price = (product.price - product.priceOne).toFixed(2)
-          console.log(product)
         }
       }
     });
@@ -57,18 +58,27 @@ const CardProducts = ({productsCart}) => {
           data={productsCart}
          
           renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => {navigation.navigate('Details', { itemId: item.id })}}>
             <View style={styles.containerProduct}>
               <View style={styles.containerProductImage}>
-                <Image source={{ uri: item.image }} style={styles.productImage} />
+                <Image source={{ uri: item.image }} resizeMode='contain' style={styles.productImage} />
               </View>
               <View style={styles.containerProductInfo}>
                 <Text style={styles.productName}>{item.model}</Text>
                 <Text style={styles.productPrice}>$ {item.price}</Text>
 
                 <View style={styles.containerProductCount}>
+                  {
+                    item.count === 1 ? 
+                    <TouchableOpacity onPress={() => {handleRemove(item.id)}}>
+                    <Ionicons name="trash-outline" size={24} color="#000" />
+                  </TouchableOpacity>
+                  :
                 <TouchableOpacity onPress={()=>handleCount(item.id,'subs')}>
                   <AntDesign name="minuscircleo" size={24} color="#000" />
                 </TouchableOpacity>
+                  }
+                
                 <Text style={styles.productCount}>{item.count}</Text>
                 <TouchableOpacity onPress={()=>handleCount(item.id,'add')}>
                   <AntDesign name="pluscircleo" size={24} color="#000" />
@@ -81,6 +91,7 @@ const CardProducts = ({productsCart}) => {
                 </View>
                 </View>
             </View>
+            </TouchableOpacity>
           )}
           keyExtractor={(item) => item.id.toString()}
         />

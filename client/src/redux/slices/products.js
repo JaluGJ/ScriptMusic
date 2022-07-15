@@ -9,7 +9,7 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: {
         list: [],
-        statusCode: 200,
+        statusCode: 0,
         details: {},
         category: 'Todos',
         newItems: 0,
@@ -51,6 +51,7 @@ export const getAllProducts = ()=> (dispatch) =>{
 }
 
 export const getProductDetails = (id)=> (dispatch) =>{
+    dispatch(setProductsStatusCode(0))
     if(id){
     axios.get(`${apiUrl}products/${id}`)
     .then(res=>{
