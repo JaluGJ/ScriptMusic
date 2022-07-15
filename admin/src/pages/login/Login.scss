@@ -1,0 +1,85 @@
+.login{
+    display: flex;
+
+    .left{
+        flex: 4;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('https://img.freepik.com/foto-gratis/hombre-tocando-guitarra-acustica-piano-cerca-grabando-notas-hermoso-color-fondo-concepto-actividad-musical_169016-4459.jpg?t=st=1657824015~exp=1657824615~hmac=83812a28b4d54fd5555a4b25153ec442107655b962a1676b1580d46a84b0c729&w=1480');
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column; 
+        flex-wrap: wrap;
+        text-align: center;
+    
+            img{
+            
+                width: 40hv;
+                height: 40vh;
+            }
+        
+        
+    }
+
+
+
+    .rigth{
+        flex: 3;
+        height: 100vh;
+        width: 100vw;
+        background-color: #FEFEFE;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .form{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-around;
+            width: 40%;
+
+            label{
+                font-size: 18px;
+                font-weight: bold;
+                color: #FFC680;
+            }
+
+            select{
+                width: 100%;
+                padding: 5px;
+                border: none;
+                border-bottom: 1px solid gray;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size: 12px;
+
+            }
+            
+            input{
+                width: 100%;
+                padding: 5px;
+                border: none;
+                border-bottom: 1px solid gray;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            button{
+                width: 150px;
+                background-color: #DD8643;
+                padding: 10px;
+                border: none;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                margin-top: 10px;
+                border-radius: 10px;
+
+                
+            }
+        }
+    }
+}

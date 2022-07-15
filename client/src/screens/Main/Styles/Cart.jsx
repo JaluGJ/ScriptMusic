@@ -44,7 +44,55 @@ let styles = StyleSheet.create({
   },
   wrapper: {
     backgroundColor: "#000000",
-  }
+  },
+  containerProducts:{
+    // backgroundColor:"red",
+    paddingTop:20,
+    height: "100%",
+    paddingHorizontal: 20,
+  },
+  containerProduct:{
+    flexDirection:'row',
+    height: 200,
+    // backgroundColor: "green",
+  },
+  containerProductImage:{
+    width:120,
+    height:160,
+  },
+  productImage:{
+    width:'70%',
+    height:'70%',
+  },
+  containerProductInfo:{
+    width:'70%',
+    height:'100%',
+  },
+  productInfo:{
+    flexDirection:'column',
+    justifyContent:'space-between',
+    height:'100%',
+  },
+  productName:{
+    fontSize:20,
+    letterSpacing:2,
+    color:'#DD8643',
+  },
+  containerProductCount:{
+    paddingTop:10,
+    width:'40%',
+    flexDirection:'row',
+    justifyContent:'space-around',
+  },
+  productCount:{
+    fontSize:20,
+    letterSpacing:2,
+  },
+  containerTrash:{
+    // backgroundColor:'#DD8643',
+    paddingRight:30,
+    alignItems: 'flex-end',
+  },
 });
 
 export default styles;

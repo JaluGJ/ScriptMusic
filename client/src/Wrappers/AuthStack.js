@@ -6,6 +6,7 @@ import Login from "../screens/Logins/Login";
 import Register from "../screens/Logins/Register";
 import ForgotPassword from "../screens/Logins/ForgotPassword";
 import AppStack from "./AppStack";
+import AboutUs from "../screens/Logins/AboutUs";
 const LoginsStack = createStackNavigator();
 
 const AuthStack = () => {
@@ -20,6 +21,7 @@ const AuthStack = () => {
       <LoginsStack.Screen name="Register" component={Register} />
       <LoginsStack.Screen name="ForgotPassword" component={ForgotPassword} />
       <LoginsStack.Screen name="AppStack" component={AppStack} />
+      <LoginsStack.Screen name="AboutUs" component={AboutUs} />
     </LoginsStack.Navigator>
   );
 };
