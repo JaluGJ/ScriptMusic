@@ -1,7 +1,7 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser } = require('../controllers/user')
 const { paymentCard } = require('../controllers/payment')
 const routes = Router()
 
@@ -27,7 +27,10 @@ routes.post('/signup', registerUser)
 
 routes.post('/loginAdmin', loginAdmin)
 
+routes.get('/user/confirm/:token', confirmUser)
+
 routes.get('/users', getAllUsers)
+
 // USER ROUTES
 
 // PASSPORT ROUTES
