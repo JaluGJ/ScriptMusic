@@ -18,7 +18,10 @@ const AppStack = () => {
       const getCountProducts = async () => {
         const countProducts = await AsyncStorage.getItem("@shoppingCart");
         if (countProducts !== null) {
-          setCountProducts(JSON.parse(countProducts).length);
+          let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
+            return acc + cur.count;
+          } , 0);
+          setCountProducts(totalCount);
         }
       }
       getCountProducts();
