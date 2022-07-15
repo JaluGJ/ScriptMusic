@@ -1,39 +1,42 @@
+require('dotenv').config()
+const { CLIENT_SECRET, CLIENT_ID, REDIRECT_URI, REFRESH_TOKEN } = process.env
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
 const mail = {
-    user: 'script_music@yahoo.com',
-    pass: '9658ikJU#',
+    user: 'script.music22@gmail.com',
 }
-// const oAuth2Client=new google.auth.OAuth2(
-//     CLIENTD_ID,
-//     CLIENT_SECRET,
-//     REDIRECT_URI
-//   );
-//   OAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN});
+
+const oAuth2Client=new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+)
+
+oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN});
+
+const accessToken = oAuth2Client.getAccessToken()
 
 let transporter = nodemailer.createTransport({
-    host: "ScriptMusic 🎵",
-    port: 2525,
-    tls: {
-        rejectUnauthorized: false
-    },
-    secure: false, // true for 465, false for other ports
+    service:"gmail",
     auth: {
-      user: mail.user, // generated ethereal user
-      pass: mail.pass, // generated ethereal password
-    },
-  });
+    type: "OAuth2",
+    user: mail.user,
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
+    refreshToken: REFRESH_TOKEN,
+    accessToken
+}});
 
   const sendEmail = async (email, subject, html) => {
     try {
         
         await transporter.sendMail({
-            from: `ScriptMusic 🎵 <${ mail.user }>`, 
+            from: `${mail.user}🎵`, 
             to: email,
             subject,
             text: "Hola, este es un mail de validacion de cuenta.", 
-            html,
+            html: html,
         });
 
     } catch (error) {
@@ -44,17 +47,18 @@ let transporter = nodemailer.createTransport({
   const getTemplate = (name, token) => {
       return `
         <head>
-            <link rel="stylesheet" href="./style.css">
         </head>
         
         <div id="email___content">
-            <img src="https://i.imgur.com/eboNR82.png" alt="">
-            <h2>Hola ${ name }</h2>
-            <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
+            <img src="https://i.postimg.cc/pTcwbcgr/Sm-Logo02-PNG.png" alt="logoScript">
+            <h2>Hola ${name}.</h2>
+            <p>Para confirmar tu cuenta, ingresa al siguiente enlace :</p>
             <a
-                href="http://localhost:3001/user/confirm/${ token }"
+                href="http://localhost:3001/user/confirm/${token}"
                 target="_blank"
-            >Confirmar Cuenta</a>
+            >Confirmar Cuenta.</a>
+            <p>Si no has solicitado una cuenta, ignora este correo.</p>
+            <p>El equipo de ScriptMusic🎶</p>
         </div>
       `;
   }

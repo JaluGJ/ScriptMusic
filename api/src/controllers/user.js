@@ -1,6 +1,3 @@
-// require('dotenv').config()
-// const { JWT_SECRET } = process.env
-// const jwt = require('jsonwebtoken')
 const { getTemplate, sendEmail } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
@@ -54,7 +51,7 @@ module.exports = {
             }
             user.isConfirmed = true
             await user.save()
-            return res.status(200).json({ message: 'El usuario ha sido confirmado' })
+            return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app' })
         } catch (error) {
             next(error)
         }
