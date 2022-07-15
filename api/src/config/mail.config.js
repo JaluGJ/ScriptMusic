@@ -56,10 +56,10 @@ let transporter = nodemailer.createTransport({
               -moz-filter: saturate(0%) invert(100%); box-shadow: 7px 10px 32px 0px rgba(255,255,255,0.75);
   -webkit-box-shadow: 7px 10px 32px 0px rgba(223, 171, 61, 0.75);
   -moz-box-shadow: 7px 10px 32px 0px rgba(255,255,255,0.75);border-radius: 50%;" src="https://i.postimg.cc/pTcwbcgr/Sm-Logo02-PNG.png" alt="">
-              <h2 style="color: #ffffff;font-size: 30px;text-shadow: 4px 0px 13px #ffffff;">Hola culiao</h2>
+              <h2 style="color: #ffffff;font-size: 30px;text-shadow: 4px 0px 13px #ffffff;">Hola ${name}</h2>
           </div>
           <p style="color: #ffffff;font-size: 15px;">Para confirmar tu cuenta, ingresa al siguiente enlace</p>
-          <a style="color: #ffffff;font-size: 20px;text-decoration: none; padding-bottom: 10px;" href="http://localhost:3001/user/confirm/${ token }" target="_blank">Confirmar Cuenta</a>
+          <a style="color: #ffffff;font-size: 20px;text-decoration: none; padding-bottom: 10px;" href="http://localhost:3001/user/confirm/${token}" target="_blank">Confirmar Cuenta</a>
       </div>
       `;
   }
