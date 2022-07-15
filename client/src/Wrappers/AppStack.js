@@ -18,7 +18,13 @@ const AppStack = () => {
       const getCountProducts = async () => {
         const countProducts = await AsyncStorage.getItem("@shoppingCart");
         if (countProducts !== null) {
-          setCountProducts(JSON.parse(countProducts).length);
+          let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
+            return acc + cur.count;
+          } , 0);
+          if(totalCount > 9){
+            totalCount = "9+";
+          }
+          setCountProducts(totalCount);
         }
       }
       getCountProducts();
@@ -114,6 +120,11 @@ const AppStack = () => {
         component={WrapperCart}
         options={{
         tabBarBadge: countProducts ? countProducts : null,
+        tabBarBadgeStyle: {
+          backgroundColor: "#fff6e8",
+          color: "#DD8643",
+          marginTop: -7,
+        },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
