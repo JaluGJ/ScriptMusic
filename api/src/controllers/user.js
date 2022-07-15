@@ -28,7 +28,7 @@ module.exports = {
             const token = getToken(userCreated._id)
             const template = getTemplate(userCreated.firstName, token)
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
-            return res.status(200).json({ userCreated, token })
+            return res.status(200).json({ userCreated })
         } catch (error) {
             next(error)
         }
@@ -96,6 +96,31 @@ module.exports = {
             next(error)
         }
     },
+
+    profile: async (req, res, next) => {
+        try {
+            const autorization = req.get('Authorization')
+            if(!autorization){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const token = autorization.split(' ')[1]
+            const data = await getTokenData(token)
+            if(!data){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if(!user){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            return res.json({ user })   
+        } catch (error) {
+            next(error)
+        }
+    },
+
 
     getAllUsers : (req, res, next) => {
         User.find({}).populate('bought', {
