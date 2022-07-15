@@ -3,6 +3,8 @@ const { Router } = require('express')
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
 const { getAllUsers, registerUser, loginUser } = require('../controllers/user')
 const { paymentCard } = require('../controllers/payment')
+const { statusPayment } = require('../controllers/statusPayments')
+
 const routes = Router()
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
@@ -87,7 +89,9 @@ routes.get('/google', (req,res)=> res.send(req.user));
 
 //PAYMENT ROUTES
 
-routes.post('/create-payment-intent', paymentCard )
+routes.post('/create-payment-intents', paymentCard )
+
+routes.post('/status-payment', statusPayment )
 
 //PAYMENT ROUTES
 

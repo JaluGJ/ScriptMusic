@@ -48,7 +48,11 @@ module.exports = {
     },
 
     getAllUsers : (req, res, next) => {
-        User.find()
+        User.find({}).populate('bought', {
+            items: 1,
+            quantity: 1,
+            date: 1 
+        })
             .then((users) => {
                 return res.json(users)
             }
