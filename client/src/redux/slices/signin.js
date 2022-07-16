@@ -10,6 +10,7 @@ export const signinSlice = createSlice({
     token: null,
     err: null,
     isLoading: true,
+    user: null,
   },
   reducers: {
     setToken: (state, action) => {
@@ -21,10 +22,13 @@ export const signinSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { setToken, setErr, setIsLoading } = signinSlice.actions;
+export const { setToken, setErr, setIsLoading, setUser } = signinSlice.actions;
 
 export default signinSlice.reducer;
 
@@ -83,6 +87,8 @@ export const create = (userToken) => (dispatch) => {
   };
   axios
     .get(`${apiUrl}profile`, config)
-    .then((res) => console.log(res.data))
+    .then((res) => {
+      dispatch(setUser(res.data.user));
+    })
     .catch((e) => console.log(e));
 };
