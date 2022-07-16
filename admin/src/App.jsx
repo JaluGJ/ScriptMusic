@@ -34,7 +34,7 @@ function App() {
                 <Route path='/home' element={<Home logout={() => setAuth(false)} />} />
                 <Route path='/products/new' element={<NewProduct />} />
                 <Route path='/products' element={<Products />} />
-                <Route path='/products/:id' element={<Home />} />
+                <Route path='/products/:id' element={<ProductDetail />} />
               </>
             )
           }
