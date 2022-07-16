@@ -39,8 +39,7 @@ export default function Register() {
       Alert.alert("Ups...", "Ya existe un usuario registrado con ese email, prueba con otro.");
     }
     if (flag) {
-      Alert.alert("¡Usuario registrado correctamente!", "Inicia sesión con tus datos.");
-      // Alert.alert("¡Usuario registrado correctamente!", "Te enviamos un correo para verificar que el email te pertenece.");
+      Alert.alert("¡Usuario registrado correctamente!", "Te enviamos un correo para verificar que el email te pertenece.");
       navigation.navigate("Login");
     }
   };
