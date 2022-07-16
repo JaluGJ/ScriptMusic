@@ -33,7 +33,7 @@ const HomeCategories = () => {
                         style={{
                             width: vw(10),
                             height: vh(5),
-                            padding: 25
+                            padding: 10
                         }}
                         resizeMode="contain"
                         source={guitarra2}
