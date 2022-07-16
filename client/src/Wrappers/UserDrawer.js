@@ -9,15 +9,9 @@ import { Icon } from "@rneui/themed";
 import WrapperHome from "./WrapperHome";
 import CustomDrawer from "../screens/Drawer/CustomDrawer";
 import AboutUs from "../screens/Drawer/AboutUs";
-import { useSelector } from "react-redux";
 const Drawer = createDrawerNavigator();
 
 const UserDrawer = () => {
-  const { user } = useSelector((state) => state.signin);
-
-
-
-  
   return (
     <Drawer.Navigator
       screenOptions={{
