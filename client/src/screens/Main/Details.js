@@ -31,13 +31,14 @@ const Details = ({ route }) => {
   }, []);
 
   const addToCart = async () => {
-    const { price, id, image, model } = details;
+    const { price, id, image, model, brand } = details;
     const product = {
       priceOne: price,
       price: (price * countProducts).toFixed(2),
       image,
       id,
       model,
+      brand,
       count: countProducts,
     };
     try {

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         letterSpacing: 6,
     },
     input: {
-        backgroundColor: "#fff6e8",
+        backgroundColor: "#F9F9F9",
         borderRadius: 100,
         paddingVertical: 10,
         shadowColor: "#000",

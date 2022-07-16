@@ -10,6 +10,7 @@ export const signinSlice = createSlice({
     token: null,
     err: null,
     isLoading: true,
+    user: null,
   },
   reducers: {
     setToken: (state, action) => {
@@ -21,10 +22,13 @@ export const signinSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { setToken, setErr, setIsLoading } = signinSlice.actions;
+export const { setToken, setErr, setIsLoading, setUser } = signinSlice.actions;
 
 export default signinSlice.reducer;
 
@@ -38,16 +42,17 @@ export const loginUser = (obj) => (dispatch) => {
           await AsyncStorage.setItem("@token_id", res.data.token);
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
+          dispatch(create(res.data.token));
           console.log("LOGIN");
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }, 500);
     })
     .catch((e) => {
       dispatch(setIsLoading(false));
       dispatch(setErr(e.response.data.message));
-      console.log("LOGIN:", e.response.data.message)
+      console.log("LOGIN:", e.response.data.message);
     });
 };
 
@@ -56,11 +61,13 @@ export const logOut = () => (dispatch) => {
   setTimeout(async () => {
     try {
       dispatch(setToken(null));
+      dispatch(setUser(null));
       dispatch(setIsLoading(false));
       await AsyncStorage.removeItem("@token_id");
+      await AsyncStorage.removeItem("@user");
       console.log("LOGOUT");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, 500);
 };
@@ -72,4 +79,23 @@ export const cleanErr = () => (dispatch) => {
 export const changeToken = (userToken) => (dispatch) => {
   dispatch(setToken(userToken));
   dispatch(setIsLoading(false));
+};
+
+export const changeUser = (user) => (dispatch) => {
+  dispatch(setUser(user));
+};
+
+export const create = (userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios
+    .get(`${apiUrl}profile`, config)
+    .then(async (res) => {
+      await AsyncStorage.setItem("@user", JSON.stringify(res.data.user));
+      dispatch(setUser(res.data.user));
+    })
+    .catch((e) => console.log(e));
 };

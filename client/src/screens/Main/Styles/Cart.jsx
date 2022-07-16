@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+import { vh, vw } from "react-native-expo-viewport-units";
 let styles = StyleSheet.create({
   image: {
     width: 70,
@@ -7,17 +7,17 @@ let styles = StyleSheet.create({
     marginVertical: 30,
   },
   title: {
-    textAlign:'center',
+    textAlign: 'center',
     fontSize: 20,
     letterSpacing: 6,
     padding: 20
   },
-  navDetail:{
-    alignItems:'center'
+  navDetail: {
+    alignItems: 'center'
   },
-  navLength:{
+  navLength: {
     fontSize: 19,
-    letterSpacing:2,
+    letterSpacing: 2,
     color: '#DD8643'
   },
   containerText: {
@@ -45,54 +45,156 @@ let styles = StyleSheet.create({
   wrapper: {
     backgroundColor: "#000000",
   },
-  containerProducts:{
-    // backgroundColor:"red",
-    paddingTop:20,
-    height: "100%",
-    paddingHorizontal: 20,
+
+
+
+  /********* ESTILOS DE LA PARTE DEL TOTAL A PAGAR **************/
+
+
+  /* containerbotton: {
+    position: 'absolute',
+    bottom: '10%',
+    left: 0,
+    right: 0,
+    backgroundColor: '#000000',
+    paddingBottom:15,
+    borderBottomEndRadius: 40,
+    borderBottomStartRadius: 40,
+  }, */
+  arrowAnimated: {
+    right: '45%',
+    top: -10,
+    position: 'absolute',
+    backgroundColor: '#000000',
+    borderRadius: 50,
   },
-  containerProduct:{
-    flexDirection:'row',
-    height: 200,
-    // backgroundColor: "green",
+  textContainer: {
+    padding: '1%',
+    marginHorizontal: 10,
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
-  containerProductImage:{
-    width:120,
-    height:160,
+  textContainerTotal: {
+    padding: '1%',
+    marginHorizontal: 10,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopWidth: 1,
+    borderTopColor: '#d6d5d5'
   },
-  productImage:{
-    width:'70%',
-    height:'70%',
+  textCart: {
+    color: '#d6d5d5',
+    letterSpacing: 3,
+    fontSize: 19,
   },
-  containerProductInfo:{
-    width:'70%',
-    height:'100%',
+  textPrice: {
+    letterSpacing: 6,
+    fontSize: 19,
+    textAlign: 'center',
+    color: '#ffffff',
+    fontWeight: 'bold'
   },
-  productInfo:{
-    flexDirection:'column',
-    justifyContent:'space-between',
-    height:'100%',
+  buttoPage: {
+    backgroundColor: '#DD8643',
+    marginHorizontal: 30,
+    padding: 8,
+    marginTop: 25,
+    textAlign: 'center',
+    color: '#DD8643',
+    borderRadius: 30,
   },
-  productName:{
-    fontSize:20,
-    letterSpacing:2,
-    color:'#DD8643',
+  buttoPageText: {
+    textAlign: 'center',
+    color: '#ffffff',
+    letterSpacing: 2,
+    fontSize: 20,
   },
-  containerProductCount:{
-    paddingTop:10,
-    width:'40%',
-    flexDirection:'row',
-    justifyContent:'space-around',
+
+  /**************** ESTILOS DEL PRODUCTO **********************/
+  containerProducts: {
+    height: '100%',
+    paddingTop: 20,
+
   },
-  productCount:{
-    fontSize:20,
-    letterSpacing:2,
+  containerProduct: {
+    flexDirection: 'row',
+    height: 150,
+    width: vw(100), /* VERSATIL */
+    paddingLeft: 10,
+    marginTop: 5,
+    marginHorizontal: 5,
+    shadowColor: "#00000076",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.79,
+    shadowRadius: 1.65,
+    elevation: 1,
+    borderRadius: 30,
+    backgroundColor: '#ffffff',
   },
-  containerTrash:{
-    // backgroundColor:'#DD8643',
-    paddingRight:30,
-    alignItems: 'flex-end',
+  containerProductInfo: {
+    justifyContent: 'space-around',
+    width: '70%',
+    height: '100%',
   },
+  containerProductImage: {
+    width: vw(35),
+    height: 160,
+    justifyContent: 'center',
+  },
+  productName: {
+    fontSize: 15,
+    letterSpacing: 2,
+    color: '#000000',
+  },
+  productInfo: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+  },
+  productImage: {
+    width: '70%',
+    height: '70%',
+  },
+  productPrice: {
+    fontSize: 15,
+    letterSpacing: 2,
+  },
+  containerProductCount: {
+    paddingTop: 10,
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  productBrand: {
+    color: "#777777",
+  },
+  containerPlus: {
+    flexDirection: 'row',
+  },
+  productCount: {
+    fontSize: 20,
+    marginHorizontal: 15,
+    letterSpacing: 2,
+  },
+  containerTrash: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  elimText: {
+    color: 'crimson',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  containerNameTrash: {
+    width: '85%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
 });
 
 export default styles;

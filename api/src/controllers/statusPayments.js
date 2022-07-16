@@ -54,11 +54,12 @@ module.exports = {
             await sold.save()
 
           } catch (error) {
-            console.log(error)
+            console.log("error", error)
           }
         })
-        const {bought}= await User.findById(userId)
-        await User.findByIdAndUpdate(userId, { $set: { bought: [...bought ,soldId] } }, { new: true })
+        const user= await User.findById(userId)
+        console.log(user)
+        await User.findByIdAndUpdate(userId, { $set: { bought: [...user.bought , ...soldId] } }, { new: true })
         
         res.json({ msg: 'Payment Successful' })
       } else {

@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native'
-
+import { vh, vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
 
     categories: {
         padding: 10,
         flexDirection: 'row',
+        
     },
     button: {
-        backgroundColor: "#fff6e8",
+        backgroundColor: "#131010",
         borderRadius: 100,
-        paddingVertical: 10,
+        paddingVertical: 5,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -19,41 +20,14 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        marginTop: 5,
-        marginBottom: 10,
-        width: 110,
+        width: vw(16),
+        height: vh(8),
+        borderWidth:1,
+        borderColor:'white',
+        justifyContent:'center',
+        alignItems:'center'
+
     },
-    buttonActive: {
-        backgroundColor: "#DD8643",
-        borderRadius: 100,
-        paddingVertical: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        marginHorizontal: 5,
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        marginTop: 5,
-        marginBottom: 10,
-        width: 110,
-    },
-    buttonText: {
-        color: "#DD8643",
-        textAlign: "center",
-        shadowColor: "#171717",
-        fontSize: 16,
-        letterSpacing:2,
-    },
-    buttonTextActive: {
-        color: "#ffffff",
-        textAlign: "center",
-        shadowColor: "#171717",
-        fontSize: 16,
-        letterSpacing:2,  
-    }
 })
 
 export default styles

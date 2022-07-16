@@ -113,7 +113,12 @@ module.exports = {
             if(!data){
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const user = await User.findById(data.id)
+            const user = await User.findById(data.id).populate('bought', {
+            items: 1,
+            quantity: 1,
+            date: 1,
+            _id: 0
+        })
             if(!user){
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
