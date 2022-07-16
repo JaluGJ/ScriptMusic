@@ -1,8 +1,11 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile } = require('../controllers/user')
+const postPromo = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
+const { statusPayment } = require('../controllers/statusPayments')
+
 const routes = Router()
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
@@ -29,6 +32,8 @@ routes.post('/loginAdmin', loginAdmin)
 
 routes.get('/user/confirm/:token', confirmUser)
 
+routes.get('/profile', profile)
+
 routes.get('/users', getAllUsers)
 
 // USER ROUTES
@@ -39,7 +44,13 @@ routes.get('/google', (req,res)=> res.send(req.user));
 
 //PAYMENT ROUTES
 
-routes.post('/create-payment-intent', paymentCard )
+routes.post('/create-payment-intents', paymentCard )
+
+routes.post('/status-payment', statusPayment )
+
+//PROMOS ROUTES
+
+routes.post('/create-promo', postPromo )
 
 //PAYMENT ROUTES
 

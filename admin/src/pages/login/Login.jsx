@@ -9,65 +9,69 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginValidate from './inputs.js'
 
-const Login = () => {
+const Login = ({ authenticate }) => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const token = useSelector(state=> state.token)
+    const token = useSelector(state => state.token)
     const [input, setInput] = useState({
-        email : '',
+        email: '',
         password: ''
     })
 
-    function handleChange(e){
+    function handleChange(e) {
         setInput({
             ...input,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault()
+        console.log(input)
         const token = await loginValidate(input)
         console.log(token)
-        token !== undefined 
-        ? navigate('/home') 
-        : toast.error('Usuario o contraseña incorrecto.', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            });  
+        token !== undefined
+            ?
+             authenticate().
+            navigate('/home')
+            : toast.error('Usuario o contraseña incorrecto.', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
     }
 
     return (
         <div className="login">
-             <ToastContainer />
+            <ToastContainer />
             <div className="left">
-                <img src={logo} alt="lol"/>
+                <img src={logo} alt="lol" />
                 <h1>Script Music</h1>
                 <h2>Panel de administrador</h2>
             </div>
-           
-           
+
+
             <div className="rigth">
-                <form className="form" onSubmit={e=> handleSubmit(e)}>
+                <form className="form" onSubmit={e => handleSubmit(e)}>
                     <label> Usuario </label>
-                    <input 
-                    type="text" 
-                    name= 'email'
-                    onChange={e => handleChange(e)} 
-                    value={input.email} 
-                     />
+                    <input
+                        type="text"
+                        name='email'
+                        onChange={e => handleChange(e)}
+                        value={input.email}
+                    />
                     <label > Contraseña </label>
-                    <input 
-                    type='password' 
-                    name='password'
-                    onChange={e => handleChange(e)} 
-                    value={input.password} 
-                     />
+                    <input
+                        type='password'
+                        name='password'
+                        onChange={e => handleChange(e)}
+                        value={input.password}
+                    />
                     <button>INGRESAR</button>
                 </form>
             </div>

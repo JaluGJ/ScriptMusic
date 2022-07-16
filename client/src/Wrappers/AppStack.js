@@ -5,11 +5,34 @@ import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
 import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
-  const { productsCart } = useSelector((state) => state.shoppingCart);
-  const countProducts = productsCart.length;
+  const { newItems } = useSelector((state) => state.products);
+  const [countProducts, setCountProducts] = useState(0);
+
+  useEffect(() => {
+    try {
+      const getCountProducts = async () => {
+        const countProducts = await AsyncStorage.getItem("@shoppingCart");
+        if (countProducts !== null) {
+          let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
+            return acc + cur.count;
+          } , 0);
+          if(totalCount > 9){
+            totalCount = "9+";
+          }
+          setCountProducts(totalCount);
+        }
+      }
+      getCountProducts();
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }, [newItems]);
 
   return (
     <Tab.Navigator
@@ -97,6 +120,11 @@ const AppStack = () => {
         component={WrapperCart}
         options={{
         tabBarBadge: countProducts ? countProducts : null,
+        tabBarBadgeStyle: {
+          backgroundColor: "#fff6e8",
+          color: "#DD8643",
+          marginTop: -7,
+        },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon

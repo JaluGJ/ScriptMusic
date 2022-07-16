@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCurrentPage } from './pagination';
@@ -8,9 +9,10 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: {
         list: [],
-        statusCode: 200,
+        statusCode: 0,
         details: {},
         category: 'Todos',
+        newItems: 0,
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -24,11 +26,17 @@ export const productsSlice = createSlice({
         },
         setCategory: (state, action)=>{
             state.category = action.payload;
+        },
+        setItems: (state, action)=>{
+            state.newItems =  state.newItems+=action.payload;
+        },
+        remItems: (state, action)=>{
+            state.newItems =  action.payload;
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -46,6 +54,7 @@ export const getAllProducts = ()=> (dispatch) =>{
 }
 
 export const getProductDetails = (id)=> (dispatch) =>{
+    dispatch(setProductsStatusCode(0))
     if(id){
     axios.get(`${apiUrl}products/${id}`)
     .then(res=>{
@@ -104,4 +113,12 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
 
 export const getCategory = (category)=> (dispatch) =>{
     dispatch(setCategory(category))
+}
+
+export const addItems = (payload) => (dispatch) =>{
+    dispatch(setItems(payload))
+}
+
+export const removeItems = () => (dispatch) =>{
+    dispatch(remItems(null))
 }

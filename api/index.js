@@ -10,7 +10,6 @@ const cors = require('cors')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
-const routes= require('./src/routes')
 
 
 const errorsHandlers = require('./src/middlewares/errorsHandlers.js')
@@ -41,7 +40,7 @@ app.use('/auth', passport.authenticate('auth-google', {
     ],
     session: false,
 }),
-routes
+router
 )
 
 app.use(errorsHandlers)

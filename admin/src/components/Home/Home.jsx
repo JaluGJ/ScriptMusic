@@ -5,10 +5,10 @@ import UploadImg from '../../ImageUpload/uploadingImg'
 import './Home.scss';
 
 
-export default function Home(){
+export default function Home({logout}){
     return (
     <div className='home'>
-        <SideBar/>
+        <SideBar logout={logout}/>
         <div className='homecontainer'>
             <NavBar/>
             homecontainer

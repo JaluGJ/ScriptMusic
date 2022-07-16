@@ -1,6 +1,3 @@
-// require('dotenv').config()
-// const { JWT_SECRET } = process.env
-// const jwt = require('jsonwebtoken')
 const { getTemplate, sendEmail } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
@@ -28,15 +25,10 @@ module.exports = {
                 isAdmin
             }
             const userCreated = await User.create(newUser)
-            if(userCreated.isAdmin === true) {
-                userCreated.isVerified = true
-                await userCreated.save()
-                return res.status(200).json({ userCreated })
-            }
             const token = getToken(userCreated._id)
             const template = getTemplate(userCreated.firstName, token)
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
-            return res.status(200).json({ userCreated, token })
+            return res.status(200).json({ userCreated })
         } catch (error) {
             next(error)
         }
@@ -59,7 +51,7 @@ module.exports = {
             }
             user.isConfirmed = true
             await user.save()
-            return res.status(200).json({ message: 'El usuario ha sido confirmado' })
+            return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app' })
         } catch (error) {
             next(error)
         }
@@ -105,8 +97,37 @@ module.exports = {
         }
     },
 
+    profile: async (req, res, next) => {
+        try {
+            const autorization = req.get('Authorization')
+            if(!autorization){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const token = autorization.split(' ')[1]
+            const data = await getTokenData(token)
+            if(!data){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if(!user){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            return res.json({ user })   
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
     getAllUsers : (req, res, next) => {
-        User.find()
+        User.find({}).populate('bought', {
+            items: 1,
+            quantity: 1,
+            date: 1 
+        })
             .then((users) => {
                 return res.json(users)
             }
