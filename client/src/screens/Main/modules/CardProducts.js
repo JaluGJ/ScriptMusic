@@ -47,7 +47,7 @@ const CardProducts = ({ productsCart, modal, setModal }) => {
       </Modal>
     )
   }
-  console.log(productsCart)
+
   return (
     <View style={styles.containerProducts}>
 
