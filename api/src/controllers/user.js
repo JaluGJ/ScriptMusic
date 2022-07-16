@@ -64,6 +64,7 @@ module.exports = {
             let validate = user === null ?
             false 
             : await user.isValidPassword(password)
+            console.log("user", user, "user.isValidPassword", user.isValidPassword, "user.isValidPassword(password)",user.isValidPassword(password))
             if(!(validate && user)){
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
