@@ -11,6 +11,7 @@ const StripeApp = ({modal,setModal}) => {
   const [email, setEmail] = useState("");
   const [cardDetails, setCardDetails] = useState("");
   const [body, setBody] = useState({});
+  const {user} = useSelector(state => state.signin);
   const {confirmPayment, loading} = useConfirmPayment()
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ const StripeApp = ({modal,setModal}) => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
       setBody({
         items: JSON.parse(res),
-        userId:'62cf22b9d279ac9be7930ca5'
+        userId:user.id
       })
     }).catch(err => {
       console.log(err);
