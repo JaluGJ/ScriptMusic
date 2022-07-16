@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const API_URL = 'http://62.108.35.100:3001';
+const API_URL = 'https://sm.up.railway.app';
 
 export const fetchPaymentIntent = async (body) => {
     const {data} = await axios.post(`${API_URL}/create-payment-intents`, body);
