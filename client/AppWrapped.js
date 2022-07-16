@@ -29,8 +29,12 @@ export default function AppWrapped() {
 
 
 
-  if (err > 400) {
-    Alert.alert("Error", "Email o contraseñas incorrectos");
+  if (err?.includes("incorrectos")) {
+    Alert.alert("Error", "Email o contraseña incorrectos.");
+    dispatch(cleanErr());
+  }
+  if (err?.includes("confirmado")) {
+    Alert.alert("Error", "Debes confirmar tu cuenta para ingresar.");
     dispatch(cleanErr());
   }
 

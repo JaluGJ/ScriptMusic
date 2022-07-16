@@ -11,7 +11,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { Link } from "react-router-dom";
 
 
-export default function SideBar() {
+export default function SideBar({logout}) {
     return (
         <div className='sidebar'>
             <div className="top">
@@ -61,7 +61,7 @@ export default function SideBar() {
                     </li>
                     <li>
                         <LogoutOutlinedIcon className='icon' />
-                        <span>Desconectarse</span>
+                        <span onClick={logout}>Desconectarse</span>
                     </li>
                 </ul>
             </div>

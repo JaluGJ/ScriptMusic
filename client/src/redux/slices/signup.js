@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiUrl = "http://62.108.35.100:3001/";
+const apiUrl = "https://sm.up.railway.app/";
 
 export const signupSlice = createSlice({
   name: "signup",
@@ -29,7 +29,7 @@ export const postUser = (obj) => (dispatch) => {
     .then((res) => {
       dispatch(setFlag(true));
       dispatch(setErr(false));
-      console.log("REGISTER: User created succesfully");
+      console.log("REGISTER");
     })
     .catch((e) => {
       dispatch(setFlag(false));

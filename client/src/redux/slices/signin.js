@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const apiUrl = "http://62.108.35.100:3001/";
+const apiUrl = "https://sm.up.railway.app/";
 
 export const signinSlice = createSlice({
   name: "signin",
@@ -38,7 +38,7 @@ export const loginUser = (obj) => (dispatch) => {
           await AsyncStorage.setItem("@token_id", res.data.token);
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
-          console.log("LOGIN: User logged in");
+          console.log("LOGIN");
         } catch (error) {
           console.log(error)
         }
@@ -46,8 +46,8 @@ export const loginUser = (obj) => (dispatch) => {
     })
     .catch((e) => {
       dispatch(setIsLoading(false));
-      dispatch(setErr(e.response.status));
-      console.log("LOGIN: Email or password is incorrect");
+      dispatch(setErr(e.response.data.message));
+      console.log("LOGIN:", e.response.data.message)
     });
 };
 
@@ -58,7 +58,7 @@ export const logOut = () => (dispatch) => {
       dispatch(setToken(null));
       dispatch(setIsLoading(false));
       await AsyncStorage.removeItem("@token_id");
-      console.log("LOGIN: User logout");
+      console.log("LOGOUT");
     } catch (error) {
       console.log(error)
     }
