@@ -6,10 +6,10 @@ const stripe = require('stripe')(STRIPE)
 
 module.exports = {
   paymentCard: async (req, res) => {
-    //const { items } = req.body
+    const { items } = req.body
     try {
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: 2000 /*calculateOrderAmount(items)*/,
+        amount: calculateOrderAmount(items),
         currency: 'usd',
         automatic_payment_methods: {
           enabled: true,
