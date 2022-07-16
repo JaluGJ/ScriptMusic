@@ -22,10 +22,9 @@ export default function EmptyCart() {
       if (res !== null) {
         let products = JSON.parse(res);
         setProductsCart(products);
-        let priceAll = products.reduce((acc, cur) => {
-          return acc + cur.price;
-        }, 0)
-        setTotalPrice(parseInt(priceAll,10))
+         setTotalPrice(products.reduce((acc, cur) => {
+          return acc + Number(cur.price);
+        }, 0))
       }
     }).catch(err => {
       console.log(err);
