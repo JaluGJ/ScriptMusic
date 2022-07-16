@@ -59,7 +59,7 @@ let transporter = nodemailer.createTransport({
               <h2 style="color: #ffffff;font-size: 30px;text-shadow: 4px 0px 13px #ffffff;">Hola ${name}</h2>
           </div>
           <p style="color: #ffffff;font-size: 15px;">Para confirmar tu cuenta, ingresa al siguiente enlace</p>
-          <a style="color: #ffffff;font-size: 20px;text-decoration: none; padding-bottom: 10px;" href="http://localhost:3001/user/confirm/${token}" target="_blank">Confirmar Cuenta</a>
+          <a style="color: #ffffff;font-size: 20px;text-decoration: none; padding-bottom: 10px;" href="https://sm.up.railway.app/user/confirm/${token}" target="_blank">Confirmar Cuenta</a>
       </div>
       `;
   }
