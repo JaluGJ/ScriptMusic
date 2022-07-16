@@ -61,10 +61,11 @@ module.exports = {
         const { email, password } = req.body
         try {
             const user = await User.findOne({ email })
+            console.log("user", user)
             let validate = user === null ?
             false 
             : await user.isValidPassword(password)
-            console.log("user", user, "user.isValidPassword", user.isValidPassword, "user.isValidPassword(password)",user.isValidPassword(password))
+            console.log("user.isValidPassword", user.isValidPassword, "user.isValidPassword(password)", await user.isValidPassword(password))
             if(!(validate && user)){
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
