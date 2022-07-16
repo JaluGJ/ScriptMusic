@@ -38,16 +38,17 @@ export const loginUser = (obj) => (dispatch) => {
           await AsyncStorage.setItem("@token_id", res.data.token);
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
+          dispatch(create(res.data.token));
           console.log("LOGIN");
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }, 500);
     })
     .catch((e) => {
       dispatch(setIsLoading(false));
       dispatch(setErr(e.response.data.message));
-      console.log("LOGIN:", e.response.data.message)
+      console.log("LOGIN:", e.response.data.message);
     });
 };
 
@@ -60,7 +61,7 @@ export const logOut = () => (dispatch) => {
       await AsyncStorage.removeItem("@token_id");
       console.log("LOGOUT");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, 500);
 };
@@ -72,4 +73,16 @@ export const cleanErr = () => (dispatch) => {
 export const changeToken = (userToken) => (dispatch) => {
   dispatch(setToken(userToken));
   dispatch(setIsLoading(false));
+};
+
+export const create = (userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios
+    .get(`${apiUrl}profile`, config)
+    .then((res) => console.log(res.data))
+    .catch((e) => console.log(e));
 };
