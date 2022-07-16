@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+import { vh, vw } from "react-native-expo-viewport-units";
 let styles = StyleSheet.create({
   image: {
     width: 70,
@@ -116,11 +116,12 @@ let styles = StyleSheet.create({
   containerProducts: {
     height: '100%',
     paddingTop: 20,
-    
+
   },
   containerProduct: {
     flexDirection: 'row',
     height: 150,
+    width: vw(100), /* VERSATIL */
     paddingLeft: 10,
     marginTop: 5,
     marginHorizontal: 5,
@@ -132,7 +133,7 @@ let styles = StyleSheet.create({
     shadowOpacity: 0.79,
     shadowRadius: 1.65,
     elevation: 1,
-    borderRadius:30,
+    borderRadius: 30,
     backgroundColor: '#ffffff',
   },
   containerProductInfo: {
@@ -141,7 +142,7 @@ let styles = StyleSheet.create({
     height: '100%',
   },
   containerProductImage: {
-    width: 160,
+    width: vw(35),
     height: 160,
     justifyContent: 'center',
   },
@@ -169,7 +170,7 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  productBrand:{
+  productBrand: {
     color: "#777777",
   },
   containerPlus: {
@@ -190,7 +191,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
   },
   containerNameTrash: {
-    width: '90%',
+    width: '85%',
     flexDirection: 'row',
     justifyContent: 'space-between',
   }

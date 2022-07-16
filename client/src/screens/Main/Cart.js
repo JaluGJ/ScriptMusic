@@ -10,20 +10,22 @@ import styles from "./Styles/Cart.jsx";
 
 export default function EmptyCart() {
 
-  // const { productsCart, totalPrice } = useSelector(state => state.shoppingCart);
-  /*   const { model } = productsCart */
   const [productsCart, setProductsCart] = useState([]);
   const [modal, setModal] = useState(false);
   const { newItems } = useSelector((state) => state.products);
-  const { totalPrice } = useSelector((state) => state.shoppingCart);
   const [animation, setAnimation] = useState(false);
-  /* const [total, setTotal] = useState(0) */
+  const [totalPrice, setTotalPrice] = useState(0);
 
 
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
       if (res !== null) {
-        setProductsCart(JSON.parse(res));
+        let products = JSON.parse(res);
+        setProductsCart(products);
+        let priceAll = products.reduce((acc, cur) => {
+          return acc + cur.price;
+        }, 0)
+        setTotalPrice(parseInt(priceAll,10))
       }
     }).catch(err => {
       console.log(err);
@@ -106,11 +108,11 @@ export default function EmptyCart() {
                   </View>
                   <View style={styles.textContainer}>
                     <Text style={styles.textCart}>Envio:</Text>
-                    <Text style={styles.textPrice}>$0</Text>
+                    <Text style={styles.textPrice}>-$2̶0̶</Text>
                   </View>
                   <View style={styles.textContainerTotal}>
                     <Text style={styles.textCart}>Total:</Text>
-                    <Text style={styles.textPrice}>${totalPrice}</Text>
+                    <Text style={styles.textPrice}>${totalPrice-20}</Text>
                   </View>
 
 
