@@ -33,7 +33,7 @@ const CustomDrawer = (props) => {
             style={styles.userImage}
           />
           <Text style={styles.userName}>
-            {user.firstName} {user.lastName}
+            {user ? user.firstName + " " + user.lastName : "Cargando..."}
           </Text>
         </ImageBackground>
 
