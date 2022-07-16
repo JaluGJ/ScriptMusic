@@ -42,16 +42,20 @@ routes.get('/users', getAllUsers)
 
 routes.get('/google', (req,res)=> res.send(req.user));
 
-//PAYMENT ROUTES
+// PASSPORT ROUTES
+
+// PAYMENT ROUTES
 
 routes.post('/create-payment-intents', paymentCard )
 
 routes.post('/status-payment', statusPayment )
 
-//PROMOS ROUTES
+// PAYMENT ROUTES
+
+// PROMOS ROUTES
 
 routes.post('/create-promo', postPromo )
 
-//PAYMENT ROUTES
+// PROMOS ROUTES
 
 module.exports = routes

@@ -1,6 +1,6 @@
 const {Schema, model}= require('mongoose');
 
-const promosProductSchema = new Schema({
+const promoProductSchema = new Schema({
 price: {
     type: Number
 },
@@ -16,13 +16,14 @@ image: {
 promo: {
     type: String
 },
-items: {
-    type: Array,
-}
+items: [{
+    type: Schema.Types.ObjectId,
+    ref: "Product"
+}]
   
 })
 
-promosProductSchema.set('toJSON', {
+promoProductSchema.set('toJSON', {
     transform: (doc, ret) =>{
         ret.id = ret._id
         delete ret._id
@@ -30,6 +31,6 @@ promosProductSchema.set('toJSON', {
     }
 })
 
-const promosProductModel = model('promos', promosProductSchema);
+const promoProductModel = model('Promo', promoProductSchema);
 
-module.exports = promosProductModel;
+module.exports = promoProductModel;
