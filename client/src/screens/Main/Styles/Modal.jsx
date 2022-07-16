@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     instrumentstwo:{
         width: '100%',
-        marginLeft:'32%'
+        marginLeft:'65%'
     },
     button: {
         margin: 2,
