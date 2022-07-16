@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const { getTemplate, sendEmail } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
@@ -38,7 +39,7 @@ module.exports = {
     confirmUser : async (req, res, next) => {
         const { token } = req.params
         try {
-            const data = await getTokenData(token)
+            const data = getTokenData(token)
             const user = await User.findById(data.id)
             if (!user) {
                 return res.status(404).json({ message: 'El usuario no existe' })
@@ -61,12 +62,10 @@ module.exports = {
         const { email, password } = req.body
         try {
             const user = await User.findOne({ email })
-            console.log("user", user)
             let validate = user === null ?
             false 
-            : await user.isValidPassword(password)
-            console.log("user.isValidPassword", user.isValidPassword, "user.isValidPassword(password)", await user.isValidPassword(password))
-            if(!(validate && user)){
+            : user.isValidPassword(password)
+            if(!validate){
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
             if(!user.isConfirmed){
@@ -85,8 +84,8 @@ module.exports = {
             const user = await User.findOne({ email })
             let validate = user === null ?
             false
-            : await user.isValidPassword(password)
-            if(!(validate && user)){    
+            : user.isValidPassword(password)
+            if(!validate){    
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
             if(!user.isAdmin){
