@@ -35,11 +35,11 @@ const userSchema = new Schema({
   ]
 });
 
-userSchema.pre('save', async function (next) {
-  const hash = await bcrypt.hash(this.password, 10)
-  this.password = hash
-  next()
-})
+// userSchema.pre('save', async function (next) {
+//   const hash = await bcrypt.hash(this.password, 10)
+//   this.password = hash
+//   next()
+// })
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
@@ -49,6 +49,11 @@ userSchema.set('toJSON', {
       delete ret.password
   }
 })
+
+userSchema.methods.hashPassword = async function (password) {
+  const hash = await bcrypt.hash(password, 10)
+  this.password = hash
+}
 
 userSchema.methods.isValidPassword = function (password) {
   const isMatch = bcrypt.compare(password, this.password)
