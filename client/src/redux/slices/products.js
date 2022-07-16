@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCurrentPage } from './pagination';
 
-const apiUrl = 'http://62.108.35.100:3001/';
+const apiUrl = 'https://sm.up.railway.app/';
 
 export const productsSlice = createSlice({
     name: 'products',

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const apiUrl = "http://62.108.35.100:3001/";
+const apiUrl = "https://sm.up.railway.app/";
 
 export const signinSlice = createSlice({
   name: "signin",
