@@ -1,10 +1,5 @@
 export const instruments = [
-    {
-        id: 1,
-        name: 'Todos',
-        imageLight: 'https://i.postimg.cc/cJxXy1jF/logo2.png',
-        imageDark: 'https://i.postimg.cc/cJxXy1jF/logo2.png',
-    },
+    
     {
         id: 2,
         name: 'Guitarra',
@@ -34,15 +29,15 @@ export const instruments = [
         name: 'Viento',
         imageLight: 'https://i.postimg.cc/7P3G71bT/viento2.png',
         imageDark: 'https://i.postimg.cc/7P3G71bT/viento2.png',
-    }
-]
-export const instrumentstwo=[
+    },
     {
         id: 7,
         name: 'Ukelele',
         imageLight: 'https://i.postimg.cc/yxHDtxpd/ukelele2.png',
         imageDark: 'https://i.postimg.cc/yxHDtxpd/ukelele2.png',
     },
+]
+export const instrumentstwo=[
     {
         id: 8,
         name: 'Arco',
