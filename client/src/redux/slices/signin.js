@@ -61,8 +61,10 @@ export const logOut = () => (dispatch) => {
   setTimeout(async () => {
     try {
       dispatch(setToken(null));
+      dispatch(setUser(null));
       dispatch(setIsLoading(false));
       await AsyncStorage.removeItem("@token_id");
+      await AsyncStorage.removeItem("@user");
       console.log("LOGOUT");
     } catch (error) {
       console.log(error);
@@ -79,6 +81,10 @@ export const changeToken = (userToken) => (dispatch) => {
   dispatch(setIsLoading(false));
 };
 
+export const changeUser = (user) => (dispatch) => {
+  dispatch(setUser(user));
+};
+
 export const create = (userToken) => (dispatch) => {
   const config = {
     headers: {
@@ -87,7 +93,8 @@ export const create = (userToken) => (dispatch) => {
   };
   axios
     .get(`${apiUrl}profile`, config)
-    .then((res) => {
+    .then(async (res) => {
+      await AsyncStorage.setItem("@user", JSON.stringify(res.data.user));
       dispatch(setUser(res.data.user));
     })
     .catch((e) => console.log(e));
