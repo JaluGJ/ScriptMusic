@@ -25,7 +25,7 @@ export const registerSchema = yup.object().shape({
     .string()
     .required("Ingrese su contraseña.")
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
       "Su contraseña debe incluir, al menos, 8 caracteres, una mayúscula, una minúscula y un número."
     ),
   passwordConfirmation: yup
