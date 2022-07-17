@@ -36,10 +36,10 @@ let styles = StyleSheet.create({
     color: "#DD8643",
     letterSpacing: 2,
   },
-  containerNav:{
+  containerNav: {
     height: vh(10),
     backgroundColor: '#000000',
-    borderWidth:1,
+    borderWidth: 1,
     shadowColor: "#00000076",
     shadowOffset: {
       width: 10,
@@ -53,16 +53,16 @@ let styles = StyleSheet.create({
 
 
   /********* ESTILOS DE LA PARTE DEL TOTAL A PAGAR **************/
-  modalContainer:{
+  modalContainer: {
     flex: 1,
-    backgroundColor: '#00000060',
-    justifyContent:'flex-end'
+    justifyContent: 'flex-end'
   },
-  modalContent:{
+  modalContent: {
+    height: vh(40),
     backgroundColor: '#000000',
-    paddingBottom:10,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30,
+    paddingBottom: 10,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     shadowColor: "#00000076",
     shadowOffset: {
       width: 1,
@@ -71,13 +71,15 @@ let styles = StyleSheet.create({
     shadowOpacity: 0.79,
     shadowRadius: 1.65,
     elevation: 5,
-    height: vh(30),
-  },  
+  },
+  modalPrueba:{
+    flex: 1,backgroundColor: '#00000075',
+  },
   arrowAnimated: {
-    left: vw(60),
+    left: '30%',
     bottom: 20,
     position: 'absolute',
-    backgroundColor: '#ee9450',
+    backgroundColor: '#f09b59',
     shadowColor: "#ffffff",
     shadowOffset: {
       width: 1,
@@ -88,7 +90,7 @@ let styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 50,
   },
-  arrowAnimatedModal:{
+  arrowAnimatedModal: {
     right: vw(45),
     top: vh(-2),
     position: 'absolute',
@@ -162,6 +164,10 @@ let styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#ffffff',
   },
+  containerProductsOff: {
+    height: vh(84),
+    backgroundColor: '#0000006d',
+  },
   containerProductInfo: {
     justifyContent: 'space-around',
     width: '70%',
@@ -173,7 +179,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productName: {
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
     width: vw(50),
     fontSize: 15,
     letterSpacing: 2,

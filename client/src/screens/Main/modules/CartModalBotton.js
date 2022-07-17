@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { removeItems } from "../../../redux/slices/products.js";
+import StripeApp from './CartModalBotton.js';
 import styles from '../Styles/CartPayment.jsx'
-import logo from '../../../../assets/icon.png'
+import logo from '../../../../assets/instrumentos/logo2.png'
 import { vh, vw } from "react-native-expo-viewport-units";
-const StripeApp = ({ modal, setModal }) => {
+const CartModalBotton = ({ modal, setModal }) => {
   const [email, setEmail] = useState("");
   const [cardDetails, setCardDetails] = useState("");
   const [body, setBody] = useState({});
@@ -89,21 +90,22 @@ const StripeApp = ({ modal, setModal }) => {
             right: vw(-20),
             padding: 10,
             position: 'absolute',
-            opacity: 0.3,
+            opacity: 0.7,
 
         }}
         resizeMode="contain"
         source={logo}
         />
-        <View style={styles.containerButton}>
-          <TouchableNativeFeedback onPress={() => {
-            setModal(!modal)
-          }}>
-            <View style={styles.arrowAnimatedModal}>
-              <AntDesign name="down" size={54} color="#DD8643" />
-            </View>
-          </TouchableNativeFeedback>
-
+        <View style={styles.containerInput}>
+          <TextInput
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder="Ingresa tu email"
+            onChange={(event) => {
+              setEmail(event.nativeEvent.text);
+            }}
+            style={styles.input}
+          />
         </View>
         <CardField
           postalCodeEnabled={true}
@@ -115,23 +117,14 @@ const StripeApp = ({ modal, setModal }) => {
             setCardDetails(card);
           }}
         />
-        <View style={styles.containerInput}>
-          <TextInput
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="Enter your email"
-            onChange={(event) => {
-              setEmail(event.nativeEvent.text);
-            }}
-            style={styles.input}
-          />
-        </View>
+        
         
 
         {/* <Button title="Pay" onPress={handlerPayPress} disabled={loading} /> */}
         <TouchableOpacity
           onPress={handlerPayPress}
           style={styles.buttoPage}
+          disabled={loading}
         >
           <Text style={styles.buttoPageText}>PAGAR</Text>
         </TouchableOpacity>
@@ -140,4 +133,4 @@ const StripeApp = ({ modal, setModal }) => {
   );
 };
 
-export default StripeApp;
+export default CartModalBotton;

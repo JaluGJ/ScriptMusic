@@ -6,10 +6,9 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { addItems } from '../../../redux/slices/products.js';
-import StripeApp from './StripeApp.js';
 import { useNavigation } from '@react-navigation/native';
 
-const CardProducts = ({ productsCart, modal, setModal }) => {
+const CardProducts = ({ productsCart }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -40,13 +39,7 @@ const CardProducts = ({ productsCart, modal, setModal }) => {
     dispatch(addItems(1));
   }
 
-  if (modal) {
-    return (
-      <Modal visible={modal} animationType='slide' transparent={true}>
-        <StripeApp setModal={setModal} modal={modal} />
-      </Modal>
-    )
-  }
+  
 
   return (
     <View style={styles.containerProducts}>
