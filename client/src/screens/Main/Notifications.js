@@ -1,30 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import styles from "./Styles/Notifications.jsx";
 
 const Notifications = () => {
   return (
-    <View style={styles.wrapper}>
-    <View style={styles.container}>
-      <Text>User Information</Text>
+    <View style={{ alignItems: "center" }}>
+      <View>
+        <Text style={styles.title}>NOTIFICACIONES</Text>
+      </View>
+      <Text>Working on it...</Text>
     </View>
-    </View>
-    
-  )
-}
+  );
+};
 
-export default Notifications
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: "#1e1c1b",
-  },
-  container: {
-    backgroundColor:"white",
-    // width: "100%",
-    height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-    alignItems: "center",
-  }
-})
+export default Notifications;
