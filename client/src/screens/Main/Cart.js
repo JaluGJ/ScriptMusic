@@ -22,7 +22,7 @@ export default function EmptyCart() {
       if (res !== null) {
         let products = JSON.parse(res);
         setProductsCart(products);
-         let total = products.reduce((acc, cur) => {
+        let total = products.reduce((acc, cur) => {
           return acc + Number(cur.price);
         }, 0)
         setTotalPrice(total.toFixed(2));
@@ -55,13 +55,19 @@ export default function EmptyCart() {
                 <CardProducts productsCart={productsCart} modal={modal} setModal={setModal} />
 
 
-                <TouchableNativeFeedback style={{borderRadius:50, backgroundColor:'red'}} onPress={() => {
-                  setAnimation(true)
-                }}>
-                  <View style={styles.arrowAnimated}>
-                    <Text style={styles.title}>PAGAR YA!</Text>
-                  </View>
-                </TouchableNativeFeedback>
+                {
+                  modal === false ?
+
+                    <TouchableNativeFeedback style={{ borderRadius: 50, backgroundColor: 'red' }} onPress={() => {
+                      setAnimation(true)
+                    }}>
+                      <View style={styles.arrowAnimated}>
+                        <Text style={styles.title}>PAGAR YA!</Text>
+                      </View>
+                    </TouchableNativeFeedback>
+                    :
+                    <Text></Text>
+                }
 
 
                 <Modal visible={animation} transparent animationType={'slide'}>
@@ -87,7 +93,6 @@ export default function EmptyCart() {
                         <Text style={styles.textPrice}>${totalPrice - 20}</Text>
                       </View>
 
-
                       <TouchableOpacity
                         onPress={() => {
                           setModal(true)
@@ -96,6 +101,7 @@ export default function EmptyCart() {
                       >
                         <Text style={styles.buttoPageText}>PAGAR</Text>
                       </TouchableOpacity>
+
                     </View>
                   </View>
                 </Modal>
