@@ -65,7 +65,7 @@ module.exports = {
             const user = await User.findOne({ email })
             let validate = user === null ?
             false 
-            : user.isValidPassword(password)
+            : await user.isValidPassword(password)
             if(!validate){
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
