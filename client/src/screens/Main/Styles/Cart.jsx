@@ -10,7 +10,8 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     letterSpacing: 6,
-    padding: 20
+    padding: 20,
+    color: 'white',
   },
   navDetail: {
     alignItems: 'center'
@@ -22,7 +23,6 @@ let styles = StyleSheet.create({
   },
   containerText: {
     alignItems: "center",
-    marginVertical: 20,
   },
   text: {
     fontSize: 20,
@@ -36,34 +36,52 @@ let styles = StyleSheet.create({
     color: "#DD8643",
     letterSpacing: 2,
   },
-  container: {
-    backgroundColor: "#F9F9F9",
-    height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-  },
-  wrapper: {
-    backgroundColor: "#000000",
+  containerNav:{
+    height: vh(10),
+    backgroundColor: '#000000',
+    borderWidth:1,
+    shadowColor: "#00000076",
+    shadowOffset: {
+      width: 10,
+      height: 1,
+    },
+    shadowOpacity: 0.79,
+    shadowRadius: 1.65,
+    elevation: 1,
   },
 
 
 
   /********* ESTILOS DE LA PARTE DEL TOTAL A PAGAR **************/
-
-
-  /* containerbotton: {
-    position: 'absolute',
-    bottom: '10%',
-    left: 0,
-    right: 0,
+  modalContainer:{
+    flex: 1,
+    
+    justifyContent:'flex-end'
+  },
+  modalContent:{
     backgroundColor: '#000000',
-    paddingBottom:15,
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-  }, */
+    paddingBottom:10,
+    borderTopLeftRadius:30,
+    borderTopRightRadius:30,
+    shadowColor: "#00000076",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.79,
+    shadowRadius: 1.65,
+    elevation: 5,
+  },  
   arrowAnimated: {
-    right: '45%',
-    top: -10,
+    left: vw(80),
+    bottom: 20,
+    position: 'absolute',
+    backgroundColor: '#00000073',
+    borderRadius: 50,
+  },
+  arrowAnimatedModal:{
+    right: vw(80),
+    top: vh(-6),
     position: 'absolute',
     backgroundColor: '#000000',
     borderRadius: 50,
@@ -114,9 +132,8 @@ let styles = StyleSheet.create({
 
   /**************** ESTILOS DEL PRODUCTO **********************/
   containerProducts: {
-    height: '100%',
-    paddingTop: 20,
-
+    height: vh(84),
+    backgroundColor: '#f1f0f0',
   },
   containerProduct: {
     flexDirection: 'row',
@@ -147,6 +164,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productName: {
+    flexWrap:'wrap',
     fontSize: 15,
     letterSpacing: 2,
     color: '#000000',
