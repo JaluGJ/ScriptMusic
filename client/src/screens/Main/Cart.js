@@ -69,7 +69,7 @@ export default function EmptyCart() {
 
 
                 <Modal visible={modal} transparent animationType={'slide'}>
-                  <Modal visible={modal} transparent animationType={'fade'}>
+                  
                     <View style={styles.modalPrueba}>
                       <View style={styles.modalContainer}>
                         <View style={styles.modalContent}>
@@ -78,7 +78,6 @@ export default function EmptyCart() {
                         </View>
                       </View>
                     </View>
-                  </Modal>
                   {/* <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                       

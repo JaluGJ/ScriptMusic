@@ -1,12 +1,10 @@
-import { Alert, Button, TouchableOpacity, TouchableNativeFeedback, Text, TextInput, View, Image } from "react-native";
+import { Alert, TouchableOpacity, Text, TextInput, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { CardField, useConfirmPayment, CardForm } from '@stripe/stripe-react-native';
 import { fetchPaymentIntent, fetchStatusPayment } from "../helpers/payments.js";
 import { useDispatch, useSelector } from "react-redux";
-import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { removeItems } from "../../../redux/slices/products.js";
-import StripeApp from './CartModalBotton.js';
 import styles from '../Styles/CartPayment.jsx'
 import logo from '../../../../assets/instrumentos/logo2.png'
 import { vh, vw } from "react-native-expo-viewport-units";
@@ -80,7 +78,6 @@ const CartModalBotton = ({ modal, setModal }) => {
   }
 
   return (
-    <View style={styles.container}>
       <View style={styles.containerCard}>
         <Image
           style={{
@@ -129,7 +126,6 @@ const CartModalBotton = ({ modal, setModal }) => {
           <Text style={styles.buttoPageText}>PAGAR</Text>
         </TouchableOpacity>
       </View>
-    </View>
   );
 };
 
