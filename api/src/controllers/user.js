@@ -113,12 +113,27 @@ module.exports = {
             if(!data){
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const user = await User.findById(data.id).populate('bought', {
-            items: 1,
-            quantity: 1,
-            date: 1,
-            _id: 0
-        })
+            const user = await User.findById(data.id).populate({
+                path: "bought",
+                select: {
+                    quantity: 1,
+                    date:1,
+                    _id: 0
+                },
+                populate: {
+                    path: "items",
+                    select: {
+                        model:1,
+                        brand:1,
+                        price:1,
+                        type:1,
+                        category:1,
+                        image:1,
+                        description:1,
+                        _id:0 
+                    }
+                }
+            })
             if(!user){
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
@@ -130,10 +145,25 @@ module.exports = {
 
 
     getAllUsers : (req, res, next) => {
-        User.find({}).populate('bought', {
-            items: 1,
-            quantity: 1,
-            date: 1 
+        User.find({}).populate({
+            path: "bought",
+            select: {
+                quantity: 1,
+                date:1,
+                _id: 0
+            },
+            populate: {
+                path: "items",
+                select: {
+                    model:1,
+                    brand:1,
+                    price:1,
+                    type:1,
+                    category:1,
+                    image:1,
+                    description:1,
+                    _id:0                }
+            }
         })
             .then((users) => {
                 return res.json(users)
