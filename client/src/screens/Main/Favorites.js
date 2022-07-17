@@ -1,21 +1,23 @@
 import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView} from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import emptyFav from "../../../assets/fav1.png";
 import styles from "./Styles/Favorites.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromFavorite } from "../../redux/slices/products";
 
 export default function EmptyFavs() {
   const {favorite} = useSelector(state => state.products);
+  const dispatch = useDispatch();
 
-  return (
-    favorite.length > 0 ? <FAVORITOS favorite={favorite}/> : <SINFAVORITOS />
-  )
+  if(favorite.length > 0){
+    return <FAVORITOS favorite={favorite} />
+  }
+  return <SINFAVORITOS />
 }
 
 
 const FAVORITOS =({favorite}) => {
-  
+  const dispatch = useDispatch();
   return (
     <ScrollView >
       <View >
@@ -29,7 +31,7 @@ const FAVORITOS =({favorite}) => {
             <Text >{item.price}</Text>
             <Image  style={styles.image} source={{ uri: item.image }} />
             <TouchableOpacity style={{width:20,height:20,backgroundColor:'red'}}>
-              <Text style={styles.buttonText} onPress={()=>removeFromFavorite(item.id)}>Eliminar</Text>
+              <Text style={styles.buttonText} onPress={()=>dispatch(removeFromFavorite(item.id))}>Eliminar</Text>
             </TouchableOpacity>
           </View>
         ))}

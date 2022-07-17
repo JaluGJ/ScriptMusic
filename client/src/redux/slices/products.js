@@ -133,6 +133,7 @@ export const removeItems = () => (dispatch) =>{
 export const addToFavorite = (item)  =>  async (dispatch) => {
     try {
       let existingFav = await AsyncStorage.getItem("@favorite");
+      console.log(existingFav)
       if (existingFav !== null) {
         let favorites = JSON.parse(existingFav);
         let existingProduct = favorites.find((product) => {

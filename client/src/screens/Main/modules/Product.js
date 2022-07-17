@@ -4,10 +4,12 @@ import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
 import { addToFavorite } from '../../../redux/slices/products.js';
+import { useDispatch } from 'react-redux';
 
 const Product = ({ item }) => {
     const { model, image, price, brand } = item
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     return (
         <TouchableOpacity
@@ -25,7 +27,7 @@ const Product = ({ item }) => {
                     resizeMode="contain"
                     source={{ uri: image }}
                 />
-                <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>addToFavorite(item)}>
+                <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>dispatch(addToFavorite(item))}>
                 <AntDesign name="hearto" size={24} color="black" />
                 </TouchableOpacity>
             </View>
