@@ -13,7 +13,6 @@ export const productsSlice = createSlice({
         details: {},
         category: 'Todos',
         newItems: 0,
-        // favorite: [],
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -34,12 +33,6 @@ export const productsSlice = createSlice({
         remItems: (state, action)=>{
             state.newItems =  action.payload;
         },
-        // setFavorite: (state, action)=>{
-        //     state.favorite = [...state.favorite, action.payload];
-        // },
-        // removeFavorite: (state, action)=>{
-        //     state.favorite = state.favorite.filter(item => item.id !== action.payload);
-        // }
     }   
 });
 

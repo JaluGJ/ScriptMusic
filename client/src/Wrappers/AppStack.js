@@ -7,32 +7,32 @@ import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useFavorites from "../screens/Main/customHooks/useFavorites";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
   const { newItems } = useSelector((state) => state.products);
   const [countProducts, setCountProducts] = useState(0);
+  // const {favorite ,getFavorite} = useFavorites()
 
   useEffect(() => {
-    try {
-      const getCountProducts = async () => {
-        const countProducts = await AsyncStorage.getItem("@shoppingCart");
-        if (countProducts !== null) {
-          let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
-            return acc + cur.count;
-          } , 0);
-          if(totalCount > 9){
-            totalCount = "9+";
-          }
-          setCountProducts(totalCount);
-        }
-      }
-      getCountProducts();
-    } catch (error) {
-      console.log(error)
-    }
-    
+        AsyncStorage.getItem("@shoppingCart").then(
+          (countProducts)=>{
+            if (countProducts !== null) {
+              let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
+                return acc + cur.count;
+              } , 0);
+              if(totalCount > 9){
+                totalCount = "9+";
+              }
+              setCountProducts(totalCount);
+            }
+          }).catch((error) => console.log(error));
   }, [newItems]);
+
+  // useEffect(() => {
+  //   getFavorite();
+  // }, [favorite]);
 
   return (
     <Tab.Navigator
@@ -75,6 +75,12 @@ const AppStack = () => {
         name="WrapperFavorites"
         component={WrapperFavorites}
         options={{
+          // tabBarBadge: favorite.length > 0 ? favorite.length : null,
+          // tabBarBadgeStyle: {
+          //   backgroundColor: "#fff6e8",
+          //   color: "#DD8643",
+          //   marginTop: -4,
+          // },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
