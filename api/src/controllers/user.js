@@ -26,7 +26,7 @@ module.exports = {
                 isAdmin
             }
             const userCreated = await User.create(newUser)
-            await userCreated.hashPassword(password)
+            // await userCreated.hashPassword(password)
             const token = getToken(userCreated._id)
             const template = getTemplate(userCreated.firstName, token)
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
