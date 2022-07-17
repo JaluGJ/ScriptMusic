@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Image, StatusBar, TouchableOpacity, Animated } from "react-native";
+import { View, Text, Image, StatusBar, TouchableNativeFeedback, Modal, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons';
 import CardDefault from "./modules/CardDefault";
@@ -16,13 +16,13 @@ export default function EmptyCart() {
   const [animation, setAnimation] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
-
+  console.log(animation)
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
       if (res !== null) {
         let products = JSON.parse(res);
         setProductsCart(products);
-         setTotalPrice(products.reduce((acc, cur) => {
+        setTotalPrice(products.reduce((acc, cur) => {
           return acc + Number(cur.price);
         }, 0))
       }
@@ -37,23 +37,7 @@ export default function EmptyCart() {
     }
   }, [newItems]);
 
-  
-  const position = useRef(new Animated.Value(0)).current
-  const fateIn = () => {
-    Animated.timing(position, {
-      toValue: -210,
-      useNativeDriver: true,
-    }).start()
 
-  }
-  const fateOut = () => {
-    Animated.timing(position, {
-      toValue: -10,
-      useNativeDriver: true,
-    }).start()
-
-  }
- 
   return (
     <View style={styles.wrapper}>
       <StatusBar />
@@ -70,60 +54,50 @@ export default function EmptyCart() {
                 <CardProducts productsCart={productsCart} modal={modal} setModal={setModal} />
 
 
-                <Animated.View style={{
-                  position: 'absolute',
-                  elevation: 4,
-                  zIndex: 4,
-                  top:'85%',
-                  width: '100%',
-                  backgroundColor: '#000000',
-                  paddingBottom: 15,
-                  transform:[{translateY:position}] 
+                <TouchableNativeFeedback style={{borderRadius:50, backgroundColor:'red'}} onPress={() => {
+                  setAnimation(true)
                 }}>
+                  <View style={styles.arrowAnimated}>
+                    <AntDesign name="up" size={54} color="white" />
+                  </View>
+                </TouchableNativeFeedback>
 
-                  {
-                    !animation ?
-                      <TouchableOpacity onPress={() => {
-                        fateIn()
-                        setAnimation(!animation)
+
+                <Modal visible={animation} transparent animationType={'slide'}>
+                  <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                      <TouchableNativeFeedback onPress={() => {
+                        setAnimation(false)
                       }}>
-                        <View style={styles.arrowAnimated}>
-                          <AntDesign name="up" size={54} color="white" />
-                        </View>
-                      </TouchableOpacity>
-                      :
-                      <TouchableOpacity onPress={() => {
-                        fateOut()
-                        setAnimation(!animation)
-                      }}>
-                        <View style={styles.arrowAnimated}>
+                        <View style={styles.arrowAnimatedModal}>
                           <AntDesign name="down" size={54} color="white" />
                         </View>
+                      </TouchableNativeFeedback>
+                      <View style={styles.textContainer}>
+                        <Text style={styles.textCart}>Sub Total:</Text>
+                        <Text style={styles.textPrice}>${totalPrice}</Text>
+                      </View>
+                      <View style={styles.textContainer}>
+                        <Text style={styles.textCart}>Envio:</Text>
+                        <Text style={styles.textPrice}>-$2̶0̶</Text>
+                      </View>
+                      <View style={styles.textContainerTotal}>
+                        <Text style={styles.textCart}>Total:</Text>
+                        <Text style={styles.textPrice}>${totalPrice - 20}</Text>
+                      </View>
+
+
+                      <TouchableOpacity
+                        onPress={() => {
+                          setModal(true)
+                        }}
+                        style={styles.buttoPage}
+                      >
+                        <Text style={styles.buttoPageText}>PAGAR</Text>
                       </TouchableOpacity>
-                  }
-                  <View style={styles.textContainer}>
-                    <Text style={styles.textCart}>Sub Total:</Text>
-                    <Text style={styles.textPrice}>${totalPrice}</Text>
+                    </View>
                   </View>
-                  <View style={styles.textContainer}>
-                    <Text style={styles.textCart}>Envio:</Text>
-                    <Text style={styles.textPrice}>-$2̶0̶</Text>
-                  </View>
-                  <View style={styles.textContainerTotal}>
-                    <Text style={styles.textCart}>Total:</Text>
-                    <Text style={styles.textPrice}>${totalPrice-20}</Text>
-                  </View>
-
-
-                  <TouchableOpacity
-                    onPress={() => {
-                      setModal(true)
-                    }}
-                    style={styles.buttoPage}
-                  >
-                    <Text style={styles.buttoPageText}>PAGAR</Text>
-                  </TouchableOpacity>
-                </Animated.View>
+                </Modal>
               </>
           }
 

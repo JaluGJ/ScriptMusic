@@ -11,20 +11,20 @@ import { Ionicons } from "@expo/vector-icons";
 import styles from "../Styles/Home.jsx";
 import user from "../../../../assets/user.png";
 import { useNavigation } from '@react-navigation/native';
-import {DrawerActions } from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/native';
 
-const HomeNav = ({search, setSearch, setModal, modal, submitHandle}) => {
-const navigation = useNavigation();
+const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.containerNav}>
-            <TouchableNativeFeedback  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <Image
-            style={{
-                width: 50,
-                height: 50,
-            }}
-            source={user}
-            />
+            <TouchableNativeFeedback onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                <Image
+                    style={{
+                        width: 50,
+                        height: 50,
+                    }}
+                    source={user}
+                />
             </TouchableNativeFeedback>
             <TextInput
                 style={styles.input}

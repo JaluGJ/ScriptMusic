@@ -53,10 +53,8 @@ const CardProducts = ({ productsCart, modal, setModal }) => {
 
       <FlatList
         data={productsCart}
-        showsVerticalScrollIndicator={true}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => { navigation.navigate('Details', { itemId: item.id }) }}>
-
+          <TouchableOpacity onLongPress={() => { navigation.navigate('Details', { itemId: item.id }) }}>
             <View style={styles.containerProduct}>
               <View style={styles.containerProductImage}>
                 <Image source={{ uri: item.image }} resizeMode='contain' style={styles.productImage} />
@@ -101,7 +99,6 @@ const CardProducts = ({ productsCart, modal, setModal }) => {
                 </View>
               </View>
             </View>
-
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id.toString()}
