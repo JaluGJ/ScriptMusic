@@ -11,10 +11,9 @@ const Product = ({ item }) => {
     return (
         <TouchableOpacity
             style={styles.container}
-            onPress={() =>
+            onLongPress={() =>
                 navigation.navigate('Details', { itemId: item.id })
             }
-
         >
             <View style={styles.image}>
                 <Image
