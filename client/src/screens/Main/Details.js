@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItems, getProductDetails } from "../../redux/slices/products.js";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useFavorites from "./customHooks/useFavorites.js";
 
 const Details = ({ route }) => {
   const { itemId } = route.params;
@@ -23,6 +24,7 @@ const Details = ({ route }) => {
   const navigation = useNavigation();
   const { details, statusCode } = useSelector((state) => state.products);
   const [countProducts, setCountProducts] = useState(1);
+  const { addToFavorite } = useFavorites()
   useEffect(() => {
     dispatch(getProductDetails(itemId));
     return () => {
@@ -80,7 +82,9 @@ const Details = ({ route }) => {
                   <AntDesign name="left" size={27} color="black" />
                 </Pressable>
                 <Text style={styles.textNav}>DETALLES</Text>
+                <TouchableOpacity onPress={()=>addToFavorite(details)}>
                 <AntDesign name="hearto" size={27} color="black" />
+                </TouchableOpacity>
               </View>
               <View style={styles.containerMain}>
                 <Text style={styles.model}>{details.model}</Text>
