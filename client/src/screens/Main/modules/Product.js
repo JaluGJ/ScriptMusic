@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
+import { addToFavorite } from '../../../redux/slices/products.js';
 
 const Product = ({ item }) => {
     const { model, image, price, brand } = item
@@ -24,7 +25,9 @@ const Product = ({ item }) => {
                     resizeMode="contain"
                     source={{ uri: image }}
                 />
-                <AntDesign style={{position:'absolute', top:3, right:-1}} name="hearto" size={24} color="black" />
+                <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>addToFavorite(item)}>
+                <AntDesign name="hearto" size={24} color="black" />
+                </TouchableOpacity>
             </View>
 
 

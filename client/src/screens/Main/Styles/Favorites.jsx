@@ -36,7 +36,8 @@ let styles = StyleSheet.create({
     height: "100%",
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
-  }
+  },
+
 });
 
 export default styles;

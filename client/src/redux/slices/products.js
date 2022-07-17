@@ -13,6 +13,7 @@ export const productsSlice = createSlice({
         details: {},
         category: 'Todos',
         newItems: 0,
+        favorite: [],
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -32,11 +33,17 @@ export const productsSlice = createSlice({
         },
         remItems: (state, action)=>{
             state.newItems =  action.payload;
+        },
+        setFavorite: (state, action)=>{
+            state.favorite = [...state.favorite, action.payload];
+        },
+        removeFavorite: (state, action)=>{
+            state.favorite = state.favorite.filter(item => item.id !== action.payload);
         }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setFavorite} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -122,3 +129,65 @@ export const addItems = (payload) => (dispatch) =>{
 export const removeItems = () => (dispatch) =>{
     dispatch(remItems(null))
 }
+
+export const addToFavorite = (item)  =>  async (dispatch) => {
+    try {
+      let existingFav = await AsyncStorage.getItem("@favorite");
+      if (existingFav !== null) {
+        let favorites = JSON.parse(existingFav);
+        let existingProduct = favorites.find((product) => {
+          if (product.id === item.id) {
+            return true;
+          }
+          return false;
+        });
+
+        if (!existingProduct) {
+          favorites.push(item);
+          await AsyncStorage.setItem("@favorite", JSON.stringify(favorites));
+          dispatch(setFavorite(favorites));
+        }
+      } else {
+        await AsyncStorage.setItem("@favorite", JSON.stringify([item]));
+        dispatch(setFavorite(item));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  export const removeFromFavorite = (id) => async (dispatch)  => {
+    try {
+      let existingFav = await AsyncStorage.getItem("@favorite");
+      if (existingFav !== null) {
+        let favorites = JSON.parse(existingFav);
+        let existingProduct = favorites.find((product) => {
+          if (product.id === id) {
+            return true;
+          }
+          return false;
+        });
+
+        if (existingProduct) {
+          favorites.splice(favorites.indexOf(existingProduct), 1);
+          await AsyncStorage.setItem("@favorite", JSON.stringify(favorites));
+          dispatch(removeFavorite(favorites));
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+//   export const getFavorite = async () => {
+//     try {
+//       let existingFav = await AsyncStorage.getItem("@favorite");
+//       if (existingFav !== null) {
+//         return JSON.parse(existingFav);
+//       }else{
+//         return [];
+//       }
+//     } catch (e) {
+//       console.log(e);
+//     }
+// }
