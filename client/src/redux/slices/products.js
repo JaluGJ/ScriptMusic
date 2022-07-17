@@ -32,7 +32,7 @@ export const productsSlice = createSlice({
         },
         remItems: (state, action)=>{
             state.newItems =  action.payload;
-        }
+        },
     }   
 });
 
@@ -122,3 +122,4 @@ export const addItems = (payload) => (dispatch) =>{
 export const removeItems = () => (dispatch) =>{
     dispatch(remItems(null))
 }
+

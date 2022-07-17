@@ -1,12 +1,15 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
+import useFavorites from '../customHooks/useFavorites.js';
+
 
 const Product = ({ item }) => {
     const { model, image, price, brand } = item
     const navigation = useNavigation();
+    const { addToFavorite } = useFavorites();
 
     return (
         <TouchableOpacity
@@ -24,7 +27,12 @@ const Product = ({ item }) => {
                     resizeMode="contain"
                     source={{ uri: image }}
                 />
-                <AntDesign style={{position:'absolute', top:3, right:-1}} name="hearto" size={24} color="black" />
+                <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>{
+                    addToFavorite(item)
+                    Alert.alert('Agregado a favoritos')
+                    }}>
+                <AntDesign name="hearto" size={24} color="black" />
+                </TouchableOpacity>
             </View>
 
 
