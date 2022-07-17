@@ -17,14 +17,15 @@ const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
     const navigation = useNavigation();
     return (
         <View style={styles.containerNav}>
-            <TouchableNativeFeedback onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                <Image
-                    style={{
-                        width: 50,
-                        height: 50,
-                    }}
-                    source={user}
-                />
+<TouchableNativeFeedback  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <Image
+            style={{
+                width: 45,
+                height: 45,
+                borderRadius: 100
+            }}
+            source={user}
+            />
             </TouchableNativeFeedback>
             <TextInput
                 style={styles.input}
