@@ -29,7 +29,6 @@ const Product = ({ item }) => {
                 />
                 <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>{
                     addToFavorite(item)
-                    Alert.alert('Agregado a favoritos')
                     }}>
                 <AntDesign name="hearto" size={24} color="black" />
                 </TouchableOpacity>

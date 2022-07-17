@@ -33,7 +33,7 @@ export const FAVORITOS =({favorite}) => {
             <Text >{item.brand}</Text>
             <Text >{item.price}</Text>
             <Image  style={styles.image} source={{ uri: item.image }} />
-            <TouchableOpacity style={{width:20,height:20,backgroundColor:'red'}}>
+            <TouchableOpacity style={{width:60,height:30,backgroundColor:'red'}}>
               <Text style={styles.buttonText} onPress={()=> {
                 removeFromFavorite(item.id)
                 // Alert.alert('Removido de favoritos')
