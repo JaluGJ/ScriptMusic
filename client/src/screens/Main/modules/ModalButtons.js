@@ -18,24 +18,24 @@ const ModalButtons = ({ setFilters, filters }) => {
 
             <View style={styles.instrumentsSix}>
 
-            <FlatList
-                numColumns={3}
-                data={instruments}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        onPress={() => { 
-                            setFilters({ ...filters, category: item.name })
-                           dispatch(getCategory(item.name))
-                        }}
-                        style={styles.button}>
+                <FlatList
+                    numColumns={3}
+                    data={instruments}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity
+                            onPress={() => {
+                                setFilters({ ...filters, category: item.name })
+                                dispatch(getCategory(item.name))
+                            }}
+                            style={styles.button}>
 
-                        <ModalItems item={item} />
+                            <ModalItems item={item} />
 
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
-                )}
-                keyExtractor={item => item.id}
-            />
+                    )}
+                    keyExtractor={item => item.id}
+                />
 
             </View>
             <View style={styles.instrumentstwo}>
@@ -46,9 +46,9 @@ const ModalButtons = ({ setFilters, filters }) => {
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             onPress={() => {
-                            setFilters({ ...filters, category: item.name })
-                            dispatch(getCategory(item.name))
-                        }}
+                                setFilters({ ...filters, category: item.name })
+                                dispatch(getCategory(item.name))
+                            }}
                             style={styles.button}>
 
                             <ModalItems item={item} />

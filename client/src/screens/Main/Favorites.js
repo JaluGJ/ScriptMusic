@@ -20,29 +20,29 @@ export default function EmptyFavs() {
 
 
 export const FAVORITOS = ({ favorite }) => {
-  
+
   return (
     <View style={styles.wrapper}>
+      <StatusBar />
       <View style={styles.container}>
-        <StatusBar />
         <ScrollView >
-          <View style={{ alignItems: "center" }}>
+          <View style={{ alignItems: "center", height: vh(10), }}>
             <Text style={styles.title}>FAVORITOS</Text>
           </View>
           <View style={{ alignItems: "center" }}>
             <Image source={emptyFav} style={styles.image} />
           </View>
           <View>
-            
+
             {favorite.map((item) => (
-              <FavProducts 
+              <FavProducts
                 key={item.id}
                 id={item.id}
                 model={item.model}
                 brand={item.brand}
                 price={item.price}
                 image={item.image}
-                />
+              />
             ))}
           </View>
         </ScrollView>
