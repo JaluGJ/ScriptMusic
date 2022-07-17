@@ -6,9 +6,9 @@ let styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     containerCard: {
-        backgroundColor: '#f1f0f0',
-        height: vh(30),
-        justifyContent: 'space-around'
+        backgroundColor: '#000000',
+        justifyContent: 'space-around',
+        height: vh(20),
     },
     arrowAnimatedModal: {
         right: vw(45),
@@ -19,10 +19,8 @@ let styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        width: vw(100), /* VERSATIL */
         paddingLeft: 10,
         marginTop: 5,
-        marginHorizontal: 5,
         shadowColor: "#00000076",
         shadowOffset: {
             width: 0,
@@ -31,12 +29,10 @@ let styles = StyleSheet.create({
         shadowOpacity: 0.79,
         shadowRadius: 1.65,
         elevation: 1,
-        borderRadius: 30,
         backgroundColor: '#ffffff',
     },
     cardContainer: {
-        height: 50,
-        width: vw(100), 
+        height: 50, 
         shadowColor: "#00000076",
         shadowOffset: {
             width: 0,

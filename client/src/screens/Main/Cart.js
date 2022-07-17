@@ -1,19 +1,20 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Image, StatusBar, TouchableNativeFeedback, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Image, StatusBar, TouchableNativeFeedback, Modal, TouchableOpacity, Pressable } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons';
 import CardDefault from "./modules/CardDefault";
 import CardNav from "./modules/CardNav";
 import CardProducts from "./modules/CardProducts";
 import styles from "./Styles/Cart.jsx";
+import CartModalBotton from "./modules/CartModalBotton";
+import CartModalTop from "./modules/CartModalTop";
 
 export default function EmptyCart() {
 
+  const { newItems } = useSelector((state) => state.products);
   const [productsCart, setProductsCart] = useState([]);
   const [modal, setModal] = useState(false);
-  const { newItems } = useSelector((state) => state.products);
-  const [animation, setAnimation] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
   /* console.log(animation) */
@@ -52,59 +53,41 @@ export default function EmptyCart() {
               <CardDefault />
               :
               <>
-                <CardProducts productsCart={productsCart} modal={modal} setModal={setModal} />
+                <CardProducts productsCart={productsCart} />
 
 
-                {
-                  modal === false ?
 
-                    <TouchableNativeFeedback style={{ borderRadius: 50, backgroundColor: 'red' }} onPress={() => {
-                      setAnimation(true)
-                    }}>
-                      <View style={styles.arrowAnimated}>
-                        <Text style={styles.title}>PAGAR YA!</Text>
-                      </View>
-                    </TouchableNativeFeedback>
-                    :
-                    <Text></Text>
-                }
-
-
-                <Modal visible={animation} transparent animationType={'slide'}>
-                  <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                      <TouchableNativeFeedback onPress={() => {
-                        setAnimation(false)
-                      }}>
-                        <View style={styles.arrowAnimatedModal}>
-                          <AntDesign name="down" size={54} color="white" />
-                        </View>
-                      </TouchableNativeFeedback>
-                      <View style={styles.textContainer}>
-                        <Text style={styles.textCart}>Sub Total:</Text>
-                        <Text style={styles.textPrice}>${totalPrice}</Text>
-                      </View>
-                      <View style={styles.textContainer}>
-                        <Text style={styles.textCart}>Envio:</Text>
-                        <Text style={styles.textPrice}>-$2̶0̶</Text>
-                      </View>
-                      <View style={styles.textContainerTotal}>
-                        <Text style={styles.textCart}>Total:</Text>
-                        <Text style={styles.textPrice}>${totalPrice - 20}</Text>
-                      </View>
-
-                      <TouchableOpacity
-                        onPress={() => {
-                          setModal(true)
-                        }}
-                        style={styles.buttoPage}
-                      >
-                        <Text style={styles.buttoPageText}>PAGAR</Text>
-                      </TouchableOpacity>
-
-                    </View>
+                <TouchableNativeFeedback
+                  onPress={() => {
+                    setModal(true)
+                  }}>
+                  <View style={styles.arrowAnimated}>
+                    <Text style={styles.title}>COMPRAR YA!</Text>
                   </View>
+                </TouchableNativeFeedback>
+
+
+
+                <Modal visible={modal} transparent animationType={'slide'}>
+                  <Modal visible={modal} transparent animationType={'fade'}>
+                    <View style={styles.modalPrueba}>
+                      <View style={styles.modalContainer}>
+                        <View style={styles.modalContent}>
+                          <CartModalTop setModal={setModal} totalPrice={totalPrice} />
+                          <CartModalBotton modal={modal} setModal={setModal} />
+                        </View>
+                      </View>
+                    </View>
+                  </Modal>
+                  {/* <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                      
+                      <CartModalTop setModal={setModal} totalPrice={totalPrice}/>
+                      <CartModalBotton modal={modal} setModal={setModal}/>
+                    </View>
+                  </View> */}
                 </Modal>
+
               </>
           }
 
