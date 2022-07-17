@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
+import { Alert } from "react-native";
+
 
 const useFavorites = () => {
   const [favorite, setFavorite] = useState([]);
@@ -15,13 +17,15 @@ const useFavorites = () => {
             }
             return false;
           });
-
           if (!existingProduct) {
             favorites.push(item);
             AsyncStorage.setItem("@favorite", JSON.stringify(favorites))
               .then((res) => console.log(res))
               .catch((err) => console.log(err));
+              Alert.alert("Producto agregado a favoritos");
+              return
           }
+          Alert.alert("Este Producto ya está en favoritos");
         } else {
           AsyncStorage.setItem("@favorite", JSON.stringify([item]))
             .then((res) => console.log(res))
