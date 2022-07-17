@@ -1,10 +1,6 @@
 import { StyleSheet } from "react-native";
 import { vh, vw } from "react-native-expo-viewport-units";
 let styles = StyleSheet.create({
-  container:{
-    backgroundColor:"#F9F9F9",
-    height: "100%",
-  },
   image: {
     width: 70,
     height: 70,
@@ -14,7 +10,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     letterSpacing: 6,
-    padding: 20,
+    padding: 5,
     color: 'white',
   },
   navDetail: {
@@ -39,6 +35,19 @@ let styles = StyleSheet.create({
     fontSize: 20,
     color: "#DD8643",
     letterSpacing: 2,
+  },
+  containerNav: {
+    height: vh(10),
+    backgroundColor: '#000000',
+    borderWidth: 1,
+    shadowColor: "#00000076",
+    shadowOffset: {
+      width: 10,
+      height: 1,
+    },
+    shadowOpacity: 0.79,
+    shadowRadius: 1.65,
+    elevation: 1,
   },
 
 
@@ -136,7 +145,7 @@ let styles = StyleSheet.create({
   containerProduct: {
     flexDirection: 'row',
     height: 150,
-    width: vw(95),
+    width: vw(100), /* VERSATIL */
     paddingLeft: 10,
     marginTop: 5,
     marginHorizontal: 5,

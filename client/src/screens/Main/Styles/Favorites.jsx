@@ -39,7 +39,7 @@ let styles = StyleSheet.create({
   containerProduct: {
     flexDirection: 'row',
     height: 150,
-    width: vw(95),
+    width: vw(100), /* VERSATIL */
     paddingLeft: 10,
     marginTop: 9,
     marginHorizontal: 5,

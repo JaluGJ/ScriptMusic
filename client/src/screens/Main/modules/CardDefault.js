@@ -6,26 +6,28 @@ import emptyCart from "../../../../assets/carrito1.png";
 import styles from "./styles/CardDefault.jsx";
 
 const CardDefault = () => {
-  const navigation = useNavigation();
+    const navigation = useNavigation();
   return (
-    <>
-      <View style={{ alignItems: "center" }}>
-        <Image source={emptyCart} style={styles.image} />
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <Text style={styles.text}>Tu carrito está vacío.</Text>
-      </View>
-      <View style={styles.containerText}>
-        <Text style={styles.text}>¡Explora nuestros</Text>
-        <View style={styles.containerTextLinked}>
-          <Text style={styles.text}>productos</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <Text style={styles.textLinked}> aquí</Text>
-          </TouchableOpacity>
-          <Text style={styles.text}>!</Text>
+    <View>
+      <View style={styles.container}>
+        <View style={{ alignItems: "center" }}>
+          <Image source={emptyCart} style={styles.image} />
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.text}>Tu carrito está vacío.</Text>
+        </View>
+        <View style={styles.containerText}>
+          <Text style={styles.text}>¡Explora nuestros</Text>
+          <View style={styles.containerTextLinked}>
+            <Text style={styles.text}>productos</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Text style={styles.textLinked}> aquí</Text>
+            </TouchableOpacity>
+            <Text style={styles.text}>!</Text>
+          </View>
         </View>
       </View>
-    </>
+    </View>
   );
 };
 
