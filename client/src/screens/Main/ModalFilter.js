@@ -12,13 +12,11 @@ import { getAllFilterProducts } from '../../redux/slices/products';
 const ModalFilter = ({ modal, setModal }) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
-    const { category: category } = useSelector((state) => state.products);
     const [filters, setFilters] = useState({
         category: '',
         price: '',
     })
     //console.log(filters)
-    
     return (
         <Modal
             animationType='slide'
@@ -70,9 +68,6 @@ const ModalFilter = ({ modal, setModal }) => {
                 <View style={styles.buttonFilter}>
                     <TouchableOpacity
                         onPress={() => {
-                            if(category === 'Todos'){
-                                return alert('Por favor seleccione una de las categorias disponibles')
-                            }
                             dispatch(getAllFilterProducts(filters))
                             setModal(!modal)
                             navigation.navigate('Products')
