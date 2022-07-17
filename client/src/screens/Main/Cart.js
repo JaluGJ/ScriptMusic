@@ -16,6 +16,7 @@ export default function EmptyCart() {
   const [animation, setAnimation] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  /* console.log(animation) */
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
       if (res !== null) {
@@ -58,7 +59,7 @@ export default function EmptyCart() {
                   setAnimation(true)
                 }}>
                   <View style={styles.arrowAnimated}>
-                    <AntDesign name="up" size={54} color="white" />
+                    <Text style={styles.title}>PAGAR YA!</Text>
                   </View>
                 </TouchableNativeFeedback>
 
