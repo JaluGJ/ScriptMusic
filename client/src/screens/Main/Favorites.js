@@ -1,22 +1,24 @@
 import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView} from "react-native";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import emptyFav from "../../../assets/fav1.png";
 import styles from "./Styles/Favorites.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromFavorite } from "../../redux/slices/products";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { getFavorite, removeFromFavorite } from "./customHooks/useFavorites";
 
 export default function EmptyFavs() {
-  const {favorite} = useSelector(state => state.products);
-  const dispatch = useDispatch();
+  const [favorite, setFavorite] = useState([]);
 
-  if(favorite.length > 0){
-    return <FAVORITOS favorite={favorite} />
-  }
-  return <SINFAVORITOS />
+  useEffect(()=>{
+    getFavorite().then(res=>setFavorite(res));
+  })
+
+  return favorite.length > 0 ? <FAVORITOS favorite={favorite} /> : <SINFAVORITOS />
 }
 
 
-const FAVORITOS =({favorite}) => {
+
+export const FAVORITOS =({favorite}) => {
   const dispatch = useDispatch();
   return (
     <ScrollView >
@@ -25,13 +27,13 @@ const FAVORITOS =({favorite}) => {
       </View>
       <View>
         {favorite.map((item) => (
-          <View >
+          <View key={item.id}>
             <Text >{item.model}</Text>
             <Text >{item.brand}</Text>
             <Text >{item.price}</Text>
             <Image  style={styles.image} source={{ uri: item.image }} />
             <TouchableOpacity style={{width:20,height:20,backgroundColor:'red'}}>
-              <Text style={styles.buttonText} onPress={()=>dispatch(removeFromFavorite(item.id))}>Eliminar</Text>
+              <Text style={styles.buttonText} onPress={()=>removeFromFavorite(item.id)}>Eliminar</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -40,7 +42,9 @@ const FAVORITOS =({favorite}) => {
   )
 }
 
-const SINFAVORITOS = () => {
+export const SINFAVORITOS = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   return (
     <View style={styles.wrapper}>
     <View style={styles.container}>
@@ -58,7 +62,10 @@ const SINFAVORITOS = () => {
         <Text style={styles.text}>¡Explora nuestros</Text>
         <View style={styles.containerTextLinked}>
           <Text style={styles.text}>productos</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() =>{
+             navigation.navigate("Home")
+             dispatch(getFavorite())
+             }}>
             <Text style={styles.textLinked}> aquí</Text>
           </TouchableOpacity>
           <Text style={styles.text}>!</Text>

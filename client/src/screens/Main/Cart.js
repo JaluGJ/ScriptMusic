@@ -16,7 +16,6 @@ export default function EmptyCart() {
   const [animation, setAnimation] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  console.log(animation)
   useEffect(() => {
     AsyncStorage.getItem("@shoppingCart").then(res => {
       if (res !== null) {
