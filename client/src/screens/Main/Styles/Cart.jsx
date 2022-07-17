@@ -10,7 +10,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     letterSpacing: 6,
-    padding: 20,
+    padding: 5,
     color: 'white',
   },
   navDetail: {
@@ -55,7 +55,7 @@ let styles = StyleSheet.create({
   /********* ESTILOS DE LA PARTE DEL TOTAL A PAGAR **************/
   modalContainer:{
     flex: 1,
-    
+    backgroundColor: '#00000060',
     justifyContent:'flex-end'
   },
   modalContent:{
@@ -73,15 +73,23 @@ let styles = StyleSheet.create({
     elevation: 5,
   },  
   arrowAnimated: {
-    left: vw(80),
+    left: vw(60),
     bottom: 20,
     position: 'absolute',
-    backgroundColor: '#00000073',
+    backgroundColor: '#ee9450',
+    shadowColor: "#ffffff",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.79,
+    shadowRadius: 1.65,
+    elevation: 5,
     borderRadius: 50,
   },
   arrowAnimatedModal:{
-    right: vw(80),
-    top: vh(-6),
+    right: vw(45),
+    top: vh(-2),
     position: 'absolute',
     backgroundColor: '#000000',
     borderRadius: 50,
@@ -165,6 +173,7 @@ let styles = StyleSheet.create({
   },
   productName: {
     flexWrap:'wrap',
+    width: vw(50),
     fontSize: 15,
     letterSpacing: 2,
     color: '#000000',
