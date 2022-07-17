@@ -20,7 +20,7 @@ module.exports = {
             isAdmin = true
             const newUser = {
                 email,
-                password,
+                password: await bcrypt.hash(password, 10),
                 firstName,
                 lastName,
                 isAdmin

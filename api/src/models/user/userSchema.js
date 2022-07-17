@@ -50,10 +50,10 @@ userSchema.set('toJSON', {
   }
 })
 
-userSchema.methods.hashPassword = async function (password) {
-  const hash = await bcrypt.hash(password, 10)
-  this.password = hash
-}
+// userSchema.methods.hashPassword = async function (password) {
+//   const hash = await bcrypt.hash(password, 10)
+//   this.password = hash
+// }
 
 userSchema.methods.isValidPassword = function (password) {
   const isMatch = bcrypt.compare(password, this.password)
