@@ -1,12 +1,14 @@
-import { Alert, Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, TouchableOpacity, TouchableNativeFeedback, Text, TextInput, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { CardField, useConfirmPayment, CardForm } from '@stripe/stripe-react-native';
 import { fetchPaymentIntent, fetchStatusPayment } from "../helpers/payments.js";
 import { useDispatch, useSelector } from "react-redux";
+import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { removeItems } from "../../../redux/slices/products.js";
-
-
+import styles from '../Styles/CartPayment.jsx'
+import logo from '../../../../assets/icon.png'
+import { vh, vw } from "react-native-expo-viewport-units";
 const StripeApp = ({ modal, setModal }) => {
   const [email, setEmail] = useState("");
   const [cardDetails, setCardDetails] = useState("");
@@ -79,16 +81,29 @@ const StripeApp = ({ modal, setModal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerCard}>
-        <View style={styles.containerInput}>
-          <TextInput
-            autoCapitalize="none"
-            keyboardType="email-address"
-            placeholder="Enter your email"
-            onChange={(event) => {
-              setEmail(event.nativeEvent.text);
-            }}
-            style={styles.input}
-          />
+        <Image
+          style={{
+            width: vw(70),
+            height: vh(35),
+            top: vh(5),
+            right: vw(-20),
+            padding: 10,
+            position: 'absolute',
+            opacity: 0.3,
+
+        }}
+        resizeMode="contain"
+        source={logo}
+        />
+        <View style={styles.containerButton}>
+          <TouchableNativeFeedback onPress={() => {
+            setModal(!modal)
+          }}>
+            <View style={styles.arrowAnimatedModal}>
+              <AntDesign name="down" size={54} color="#DD8643" />
+            </View>
+          </TouchableNativeFeedback>
+
         </View>
         <CardField
           postalCodeEnabled={true}
@@ -100,53 +115,29 @@ const StripeApp = ({ modal, setModal }) => {
             setCardDetails(card);
           }}
         />
+        <View style={styles.containerInput}>
+          <TextInput
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder="Enter your email"
+            onChange={(event) => {
+              setEmail(event.nativeEvent.text);
+            }}
+            style={styles.input}
+          />
+        </View>
+        
 
-        <Button title="Pay" onPress={handlerPayPress} disabled={loading} />
-      </View>
-
-      <View style={styles.containerButton}>
-        <Button title="Close" onPress={() => setModal(!modal)} />
+        {/* <Button title="Pay" onPress={handlerPayPress} disabled={loading} /> */}
+        <TouchableOpacity
+          onPress={handlerPayPress}
+          style={styles.buttoPage}
+        >
+          <Text style={styles.buttoPageText}>PAGAR</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 export default StripeApp;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-  },
-  containerInput: {
-    paddingHorizontal: 5,
-  },
-  containerCard: {
-    width: '100%',
-    height: '90%',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  input: {
-    backgroundColor: "#efefef",
-    borderRadius: 5,
-    fontSize: 16,
-    height: 50,
-    padding: 10,
-  },
-  cardContainer: {
-    height: 50,
-    marginVertical: 30
-  },
-  card: {
-    backgroundColor: '#efefef',
-  },
-  containerButton: {
-    width: '100%',
-    height: '100%',
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  }
-});

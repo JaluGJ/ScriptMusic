@@ -71,6 +71,7 @@ let styles = StyleSheet.create({
     shadowOpacity: 0.79,
     shadowRadius: 1.65,
     elevation: 5,
+    height: vh(30),
   },  
   arrowAnimated: {
     left: vw(60),
@@ -221,7 +222,11 @@ let styles = StyleSheet.create({
     width: '85%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
+
+
+
+
 });
 
 export default styles;
