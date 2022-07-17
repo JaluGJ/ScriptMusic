@@ -62,7 +62,7 @@ let styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    height: vh(45),
+    height: vh(50),
     backgroundColor: '#000000',
     paddingBottom: 10,
     borderTopLeftRadius: 30,
