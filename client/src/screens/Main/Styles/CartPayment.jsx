@@ -1,22 +1,12 @@
 import { StyleSheet } from "react-native";
 import { vh, vw } from "react-native-expo-viewport-units";
 let styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
     containerCard: {
-        backgroundColor: '#000000',
-        justifyContent: 'space-around',
         height: vh(20),
+        justifyContent: 'space-between',
+        marginTop:15,
     },
-    arrowAnimatedModal: {
-        right: vw(45),
-        top: vh(-5),
-        position: 'absolute',
-        backgroundColor: '#f1f0f0',
-        borderRadius: 50,
-    },
+
     input: {
         height: 50,
         paddingLeft: 10,

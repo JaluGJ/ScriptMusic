@@ -57,8 +57,12 @@ let styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end'
   },
+  containerMain:{
+    justifyContent:'center',
+    alignItems: 'center',
+  },
   modalContent: {
-    height: vh(40),
+    height: vh(45),
     backgroundColor: '#000000',
     paddingBottom: 10,
     borderTopLeftRadius: 30,
@@ -73,21 +77,13 @@ let styles = StyleSheet.create({
     elevation: 5,
   },
   modalPrueba:{
-    flex: 1,backgroundColor: '#00000075',
+    flex: 1,
+    backgroundColor: '#00000075',
   },
   arrowAnimated: {
-    left: '30%',
-    bottom: 20,
+    bottom: 15,
     position: 'absolute',
     backgroundColor: '#f09b59',
-    shadowColor: "#ffffff",
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 0.79,
-    shadowRadius: 1.65,
-    elevation: 5,
     borderRadius: 50,
   },
   arrowAnimatedModal: {
