@@ -42,7 +42,7 @@ const CardProducts = ({ productsCart, modal, setModal }) => {
 
   if (modal) {
     return (
-      <Modal visible={modal} animationType='slide'>
+      <Modal visible={modal} animationType='slide' transparent={true}>
         <StripeApp setModal={setModal} modal={modal} />
       </Modal>
     )
