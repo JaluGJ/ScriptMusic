@@ -28,7 +28,7 @@ const HomeItem = ({ text, button }) => {
                 <Text style={styles.Text}>{text}</Text>
             </View>
             <TouchableOpacity
-                onLongPress={() =>
+                onPress={() =>
                     navigation.navigate('Details', { itemId: item.id })
                 }
 
