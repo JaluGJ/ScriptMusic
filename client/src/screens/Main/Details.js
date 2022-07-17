@@ -82,7 +82,7 @@ const Details = ({ route }) => {
                   <AntDesign name="left" size={27} color="black" />
                 </Pressable>
                 <Text style={styles.textNav}>DETALLES</Text>
-                <TouchableOpacity onPress={()=>addToFavorite(item)}>
+                <TouchableOpacity onPress={()=>addToFavorite(details)}>
                 <AntDesign name="hearto" size={27} color="black" />
                 </TouchableOpacity>
               </View>

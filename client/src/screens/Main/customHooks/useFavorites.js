@@ -30,6 +30,7 @@ const useFavorites = () => {
           AsyncStorage.setItem("@favorite", JSON.stringify([item]))
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
+            Alert.alert("Producto agregado a favoritos");
         }
         // AsyncStorage.getItem("@favorite").then(resultado=>setFavorite(resultado))
         // return favorite
@@ -37,42 +38,28 @@ const useFavorites = () => {
       .catch((error) => console.log(error));
   };
 
-  const removeFromFavorite = async (id) => {
-    try {
-      let existingFav = await AsyncStorage.getItem("@favorite");
-      if (existingFav !== null) {
-        let favorites = JSON.parse(existingFav);
-        let existingProduct = favorites.find((product) => {
+  const removeFromFavorite = (id) => {
+      AsyncStorage.getItem("@favorite").then(resultado=>{
+        let favorites = JSON.parse(resultado);
+        let newFavorites = favorites.filter((product) => {
           if (product.id === id) {
-            return true;
+            return false;
           }
-          return false;
-        });
-
-        if (existingProduct) {
-          favorites.splice(favorites.indexOf(existingProduct), 1);
-          await AsyncStorage.setItem("@favorite", JSON.stringify(favorites));
+          return true;
         }
-      }
-      // AsyncStorage.getItem("@favorite").then(resultado=>setFavorite(resultado))
-      // return favorite
-    } catch (e) {
-      console.log(e);
-    }
+        );
+        AsyncStorage.setItem("@favorite", JSON.stringify(newFavorites))
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      }).catch((error) => console.log(error));
   };
 
-  const getFavorite = async () => {
-    try {
-      let existingFav = await AsyncStorage.getItem("@favorite");
-      if (existingFav !== null) {
-        setFavorite(JSON.parse(existingFav));
-        return favorite
-      } else {
-        return [];
+  const getFavorite = () => {
+    AsyncStorage.getItem("@favorite").then(resultado=>{
+      if(resultado !== null){
+        setFavorite(JSON.parse(resultado))
       }
-    } catch (e) {
-      console.log(e);
-    }
+    }).catch((error) => console.log(error));
   };
 
   return { favorite, addToFavorite, removeFromFavorite , getFavorite};
