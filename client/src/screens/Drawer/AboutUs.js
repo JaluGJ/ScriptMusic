@@ -12,11 +12,11 @@ import facu from "../../../assets/aboutUs/facu.png";
 
 const AboutUs = () => {
   return (
-    <View styles={styles.wrapper}>
+    <View>
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title}>SOBRE NOSOTROS</Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <AboutUsCard
           name="HORACIO"
           stack="FRONT-END"

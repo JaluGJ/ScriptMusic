@@ -20,8 +20,9 @@ const navigation = useNavigation();
             <TouchableNativeFeedback  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Image
             style={{
-                width: 50,
-                height: 50,
+                width: 45,
+                height: 45,
+                borderRadius: 100
             }}
             source={user}
             />

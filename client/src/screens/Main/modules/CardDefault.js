@@ -1,20 +1,34 @@
-import React from 'react'
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import { View, Text, Image, StatusBar } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import emptyCart from "../../../../assets/carrito1.png";
-import styles from "../Styles/Cart.jsx";
+import styles from "./styles/CardDefault.jsx";
 
 const CardDefault = () => {
-    return (
-        <View style={styles.containerText}>
-            <View style={{ alignItems: "center" }}>
-                <Image source={emptyCart} style={styles.image} />
-            </View>
-            <View style={{ alignItems: "center" }}>
-                <Text style={styles.text}>Tu carrito está vacío.</Text>
-            </View>
-
+    const navigation = useNavigation();
+  return (
+    <View>
+      <View style={styles.container}>
+        <View style={{ alignItems: "center" }}>
+          <Image source={emptyCart} style={styles.image} />
         </View>
-    )
-}
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.text}>Tu carrito está vacío.</Text>
+        </View>
+        <View style={styles.containerText}>
+          <Text style={styles.text}>¡Explora nuestros</Text>
+          <View style={styles.containerTextLinked}>
+            <Text style={styles.text}>productos</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Text style={styles.textLinked}> aquí</Text>
+            </TouchableOpacity>
+            <Text style={styles.text}>!</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
 
-export default CardDefault
+export default CardDefault;
