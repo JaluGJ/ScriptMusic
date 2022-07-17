@@ -8,11 +8,12 @@ import { removeItems } from "../../../redux/slices/products.js";
 import styles from '../Styles/CartPayment.jsx'
 import logo from '../../../../assets/instrumentos/logo2.png'
 import { vh, vw } from "react-native-expo-viewport-units";
+import { create } from "../../../redux/slices/signin.js";
 const CartModalBotton = ({ modal, setModal }) => {
   const [email, setEmail] = useState("");
   const [cardDetails, setCardDetails] = useState("");
   const [body, setBody] = useState({});
-  const { user } = useSelector(state => state.signin);
+  const { user ,token } = useSelector(state => state.signin);
   const { confirmPayment, loading } = useConfirmPayment()
   const dispatch = useDispatch();
 
@@ -61,7 +62,8 @@ const CartModalBotton = ({ modal, setModal }) => {
           } else if (err) {
             console.log(err)
           }
-          Alert.alert('Status Payment', 'Payment Successful', [{
+          dispatch(create(token))
+          Alert.alert('Estado de pago', 'Exitoso', [{
             text: 'OK', onPress: () => {
               setModal(false)
               dispatch(removeItems())
@@ -69,7 +71,7 @@ const CartModalBotton = ({ modal, setModal }) => {
           }]);
         } else {
           await fetchStatusPayment(body, 'Failed');
-          Alert.alert('Status Payment', 'Payment Failed', [{ text: 'OK', onPress: () => console.log('OK Pressed') }]);
+          Alert.alert('Estado de pago', 'Fallido', [{ text: 'OK', onPress: () => console.log('OK Pressed') }]);
         }
       }
     } catch (error) {

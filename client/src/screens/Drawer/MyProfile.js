@@ -6,6 +6,7 @@ import styles from "./Styles/MyProfile";
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.signin);
+  console.log("user", user);
 
   return (
     <View style={{ alignItems: "center" }}>
