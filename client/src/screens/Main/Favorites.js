@@ -48,6 +48,7 @@ export const FAVORITOS =({favorite}) => {
 
 export const SINFAVORITOS = () => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.wrapper}>
     <View style={styles.container}>
