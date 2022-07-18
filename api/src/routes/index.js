@@ -5,6 +5,7 @@ const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile }
 const postPromo = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
+const { soldProducts } = require('../controllers/soldInfo')
 
 const routes = Router()
 
@@ -51,6 +52,12 @@ routes.post('/create-payment-intents', paymentCard )
 routes.post('/status-payment', statusPayment )
 
 // PAYMENT ROUTES
+
+// SOLD ROUTES
+
+routes.get('/sold', soldProducts )
+
+// SOLD ROUTES
 
 // PROMOS ROUTES
 
