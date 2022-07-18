@@ -36,17 +36,23 @@ export default function Register() {
   let handleErrorCheck = (err, flag) => {
     if (err) {
       dispatch(errFalse(err));
-      Alert.alert("Ups...", "Ya existe un usuario registrado con ese email, prueba con otro.");
+      Alert.alert(
+        "Ups...",
+        "Ya existe un usuario registrado con ese email, prueba con otro."
+      );
     }
     if (flag) {
-      Alert.alert("¡Usuario registrado correctamente!", "Te enviamos un correo para verificar que el email te pertenece.");
+      Alert.alert(
+        "¡Usuario registrado correctamente!",
+        "Te enviamos un correo para verificar que el email te pertenece."
+      );
       navigation.navigate("Login");
     }
   };
 
   useEffect(() => {
     handleErrorCheck(err, flag);
-    return dispatch(cleanCache())
+    return dispatch(cleanCache());
   }, [err, flag]);
 
   return (
