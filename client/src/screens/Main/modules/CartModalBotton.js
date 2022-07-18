@@ -31,7 +31,7 @@ const CartModalBotton = ({ modal, setModal }) => {
 
   const handlerPayPress = async () => {
     if (!email || !cardDetails?.complete) {
-      alert("Please enter email and card details");
+      Alert.alert("Error", "Por favor, complete los datos requeridos");
       return;
     }
     try {

@@ -94,9 +94,9 @@ export const create = (userToken) => (dispatch) => {
   axios
     .get(`${apiUrl}profile`, config)
     .then(async (res) => {
-      let {email,firstName,lasName,id} = res.data.user;
-      await AsyncStorage.setItem("@user", JSON.stringify({email,firstName,lasName,id}));
+      let {email,firstName,lastName,id} = res.data.user;
       dispatch(setUser(res.data.user));
+      await AsyncStorage.setItem("@user", JSON.stringify({email,firstName,lastName,id}));
     })
     .catch((e) => console.log(e));
 };

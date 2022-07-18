@@ -1,20 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, FlatList, StatusBar, Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import HomeNav from './modules/HomeNav.js';
 import Product from './modules/Product.js';
 import ModalFilter from './ModalFilter.js';
 import styles from "./Styles/Products";
-import { searchProducts } from "../../redux/slices/products";
+import { cleanProducts, searchProducts } from "../../redux/slices/products";
 
 const Products = () => {
     const { list: products } = useSelector((state) => state.products);
     const { category } = useSelector((state) => state.products);
     const { statusCode: statusCode } = useSelector((state) => state.products);
-    /* console.log(statusCode) */
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState('');
+    useEffect(() => {
+      return () => {
+        dispatch(cleanProducts())
+      }
+    }, [])
+    
+
     const submitHandle = (search) => {
         dispatch(searchProducts(search));
         setSearch('')
@@ -25,6 +31,8 @@ const Products = () => {
         inputRange: [0, 65],
         outputRange: [0, -65]
     })
+
+
     return (
         <View style={styles.wrapper}>
             <StatusBar />
@@ -49,11 +57,14 @@ const Products = () => {
                 <View style={styles.categorieInfo}>
                     <Text style={styles.categorieInfoText}>{category}</Text>
                 </View>
-                    {statusCode  > 400 ?
+                    
+
+                    {statusCode  >= 400 ?
                         <View style={styles.containerNoProducts}>
                             <Text style={styles.notProducts}>No existen coincidencias.</Text>
                         </View>
                         :
+                        // statusCode >= 200 && statusCode < 400 ?
                         <FlatList
                         showsVerticalScrollIndicator={false}
                         numColumns={2}
@@ -66,6 +77,10 @@ const Products = () => {
                             scrollY.setValue(e.nativeEvent.contentOffset.y)
                         }}
                     />
+                //     : 
+                //     <View style={styles.containerNoProducts}>
+                //     <Text style={styles.notProducts}>Loading</Text>
+                // </View>
                     }
                 {/*  <Pagination allInstruments={allInstruments}></Pagination> */}
 
