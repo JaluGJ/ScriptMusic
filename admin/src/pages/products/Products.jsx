@@ -6,7 +6,6 @@ import List from '../../components/tableproducts/List';
 import './Products.scss';
 import { getAllProducts } from '../../redux/actions'
 import columns from './inputs'
-
 const Products = ({logout}) => {
     const dispatch = useDispatch()
     const rows = useSelector(state => state.products)

@@ -1,38 +1,53 @@
 import NavBar from '../Navbar/NavBar'
 import SideBar from '../SideBar/SideBar'
-import './NewProduct.scss'
+import './updateProduct.scss'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getAllProducts } from '../../redux/actions'
+import { getAllProducts, getOneProduct, updateProduct, clearCache } from '../../redux/actions'
 import { useState } from 'react';
 import { validate, checkprops } from './errors';
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 
-export default function NewProduct({inputs, title, logout}){
+export default function UpdateProduct({ inputs, title, logout}){
+    const { id } = useParams()
     const types = useSelector(state=> state.types)
+    const product = useSelector(state=> state.product)
     const dispatch  =  useDispatch()
-    const navigate = useNavigate()
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
-    
     useEffect(() => {
-        dispatch(getAllProducts());
-        setError(validate(input))
-    }, [])
-    
+        setInput({
+            model: product.model,
+            brand: product.brand,
+            price: product.price,
+            type: product.type,
+            category: product.category,
+            stock: product.stock,
+            image: product.image,
+            description: product.description,
+        })
+    }, [product])
+
     const [error, setError] = useState({})
-    const [file, setFile] = useState('')
     const [input, setInput] = useState({
-        model: '',
-        brand: '',
-        price: '',
-        type: '',
-        category: '',
-        stock: '',
-        image: '',
-        description: '',
+        model: product.model,
+        brand: product.brand,
+        price: product.price,
+        type: product.type,
+        category: product.category,
+        stock: product.stock,
+        image: product.image,
+        description: product.description
     })
+    useEffect(() => {
+        dispatch(getOneProduct(id))
+        dispatch(getAllProducts())
+        return () => {
+            dispatch(clearCache())
+        }
+    }, [])
+
 
     function handleinput(e){
         setInput({
@@ -52,7 +67,8 @@ export default function NewProduct({inputs, title, logout}){
             window.location.reload()
             return alert('Por favor verifique los campos')
         }
-        dispatch(addProduct(input))
+        console.log(input)
+        dispatch(updateProduct(id, input))
         toast.success('Producto agregado exitosamente', {
             position: "top-center",
             autoClose: 4000,
@@ -62,33 +78,21 @@ export default function NewProduct({inputs, title, logout}){
             draggable: true,
             progress: undefined,
             });
-        setInput({
-            model: '',
-            brand: '',
-            price: '',
-            type: '',
-            category: '',
-            stock: '',
-            image: '',
-            description: '',
-        })
     }
     return(
+
+        product.length === 0 ? <div>Cargando...</div> :
         <div className="new">
         <SideBar logout={logout}/>
         <ToastContainer />
         <div className="newcontainer">
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="top">
-                <h1 className="title"> Crear nuevo producto. </h1>
+                <h1 className="title"> Actualiza el producto </h1>
             </div>
             <div className="bottom">
                 <div className="left">
-                    {/* <img 
-                        src={file ? URL.createObjectURL(file) 
-                        : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} 
-                    alt="" /> */}
-                    <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
+                    <img src={product.image ? product.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
 
                 </div>
                 <div className="rigth">
@@ -96,14 +100,11 @@ export default function NewProduct({inputs, title, logout}){
                         <div className="formInput">
                            
                             <label> Imagen </label>
-                            {/* <input 
-                            type="file" 
-                            onChange={e => setFile(e.target.files[0])}/> */}
                             <input 
                             type="text"
                             placeholder='Agrega un link de imagen'
                             name='image'
-                            value={input.image}
+                            value={product.image}
                             onChange={(e) => handleinput(e)}
                             />
                             {error.image && (
@@ -116,7 +117,7 @@ export default function NewProduct({inputs, title, logout}){
                             type="text" 
                             placeholder='Paloma Estudio Satinada'
                             name='model'
-                            value={input.model}
+                            value={product.model}
                             onChange={(e) => handleinput(e)}/>
                             {error.model && (
                             <p>{ error.model }</p>
@@ -127,7 +128,7 @@ export default function NewProduct({inputs, title, logout}){
                             type="text" 
                             placeholder='Admira'
                             name='brand'
-                            value={input.brand}
+                            value={product.brand}
                             onChange={(e) => handleinput(e)}/>
                             {error.brand && (
                             <p>{ error.brand }</p>
@@ -138,8 +139,7 @@ export default function NewProduct({inputs, title, logout}){
                             type="number" 
                             placeholder='135'
                             name='price'
-                            value={input.price}
-                            // min='1'
+                            value={product.price}
                             onChange={(e) => handleinput(e)}/>
                             {error.price && (
                             <p>{ error.price }</p>
@@ -150,18 +150,15 @@ export default function NewProduct({inputs, title, logout}){
                             type="number" 
                             placeholder='50'
                             name='stock'
-                            value={input.stock}
-                            // min='0'
+                            value={product.stock}
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
                             )}
-
-
                             <label> Categoria </label>
                             <select name='category' defaultValue="Categoria"
                             onChange={e => handleinput(e)}>
-                            <option disabled={true}>Categoria</option>
+                            <option disabled={true}>{product.categories}</option>
                             { categories.map(e =>
                             <option value={e} key={e}>{e}</option>)}
                             </select>
@@ -172,7 +169,7 @@ export default function NewProduct({inputs, title, logout}){
                             <label> Tipo </label>
                             <select name='type' defaultValue="Tipo"
                             onChange={e => handleinput(e)}>
-                            <option disabled={true}>Tipo</option>
+                            <option disabled={true}>{product.type}</option>
                             { types.map(e =>
                             <option value={e} key={e}>{e}</option>)}
                             </select>
@@ -184,7 +181,7 @@ export default function NewProduct({inputs, title, logout}){
                             <textarea 
                             placeholder='Descripción del producto, caracteristicas o pie promocional'
                             name='description'
-                            value={input.description}
+                            value={product.description}
                             onChange={(e) => handleinput(e)}/>
                             {error.description && (
                             <p>{ error.description }</p>
@@ -192,8 +189,8 @@ export default function NewProduct({inputs, title, logout}){
                             
                             
                             {!Object.keys(error).length && !checkprops(input) ?
-                                <button >CREAR</button> : 
-                                <button disabled >CREAR</button>   
+                                <button >ACTUALIZAR PRODUCTO</button> : 
+                                <button disabled >ACTUALIZAR PRODUCTO</button>   
                             } 
                         </div>
                     </form>
