@@ -2,21 +2,22 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
+import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
 
 const HomeItem = ({ text, button }) => {
     const item =
     {
-        "model": " Clásica Natural",
-        "brand": "Admira",
-        "price": 95.99,
+        "model": "MK-B",
+        "brand": "Kala",
+        "price": 195.99,
         "type": "Guitarra Clasica",
         "category": "Guitarra",
         "stock": 50,
-        "image": "https://res.cloudinary.com/dzonjuriq/image/upload/v1657387337/script_music_img/alba_natural_natural-removebg-preview_pmhyla.png",
+        "image": "https://res.cloudinary.com/dzonjuriq/image/upload/v1657387257/script_music_img/viola-yamaha-removebg-preview_v680ig.png",
         "description": "Si quieres aprender a tocar y no sabes qué modelo comprar, la guitarra Admira Sara probablemente sea una de las mejores opciones. Es un modelo ideal para principiantes y de los más vendidos de la marca, a diferencia de la Fiesta, esta tiene la tapa en Pino.",
         "user": [],
-        "id": "62c9e52f89ca48a583966a39"
+        "id": "62d4d8e0da220153870d7765"
     }
 
     const { model, image, price, brand } = item
@@ -41,8 +42,8 @@ const HomeItem = ({ text, button }) => {
                 <View style={styles.image}>
                     <Image
                         style={{
-                            width: 250,
-                            height: 300,
+                            width: vw(75),
+                            height: vh(30),
 
                         }}
                         resizeMode="contain"
