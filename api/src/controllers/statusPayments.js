@@ -35,11 +35,8 @@ module.exports = {
     const { items, userId, status } = req.body
     try {
       if (status === 'Successful') {
-        //logica de guardados y demas con items y userId
-
-        //const bought = items.map(itm => itm.id)
-        //await User.findByIdAndUpdate(userId, { $set: { bought: bought } }, { new: true })
         const soldId = []
+        const productFinal = []
         items.forEach(async (item) => {
           try {
             const sold = new Sold({
@@ -50,6 +47,7 @@ module.exports = {
             })
             soldId.push(sold._id)
             const product = await Products.findById(item.id)
+            productFinal.push(product)
             const finalStock = product.stock - item.count
             await Products.findByIdAndUpdate(item.id, { $set: { stock: finalStock } }, { new: true })
             await sold.save()
@@ -59,12 +57,14 @@ module.exports = {
           }
         })
         const user = await User.findById(userId)
-        // console.log(user)
         await User.findByIdAndUpdate(userId, { $set: { bought: [...user.bought , ...soldId] } }, { new: true })
-        const template = await getTemplateBougth(user)
+        const template = getTemplateBougth(user.email, productFinal)
         await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
       } else {
+        const user = await User.findById(userId)
+        const template = getTemplateBougth(user.email)
+        await sendEmail(user.email, 'Fallo de pago', template)
         res.json({ error: 'Payment Failed' })
       }
     } catch (error) {

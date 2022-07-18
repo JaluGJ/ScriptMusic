@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail } = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBaned } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
+const BanedUser = require('../models/user/banedUserSchema.js')
 
 
 
@@ -24,6 +25,12 @@ module.exports = {
                 firstName,
                 lastName,
                 isAdmin
+            }
+            const ban = await BanedUser.findOne({ email })
+            if(ban){
+                const template = getTemplateBaned(ban.email)
+                await sendEmail(template)
+                return res.status(404).json({ message: 'El usuario ha sido baneado' })
             }
             const userCreated = await User.create(newUser)
             const token = getToken(userCreated._id)

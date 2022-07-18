@@ -57,10 +57,30 @@ const getTemplate = (name, token) => {
       `
 }
 
-const getTemplateBougth = (name, token) => {
+const getTemplateBaned = (name) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos recibido tu solicitud y ha sucedido un problema, el email que usted intenta registrar ha sido baneado.</div>
+  <div>Disculpe los inconvenientes.</div>
+  <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+`
+}
+
+const getTemplateBougth = (name, product) => {
+  if(!product){
+    return `
+      <div>Hola ${name}.</div>
+      <div>Hemos recibido tu compra y ha sucedido un problema.</div>
+      <div>Disculpe los inconvenientes.</div>
+      <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+  `
+  }
   return `
       <div>Hola ${name}.</div>
       <div>Hemos recibido tu compra y todo se ha procesado correctamente.</div>
+      ${product.map(item => `<div>${item.name} - ${item.price}</div>`).join("")}
+      <div>Total: ${product.reduce((acc, item) => acc + item.price, 0)}</div>
+      <div>Gracias por tu compra.</div>
       <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
   `
 }
@@ -68,5 +88,6 @@ const getTemplateBougth = (name, token) => {
 module.exports = {
   sendEmail,
   getTemplate,
-  getTemplateBougth
+  getTemplateBougth,
+  getTemplateBaned
 };
