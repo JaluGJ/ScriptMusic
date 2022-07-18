@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function NewProduct({inputs, title}){
+export default function NewProduct({inputs, title, logout}){
     // const categories = useSelector(state => state.categories)
     const types = useSelector(state=> state.types)
     const dispatch  =  useDispatch()
@@ -80,7 +80,7 @@ export default function NewProduct({inputs, title}){
     }
     return(
         <div className="new">
-        <SideBar />
+        <SideBar logout={logout}/>
         <ToastContainer />
         <div className="newcontainer">
             <NavBar />
