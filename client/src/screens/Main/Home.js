@@ -13,7 +13,7 @@ import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
-
+import { vh, vw } from "react-native-expo-viewport-units";
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -59,14 +59,32 @@ const Home = () => {
           <HomeCategories />
           <View style={styles.containerMain}>
 
-            <HomeItem text={'PROMO DE LA SEMANA'} button={'Ver mas promociones'} />
+            <HomeItem 
+              text={'PROMO DE LA SEMANA'}
+              button={'Ver mas promociones'}
+              model={'ACTION BASS PLUS LH BK'}  
+              price={349.99} 
+              brand={'CORT'}
+              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1658006558/script_music_img/CORT_ACTION_BASS_PLUS_LH_BK_ieh0af.png"}
+              id={"62d4db06da220153870d77f3"}
+              />
 
             <Image
               source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
-              style={{ width: '100%', height: 150, marginVertical: 20, }}
+
+              style={{ width: '100%', height: vh(30), marginVertical: 20, }}
+
             />
 
-            <HomeItem text={'OFERTA IMPERDIBLE!'} button={'Ver mas ofertas'} />
+            <HomeItem 
+              text={'OFERTA IMPERDIBLE!'} 
+              button={'Ver mas ofertas'}
+              model={'Laud L 11Pa'}  
+              price={129.99} 
+              brand={'ALHAMBRA'}
+              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657995382/script_music_img/Alhambra_Laud_L_11Pa_con_Estuche_fucind.png"}
+              id={"62d4d68bda220153870d76a1"}
+              />
 
           </View>
 

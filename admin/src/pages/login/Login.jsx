@@ -33,7 +33,7 @@ const Login = ({ authenticate }) => {
         console.log(token)
         token !== undefined
             ?
-             authenticate().
+            authenticate().
             navigate('/home')
             : toast.error('Usuario o contraseña incorrecto.', {
                 position: "top-center",

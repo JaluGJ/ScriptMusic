@@ -78,11 +78,11 @@ export default function Login() {
           }}
         </Formik>
 
-        <FormikSubmit name="Acá va ingresar con Google" />
+        {/* <FormikSubmit name="Acá va ingresar con Google" /> */}
 
-        <View style={{ alignItems: "center" }}>
+        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")} style={{alignItems: "center"}}>
           <Text style={styles.forgotPass}>¿Olvidaste tu contraseña?</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.containerRegisterNow}>
           <Text style={styles.notAccount}>¿No tienes una cuenta?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>

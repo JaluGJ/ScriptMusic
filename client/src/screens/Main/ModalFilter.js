@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Modal, FlatList, Image } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Modal, FlatList, Image, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles/Modal'
 import { useState } from 'react';
@@ -11,12 +11,13 @@ import { getAllFilterProducts } from '../../redux/slices/products';
 
 const ModalFilter = ({ modal, setModal }) => {
     const dispatch = useDispatch();
+    // const { category } = useSelector(state => state.products);
     const navigation = useNavigation();
     const [filters, setFilters] = useState({
         category: '',
         price: '',
     })
-    //console.log(filters)
+    
     return (
         <Modal
             animationType='slide'
@@ -68,6 +69,9 @@ const ModalFilter = ({ modal, setModal }) => {
                 <View style={styles.buttonFilter}>
                     <TouchableOpacity
                         onPress={() => {
+                            if(!filters.category){
+                                return Alert.alert('Por favor seleccione una de las categoria disponible')
+                            }
                             dispatch(getAllFilterProducts(filters))
                             setModal(!modal)
                             navigation.navigate('Products')

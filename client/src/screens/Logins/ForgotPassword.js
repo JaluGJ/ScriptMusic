@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import styles from "./styles/ForgotPassword.jsx";
 
 const ForgotPassword = () => {
   return (
-    <View>
-      <Text>ForgotPassword</Text>
+    <View style={{ alignItems: "center" }}>
+      <Text style={styles.title}>RECUPERA TU CONTRASEÑA</Text>
     </View>
-  )
-}
+  );
+};
 
-export default ForgotPassword
-
-const styles = StyleSheet.create({})
+export default ForgotPassword;

@@ -18,6 +18,7 @@ let styles = StyleSheet.create({
   text: {
     fontSize: 20,
     letterSpacing: 2,
+    textAlign: "center",
   },
   containerTextLinked: {
     flexDirection: "row",
@@ -29,16 +30,6 @@ let styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
-    alignItems: "center",
-  },
-  wrapper: {
-    height: "100%",
-    backgroundColor: "#000000",
-    height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
     alignItems: "center",
   },
 });

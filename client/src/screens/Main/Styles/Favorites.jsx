@@ -4,12 +4,12 @@ let styles = StyleSheet.create({
   image: {
     width: 70,
     height: 70,
-    marginVertical: 30,
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,
     letterSpacing: 6,
-    padding: 20
+    padding: 20,
   },
   containerText: {
     alignItems: "center",
@@ -18,7 +18,7 @@ let styles = StyleSheet.create({
   text: {
     fontSize: 20,
     letterSpacing: 2,
-    textAlign: "center"
+    textAlign: "center",
   },
   containerTextLinked: {
     flexDirection: "row",
@@ -28,18 +28,15 @@ let styles = StyleSheet.create({
     color: "#DD8643",
     letterSpacing: 2,
   },
-  wrapper: {
-    backgroundColor: "#000000",
-  },
   container: {
-    backgroundColor:"#F9F9F9",
     height: "100%",
+    alignItems: "center",
   },
   /******************* ESTILOS DE PRODUCTOS *************************/
   containerProduct: {
-    flexDirection: 'row',
+    flexDirection: "row",
     height: 150,
-    width: vw(100), /* VERSATIL */
+    width: vw(95) /* VERSATIL */,
     paddingLeft: 10,
     marginTop: 9,
     marginHorizontal: 5,
@@ -53,33 +50,33 @@ let styles = StyleSheet.create({
     shadowRadius: 1.65,
     elevation: 1,
     borderRadius: 30,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   containerProductInfo: {
-    justifyContent: 'space-around',
-    width: '70%',
-    height: '100%',
+    justifyContent: "space-around",
+    width: "70%",
+    height: "100%",
   },
   containerProductImage: {
     width: vw(35),
     height: 160,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   productName: {
-    flexWrap: 'wrap',
-    width: vw(50),
+    flexWrap: "wrap",
+    width: vw(45),
     fontSize: 15,
     letterSpacing: 2,
-    color: '#000000',
+    color: "#000000",
   },
   productInfo: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
   },
   productImage: {
-    width: '70%',
-    height: '70%',
+    width: "70%",
+    height: "70%",
   },
   productPrice: {
     fontSize: 15,
@@ -94,13 +91,13 @@ let styles = StyleSheet.create({
     letterSpacing: 2,
   },
   containerTrash: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   containerNameTrash: {
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: "85%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

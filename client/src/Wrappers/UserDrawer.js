@@ -28,7 +28,7 @@ const UserDrawer = () => {
         name="Home "
         component={WrapperHome}
         options={{
-          drawerLabel: "Home",
+          drawerLabel: "Inicio",
           drawerIcon: ({ color }) => (
             <Icon
               name="home-outline"
@@ -43,7 +43,7 @@ const UserDrawer = () => {
         name="MyProfile"
         component={MyProfile}
         options={{
-          drawerLabel: "Mi Perfil",
+          drawerLabel: "Mi perfil",
           drawerIcon: ({ color }) => (
             <Icon
               name="account-circle-outline"
@@ -58,7 +58,7 @@ const UserDrawer = () => {
         name="PaymentMethods"
         component={PaymentMethods}
         options={{
-          drawerLabel: "Métodos de Pago",
+          drawerLabel: "Métodos de pago",
           drawerIcon: ({ color }) => (
             <Icon
               name="credit-card-outline"
@@ -88,7 +88,7 @@ const UserDrawer = () => {
         name="MyShopping"
         component={MyShopping}
         options={{
-          drawerLabel: "Mis Compras",
+          drawerLabel: "Mis compras",
           drawerIcon: ({ color }) => (
             <Icon
               name="shopping-outline"
@@ -103,7 +103,15 @@ const UserDrawer = () => {
         name="AboutUs"
         component={AboutUs}
         options={{
-          drawerLabel: "",
+          drawerLabel: "Sobre nosotros",
+          drawerIcon: ({ color }) => (
+            <Icon
+            name="help-circle-outline"
+            type="material-community"
+            size={24}
+            color={color}
+          />
+          ),
         }}
       />
     </Drawer.Navigator>
@@ -112,4 +120,3 @@ const UserDrawer = () => {
 
 export default UserDrawer;
 
-const styles = StyleSheet.create({});

@@ -123,3 +123,7 @@ export const removeItems = () => (dispatch) =>{
     dispatch(remItems(null))
 }
 
+export const cleanProducts = () => (dispatch) =>{
+    dispatch(setProductsList([]))
+    dispatch(setProductsStatusCode(0))
+}

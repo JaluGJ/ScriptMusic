@@ -35,7 +35,7 @@ const CardNav = ({ productsCart }) => {
                                 </Text>
                                 :
                                 <Text style={styles.navLength}>
-                                    {productsCart.length} items
+                                    {productsCart.length === 1 ? `${productsCart.length} item` : `${productsCart.length} items`}
                                 </Text>
                             }
                         </View>

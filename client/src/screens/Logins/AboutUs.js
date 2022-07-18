@@ -17,9 +17,9 @@ const AboutUs = () => {
   return (
     <View styles={styles.wrapper}>
       <View style={{ alignItems: "center", flexDirection: "row" }}>
-      <Pressable onPress={() => navigation.goBack()}>
-        <AntDesign name="left" size={27} color="black" />
-      </Pressable>
+        <Pressable onPress={() => navigation.goBack()}>
+          <AntDesign name="left" size={27} color="black" />
+        </Pressable>
         <Text style={styles.title}>SOBRE NOSOTROS</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

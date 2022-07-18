@@ -14,7 +14,7 @@ let styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     letterSpacing: 6,
-    textAlign: "center"
+    textAlign: "center",
   },
   input: {
     backgroundColor: "#FFF6E8",

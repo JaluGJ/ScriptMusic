@@ -10,6 +10,7 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 export const ADMIN_LOGIN = "ADMIN_LOGIN"
 export const DELETE_TOKEN = 'DELETE_TOKEN'
+export const CLEAR_CACHE = 'CLEAR_CACHE'
 
 export const GET_ALL_USERS = "GET_ALL_USERS"
 // El one user no esta aun
@@ -53,7 +54,7 @@ export const addProduct = (product) => (dispatch) => {
 }
 
 export const updateProduct = (id, product) => (dispatch) => {
-    axios.put(`${baseUrl}/product/${id}`, product)
+    axios.put(`${baseUrl}/products/${id}`, product)
         .then(res => {
             dispatch({
                 type: UPDATE_PRODUCT,
@@ -72,6 +73,12 @@ export const deleteProduct = (id) => (dispatch) => {
             })
         })
         .catch(err => console.log(err))
+}
+
+export const clearCache = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_CACHE
+    })
 }
 
 // PRODUCTS ACTIONS
@@ -112,7 +119,7 @@ export const getOneUser = (id) => (dispatch) => {
 // }
 
 export const adminLogin = (user) => (dispatch) => {
-    axios.post(`http://localhost:3001/loginAdmin`, user)
+    axios.post(`https://sm.up.railway.app/loginAdmin`, user)
     .then(res => {
             console.log(res.data.token)
             dispatch({

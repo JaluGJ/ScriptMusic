@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
       backgroundColor: "black",
     },
     containerFooter: {
-      padding: 20,
+      paddingLeft: 20,
+      paddingBottom: 22,
       borderTopWidth: 1,
       borderTopColor: "#ccc",
       backgroundColor: "white",
-      borderBottomLeftRadius: 40,
+      // borderBottomLeftRadius: 40,
     },
     containerAbout: {
       flexDirection: "row",

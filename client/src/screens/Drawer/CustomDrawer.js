@@ -44,7 +44,7 @@ const CustomDrawer = (props) => {
 
       <View style={styles.drawerFooter}>
         <View style={styles.containerFooter}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AboutUs")}
           >
             <View style={styles.containerAbout}>
@@ -55,7 +55,7 @@ const CustomDrawer = (props) => {
               />
               <Text style={styles.about}>Sobre nosotros</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => dispatch(logOut())}>
             <View style={styles.containerSignOff}>
               <Icon name="login-variant" type="material-community" size={24} />

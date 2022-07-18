@@ -1,13 +1,13 @@
-const {Schema, model} = require('moongose');
+const {Schema, model} = require('mongoose');
 
 const bannedUserSchema = new Schema ({
 
     email: {
-        type: String,
+        type: String
     }
 })
 
-bannedUserModel.set('toJSON', {
+bannedUserSchema.set('toJSON', {
     transform: (doc, ret) => {
         ret.id = ret._id
         delete ret._id
@@ -15,6 +15,6 @@ bannedUserModel.set('toJSON', {
     }
 })
 
-const bannedUserModel = model('BannedUserModel', bannedUserSchema);
+const bannedUserModel = model('BannedUser', bannedUserSchema);
 
-module.exports= bannedUserModel;
+module.exports = bannedUserModel;
