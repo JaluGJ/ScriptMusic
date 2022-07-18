@@ -2,20 +2,17 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         shadowColor: "#00000076",
         shadowOffset: {
             width: 3,
             height: 1,
         },
-        marginTop:20,
         shadowOpacity: 0.29,
         shadowRadius: 1.65,
         marginHorizontal:30,
         elevation: 3,
         borderRadius:30,
-        marginVertical: 10,
-        backgroundColor:'white'
+        backgroundColor:'white',
     },
     firstText:{
         height: 35,
@@ -25,7 +22,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     secondText:{
-        height: 40,
         padding: 3,
         borderTopColor:'black',
         flexDirection:'row',
@@ -44,8 +40,7 @@ const styles = StyleSheet.create({
         marginHorizontal:5,
     },
     image: {
-        
-        paddingTop: 10,
+
         alignItems: 'center',
         justifyContent: 'center',
         transform: [{ rotate: "35deg" }],

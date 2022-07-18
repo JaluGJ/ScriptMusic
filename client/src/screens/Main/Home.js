@@ -71,7 +71,9 @@ const Home = () => {
 
             <Image
               source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
+
               style={{ width: '100%', height: vh(30), marginVertical: 20, }}
+
             />
 
             <HomeItem 

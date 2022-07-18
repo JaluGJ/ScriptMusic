@@ -2,10 +2,13 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
+import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
+
 
 const HomeItem = ({ text, button, model, price, brand, image, id }) => {
     
+
 
     const navigation = useNavigation();
 
@@ -28,8 +31,8 @@ const HomeItem = ({ text, button, model, price, brand, image, id }) => {
                 <View style={styles.image}>
                     <Image
                         style={{
-                            width: 250,
-                            height: 300,
+                            width: vw(75),
+                            height: vh(30),
 
                         }}
                         resizeMode="contain"
