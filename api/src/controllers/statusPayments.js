@@ -1,6 +1,7 @@
 const User = require('../models/user/userSchema')
 const Products = require('../models/product/productSchema')
 const Sold = require('../models/sold/soldSchema.js')
+const { getTemplateBougth, sendEmail } = require('../config/mail.config.js')
 
 
 /*
@@ -57,10 +58,11 @@ module.exports = {
             console.log("error", error)
           }
         })
-        const user= await User.findById(userId)
-        console.log(user)
+        const user = await User.findById(userId)
+        // console.log(user)
         await User.findByIdAndUpdate(userId, { $set: { bought: [...user.bought , ...soldId] } }, { new: true })
-        
+        const template = await getTemplateBougth(user)
+        await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
       } else {
         res.json({ error: 'Payment Failed' })
