@@ -6,7 +6,7 @@ import store from "./src/redux/store.js";
 import AppWrapped from "./AppWrapped";
 import { StripeProvider } from '@stripe/stripe-react-native'; 
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['new NativeEventEmitter']);
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
