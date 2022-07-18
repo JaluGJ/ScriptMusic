@@ -62,7 +62,7 @@ export default function EmptyCart() {
                     setModal(true)
                   }}>
                   <View style={styles.arrowAnimated}>
-                    <Text style={styles.title}>COMPRAR YA!</Text>
+                    <Text style={styles.title}>¡COMPRAR YA!</Text>
                   </View>
                 </TouchableNativeFeedback>
 

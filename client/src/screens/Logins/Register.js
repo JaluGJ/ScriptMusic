@@ -99,7 +99,7 @@ export default function Register() {
             }}
           </Formik>
 
-          <FormikSubmit name="Acá va registrarse con Google" />
+          {/* <FormikSubmit name="Acá va registrarse con Google" /> */}
 
           <View style={styles.containerLoginNow}>
             <Text style={styles.haveAccount}>¿Ya tienes una cuenta?</Text>
