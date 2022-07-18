@@ -15,11 +15,12 @@
         text-align: center;
         color: #FEFEFE;
     
-            img{
-            
-                width: 20vw;
-                height: 40vh;
-            }
+            img {
+            filter: saturate(0%) invert(100%);
+            border-radius: 50%;
+            width: 20vw;
+            height: 40vh;
+        }
         
         
     }
