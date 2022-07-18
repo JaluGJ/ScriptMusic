@@ -78,7 +78,7 @@ export default function Login() {
           }}
         </Formik>
 
-        <FormikSubmit name="Acá va ingresar con Google" />
+        {/* <FormikSubmit name="Acá va ingresar con Google" /> */}
 
         <View style={{ alignItems: "center" }}>
           <Text style={styles.forgotPass}>¿Olvidaste tu contraseña?</Text>

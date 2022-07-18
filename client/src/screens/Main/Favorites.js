@@ -55,9 +55,8 @@ export const SINFAVORITOS = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.wrapper}>
+    <View>
       <View style={styles.container}>
-        <StatusBar />
         <View style={{ alignItems: "center" }}>
           <Text style={styles.title}>FAVORITOS</Text>
         </View>
