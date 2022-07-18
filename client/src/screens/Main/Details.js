@@ -24,7 +24,7 @@ const Details = ({ route }) => {
   const navigation = useNavigation();
   const { details, statusCode } = useSelector((state) => state.products);
   const [countProducts, setCountProducts] = useState(1);
-  const { addToFavorite } = useFavorites()
+  const { addToFavorite } = useFavorites();
   useEffect(() => {
     dispatch(getProductDetails(itemId));
     return () => {
@@ -82,8 +82,8 @@ const Details = ({ route }) => {
                   <AntDesign name="left" size={27} color="black" />
                 </Pressable>
                 <Text style={styles.textNav}>DETALLES</Text>
-                <TouchableOpacity onPress={()=>addToFavorite(details)}>
-                <AntDesign name="hearto" size={27} color="black" />
+                <TouchableOpacity onPress={() => addToFavorite(details)}>
+                  <AntDesign name="hearto" size={27} color="black" />
                 </TouchableOpacity>
               </View>
               <View style={styles.containerMain}>

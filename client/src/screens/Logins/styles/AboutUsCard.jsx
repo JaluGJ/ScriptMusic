@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     marginVertical: 20,
-    borderWidth: 1
+    borderWidth: 1,
   },
   lastContainer: {
     alignItems: "center",
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     marginTop: 20,
-    marginBottom: 90
+    marginBottom: 90,
   },
   image: {
     width: vh(45),
