@@ -5,22 +5,11 @@ import { AntDesign } from '@expo/vector-icons';
 import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
 
-const HomeItem = ({ text, button }) => {
-    const item =
-    {
-        "model": "MK-B",
-        "brand": "Kala",
-        "price": 195.99,
-        "type": "Guitarra Clasica",
-        "category": "Guitarra",
-        "stock": 50,
-        "image": "https://res.cloudinary.com/dzonjuriq/image/upload/v1657387257/script_music_img/viola-yamaha-removebg-preview_v680ig.png",
-        "description": "Si quieres aprender a tocar y no sabes qué modelo comprar, la guitarra Admira Sara probablemente sea una de las mejores opciones. Es un modelo ideal para principiantes y de los más vendidos de la marca, a diferencia de la Fiesta, esta tiene la tapa en Pino.",
-        "user": [],
-        "id": "62d4d8e0da220153870d7765"
-    }
 
-    const { model, image, price, brand } = item
+const HomeItem = ({ text, button, model, price, brand, image, id }) => {
+    
+
+
     const navigation = useNavigation();
 
     return (
@@ -30,7 +19,7 @@ const HomeItem = ({ text, button }) => {
             </View>
             <TouchableOpacity
                 onPress={() =>
-                    navigation.navigate('Details', { itemId: item.id })
+                    navigation.navigate('Details', { itemId: id })
                 }
 
             >
