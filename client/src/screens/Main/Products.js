@@ -14,11 +14,6 @@ const Products = () => {
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState('');
-    useEffect(() => {
-      return () => {
-        dispatch(cleanProducts())
-      }
-    }, [])
     
 
     const submitHandle = (search) => {
@@ -77,10 +72,10 @@ const Products = () => {
                             scrollY.setValue(e.nativeEvent.contentOffset.y)
                         }}
                     />
-                //     : 
-                //     <View style={styles.containerNoProducts}>
-                //     <Text style={styles.notProducts}>Loading</Text>
-                // </View>
+                //      : 
+                //      <View style={styles.containerNoProducts}>
+                //      <Text style={styles.notProducts}>Loading...</Text>
+                //  </View>
                     }
                 {/*  <Pagination allInstruments={allInstruments}></Pagination> */}
 
