@@ -112,7 +112,7 @@ export const getOneUser = (id) => (dispatch) => {
 // }
 
 export const adminLogin = (user) => (dispatch) => {
-    axios.post(`http://localhost:3001/loginAdmin`, user)
+    axios.post(`https://sm.up.railway.app/loginAdmin`, user)
     .then(res => {
             console.log(res.data.token)
             dispatch({

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = "http://localhost:3001/loginAdmin"
+const url = "https://sm.up.railway.app/loginAdmin"
 
 const loginValidate = async (values) => {
     try{

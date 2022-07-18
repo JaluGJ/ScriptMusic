@@ -23,28 +23,28 @@ export default function SideBar({logout}) {
             <div className="center">
                 <ul>
                     <p className="title">LISTADO</p>
-                    <Link to="/usuarios" style={{ textDecoration: "none" }}>
+                   {/*  <Link to="/usuarios" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlinedIcon className='icon' />
                             <span>Usuarios</span>
                         </li>
-                    </Link>
+                    </Link> */}
                     <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreMallDirectoryOutlinedIcon className='icon' />
                             <span>Productos</span>
                         </li>
                     </Link>
-                    <li>
+                    {/* <li>
                         <CreditCardOutlinedIcon className='icon' />
                         <span>Ordenes</span>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <LocalShippingOutlinedIcon className='icon' />
                         <span>Envios</span>
-                    </li>
+                    </li> */}
 
-                    <p className="title">ESTADISTICAS</p>
+                    {/* <p className="title">ESTADISTICAS</p>
                     <li>
                         <SignalCellularAltIcon className='icon' />
                         <span>Graficos</span>
@@ -52,22 +52,22 @@ export default function SideBar({logout}) {
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon' />
                         <span>Alertas</span>
-                    </li>
+                    </li> */}
 
                     <p className="title">USUARIO</p>
-                    <li>
+                    {/* <li>
                         <AccountCircleOutlinedIcon className='icon' />
                         <span>Perfil</span>
-                    </li>
+                    </li> */}
                     <li>
                         <LogoutOutlinedIcon className='icon' />
                         <span onClick={logout}>Desconectarse</span>
                     </li>
                 </ul>
             </div>
-            <div className="bottom">
+            {/* <div className="bottom">
                 BOTTOM
-            </div>
+            </div> */}
         </div>
     )
 }

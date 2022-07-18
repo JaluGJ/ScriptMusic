@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOneProduct } from '../../redux/actions';
 import { useState } from 'react';
 
-export default function ProductDetail() {
+export default function ProductDetail({logout}) {
     const {id} = useParams()
     const dispatch = useDispatch()
     const product = useSelector(state => state.product)
@@ -30,7 +30,7 @@ export default function ProductDetail() {
 
     return (
         <div className="productdetail">
-            <SideBar />
+            <SideBar logout={logout}/>
             <div className="container">
                 <NavBar />
 
