@@ -36,7 +36,7 @@ let styles = StyleSheet.create({
   containerProduct: {
     flexDirection: "row",
     height: 150,
-    width: vw(100) /* VERSATIL */,
+    width: vw(95) /* VERSATIL */,
     paddingLeft: 10,
     marginTop: 9,
     marginHorizontal: 5,
@@ -64,7 +64,7 @@ let styles = StyleSheet.create({
   },
   productName: {
     flexWrap: "wrap",
-    width: vw(50),
+    width: vw(45),
     fontSize: 15,
     letterSpacing: 2,
     color: "#000000",

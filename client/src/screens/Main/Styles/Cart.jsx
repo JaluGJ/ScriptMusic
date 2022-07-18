@@ -145,7 +145,7 @@ let styles = StyleSheet.create({
   containerProduct: {
     flexDirection: 'row',
     height: 150,
-    width: vw(100), /* VERSATIL */
+    width: vw(95), /* VERSATIL */
     paddingLeft: 10,
     marginTop: 5,
     marginHorizontal: 5,

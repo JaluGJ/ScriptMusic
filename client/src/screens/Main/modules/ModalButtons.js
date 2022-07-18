@@ -5,12 +5,12 @@ import ModalItems from './ModalItems';
 import { instruments } from './ModalInstruments';
 import { instrumentstwo } from './ModalInstruments';
 import { getCategory } from '../../../redux/slices/products';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 
 
-const ModalButtons = ({ setFilters, filters }) => {
+const ModalButtons = ({ setFilters, filters ,category}) => {
     const dispatch = useDispatch()
 
     return (
@@ -29,7 +29,7 @@ const ModalButtons = ({ setFilters, filters }) => {
                         }}
                         style={styles.button}>
 
-                        <ModalItems item={item} />
+                        <ModalItems category={category} item={item} />
 
                     </TouchableOpacity>
 
@@ -51,7 +51,7 @@ const ModalButtons = ({ setFilters, filters }) => {
                         }}
                             style={styles.button}>
 
-                            <ModalItems item={item} />
+                            <ModalItems category={category} item={item} />
 
                         </TouchableOpacity>
 
