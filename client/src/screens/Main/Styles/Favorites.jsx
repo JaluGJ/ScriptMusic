@@ -4,7 +4,7 @@ let styles = StyleSheet.create({
   image: {
     width: 70,
     height: 70,
-    marginVertical: 30,
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,
