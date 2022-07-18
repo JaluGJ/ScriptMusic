@@ -13,7 +13,7 @@ import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
-
+import { vh, vw } from "react-native-expo-viewport-units";
 
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
@@ -63,7 +63,7 @@ const Home = () => {
 
             <Image
               source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
-              style={{ width: '100%', height: 150, marginVertical: 20, }}
+              style={{ width: '100%', height: vh(25), marginVertical: 20, }}
             />
 
             <HomeItem text={'OFERTA IMPERDIBLE!'} button={'Ver mas ofertas'} />
