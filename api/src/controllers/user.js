@@ -3,7 +3,7 @@ const { getTemplate, sendEmail, getTemplateBaned } = require('../config/mail.con
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
-const BanedUser = require('../models/user/banedUserSchema.js')
+const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 
 
@@ -26,7 +26,7 @@ module.exports = {
                 lastName,
                 isAdmin
             }
-            const ban = await BanedUser.findOne({ email })
+            const ban = await BannedUser.findOne({ email })
             if(ban){
                 const template = getTemplateBaned(ban.email)
                 await sendEmail(template)
