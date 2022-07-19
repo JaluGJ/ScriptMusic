@@ -1,20 +1,11 @@
 const Product = require("../models/product/productSchema.js");
 
 module.exports = {
+
   getAllProducts: async (req, res, next) => {
     const { search, category, price } = req.query;
 
     if (search) {
-      // return Product.find({ model: { $regex: search, $options: "i" } })
-      //   .then((products) => {
-      //     if (products.length === 0) {
-      //         return res.status(404).json({msg:"No se encontro ningun producto"});
-      //       }
-      //     return res.json(products).end();
-      //   })
-      //   .catch((error) => {
-      //     next(error);
-      //   });
       try {
         const firstSearch = await Product.find({ model: { $regex: search, $options: "i" } })
         if(firstSearch.length === 0){
@@ -150,6 +141,23 @@ module.exports = {
   },
 
   updateProduct: (req, res, next) => {
+
+    const autorization = req.get('Authorization')
+    if(!autorization){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    const token = autorization.split(' ')[1]
+    const data = getTokenData(token)
+    if(!data){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(!data.isAdmin){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
     const { id } = req.params;
     const { model, brand, price, type, category, stock, image, description } = req.body;
 
@@ -184,6 +192,23 @@ module.exports = {
   },
 
   deleteProduct: (req, res, next) => {
+
+    const autorization = req.get('Authorization')
+    if(!autorization){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    const token = autorization.split(' ')[1]
+    const data = getTokenData(token)
+    if(!data){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(!data.isAdmin){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
     const { id } = req.params;
     return Product.findByIdAndDelete(id)
       .then(() => {
@@ -195,8 +220,23 @@ module.exports = {
   },
 
   uploadProduct: (req, res, next) => {
-    const { model, brand, price, type, category, stock, image, description } =
-      req.body;
+
+    const autorization = req.get('Authorization')
+    if(!autorization){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    const token = autorization.split(' ')[1]
+    const data = getTokenData(token)
+    if(!data){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    if(!data.isAdmin){
+        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+    const { model, brand, price, type, category, stock, image, description } = req.body;
 
     if (!model) return res.status(404).json({msg:"Falta informacion necesaria de model"});
     if(!brand) return res.status(404).json({msg:'Falta informacion necesaria de brand'});
@@ -220,7 +260,7 @@ module.exports = {
 
     product.save()
       .then(() => {
-        return res.json({msg:"Producto guardado"});
+        return res.json({msg:"Producto guardado", product});
       })
       .catch((error) => {
         next(error);

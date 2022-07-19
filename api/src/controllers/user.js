@@ -127,7 +127,7 @@ module.exports = {
                 select: {
                     quantity: 1,
                     date:1,
-                    _id: 0
+                    _id: 1
                 },
                 populate: {
                     path: "items",
@@ -139,7 +139,7 @@ module.exports = {
                         category:1,
                         image:1,
                         description:1,
-                        _id:0 
+                        _id:1 
                     }
                 }
             })
@@ -170,12 +170,15 @@ module.exports = {
             if(!user){
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const { firstName, lastName } = req.body
+            const { firstName, lastName, image } = req.body
             if(firstName){
                 user.firstName = firstName
             }
             if(lastName){
                 user.lastName = lastName
+            }
+            if(image){
+                user.image = image
             }
             await user.save()
             return res.json({ user })
@@ -186,12 +189,27 @@ module.exports = {
 
 
     getAllUsers : (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if(!autorization){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if(!data){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if(!data.isAdmin){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
         User.find({}).populate({
             path: "bought",
             select: {
                 quantity: 1,
                 date:1,
-                _id: 0
+                _id: 1
             },
             populate: {
                 path: "items",
@@ -203,7 +221,8 @@ module.exports = {
                     category:1,
                     image:1,
                     description:1,
-                    _id:0                }
+                    _id:1                
+                }
             }
         })
             .then((users) => {

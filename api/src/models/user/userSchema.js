@@ -27,6 +27,10 @@ const userSchema = new Schema({
     required: true,
     default: false
   },
+  image: {
+    type: String,
+    default: 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658196918/script_music_img/Usuario-Vacio1_lzvvtl.png'
+  },
   bought: [
     {
       type: Schema.Types.ObjectId,
