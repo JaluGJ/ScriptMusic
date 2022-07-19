@@ -8,8 +8,8 @@ const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 
 module.exports = {
-    
-    registerUser : async (req, res, next) => {
+
+    registerUser: async (req, res, next) => {
         let { email, password, firstName, lastName, isAdmin } = req.body
         try {
             const user = await User.findOne({ email })
@@ -17,8 +17,8 @@ module.exports = {
                 return res.status(404).json({ message: 'El e-mail ya ha sido tomado' })
             }
             isAdmin === undefined ?
-            isAdmin = false :
-            isAdmin = true
+                isAdmin = false :
+                isAdmin = true
             const newUser = {
                 email,
                 password: await bcrypt.hash(password, 10),
@@ -27,7 +27,7 @@ module.exports = {
                 isAdmin
             }
             const ban = await BannedUser.findOne({ email })
-            if(ban){
+            if (ban) {
                 const template = getTemplateBaned(ban.email)
                 await sendEmail(template)
                 return res.status(404).json({ message: 'El usuario ha sido baneado' })
@@ -43,7 +43,7 @@ module.exports = {
     },
 
 
-    confirmUser : async (req, res, next) => {
+    confirmUser: async (req, res, next) => {
         const { token } = req.params
         try {
             const data = getTokenData(token)
@@ -51,10 +51,10 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'El usuario no existe' })
             }
-            if(data === null){
+            if (data === null) {
                 return res.status(404).json({ message: 'El token no existe' })
             }
-            if(user.isConfirmed){
+            if (user.isConfirmed) {
                 return res.status(404).json({ message: 'El usuario ya ha sido confirmado' })
             }
             user.isConfirmed = true
@@ -65,21 +65,21 @@ module.exports = {
         }
     },
 
-    loginUser : async (req, res, next) => {
+    loginUser: async (req, res, next) => {
         const { email, password } = req.body
         try {
             const user = await User.findOne({ email })
             let validate = user === null ?
-            false 
-            : await user.isValidPassword(password)
-            if(!validate){
+                false
+                : await user.isValidPassword(password)
+            if (!validate) {
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
             const token = getToken(user._id)
-            if(user.isAdmin){
+            if (user.isAdmin) {
                 return res.status(200).json({ token })
             }
-            if(!user.isConfirmed){
+            if (!user.isConfirmed) {
                 return res.status(401).json({ message: 'El usuario no ha confirmado su cuenta' })
             }
             return res.json({ token })
@@ -88,17 +88,17 @@ module.exports = {
         }
     },
 
-    loginAdmin : async (req, res, next) => {
+    loginAdmin: async (req, res, next) => {
         const { email, password } = req.body
         try {
             const user = await User.findOne({ email })
             let validate = user === null ?
-            false
-            : await user.isValidPassword(password)
-            if(!validate){    
+                false
+                : await user.isValidPassword(password)
+            if (!validate) {
                 return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
             }
-            if(!user.isAdmin){
+            if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const token = getToken(user._id)
@@ -111,42 +111,51 @@ module.exports = {
     profile: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
-            if(!autorization){
+            if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+            if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const token = autorization.split(' ')[1]
             const data = getTokenData(token)
-            if(!data){
+            if (!data) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const user = await User.findById(data.id).populate({
                 path: "bought",
                 select: {
                     quantity: 1,
-                    date:1,
+                    date: 1,
                     _id: 0
                 },
                 populate: {
                     path: "items",
                     select: {
-                        model:1,
-                        brand:1,
-                        price:1,
-                        type:1,
-                        category:1,
-                        image:1,
-                        description:1,
-                        _id:0 
+                        model: 1,
+                        brand: 1,
+                        price: 1,
+                        type: 1,
+                        category: 1,
+                        image: 1,
+                        description: 1,
+                        _id: 0
                     }
                 }
+            }).populate("favourites", {
+                model: 1,
+                brand: 1,
+                price: 1,
+                type: 1,
+                category: 1,
+                image: 1,
+                description: 1,
+                _id: 1
             })
-            if(!user){
+            if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            return res.json({ user })   
+            return res.json({ user })
         } catch (error) {
             next(error)
         }
@@ -155,26 +164,26 @@ module.exports = {
     updateProfile: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
-            if(!autorization){
+            const { firstName, lastName } = req.body
+            if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+            if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const token = autorization.split(' ')[1]
             const data = getTokenData(token)
-            if(!data){
+            if (!data) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const user = await User.findById(data.id)
-            if(!user){
+            if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const { firstName, lastName } = req.body
-            if(firstName){
+            if (firstName) {
                 user.firstName = firstName
             }
-            if(lastName){
+            if (lastName) {
                 user.lastName = lastName
             }
             await user.save()
@@ -185,25 +194,26 @@ module.exports = {
     },
 
 
-    getAllUsers : (req, res, next) => {
+    getAllUsers: (req, res, next) => {
         User.find({}).populate({
             path: "bought",
             select: {
                 quantity: 1,
-                date:1,
-                _id: 0
+                date: 1,
+                _id: 1
             },
             populate: {
                 path: "items",
                 select: {
-                    model:1,
-                    brand:1,
-                    price:1,
-                    type:1,
-                    category:1,
-                    image:1,
-                    description:1,
-                    _id:0                }
+                    model: 1,
+                    brand: 1,
+                    price: 1,
+                    type: 1,
+                    category: 1,
+                    image: 1,
+                    description: 1,
+                    _id: 1
+                }
             }
         })
             .then((users) => {
@@ -212,6 +222,6 @@ module.exports = {
             ).catch((error) => {
                 next(error)
             }
-        )
+            )
     }
 }

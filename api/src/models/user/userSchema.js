@@ -16,7 +16,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required:false
+    required: false
   },
   isAdmin: {
     type: Boolean,
@@ -27,6 +27,12 @@ const userSchema = new Schema({
     required: true,
     default: false
   },
+  favourites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product"
+    }
+  ],
   bought: [
     {
       type: Schema.Types.ObjectId,
@@ -43,10 +49,10 @@ const userSchema = new Schema({
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
-      ret.id = ret._id
-      delete ret._id
-      delete ret.__v
-      delete ret.password
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+    delete ret.password
   }
 })
 
