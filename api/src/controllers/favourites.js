@@ -52,9 +52,8 @@ module.exports = {
         description: 1,
         _id: 1
       })
-         
-         const favos = user.favourites
-        return res.json({ msg: 'se ha guardado con exito', favs: favos })
+        
+        return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
       }
       
       const favoritos = user.favourites
@@ -78,11 +77,8 @@ module.exports = {
         description: 1,
         _id: 1
       })
-      
-      const favos = user.favourites
-      
 
-      return res.json({ msg: 'se ha guardado con exito', favs: favos })
+      return res.json({ msg: 'se ha guardado con exito', favs: user.favourites})
     } catch (error) {
       return next(error)
     }
