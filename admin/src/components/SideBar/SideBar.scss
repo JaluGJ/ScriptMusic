@@ -4,6 +4,27 @@
     min-height: 100vh;
     background-color: #2B2b2b;
 
+    .items{
+        display: flex;
+        align-items: center;
+
+        .item{
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .icon{
+            font-size: 20px;
+        }
+
+        .avatar{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
+
     .top{
         height: 50px;
         display: flex;
