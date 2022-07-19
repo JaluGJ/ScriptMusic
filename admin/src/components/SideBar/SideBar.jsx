@@ -14,6 +14,20 @@ import { Link } from "react-router-dom";
 export default function SideBar({logout}) {
     return (
         <div className='sidebar'>
+              <div className="items">
+                <div className="item">
+                <DarkModeOutlinedIcon className='icon'/>            
+                </div>
+                <div className="item">
+                <LightModeOutlinedIcon className='icon'/>
+                </div>
+                <div className="item">
+                <NotificationsIcon className='icon'/>
+                </div>
+                <div className="item">
+                <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" className="avatar" />
+                </div>
+            </div>
             <div className="top">
                 <span className="logo">ADMIN PANEL</span>
             </div>
