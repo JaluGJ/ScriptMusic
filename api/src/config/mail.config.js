@@ -5,15 +5,15 @@ const { google } = require("googleapis");
 
 const mail = {
   user: "script.music22@gmail.com",
-};
+}
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLIENT_SECRET,
   REDIRECT_URI
-);
+)
 
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
 
 const accessToken = oAuth2Client.getAccessToken();
 
@@ -27,7 +27,7 @@ let transporter = nodemailer.createTransport({
     refreshToken: REFRESH_TOKEN,
     accessToken,
   },
-});
+})
 
 const sendEmail = async (email, subject, html) => {
   try {
@@ -35,13 +35,13 @@ const sendEmail = async (email, subject, html) => {
       from: `${mail.user}🎵`,
       to: email,
       subject,
-      text: "Hola, este es un mail de validación de cuenta.",
+      text: "¡Hola!",
       html: html,
-    });
+    })
   } catch (error) {
-    console.log("Algo no va bien con el email", error);
+    console.log("Algo no va bien con el email", error)
   }
-};
+}
 
 const getTemplate = (name, token) => {
   return `
@@ -54,10 +54,41 @@ const getTemplate = (name, token) => {
       <p>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
       <p style="color: #000000;font-size: 15px;">Saludos, el equipo de ScriptMusic.</p>
       </div>
-      `;
-};
+      `
+}
+
+const getTemplateBaned = (name) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos recibido tu solicitud y ha sucedido un problema, el email que usted intenta registrar ha sido baneado.</div>
+  <div>Disculpe los inconvenientes.</div>
+  <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+`
+}
+
+const getTemplateBougthFail = (name) => {
+    return `
+      <div>Hola ${name}.</div>
+      <div>Hemos recibido tu compra y ha sucedido un problema.</div>
+      <div>Disculpe los inconvenientes.</div>
+      <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+  `
+}
+
+const getTemplateBougthSuccess = (name) => {
+    return `
+      <div>Hola ${name}.</div>
+      <div>Hemos recibido tu compra y todo se ha procesado correctamente.</div>
+      <div>Puedes ver mas detalles de la misma en la sección de 'Mis Compras' en la app.</div>
+      <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+    `
+}
+
 
 module.exports = {
   sendEmail,
   getTemplate,
+  getTemplateBougthFail,
+  getTemplateBougthSuccess,
+  getTemplateBaned
 };

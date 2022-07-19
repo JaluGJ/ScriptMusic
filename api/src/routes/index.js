@@ -1,10 +1,12 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, updateProfile } = require('../controllers/user')
 const postPromo = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
+const { soldProducts } = require('../controllers/soldInfo')
+const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers/favourites')
 
 const routes = Router()
 
@@ -24,6 +26,8 @@ routes.put('/products/:id', updateProduct)
 
 // USER ROUTES
 
+    //login & signup
+
 routes.post('/login', loginUser)
 
 routes.post('/signup', registerUser)
@@ -32,9 +36,22 @@ routes.post('/loginAdmin', loginAdmin)
 
 routes.get('/user/confirm/:token', confirmUser)
 
+    //user info
+
 routes.get('/profile', profile)
 
+routes.put('/profile', updateProfile)
+
 routes.get('/users', getAllUsers)
+
+     //favs
+
+routes.post('/profile/favs', newFavourite)
+
+routes.get('/profile/favs', getFavourites)
+
+routes.delete('/profile/favs', deleteFavoutite)
+
 
 // USER ROUTES
 
@@ -51,6 +68,12 @@ routes.post('/create-payment-intents', paymentCard )
 routes.post('/status-payment', statusPayment )
 
 // PAYMENT ROUTES
+
+// SOLD ROUTES
+
+routes.get('/sold', soldProducts )
+
+// SOLD ROUTES
 
 // PROMOS ROUTES
 

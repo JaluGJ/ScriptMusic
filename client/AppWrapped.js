@@ -39,6 +39,10 @@ export default function AppWrapped() {
     Alert.alert("Error", "Debes confirmar tu cuenta para ingresar.");
     dispatch(cleanErr());
   }
+  if (err === undefined) {
+    Alert.alert("Error", "El servidor se encuentra caído.");
+    dispatch(cleanErr());
+  }
 
   if (isLoading) {
     return (

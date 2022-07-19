@@ -17,7 +17,7 @@ export default function List({ rows, columns, title }) {
                 </Link>
             </div>
             <div className="bottom">
-                <div style={{ height: 800, width: '85%' }}>
+                <div className="posData">                    
                     <DataGrid
                         rows={rows}
                         columns={columns}
