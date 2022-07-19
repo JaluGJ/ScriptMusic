@@ -33,7 +33,7 @@ module.exports = {
       if (!user.favourites) {
         user.favourites = [...productsId]
         await user.save()
-        return res.json({ msg: 'se ha guardado con exito' })
+        return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
       }
       
       const favoritos = user.favourites
@@ -41,12 +41,12 @@ module.exports = {
       const existente = favoritos.find(prod => prod.id === productsId)
      
       if (existente) {
-        return res.json({msg: 'Este item ya está en favoritos'})
+        return res.json({msg: 'Este item ya está en favoritos', favs: user.favourites})
       }
       user.favourites = [...favoritos, productsId]
       await user.save()
 
-      return res.json({ msg: 'se ha guardado con exito' })
+      return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
     } catch (error) {
       return next(error)
     }
