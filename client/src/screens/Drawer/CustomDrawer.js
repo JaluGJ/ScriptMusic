@@ -29,7 +29,7 @@ const CustomDrawer = (props) => {
           style={styles.imgBackground}
         >
           <Image
-            source={require("../../../assets/user.png")}
+            source={user ? {uri: user.image} : require("../../../assets/user.png")}
             style={styles.userImage}
           />
           <Text style={styles.userName}>

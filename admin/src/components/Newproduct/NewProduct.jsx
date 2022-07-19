@@ -1,4 +1,3 @@
-import NavBar from '../Navbar/NavBar'
 import SideBar from '../SideBar/SideBar'
 import './NewProduct.scss'
 import { useEffect } from 'react';
@@ -78,7 +77,6 @@ export default function NewProduct({inputs, title, logout}){
         <SideBar logout={logout}/>
         <ToastContainer />
         <div className="newcontainer">
-            <NavBar />
             <div className="top">
                 <h1 className="title"> Crear nuevo producto. </h1>
             </div>

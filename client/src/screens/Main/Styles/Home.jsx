@@ -59,6 +59,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         letterSpacing: 2,
         color: "#DD8643",
+    },
+    offTitle:{
+        opacity: 1,
     }
 })
 

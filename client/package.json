@@ -20,6 +20,8 @@
     "@rneui/themed": "^4.0.0-rc.5",
     "@stripe/stripe-react-native": "^0.6.1",
     "axios": "^0.27.2",
+    "crypto-js": "^3.1.9-1",
+    "dotenv": "^16.0.1",
     "expo": "~45.0.0",
     "expo-image-picker": "^13.1.1",
     "expo-status-bar": "~1.3.0",
