@@ -2,12 +2,13 @@ import React from "react";
 import { View, TextInput, Image, TouchableNativeFeedback } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../Styles/Home.jsx";
-import user from "../../../../assets/user.png";
+import userIMG from "../../../../assets/user.png";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
+  let { user } = useSelector((state) => state.signin);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   return (
@@ -21,7 +22,7 @@ const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
             height: 45,
             borderRadius: 100,
           }}
-          source={user}
+          source={user ? { uri: user.image } : userIMG}
         />
       </TouchableNativeFeedback>
       <TextInput

@@ -1,7 +1,7 @@
 const User = require('../models/user/userSchema')
 const Products = require('../models/product/productSchema')
 const Sold = require('../models/sold/soldSchema.js')
-const { getTemplateBougth, sendEmail } = require('../config/mail.config.js')
+const { getTemplateBougthFail, getTemplateBougthSuccess, sendEmail } = require('../config/mail.config.js')
 
 
 /*
@@ -51,19 +51,18 @@ module.exports = {
             const finalStock = product.stock - item.count
             await Products.findByIdAndUpdate(item.id, { $set: { stock: finalStock } }, { new: true })
             await sold.save()
-
           } catch (error) {
             console.log("error", error)
           }
         })
         const user = await User.findById(userId)
         await User.findByIdAndUpdate(userId, { $set: { bought: [...user.bought , ...soldId] } }, { new: true })
-        const template = getTemplateBougth(user.email, productFinal)
+        const template = getTemplateBougthSuccess(user.firstName)
         await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
       } else {
         const user = await User.findById(userId)
-        const template = getTemplateBougth(user.email)
+        const template = getTemplateBougthFail(user.firstName)
         await sendEmail(user.email, 'Fallo de pago', template)
         res.json({ error: 'Payment Failed' })
       }

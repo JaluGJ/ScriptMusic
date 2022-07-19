@@ -1,6 +1,5 @@
 import './ProductDetail.scss'
 import SideBar from '../../components/SideBar/SideBar';
-import NavBar from '../../components/Navbar/NavBar';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +31,7 @@ export default function ProductDetail({logout}) {
         <div className="productdetail">
             <SideBar logout={logout}/>
             <div className="container">
-                <NavBar />
+            
 
                 <div className="top">
                     <Link to='/products' style={{ textDecoration: "none" }}>

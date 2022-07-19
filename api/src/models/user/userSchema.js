@@ -16,7 +16,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required:false
+    required: false
   },
   isAdmin: {
     type: Boolean,
@@ -26,6 +26,16 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  favourites: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product"
+    }
+  ],
+  image: {
+    type: String,
+    default: 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658196918/script_music_img/Usuario-Vacio1_lzvvtl.png'
   },
   bought: [
     {
@@ -43,10 +53,10 @@ const userSchema = new Schema({
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
-      ret.id = ret._id
-      delete ret._id
-      delete ret.__v
-      delete ret.password
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+    delete ret.password
   }
 })
 
