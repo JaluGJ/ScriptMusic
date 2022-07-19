@@ -41,8 +41,9 @@ module.exports = {
       }
       if (!user.favourites) {
         user.favourites = [...productsId]
+        const favos = user.favourites
         await user.save()
-        return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
+        return res.json({ msg: 'se ha guardado con exito', favs: favos })
       }
       
       const favoritos = user.favourites
@@ -53,9 +54,10 @@ module.exports = {
         return res.json({msg: 'Este item ya está en favoritos', favs: user.favourites})
       }
       user.favourites = [...favoritos, productsId]
+      const favos = user.favourites
       await user.save()
 
-      return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
+      return res.json({ msg: 'se ha guardado con exito', favs: favos })
     } catch (error) {
       return next(error)
     }
