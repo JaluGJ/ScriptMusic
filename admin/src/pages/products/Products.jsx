@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import NavBar from '../../components/Navbar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import List from '../../components/tableproducts/List';
 import './Products.scss';
@@ -19,7 +18,6 @@ import columns from './inputs'
         <div className="products">
                 <SideBar logout={logout}/>
             <div className="container">
-                <NavBar />
                 <List 
                 title = 'Productos existentes'
                 rows = {rows}
