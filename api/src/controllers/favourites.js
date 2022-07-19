@@ -82,7 +82,7 @@ module.exports = {
     } catch (error) {
       next(error)
     }
-    return res.json({ msg: "producto eliminado con exito" })
+    return res.json({ msg: 'Producto eliminado con exito', favs: user.favourites })
   },
 
 
