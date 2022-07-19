@@ -64,6 +64,7 @@ module.exports = {
             next(error)
         }
     },
+    
 
     loginUser: async (req, res, next) => {
         const { email, password } = req.body
@@ -88,6 +89,7 @@ module.exports = {
         }
     },
 
+
     loginAdmin: async (req, res, next) => {
         const { email, password } = req.body
         try {
@@ -107,6 +109,7 @@ module.exports = {
             next(error)
         }
     },
+
 
     profile: async (req, res, next) => {
         try {
@@ -160,6 +163,7 @@ module.exports = {
             next(error)
         }
     },
+
 
     updateProfile: async (req, res, next) => {
         try {

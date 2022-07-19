@@ -78,11 +78,10 @@ module.exports = {
     const favoritos = user.favourites
     user.favourites = favoritos.filter(p => p.id !== productsId )
     await user.save()
-      
+    return res.json({ msg: 'Producto eliminado con exito', favs: user.favourites })
     } catch (error) {
       next(error)
     }
-    return res.json({ msg: 'Producto eliminado con exito', favs: user.favourites })
   },
 
 
