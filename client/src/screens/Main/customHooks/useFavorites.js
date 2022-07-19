@@ -22,15 +22,15 @@ const useFavorites = () => {
             AsyncStorage.setItem("@favorite", JSON.stringify(favorites))
               .then((res) => console.log(res))
               .catch((err) => console.log(err));
-              Alert.alert("Producto agregado a favoritos");
+              // Alert.alert("Producto agregado a favoritos");
               return
           }
-          Alert.alert("Este Producto ya está en favoritos");
+          // Alert.alert("Este Producto ya está en favoritos");
         } else {
           AsyncStorage.setItem("@favorite", JSON.stringify([item]))
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
-            Alert.alert("Producto agregado a favoritos");
+            // Alert.alert("Producto agregado a favoritos");
         }
         // AsyncStorage.getItem("@favorite").then(resultado=>setFavorite(resultado))
         // return favorite

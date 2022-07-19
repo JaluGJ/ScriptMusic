@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
 import useFavorites from '../customHooks/useFavorites.js';
+import CustomAlertComponent from '../../../Wrappers/CustomAlert.js';
 
 
 const Product = ({ item }) => {
     const { model, image, price, brand } = item
     const navigation = useNavigation();
     const { addToFavorite } = useFavorites();
+    const [visible, setVisible] = useState(false);
+
+    if(visible){
+        return (
+            <CustomAlertComponent visible={visible} setVisible={setVisible}/>
+        )
+    }
 
     return (
         <TouchableOpacity
@@ -29,11 +37,12 @@ const Product = ({ item }) => {
                 />
                 <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>{
                     addToFavorite(item)
+                    setVisible(true)
                     }}>
                 <AntDesign name="hearto" size={24} color="black" />
                 </TouchableOpacity>
+                
             </View>
-
 
             <View style={styles.textProduct}>
                 <View style={styles.model}>
