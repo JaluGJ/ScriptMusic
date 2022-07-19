@@ -126,20 +126,20 @@ module.exports = {
                 path: "bought",
                 select: {
                     quantity: 1,
-                    date: 1,
-                    _id: 0
+                    date:1,
+                    _id: 1
                 },
                 populate: {
                     path: "items",
                     select: {
-                        model: 1,
-                        brand: 1,
-                        price: 1,
-                        type: 1,
-                        category: 1,
-                        image: 1,
-                        description: 1,
-                        _id: 0
+                        model:1,
+                        brand:1,
+                        price:1,
+                        type:1,
+                        category:1,
+                        image:1,
+                        description:1,
+                        _id:1 
                     }
                 }
             }).populate("favourites", {
@@ -164,7 +164,7 @@ module.exports = {
     updateProfile: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
-            const { firstName, lastName } = req.body
+            const { firstName, lastName, image } = req.body
             if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
@@ -180,11 +180,15 @@ module.exports = {
             if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if (firstName) {
+  
+            if(firstName){
                 user.firstName = firstName
             }
             if (lastName) {
                 user.lastName = lastName
+            }
+            if(image){
+                user.image = image
             }
             await user.save()
             return res.json({ user })
@@ -194,25 +198,40 @@ module.exports = {
     },
 
 
-    getAllUsers: (req, res, next) => {
+    getAllUsers : (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if(!autorization){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if(!data){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if(!data.isAdmin){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
         User.find({}).populate({
             path: "bought",
             select: {
                 quantity: 1,
-                date: 1,
+                date:1,
                 _id: 1
             },
             populate: {
                 path: "items",
                 select: {
-                    model: 1,
-                    brand: 1,
-                    price: 1,
-                    type: 1,
-                    category: 1,
-                    image: 1,
-                    description: 1,
-                    _id: 1
+                    model:1,
+                    brand:1,
+                    price:1,
+                    type:1,
+                    category:1,
+                    image:1,
+                    description:1,
+                    _id:1                
                 }
             }
         })

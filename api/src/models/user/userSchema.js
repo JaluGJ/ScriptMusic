@@ -33,6 +33,10 @@ const userSchema = new Schema({
       ref: "Product"
     }
   ],
+  image: {
+    type: String,
+    default: 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658196918/script_music_img/Usuario-Vacio1_lzvvtl.png'
+  },
   bought: [
     {
       type: Schema.Types.ObjectId,
