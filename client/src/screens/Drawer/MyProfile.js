@@ -12,10 +12,6 @@ import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
 
 const MyProfile = () => {
-<<<<<<< HEAD
-  const { user , token } = useSelector((state) => state.signin);
-  console.log(token)
-=======
   const [modalName, setModalName] = useState(false);
   const [modalLastName, setModalLastName] = useState(false);
   const { user } = useSelector((state) => state.signin);
@@ -64,7 +60,6 @@ const MyProfile = () => {
       .catch((e) => console.log(e));
   };
 
->>>>>>> 6cb06b5d95dab5b53c51b5ccbdc3091381e45b35
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
