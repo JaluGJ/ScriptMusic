@@ -32,22 +32,21 @@ module.exports = {
       if (!user.favourites) {
         user.favourites = [productsId]
         await user.save() 
-        let userUpdate = user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
+        let userUpdate = await user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
         return res.json({ msg: 'se ha guardado con exito', favs: userUpdate.favourites })
       }
       
       //const favoritos = user.favourites
       
-      const existente = user.favourites.map(prod => prod.includes(productsId))
+      const existente = user.favourites.includes(productsId)
      
       if(existente){
-        let userUpdate = user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
-        return res.json({msg: 'Este item ya está en favoritos', favs: userUpdate.favourites})
+        return res.json({msg: 'Este item ya está en favoritos'})
       }
 
       user.favourites = [...user.favourites, productsId]
       await user.save()
-      let userUpdate = user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
+      let userUpdate = await user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
       return res.json({ msg: 'se ha guardado con exito', favs: userUpdate.favourites})
     } catch (error) {
       return next(error)
