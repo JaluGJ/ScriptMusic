@@ -1,43 +1,50 @@
 import {createSlice} from '@reduxjs/toolkit';
+import axios from 'axios';
 const apiUrl = 'https://sm.up.railway.app/';
 
 export const favouritesSlice = createSlice({
     name: 'favourites',
     initialState: {
         favourites: [],
+        existingFavourite: false,
     },
     reducers: {
         setFavourite: (state, action) => {
             state.favourites = action.payload;
+        },
+        setExistingFavourite: (state, action) => {
+            state.existingFavourite = action.payload;
         }
     }   
 });
 
 
-export const {setFavourite} = favouritesSlice.actions;
+export const {setFavourite,setExistingFavourite} = favouritesSlice.actions;
 
 export default favouritesSlice.reducer;
 
-
 export const postFavourite = (userToken,productId) => async (dispatch) => {
+    
     const config = {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    }
-    const datos = {
-        body:{
-          productId: productId
+        headers: {
+          Authorization: `Bearer ${userToken}`,
         }
       }
-    try {
-        const {data} = await axios.post(`${apiUrl}profile/favs`,datos , config)
+      const datos = {
+            productsId: productId
+      }
+      try {
+        const {data} = await axios.post(`${apiUrl}profile/favs`,datos,config);
         console.log(data)
+        if(data==='se ha guardado con exito'){
+            dispatch(setFavourite(data.favs));
+        }else{
+            dispatch(setExistingFavourite(true));
+        }
     } catch (error) {
         console.log(error)
     }
   };
-  
 
   export const deleteFavourite = (userToken,productId) => async (dispatch) => {
     
@@ -45,16 +52,16 @@ export const postFavourite = (userToken,productId) => async (dispatch) => {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
-    }
-    const datos = {
-        body:{
-          productId: productId
-        }
+      data:{
+            productsId: productId
       }
+    }
       try {
-        const {data} = await axios.post(`${apiUrl}profile/favs`,datos, config)
-        // dispatch(setFavourite(data.favourites))
-        dispatch(getFavourites(userToken))
+        const {data} = await axios.delete(`${apiUrl}profile/favs`,config)
+        console.log(data)
+        if(data.msg==="Producto eliminado con exito"){
+            dispatch(setFavourite(data.favs));
+        }
     } catch (error) {
         console.log(error)
     }
@@ -69,10 +76,9 @@ export const postFavourite = (userToken,productId) => async (dispatch) => {
         }
           try {
             const {data} = await axios.get(`${apiUrl}profile/favs`, config)
-            console.log(data)
-            // dispatch(setFavourite(data.favourites))
-            console.log(data)
+            dispatch(setFavourite(data))
         } catch (error) {
             console.log(error)
         }
     }
+

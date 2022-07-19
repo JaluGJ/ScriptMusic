@@ -5,10 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from "../Styles/Favorites.jsx";
 import useFavorites from "../customHooks/useFavorites";
 import { useNavigation } from '@react-navigation/native';
+import { deleteFavourite } from '../../../redux/slices/favourites.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const FavProducts = ({ model, brand, price, image, id }) => {
-    const { removeFromFavorite } = useFavorites();
+    // const { removeFromFavorite } = useFavorites();
+    // const {favourites} = useSelector((state) => state.favourites);
+    const {token} = useSelector((state) => state.signin);
+    const dispatch = useDispatch();
     const navigation = useNavigation();
     {/* <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: 'red' }}>
         <Text style={styles.buttonText} onPress={() => {
@@ -30,7 +35,7 @@ const FavProducts = ({ model, brand, price, image, id }) => {
                     <Text style={styles.productBrand}>{brand}</Text>
                   </View>
                   <View style={styles.containerTrash}>
-                    <TouchableOpacity onPress={() => { removeFromFavorite(id) }}>
+                    <TouchableOpacity onPress={() => { dispatch(deleteFavourite(token,id)) }}>
                       <AntDesign name="closecircleo" size={30} color="crimson" />
                     </TouchableOpacity>
                   </View>

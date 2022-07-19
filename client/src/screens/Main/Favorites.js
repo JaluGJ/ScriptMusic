@@ -2,19 +2,24 @@ import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, Alert } fro
 import React, { useCallback, useEffect, useState } from "react";
 import emptyFav from "../../../assets/fav1.png";
 import styles from "./Styles/Favorites.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import useFavorites from "./customHooks/useFavorites";
 import FavProducts from "./modules/FavProducts";
+import { getFavourites } from "../../redux/slices/favourites";
 
 export default function EmptyFavs() {
-  const { favorite, getFavorite } = useFavorites();
+  // const { favorite, getFavorite } = useFavorites();
+  const {  token } = useSelector((state) => state.signin);
+  const { favourites } = useSelector((state) => state.favourites);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    getFavorite()
-  })
+  useEffect(()=>{
+    dispatch(getFavourites(token))
+  },[])
 
-  return favorite.length > 0 ? <FAVORITOS favorite={favorite} /> : <SINFAVORITOS />
+
+  return favourites.length > 0 ? <FAVORITOS favorite={favourites} /> : <SINFAVORITOS />
 }
 
 

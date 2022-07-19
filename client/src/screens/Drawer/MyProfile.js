@@ -8,7 +8,8 @@ import lapiz from "../../../assets/lapiz.png";
 import * as imagePiker from "expo-image-picker";
 
 const MyProfile = () => {
-  const { user } = useSelector((state) => state.signin);
+  const { user , token } = useSelector((state) => state.signin);
+  console.log(token)
   return (
     <View style={{ alignItems: "center" }}>
       <View>
