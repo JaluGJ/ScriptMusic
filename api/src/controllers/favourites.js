@@ -1,5 +1,4 @@
 const User = require('../models/user/userSchema')
-const Product = require('../models/product/productSchema')
 const getTokenData = require('../config/jwt.config.js').getTokenData
 
 
@@ -41,8 +40,20 @@ module.exports = {
       }
       if (!user.favourites) {
         user.favourites = [...productsId]
-        const favos = user.favourites
+        
         await user.save()
+         user.populate('favourites', {
+        model: 1,
+        brand: 1,
+        price: 1,
+        type: 1,
+        category: 1,
+        image: 1,
+        description: 1,
+        _id: 1
+      })
+         
+         const favos = user.favourites
         return res.json({ msg: 'se ha guardado con exito', favs: favos })
       }
       
@@ -54,8 +65,22 @@ module.exports = {
         return res.json({msg: 'Este item ya está en favoritos', favs: user.favourites})
       }
       user.favourites = [...favoritos, productsId]
-      const favos = user.favourites
+      
       await user.save()
+      
+      user.populate('favourites', {
+        model: 1,
+        brand: 1,
+        price: 1,
+        type: 1,
+        category: 1,
+        image: 1,
+        description: 1,
+        _id: 1
+      })
+      
+      const favos = user.favourites
+      
 
       return res.json({ msg: 'se ha guardado con exito', favs: favos })
     } catch (error) {
