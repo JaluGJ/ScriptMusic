@@ -8,6 +8,9 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from "react-router-dom";
 
 
