@@ -39,7 +39,7 @@ module.exports = {
         return res.json({ msg: "Machado, hace bien las cosas. pone algo que quieras guardar" })
       }
       if (!user.favourites) {
-        user.favourites = [...productsId]
+        user.favourites = [productsId]
         
         await user.save()
          user.populate('favourites', {
@@ -56,14 +56,14 @@ module.exports = {
         return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
       }
       
-      const favoritos = user.favourites
+      //const favoritos = user.favourites
       
       const existente = favoritos.find(prod => prod.id === productsId)
      
       if (existente) {
         return res.json({msg: 'Este item ya está en favoritos', favs: user.favourites})
       }
-      user.favourites = [...favoritos, productsId]
+      user.favourites = [...user.favorites, productsId]
       
       await user.save()
       
