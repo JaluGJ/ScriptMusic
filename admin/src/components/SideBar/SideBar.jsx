@@ -23,12 +23,12 @@ export default function SideBar({logout}) {
             <div className="center">
                 <ul>
                     <p className="title">LISTADO</p>
-                   {/*  <Link to="/usuarios" style={{ textDecoration: "none" }}>
+                    <Link to="/usuarios" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlinedIcon className='icon' />
                             <span>Usuarios</span>
                         </li>
-                    </Link> */}
+                    </Link>
                     <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreMallDirectoryOutlinedIcon className='icon' />
