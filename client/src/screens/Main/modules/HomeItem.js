@@ -6,7 +6,7 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
 
 
-const HomeItem = ({ promoimg, button, model, price, containerInfo, containerTitle, containerText, containerImage, image, id }) => {
+const HomeItem = ({ promoimg, button, price, containerInfo, containerText, containerImage, image, id }) => {
 
     //console.log(promoimg)
     //const {promoOne} = promoimg
@@ -36,13 +36,7 @@ const HomeItem = ({ promoimg, button, model, price, containerInfo, containerTitl
                     </Image>
                     <View style={containerInfo}>
                         <View style={containerText}>
-                            <View style={containerTitle}>
-                                <Text style={styles.modelText}>{model}</Text>
-                            </View>
                             <Text style={styles.price}>${price}</Text>
-                            <View style={containerTitle}>
-                                <Text style={styles.modelText}>LLEVATELA YA!</Text>
-                            </View>
                         </View>
                         <View style={containerImage}>
                             <Image
