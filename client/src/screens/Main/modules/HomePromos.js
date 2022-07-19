@@ -14,7 +14,7 @@ export const instruments = [
         id: 2,
         image: promo2,
         containerInfo: styles.containerInfo,
-        containerTitle: styles.containerTitle,
+        containerText: styles.containerText,
     },
     promoOne = {
         id: 3,
@@ -26,18 +26,10 @@ export const instruments = [
     },
     promoFor={ 
         id: 4,
-        name: 'Guitarra',
         image: promo4,
-        model:'',
-        price: 109.99, 
-        brand:'CORT'
     },
     promoFive={
         id: 5,
-        name: 'Guitarra',
         image: promo5,
-        model:'',
-        price: 259.99, 
-        brand:'CORT'
     },
 ]

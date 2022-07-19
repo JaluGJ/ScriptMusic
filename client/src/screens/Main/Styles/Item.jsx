@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         textAlign:'center',
-        fontSize:25,
+        fontSize:35,
         color: '#ffffff',
         paddingVertical:10,
         fontWeight:'bold'
@@ -55,19 +55,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     containerText:{
-
-    },
-    containerTitle:{
-        textAlign:'center', 
         justifyContent:'center',
-        width: vw(40),
-        backgroundColor:'black',
-        borderRadius:20,
-        padding: 20,
     },
-
-
-
     /* Tercer promo circulo en medio*/
     containerInfoCircle:{
         width: vw(70),
@@ -77,7 +66,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     containerTextCircle:{
-        display: 'none',
         position: 'absolute',
         bottom:vh(-7),
     },
