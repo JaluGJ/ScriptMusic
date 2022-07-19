@@ -84,9 +84,8 @@ const Home = () => {
             <HomeItem
               promoimg={promoTwo.image}
               containerInfo={promoTwo.containerInfo}
-              containerTitle={promoTwo.containerTitle}
+              containerText={promoTwo.containerText}
               button={'Ver mas ofertas'}
-              model={'ROCK A BILLY Negro'}
               price={129.99}
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996173/script_music_img/STENTOR_ROCK_A_BILLY_Contrabajo_Negro_xy5u2y.png"}
               id={"62d4dad4da220153870d77e5"}
@@ -97,10 +96,32 @@ const Home = () => {
               containerInfo={promoOne.containerInfo}
               containerText={promoOne.containerText}
               containerImage={promoOne.containerImage}
+              price={4129.99}
               button={'Ver mas ofertas'}
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1658002388/script_music_img/Stomvi_Elite_Fliscorno_Sib_Pabell%C3%B3n_cobre_f2rzvx.png"}
               id={"62d4dab4da220153870d77dd"}
             />
+            <HomeItem
+              promoimg={promoFive.image}
+              containerInfo={promoTwo.containerInfo}
+              containerText={promoTwo.containerText}
+              containerImage={promoTwo.containerImage}
+              price={1129.99}
+              button={'Ver mas ofertas'}
+              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657998782/script_music_img/Bressant_AS-220_Saxof%C3%B3n_Alto_iusuyz.png"}
+              id={"62d4dc03da220153870d783a"}
+            />
+            <HomeItem
+              promoimg={promoFor.image}
+              containerInfo={promoOne.containerInfo}
+              containerText={promoOne.containerText}
+              containerImage={promoOne.containerImage}
+              price={89.99}
+              button={'Ver mas ofertas'}
+              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996915/script_music_img/Gliga_Gems_II_34_Viol%C3%ADn_jgqygm.png"}
+              id={"62d4db52da220153870d780b"}
+            />
+            
           </View>
 
           
