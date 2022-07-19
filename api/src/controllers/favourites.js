@@ -22,7 +22,16 @@ module.exports = {
         return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
       }
     
-      const user = await User.findById(data.id).populate("favourites")
+      const user = await User.findById(data.id).populate("favourites", {
+        model: 1,
+        brand: 1,
+        price: 1,
+        type: 1,
+        category: 1,
+        image: 1,
+        description: 1,
+        _id: 1
+      })
       if (!user) {
         return res.status(401).json({ msg: 'No tienes permiso para hacer esto' })
       }
@@ -32,8 +41,9 @@ module.exports = {
       }
       if (!user.favourites) {
         user.favourites = [...productsId]
+        const favos = user.favourites
         await user.save()
-        return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
+        return res.json({ msg: 'se ha guardado con exito', favs: favos })
       }
       
       const favoritos = user.favourites
@@ -44,9 +54,10 @@ module.exports = {
         return res.json({msg: 'Este item ya está en favoritos', favs: user.favourites})
       }
       user.favourites = [...favoritos, productsId]
+      const favos = user.favourites
       await user.save()
 
-      return res.json({ msg: 'se ha guardado con exito', favs: user.favourites })
+      return res.json({ msg: 'se ha guardado con exito', favs: favos })
     } catch (error) {
       return next(error)
     }
@@ -68,7 +79,15 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
     }
-    const user = await User.findById(data.id).populate("favourites", {_id:1})
+    const user = await User.findById(data.id).populate("favourites", {
+      model: 1,
+      brand: 1,
+      price: 1,
+      type: 1,
+      category: 1,
+      image: 1,
+      description: 1,
+      _id: 1})
     if (!user) {
       return res.status(401).json({ msg: 'No tienes permiso para hacer esto' })
     }
