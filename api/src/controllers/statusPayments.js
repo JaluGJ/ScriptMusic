@@ -57,12 +57,12 @@ module.exports = {
         })
         const user = await User.findById(userId)
         await User.findByIdAndUpdate(userId, { $set: { bought: [...user.bought , ...soldId] } }, { new: true })
-        const template = getTemplateBougthSuccess(user.email)
+        const template = getTemplateBougthSuccess(user.firstName)
         await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
       } else {
         const user = await User.findById(userId)
-        const template = getTemplateBougthFail(user.email)
+        const template = getTemplateBougthFail(user.firstName)
         await sendEmail(user.email, 'Fallo de pago', template)
         res.json({ error: 'Payment Failed' })
       }
