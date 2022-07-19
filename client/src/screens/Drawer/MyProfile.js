@@ -9,8 +9,6 @@ import * as imagePiker from "expo-image-picker";
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.signin);
-  const navigation = useNavigation();
-
   return (
     <View style={{ alignItems: "center" }}>
       <View>
