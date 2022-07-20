@@ -10,6 +10,7 @@ import { ScrollView } from "react-native";
 import { Icon } from "@rneui/themed";
 import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MyProfile = () => {
   const [modalName, setModalName] = useState(false);
@@ -55,7 +56,8 @@ const MyProfile = () => {
     })
       .then(async (res) => {
         let data = await res.json();
-        dispatch(updateIMG(data.url, user));
+        let token = await AsyncStorage.getItem("@token_id");
+        dispatch(updateIMG(data.url, token));
       })
       .catch((e) => console.log(e));
   };

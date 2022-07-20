@@ -1,11 +1,19 @@
-import { View, Text, Modal, Pressable } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Modal,
+  Pressable,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { putName } from "../../redux/slices/signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ModalName({ modal, setModal }) {
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   return (
     <Modal
@@ -26,6 +34,20 @@ export default function ModalName({ modal, setModal }) {
           <Text>NOMBRE</Text>
         </View>
       </Pressable>
+      <TextInput
+        onChangeText={(value) => setName(value)}
+        style={{ backgroundColor: "blue", color: "white" }}
+      />
+      <Text>{name}</Text>
+      <TouchableOpacity
+        style={{ height: 110, width: 110, backgroundColor: "yellow" }}
+        onPress={async () => {
+          let token = await AsyncStorage.getItem("@token_id");
+          dispatch(putName(name, token));
+        }}
+      >
+        <Text>ENVIAR</Text>
+      </TouchableOpacity>
     </Modal>
   );
 }

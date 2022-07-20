@@ -1,11 +1,19 @@
-import { View, Text, Modal, Pressable } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Modal,
+  Pressable,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { putLastName } from "../../redux/slices/signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ModalLastName({ modal, setModal }) {
+  const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   return (
     <Modal
@@ -26,6 +34,20 @@ export default function ModalLastName({ modal, setModal }) {
           <Text>APELLIDO</Text>
         </View>
       </Pressable>
+      <TextInput
+        onChangeText={(value) => setLastName(value)}
+        style={{ backgroundColor: "blue", color: "white" }}
+      />
+      <Text>{lastName}</Text>
+      <TouchableOpacity
+        style={{ height: 110, width: 110, backgroundColor: "yellow" }}
+        onPress={async () => {
+          let token = await AsyncStorage.getItem("@token_id");
+          dispatch(putLastName(lastName, token));
+        }}
+      >
+        <Text>ENVIAR</Text>
+      </TouchableOpacity>
     </Modal>
   );
 }
