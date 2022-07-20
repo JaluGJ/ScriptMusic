@@ -71,12 +71,42 @@ const useShoppingCart = () => {
     dispatch(addItems(1));
   };
 
+  const handleRemove = async ({id}) => {
+    const newProductsCart = productsCart.filter(product => product.id !== id);
+    await AsyncStorage.setItem("@shoppingCart", JSON.stringify(newProductsCart));
+    dispatch(addItems(-1));
+    return true
+  }
+
+
+  const handleCount = ({id, operation}) => {
+    console.log(id, operation);
+    productsCart.forEach(product => {
+      if (product.id === id) {
+        if (operation === 'add') {
+          product.count += 1
+          product.price = (product.priceOne * product.count).toFixed(2)
+        } else {
+          if (product.count === 1) {
+            return
+          }
+          product.count -= 1
+          product.price = (product.price - product.priceOne).toFixed(2)
+        }
+      }
+    });
+    AsyncStorage.setItem("@shoppingCart", JSON.stringify(productsCart));
+    dispatch(addItems(1));
+  }
+
   return {
     productsCart,
     totalPrice,
     addToCart,
     countProducts,
     setCountProducts,
+    handleRemove,
+    handleCount
   };
 };
 
