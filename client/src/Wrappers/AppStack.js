@@ -3,37 +3,14 @@ import { Icon } from "@rneui/themed";
 import WrapperNotifications from "./WrapperNotifications";
 import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
-import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import useFavorites from "../screens/Main/customHooks/useFavorites";
+import useCountCart from "../screens/Main/customHooks/useCountCart";
 
-const Tab = createBottomTabNavigator();
+
 const AppStack = () => {
-  const { newItems } = useSelector((state) => state.products);
-  const [countProducts, setCountProducts] = useState(0);
-  // const {favorite ,getFavorite} = useFavorites()
-
-  useEffect(() => {
-        AsyncStorage.getItem("@shoppingCart").then(
-          (countProducts)=>{
-            if (countProducts !== null) {
-              let totalCount = JSON.parse(countProducts).reduce((acc, cur) => {
-                return acc + cur.count;
-              } , 0);
-              if(totalCount > 9){
-                totalCount = "9+";
-              }
-              setCountProducts(totalCount);
-            }
-          }).catch((error) => console.log(error));
-  }, [newItems]);
-
-  // useEffect(() => {
-  //   getFavorite();
-  // }, [favorite]);
-
+const Tab = createBottomTabNavigator();
+const [countProducts] = useCountCart()
+  
   return (
     <Tab.Navigator
       initialRouteName="UserDrawer"
@@ -75,12 +52,6 @@ const AppStack = () => {
         name="WrapperFavorites"
         component={WrapperFavorites}
         options={{
-          // tabBarBadge: favorite.length > 0 ? favorite.length : null,
-          // tabBarBadgeStyle: {
-          //   backgroundColor: "#fff6e8",
-          //   color: "#DD8643",
-          //   marginTop: -4,
-          // },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
