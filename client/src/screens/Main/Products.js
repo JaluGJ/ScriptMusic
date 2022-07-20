@@ -71,7 +71,7 @@ const Products = () => {
                         onScroll={(e) => {
                             scrollY.setValue(e.nativeEvent.contentOffset.y)
                         }}
-                    />
+                    /> 
                 //      : 
                 //      <View style={styles.containerNoProducts}>
                 //      <Text style={styles.notProducts}>Loading...</Text>
