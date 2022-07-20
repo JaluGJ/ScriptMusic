@@ -1,9 +1,6 @@
-html, body{
-    height: 100%;
-    margin: 0;
-  }
-
 .list{
+    height: 97%;
+
     .top{
         box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
         height: 30px;
@@ -38,9 +35,6 @@ html, body{
         padding: 10px;
         margin: 20px;
         margin-bottom: 20px;
-        
-        .posData{
-            height: 50rem;
-        }
+        height: 87%;
     }
 }

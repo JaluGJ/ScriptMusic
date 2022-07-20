@@ -13,11 +13,11 @@ let columns = [
         },
      },
     { field: 'model', headerName: 'Modelo', width: 220, headerAlign: 'center', align: 'left' },
-    { field: 'brand', headerName: 'Marca', width: 130, headerAlign: 'center', align: 'left' },
-    { field: 'price', type: 'number', headerName: 'Precio', width: 80, headerAlign: 'center', align: 'center' },
+    { field: 'brand', headerName: 'Marca', width: 130, headerAlign: 'center', align: 'center' },
+    { field: 'price', type: 'number', headerName: 'Precio', width: 70, headerAlign: 'center', align: 'center' },
     { field: 'category', headerName: 'Categoria', width: 100, headerAlign: 'center', align: 'center' },
-    { field: 'type', headerName: 'Tipo', width: 150, headerAlign: 'center', align: 'center' },
-    { field: 'stock', type: 'number', headerName: 'Disponible', width: 120, headerAlign: 'center', align: 'center' },    
+    { field: 'type', headerName: 'Tipo', width: 100, headerAlign: 'center', align: 'center' },
+    { field: 'stock', type: 'number', headerName: 'Disponible', width: 85, headerAlign: 'center', align: 'center' },    
 ]
 
 
