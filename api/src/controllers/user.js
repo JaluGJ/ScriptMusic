@@ -9,6 +9,19 @@ const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 module.exports = {
 
+
+    googleLogin: async (req, res, next) => {
+        try {
+            const { _id } = req.user
+            const token = getToken(_id)
+            res.status(200).json({token})
+        }
+        catch (error) {
+            next(error)
+        }
+    },
+
+
     registerUser: async (req, res, next) => {
         let { email, password, firstName, lastName, isAdmin } = req.body
         try {
