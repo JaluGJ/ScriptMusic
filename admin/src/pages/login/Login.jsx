@@ -30,6 +30,7 @@ const Login = ({ authenticate }) => {
         e.preventDefault()
         console.log(input)
         const token = await loginValidate(input)
+        // Aca guardar el token
         console.log(token)
         token !== undefined
             ?
