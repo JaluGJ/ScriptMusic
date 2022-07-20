@@ -321,7 +321,7 @@ module.exports = {
     },
 
 
-    getAllUsers : (req, res, next) => {
+    getAllUsers : async (req, res, next) => {
         const autorization = req.get('Authorization')
         if(!autorization){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -334,7 +334,11 @@ module.exports = {
         if(!data){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
-        if(!data.isAdmin){
+        const user = await User.findById(data.id)
+        if(!user){
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if(!user.isAdmin){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         User.find({}).populate({
