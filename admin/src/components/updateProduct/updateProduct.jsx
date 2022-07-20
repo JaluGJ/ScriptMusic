@@ -9,10 +9,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
-export default function UpdateProduct({ inputs, title, logout}){
+export default function UpdateProduct({ logout}){
     const { id } = useParams()
-    const types = useSelector(state=> state.types)
-    const product = useSelector(state=> state.product)
+    const product = useSelector(state => state.product)
     const dispatch  =  useDispatch()
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
     useEffect(() => {
@@ -68,7 +67,7 @@ export default function UpdateProduct({ inputs, title, logout}){
         }
         console.log(input)
         dispatch(updateProduct(id, input))
-        toast.success('Producto agregado exitosamente', {
+        toast.success('Producto Actualizado', {
             position: "top-center",
             autoClose: 4000,
             hideProgressBar: false,
@@ -80,7 +79,9 @@ export default function UpdateProduct({ inputs, title, logout}){
     }
     return(
 
-        product.length === 0 ? <div>Cargando...</div> :
+        product.length === 0 ? <div >
+            <img src="https://i.gifer.com/VAyR.gif" alt='image'/>
+        </div> :
         <div className="new">
         <SideBar logout={logout}/>
         <ToastContainer />
@@ -97,36 +98,35 @@ export default function UpdateProduct({ inputs, title, logout}){
                     <form onSubmit={e => handleSubmit(e)}>
                         <div className="formInput">
                            
-                            <label> Imagen </label>
+                            <label>Imagen</label>
                             <input 
                             type="text"
-                            placeholder='Agrega un link de imagen'
+                            placeholder={product.image}
                             name='image'
-                            value={product.image}
+                            value={input.image}
                             onChange={(e) => handleinput(e)}
                             />
                             {error.image && (
-                            <p>{ error.image }</p>
+                            <p>{ error.image}</p>
                             )}
-
 
                             <label>Modelo</label>
                             <input 
                             type="text" 
-                            placeholder='Paloma Estudio Satinada'
+                            placeholder={product.model}
                             name='model'
-                            value={product.model}
+                            value={input.model}
                             onChange={(e) => handleinput(e)}/>
                             {error.model && (
                             <p>{ error.model }</p>
                             )}
-
+                    
                             <label>Marca</label>
                             <input 
                             type="text" 
-                            placeholder='Admira'
+                            placeholder={product.brand}
                             name='brand'
-                            value={product.brand}
+                            value={input.brand}
                             onChange={(e) => handleinput(e)}/>
                             {error.brand && (
                             <p>{ error.brand }</p>
@@ -135,28 +135,40 @@ export default function UpdateProduct({ inputs, title, logout}){
                             <label>Precio</label>
                             <input 
                             type="number" 
-                            placeholder='135'
+                            placeholder={product.price}
                             name='price'
-                            value={product.price}
+                            value={input.price}
                             onChange={(e) => handleinput(e)}/>
                             {error.price && (
                             <p>{ error.price }</p>
                             )}
 
-                            <label>Disponibles</label>
+                            <label>Disponible</label>
                             <input 
                             type="number" 
-                            placeholder='50'
+                            placeholder={product.stock}
                             name='stock'
-                            value={product.stock}
+                            value={input.stock}
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
                             )}
-                            <label> Categoria </label>
+
+                            <label>Tipo</label>
+                            <input 
+                            type="text" 
+                            placeholder={product.type}
+                            name='type'
+                            value={input.type}
+                            onChange={(e) => handleinput(e)}/>
+                            {error.type && (
+                            <p>{ error.type }</p>
+                            )}
+
+                            <label>Categoria</label>
                             <select name='category' defaultValue="Categoria"
                             onChange={e => handleinput(e)}>
-                            <option disabled={true}>{product.categories}</option>
+                            <option disabled={true}>{input.categories}</option>
                             { categories.map(e =>
                             <option value={e} key={e}>{e}</option>)}
                             </select>
@@ -164,22 +176,11 @@ export default function UpdateProduct({ inputs, title, logout}){
                             <p>{ error.category }</p>
                             )}
 
-                            <label> Tipo </label>
-                            <select name='type' defaultValue="Tipo"
-                            onChange={e => handleinput(e)}>
-                            <option disabled={true}>{product.type}</option>
-                            { types.map(e =>
-                            <option value={e} key={e}>{e}</option>)}
-                            </select>
-                            {error.type && (
-                            <p>{ error.type }</p>
-                            )}
-
                             <label>Descripción</label>
                             <textarea 
-                            placeholder='Descripción del producto, caracteristicas o pie promocional'
+                            placeholder={product.description}
                             name='description'
-                            value={product.description}
+                            value={input.description}
                             onChange={(e) => handleinput(e)}/>
                             {error.description && (
                             <p>{ error.description }</p>
