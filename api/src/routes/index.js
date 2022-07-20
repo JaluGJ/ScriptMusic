@@ -40,7 +40,7 @@ routes.get('/user/confirm/:token', confirmUser)
 
 routes.get('/profile', profile)
 
-routes.patch('/profile', updateProfile)
+routes.put('/profile', updateProfile)
 
 routes.get('/users', getAllUsers)
 

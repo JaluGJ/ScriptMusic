@@ -182,16 +182,18 @@ module.exports = {
             }
             const user = await User.findById(data.id)
             if (!user) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
-  
-            if(firstName){
+            if(!firstName && !lastName && !image){
+                return res.status(400).json({ message: 'No se ha modificado ningun dato' })
+            }
+            if (firstName) {
                 user.firstName = firstName
             }
             if (lastName) {
                 user.lastName = lastName
             }
-            if(image){
+            if (image) {
                 user.image = image
             }
             await user.save()
