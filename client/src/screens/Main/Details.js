@@ -13,25 +13,19 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./Styles/Detail.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../../redux/slices/products.js";
-import { useEffect } from "react";
 import { postFavourite } from "../../redux/slices/favourites.js";
 import useShoppingCart from "./customHooks/useShoppingCart.js";
+import useDetails from "./customHooks/useDetails.js";
 
 const Details = ({ route }) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { details, statusCode } = useSelector((state) => state.products);
   const { token } = useSelector((state) => state.signin);
+  const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
 
-  useEffect(() => {
-    dispatch(getProductDetails(itemId));
-    return () => {
-      dispatch(getProductDetails());
-    };
-  }, []);
+  
 
   return (
     <>
