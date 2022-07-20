@@ -5,28 +5,39 @@
     background-color: #2B2b2b;
 
     .items{
+        width: 100%;
         display: flex;
         align-items: center;
-
-        .item{
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-        }
-
-        .icon{
-            font-size: 20px;
-        }
-
+        justify-content: center;
+    
         .avatar{
-            width: 30px;
-            height: 30px;
+            margin-top: 5px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
         }
     }
+    
+    .itemsIcons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
+        
+        .item{
+            margin-left: 10px;
+            margin-right: 10px;
+            color: #DD8643;
+        }
+        
+        .icon{
+            margin-top: 5px;
+            font-size: 20px;
+        }
+    }
+        
     .top{
-        height: 50px;
+        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
