@@ -3,7 +3,8 @@ import {
   View,
   StatusBar,
   ScrollView,
-  Image
+  Image,
+  Text
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, searchProducts } from "../../redux/slices/products";
@@ -13,8 +14,10 @@ import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
+import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
 import { instruments } from './modules/HomePromos.js'
+import { useNavigation } from '@react-navigation/native'
 const Home = () => {
   const { list: products } = useSelector((state) => state.products);
   const { statusCode: statusCode } = useSelector((state) => state.products);
@@ -31,12 +34,13 @@ const Home = () => {
     indexOfFirstInstrument,
     indexOfLastInstrument
   ); //12 - 24
-
+  const navigation = useNavigation();
 
 
   const submitHandle = (search) => {
     dispatch(searchProducts(search));
     setSearch('')
+    navigation.navigate('Products');
   }
   useEffect(() => {
     dispatch(getAllProducts());
@@ -62,12 +66,6 @@ const Home = () => {
 
 
 
-
-
-
-
-
-
             <HomeItem
               promoimg={promoThree.image}
               containerInfo={promoThree.containerInfo}
@@ -80,17 +78,19 @@ const Home = () => {
               style={{ width: '100%', height: vh(30), marginVertical: 20, }}
 
             />
-            {/* <HomeFav/>  */}
+            <HomeFavorites />
             <HomeItem
               promoimg={promoTwo.image}
               containerInfo={promoTwo.containerInfo}
               containerText={promoTwo.containerText}
+              containerModel={promoTwo.containerModel}
+              model={'VIOLIN BLACK 1/8 '}
               button={'Ver mas ofertas'}
               price={129.99}
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996173/script_music_img/STENTOR_ROCK_A_BILLY_Contrabajo_Negro_xy5u2y.png"}
               id={"62d4dad4da220153870d77e5"}
             />
-            
+
             <HomeItem
               promoimg={promoOne.image}
               containerInfo={promoOne.containerInfo}
@@ -106,6 +106,8 @@ const Home = () => {
               containerInfo={promoTwo.containerInfo}
               containerText={promoTwo.containerText}
               containerImage={promoTwo.containerImage}
+              containerModel={promoTwo.containerModel}
+              model={'SAXOFON'}
               price={1129.99}
               button={'Ver mas ofertas'}
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657998782/script_music_img/Bressant_AS-220_Saxof%C3%B3n_Alto_iusuyz.png"}
@@ -116,16 +118,18 @@ const Home = () => {
               containerInfo={promoOne.containerInfo}
               containerText={promoOne.containerText}
               containerImage={promoOne.containerImage}
+              containerModel={promoOne.containerModel}
+              model={'VIOLIN '}
               price={89.99}
               button={'Ver mas ofertas'}
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996915/script_music_img/Gliga_Gems_II_34_Viol%C3%ADn_jgqygm.png"}
               id={"62d4db52da220153870d780b"}
             />
-            
+            <View style={styles.containerNewCartegories}>
+            <HomeCategories botton={true} />
+
+            </View>
           </View>
-
-          
-
           <ModalFilter
             modal={modal}
             setModal={setModal}

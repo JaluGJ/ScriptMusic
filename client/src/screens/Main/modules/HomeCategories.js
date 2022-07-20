@@ -13,7 +13,7 @@ import violin2 from '../../../../assets/instrumentos/violin2.png'
 import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Categories.jsx'
 
-const HomeCategories = () => {
+const HomeCategories = ({botton}) => {
     const dispatch = useDispatch()
     const { category: category } = useSelector((state) => state.products);
     const navigation = useNavigation();
