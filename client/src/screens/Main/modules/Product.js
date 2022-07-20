@@ -5,15 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
 import useFavorites from '../customHooks/useFavorites.js';
 import CustomAlertComponent from '../../../Wrappers/CustomAlert.js';
-import { postFavourite } from '../../../redux/slices/favourites.js';
-import { useDispatch, useSelector } from 'react-redux';
 
 
 const Product = ({ item }) => {
-    const { model, image, price, brand ,id } = item
-    const navigation = useNavigation(); 
-    const dispatch = useDispatch();
-    const {token} = useSelector(state => state.signin);
+    const { model, image, price, brand } = item
+    const navigation = useNavigation();
+    const { addToFavorite } = useFavorites();
     const [visible, setVisible] = useState(false);
 
     if(visible){
@@ -39,7 +36,7 @@ const Product = ({ item }) => {
                     source={{ uri: image }}
                 />
                 <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>{
-                    dispatch(postFavourite(token,id))
+                    addToFavorite(item)
                     setVisible(true)
                     }}>
                 <AntDesign name="hearto" size={24} color="black" />
