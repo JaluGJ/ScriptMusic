@@ -63,7 +63,9 @@ const Product = ({ item }) => {
         setVisible={setShowModal}
         setFlag={setFlag}
         flag={flag}
-        title={!flag ? "¡Producto agregado!" : "¡Producto existente!"}
+        title={
+          !flag ? "¡Producto agregado!" : "¡Producto agregado anteriormente!"
+        }
         message={"Revise su lista de favoritos"}
         color={"#DD8643"}
         iconName={"cards-heart"}
