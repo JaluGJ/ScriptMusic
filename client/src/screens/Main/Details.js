@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   SafeAreaView,
   Text,
@@ -13,63 +13,19 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./Styles/Detail.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { addItems, getProductDetails } from "../../redux/slices/products.js";
-import { useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import useFavorites from "./customHooks/useFavorites.js";
+import { postFavourite } from "../../redux/slices/favourites.js";
+import useShoppingCart from "./customHooks/useShoppingCart.js";
+import useDetails from "./customHooks/useDetails.js";
 
 const Details = ({ route }) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { details, statusCode } = useSelector((state) => state.products);
-  const [countProducts, setCountProducts] = useState(1);
-  const { addToFavorite } = useFavorites();
-  useEffect(() => {
-    dispatch(getProductDetails(itemId));
-    return () => {
-      dispatch(getProductDetails());
-    };
-  }, []);
+  const { token } = useSelector((state) => state.signin);
+  const { details, statusCode } = useDetails({ itemId });
+  const { addToCart, countProducts, setCountProducts } = useShoppingCart();
 
-  const addToCart = async () => {
-    const { price, id, image, model, brand } = details;
-    const product = {
-      priceOne: price,
-      price: (price * countProducts).toFixed(2),
-      image,
-      id,
-      model,
-      brand,
-      count: countProducts,
-    };
-    try {
-      let existingCart = await AsyncStorage.getItem("@shoppingCart");
-      if (existingCart !== null) {
-        let cart = JSON.parse(existingCart);
-        let existingProduct = cart.find((product) => {
-          if (product.id === id) {
-            product.count += countProducts;
-            product.price = (product.priceOne * product.count).toFixed(2);
-            return true;
-          }
-          return false;
-        });
-
-        if (!existingProduct) {
-          cart.push(product);
-        }
-        await AsyncStorage.setItem("@shoppingCart", JSON.stringify(cart));
-      } else {
-        console.log("primera ves");
-        await AsyncStorage.setItem("@shoppingCart", JSON.stringify([product]));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    dispatch(addItems(1));
-    navigation.goBack();
-  };
+  
 
   return (
     <>
@@ -82,7 +38,9 @@ const Details = ({ route }) => {
                   <AntDesign name="left" size={27} color="black" />
                 </Pressable>
                 <Text style={styles.textNav}>DETALLES</Text>
-                <TouchableOpacity onPress={() => addToFavorite(details)}>
+                <TouchableOpacity
+                  onPress={() => dispatch(postFavourite(token, details.id))}
+                >
                   <AntDesign name="hearto" size={27} color="black" />
                 </TouchableOpacity>
               </View>
@@ -133,7 +91,13 @@ const Details = ({ route }) => {
                 </View>
 
                 <View>
-                  <TouchableOpacity style={styles.button} onPress={addToCart}>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                      addToCart({ details });
+                      navigation.goBack();
+                    }}
+                  >
                     <Text style={styles.buttonText}>AL CARRITO</Text>
                   </TouchableOpacity>
                 </View>

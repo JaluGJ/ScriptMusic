@@ -3,13 +3,15 @@ import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons';
 import styles from '../Styles/Product.jsx';
-import useFavorites from '../customHooks/useFavorites.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { postFavourite } from '../../../redux/slices/favourites.js';
 
 
 const Product = ({ item }) => {
-    const { model, image, price, brand } = item
+    const { model, image, price, brand ,id} = item
+    const {token} = useSelector(state => state.signin);
     const navigation = useNavigation();
-    const { addToFavorite } = useFavorites();
+    const dispatch = useDispatch();
 
     return (
         <TouchableOpacity
@@ -28,7 +30,7 @@ const Product = ({ item }) => {
                     source={{ uri: image }}
                 />
                 <TouchableOpacity style={{position:'absolute', top:3, right:-1}} onPress={()=>{
-                    addToFavorite(item)
+                    dispatch(postFavourite(token,id))
                     }}>
                 <AntDesign name="hearto" size={24} color="black" />
                 </TouchableOpacity>

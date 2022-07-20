@@ -1,22 +1,27 @@
-import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import emptyFav from "../../../assets/fav1.png";
 import styles from "./Styles/Favorites.jsx";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import useFavorites from "./customHooks/useFavorites";
 import FavProducts from "./modules/FavProducts";
+import useFavorites from "./customHooks/useFavorites";
 
 export default function EmptyFavs() {
-  const { favorite, getFavorite } = useFavorites();
+  const [favourites,loading] = useFavorites()
 
-  useEffect(() => {
-    getFavorite()
-  })
-
-  return favorite.length > 0 ? <FAVORITOS favorite={favorite} /> : <SINFAVORITOS />
+  return loading ? <Loading/> : favourites.length > 0 ? <FAVORITOS favorite={favourites} /> : <SINFAVORITOS />
 }
 
+export const Loading = () =>{
+  return (
+    <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" />
+    </View>
+  )
+}
 
 
 export const FAVORITOS = ({ favorite }) => {

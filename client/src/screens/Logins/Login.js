@@ -18,7 +18,7 @@ import loginSchema from "./validation/schemas/LoginSchema";
 import { FormikInputValue } from "./validation/FormikInputValue";
 import { FormikSubmit } from "./validation/FormikSubmit";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/slices/signin";
+import { google, loginUser } from "../../redux/slices/signin";
 
 const initialValues = {
   email: "",
@@ -78,7 +78,7 @@ export default function Login() {
           }}
         </Formik>
 
-        {/* <FormikSubmit name="Acá va ingresar con Google" /> */}
+        {/* <FormikSubmit onPress={() => dispatch(google())} name="Acá va ingresar con Google" /> */}
 
         <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")} style={{alignItems: "center"}}>
           <Text style={styles.forgotPass}>¿Olvidaste tu contraseña?</Text>

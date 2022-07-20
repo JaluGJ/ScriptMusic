@@ -1,68 +1,20 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
-import { Alert } from "react-native";
-
+import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFavourites } from '../../../redux/slices/favourites';
 
 const useFavorites = () => {
-  const [favorite, setFavorite] = useState([]);
+  const navigation = useNavigation();
+  const {favourites,loading} = useSelector((state) => state.favourites);
+  const {token} = useSelector(state => state.signin);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(getFavourites(token));
+    })
+    return unsubscribe;
+  },[navigation]);
+  return [favourites,loading];
+}
 
-  const addToFavorite = (item) => {
-    AsyncStorage.getItem("@favorite")
-      .then((existingFav) => {
-        if (existingFav !== null) {
-          let favorites = JSON.parse(existingFav);
-          let existingProduct = favorites.find((product) => {
-            if (product.id === item.id) {
-              return true;
-            }
-            return false;
-          });
-          if (!existingProduct) {
-            favorites.push(item);
-            AsyncStorage.setItem("@favorite", JSON.stringify(favorites))
-              .then((res) => console.log(res))
-              .catch((err) => console.log(err));
-              Alert.alert("Producto agregado a favoritos");
-              return
-          }
-          Alert.alert("Este Producto ya está en favoritos");
-        } else {
-          AsyncStorage.setItem("@favorite", JSON.stringify([item]))
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-            Alert.alert("Producto agregado a favoritos");
-        }
-        // AsyncStorage.getItem("@favorite").then(resultado=>setFavorite(resultado))
-        // return favorite
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const removeFromFavorite = (id) => {
-      AsyncStorage.getItem("@favorite").then(resultado=>{
-        let favorites = JSON.parse(resultado);
-        let newFavorites = favorites.filter((product) => {
-          if (product.id === id) {
-            return false;
-          }
-          return true;
-        }
-        );
-        AsyncStorage.setItem("@favorite", JSON.stringify(newFavorites))
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
-      }).catch((error) => console.log(error));
-  };
-
-  const getFavorite = () => {
-    AsyncStorage.getItem("@favorite").then(resultado=>{
-      if(resultado !== null){
-        setFavorite(JSON.parse(resultado))
-      }
-    }).catch((error) => console.log(error));
-  };
-
-  return { favorite, addToFavorite, removeFromFavorite , getFavorite};
-};
-
-export default useFavorites;
+export default useFavorites

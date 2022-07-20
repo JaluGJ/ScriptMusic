@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBaned } = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUUnBanUser } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
@@ -8,6 +8,19 @@ const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 
 module.exports = {
+
+
+    googleLogin: async (req, res, next) => {
+        try {
+            const { _id } = req.user
+            const token = getToken(_id)
+            res.status(200).json({token})
+        }
+        catch (error) {
+            next(error)
+        }
+    },
+
 
     registerUser: async (req, res, next) => {
         let { email, password, firstName, lastName, isAdmin } = req.body
@@ -182,16 +195,18 @@ module.exports = {
             }
             const user = await User.findById(data.id)
             if (!user) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
-  
-            if(firstName){
+            if(!firstName && !lastName && !image){
+                return res.status(400).json({ message: 'No se ha modificado ningun dato' })
+            }
+            if (firstName) {
                 user.firstName = firstName
             }
             if (lastName) {
                 user.lastName = lastName
             }
-            if(image){
+            if (image) {
                 user.image = image
             }
             await user.save()
@@ -202,7 +217,111 @@ module.exports = {
     },
 
 
-    getAllUsers : (req, res, next) => {
+    banUser : async (req, res, next) => {
+        try {
+            const { id } = req.params
+            const autorization = req.get('Authorization')
+            if (!autorization) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const token = autorization.split(' ')[1]
+            const data = getTokenData(token)
+            if (!data) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const userToBan = await User.findById(id)
+            if (!userToBan) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const { email, name } = userToBan
+            const template = getTemplateBanUser(name)
+            await sendEmail(email, template)
+            await BannedUser.create({ email })
+            await userToBan.remove()
+            return res.json({ message: 'Usuario baneado' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    unBanUser : async (req, res, next) => {
+        try {
+            const { id } = req.params
+            const autorization = req.get('Authorization')
+            if (!autorization) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const token = autorization.split(' ')[1]
+            const data = getTokenData(token)
+            if (!data) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const userToUnBan = await BannedUser.findById(id)
+            if (!userToUnBan) {
+                return res.status(404).json({ message: 'No se ha encontrado el usuario' })
+            }
+            const { email } = userToUnBan
+            const template = getTemplateUnBanUser(email)
+            await sendEmail(email, template)
+            await userToUnBan.remove()
+            return res.json({ message: 'Usuario desbaneado' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    getUserBanned: async (req, res, next) => {
+        try {
+            const autorization = req.get('Authorization')
+            if (!autorization) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const token = autorization.split(' ')[1]
+            const data = getTokenData(token)
+            if (!data) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const bannedUsers = await BannedUser.find()
+            return res.json({ bannedUsers })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    getAllUsers : async (req, res, next) => {
         const autorization = req.get('Authorization')
         if(!autorization){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -215,7 +334,11 @@ module.exports = {
         if(!data){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
-        if(!data.isAdmin){
+        const user = await User.findById(data.id)
+        if(!user){
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if(!user.isAdmin){
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         User.find({}).populate({

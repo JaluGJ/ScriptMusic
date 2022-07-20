@@ -66,6 +66,25 @@ const getTemplateBaned = (name) => {
 `
 }
 
+const getTemplateBanUser = (name) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos tomado la medida de banear indefinidamente tu cuenta.</div>
+  <div>Disculpe los inconvenientes.</div>
+  <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+`
+}
+
+const getTemplateUUnBanUser = (name) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos recibido tu solicitud y ha sucedido un problema, el email que usted intenta registrar ha sido baneado.</div>
+  <div>Disculpe los inconvenientes.</div>
+  <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+`
+}
+
+
 const getTemplateBougthFail = (name) => {
     return `
       <div>Hola ${name}.</div>
@@ -90,5 +109,7 @@ module.exports = {
   getTemplate,
   getTemplateBougthFail,
   getTemplateBougthSuccess,
-  getTemplateBaned
+  getTemplateBaned,
+  getTemplateBanUser,
+  getTemplateUUnBanUser,
 };

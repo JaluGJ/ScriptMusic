@@ -1,21 +1,16 @@
 import React from 'react'
-import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Text, Image, TouchableOpacity,} from "react-native";
 import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import styles from "../Styles/Favorites.jsx";
-import useFavorites from "../customHooks/useFavorites";
 import { useNavigation } from '@react-navigation/native';
+import { deleteFavourite } from '../../../redux/slices/favourites.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const FavProducts = ({ model, brand, price, image, id }) => {
-    const { removeFromFavorite } = useFavorites();
+    const {token} = useSelector((state) => state.signin);
     const navigation = useNavigation();
-    {/* <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: 'red' }}>
-        <Text style={styles.buttonText} onPress={() => {
-            removeFromFavorite(id)
-            // Alert.alert('Removido de favoritos')
-        }}>Eliminar</Text>
-    </TouchableOpacity> */}
+    const dispatch = useDispatch();
 
     return (
         <TouchableOpacity onPress={() => { navigation.navigate('Details', { itemId: id }) }}>
@@ -30,7 +25,7 @@ const FavProducts = ({ model, brand, price, image, id }) => {
                     <Text style={styles.productBrand}>{brand}</Text>
                   </View>
                   <View style={styles.containerTrash}>
-                    <TouchableOpacity onPress={() => { removeFromFavorite(id) }}>
+                    <TouchableOpacity onPress={() => { dispatch(deleteFavourite(token,id)) }}>
                       <AntDesign name="closecircleo" size={30} color="crimson" />
                     </TouchableOpacity>
                   </View>
