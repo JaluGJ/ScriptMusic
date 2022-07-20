@@ -7,6 +7,7 @@ export const favouritesSlice = createSlice({
     initialState: {
         favourites: [],
         existingFavourite: false,
+        loading: false,
     },
     reducers: {
         setFavourite: (state, action) => {
@@ -14,12 +15,15 @@ export const favouritesSlice = createSlice({
         },
         setExistingFavourite: (state, action) => {
             state.existingFavourite = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
     }   
 });
 
 
-export const {setFavourite,setExistingFavourite} = favouritesSlice.actions;
+export const {setFavourite,setExistingFavourite,setLoading} = favouritesSlice.actions;
 
 export default favouritesSlice.reducer;
 
@@ -73,7 +77,9 @@ export const postFavourite = (userToken,productId) => async (dispatch) => {
           },
         }
           try {
+            dispatch(setLoading(true));
             const {data} = await axios.get(`${apiUrl}profile/favs`, config)
+            dispatch(setLoading(false));
             dispatch(setFavourite(data))
         } catch (error) {
             console.log(error)
