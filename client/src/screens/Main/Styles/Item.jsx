@@ -1,87 +1,77 @@
 import { StyleSheet } from 'react-native'
-
+import { vh, vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
-    container: {
-        shadowColor: "#00000076",
-        shadowOffset: {
-            width: 3,
-            height: 1,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 1.65,
-        marginHorizontal:30,
-        elevation: 3,
-        borderRadius:30,
-        backgroundColor:'white',
-    },
-    firstText:{
-        height: 35,
-        justifyContent:'center',
-        borderBottomColor:'#919191',
-        borderBottomWidth:1,
+    background:{
         alignItems:'center',
+    },/* no tocar */
+    container: {
+        width: vw(100),
+        height: vh(47),
+        marginTop:20,
+        alignItems:'center',
+        
+    },/* no tocar */ 
+    
+    price:{
+        height: vh(6),
+        justifyContent:'center',
+        alignItems:'center',
+        textAlign:'center',
+        fontSize:35,
+        color: '#ffffff',
+        paddingVertical:10,
+        fontWeight:'bold'
+    },/* no tocar */
+    
+    modelText:{
+        textAlign:'center',
+        fontSize:20,
+        color: '#ffffff',
     },
     secondText:{
-        padding: 3,
-        borderTopColor:'black',
+        width: vw(70),
         flexDirection:'row',
-        borderTopWidth:1,
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingRight:20,
-        backgroundColor: "#000000",
-        borderBottomLeftRadius:30,
-        borderBottomRightRadius:30
-    },  
+        justifyContent:'space-around',
+    },
     Text:{
-        color: '#DD8643',
-        fontSize:15,
-        letterSpacing:2,
-        marginHorizontal:5,
-    },
-    image: {
-
-        alignItems: 'center',
-        justifyContent: 'center',
-        transform: [{ rotate: "35deg" }],
-    },
-    textProduct:{
-        padding: 10,
-        width:'100%',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    model: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    modelText: {
         fontSize:20,
-        textAlign:'center'
+        color: '#DD8643',
     },
-    brand: {
-        marginVertical: 3,
+
+
+    /* Primer promo cuadrado vacio */
+    offcontainerInfo:{
+        display: 'none'
     },
-    textBrand: {
-        opacity: .6,
+
+
+
+
+    /* Segunda promo doble circulo */
+    containerInfo:{
+        width: vw(100),
+        marginTop:vh(10),
+        flexDirection:'row',
+        justifyContent:'center',
     },
-    priceFav: {
+    containerText:{
+        justifyContent:'center',
+    },
+    /* Tercer promo circulo en medio*/
+    containerInfoCircle:{
+        width: vw(70),
+        height: vh(25),
+        marginTop:vh(10),
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    containerTextCircle:{
         position: 'absolute',
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: "center"
+        bottom:vh(-7),
     },
-    price: {
-        transform: [{ rotate: "-35deg" }],
+    containerImageCircle:{
         position: 'absolute',
-        left: '3%',
-        top: 40,
-        color: '#df7727',
-        fontWeight: 'bold',
-        fontSize: 30,
-        letterSpacing: 2,
-    },
+    }
 })
 
 export default styles 

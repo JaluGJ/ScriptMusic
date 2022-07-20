@@ -1,4 +1,3 @@
-import NavBar from '../Navbar/NavBar'
 import SideBar from '../SideBar/SideBar'
 import './updateProduct.scss'
 import { useEffect } from 'react';
@@ -86,7 +85,6 @@ export default function UpdateProduct({ inputs, title, logout}){
         <SideBar logout={logout}/>
         <ToastContainer />
         <div className="newcontainer">
-            {/* <NavBar /> */}
             <div className="top">
                 <h1 className="title"> Actualiza el producto </h1>
             </div>

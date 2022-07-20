@@ -34,25 +34,5 @@
             }
         }
 
-        .items{
-            display: flex;
-            align-items: center;
-
-            .item{
-                display: flex;
-                align-items: center;
-                margin-right: 20px;
-            }
-
-            .icon{
-                font-size: 20px;
-            }
-
-            .avatar{
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-            }
-        }
     }
 }
