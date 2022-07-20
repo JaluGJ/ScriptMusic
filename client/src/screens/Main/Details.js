@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { postFavourite } from "../../redux/slices/favourites.js";
 import useShoppingCart from "./customHooks/useShoppingCart.js";
 import useDetails from "./customHooks/useDetails.js";
+import useFavorites from "./customHooks/useFavorites.js";
+import CustomAlertComponent from "../../components/CustomAlert.js";
 
 const Details = ({ route }) => {
   const { itemId } = route.params;
@@ -24,8 +26,9 @@ const Details = ({ route }) => {
   const { token } = useSelector((state) => state.signin);
   const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
-
-  
+  const [showModal, setShowModal] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const [favourites] = useFavorites();
 
   return (
     <>
@@ -39,7 +42,15 @@ const Details = ({ route }) => {
                 </Pressable>
                 <Text style={styles.textNav}>DETALLES</Text>
                 <TouchableOpacity
-                  onPress={() => dispatch(postFavourite(token, details.id))}
+                  onPress={() => {
+                    const existente = favourites.find((item) => item.id === details.id);
+                    if (existente) {
+                      setFlag(true);
+                    } else {
+                      dispatch(postFavourite(token, details.id));
+                    }
+                    setShowModal(true);
+                  }}
                 >
                   <AntDesign name="hearto" size={27} color="black" />
                 </TouchableOpacity>
@@ -109,6 +120,16 @@ const Details = ({ route }) => {
                 </View>
               </View>
             </View>
+            <CustomAlertComponent
+              visible={showModal}
+              setVisible={setShowModal}
+              setFlag={setFlag}
+              flag={flag}
+              title={!flag ? "¡Producto agregado!" : "¡Producto agregado anteriormente!"}
+              message={"Revise su lista de favoritos"}
+              color={"#FF0063"}
+              iconName={"cards-heart"}
+            />
           </SafeAreaView>
         </ScrollView>
       ) : (
