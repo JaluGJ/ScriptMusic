@@ -28,11 +28,24 @@ export const signinSlice = createSlice({
     updateIMGUser: (state, action) => {
       state.user = { ...state.user, image: action.payload };
     },
+    updateName: (state, action) => {
+      state.user = { ...state.user, firstName: action.payload };
+    },
+    updateLastname: (state, action) => {
+      state.user = { ...state.user, lastName: action.payload };
+    },
   },
 });
 
-export const { setToken, setErr, setIsLoading, setUser, updateIMGUser } =
-  signinSlice.actions;
+export const {
+  setToken,
+  setErr,
+  setIsLoading,
+  setUser,
+  updateIMGUser,
+  updateName,
+  updateLastname,
+} = signinSlice.actions;
 
 export default signinSlice.reducer;
 
@@ -108,11 +121,53 @@ export const create = (userToken) => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const updateIMG = (url, user) => (dispatch) => {
-  dispatch(updateIMGUser(url));
-  // axios
-  //   .patch(`${apiUrl}profile/${user.id}`)
-  //   .then((res) => console.log("res", res))
-  //   .catch((err) => console.log(err));
-  
+export const updateIMG = (image, userToken) => async (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  dispatch(updateIMGUser(image));
+  try {
+    await axios.put(`${apiUrl}profile`, { image }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ image }));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const putName = (firstName, userToken) => async (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  dispatch(updateName(firstName));
+  try {
+    await axios.put(`${apiUrl}profile`, { firstName }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ firstName }));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const putLastName = (lastName, userToken) => async (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  dispatch(updateLastname(lastName));
+  try {
+    await axios.put(`${apiUrl}profile`, { lastName }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ lastName }));
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
