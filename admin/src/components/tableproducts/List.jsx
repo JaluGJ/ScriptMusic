@@ -15,15 +15,13 @@ export default function List({ rows, columns, title, tipo }) {
                     </button>
                 </Link>
             </div>
-            <div className="bottom">
-                <div className="posData">                    
+            <div className="bottom">                   
                     <DataGrid
                         rows={rows}
                         columns={columns}
                         pageSize={30}
                         rowsPerPageOptions={[6]}                      
                     />
-                </div>
             </div>
         </div>
     );
