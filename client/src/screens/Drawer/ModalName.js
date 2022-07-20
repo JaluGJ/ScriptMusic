@@ -10,44 +10,44 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { putName } from "../../redux/slices/signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import styles from "./Styles/ModalName";
 
 export default function ModalName({ modal, setModal }) {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
   return (
-    <Modal
-      animationType="slide"
-      visible={modal}
-      style={{ flex: 1, justifyContent: "flex-end" }}
-    >
-      <Pressable onPress={() => setModal(!modal)}>
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            width: 100,
-            height: 100,
-            backgroundColor: "red",
-          }}
-        >
-          <Text>NOMBRE</Text>
+    <Modal visible={modal} style={styles.modal} transparent>
+      <View style={styles.modalBackground}>
+        <View style={styles.modalContainer}>
+          <View style={{ alignItems: "center" }}>
+            <View style={styles.header}>
+              <Pressable onPress={() => setModal(!modal)}>
+                <Text style={styles.cruz}>╳</Text>
+              </Pressable>
+            </View>
+            <View style={styles.containerInput}>
+              <TextInput
+                onChangeText={(value) => setName(value)}
+                style={styles.input}
+                placeholder="Nuevo nombre"
+              />
+            </View>
+            <View style={styles.containerButton}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={async () => {
+                  setModal(!modal);
+                  let token = await AsyncStorage.getItem("@token_id");
+                  dispatch(putName(name, token));
+                }}
+              >
+                <Text>ACTUALIZAR</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </Pressable>
-      <TextInput
-        onChangeText={(value) => setName(value)}
-        style={{ backgroundColor: "blue", color: "white" }}
-      />
-      <Text>{name}</Text>
-      <TouchableOpacity
-        style={{ height: 110, width: 110, backgroundColor: "yellow" }}
-        onPress={async () => {
-          let token = await AsyncStorage.getItem("@token_id");
-          dispatch(putName(name, token));
-        }}
-      >
-        <Text>ENVIAR</Text>
-      </TouchableOpacity>
+      </View>
     </Modal>
   );
 }

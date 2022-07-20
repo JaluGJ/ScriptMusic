@@ -1,5 +1,5 @@
 import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import userImage from "../../../assets/user.png";
 import styles from "./Styles/MyProfile";
