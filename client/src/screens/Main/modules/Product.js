@@ -65,7 +65,7 @@ const Product = ({ item }) => {
         flag={flag}
         title={!flag ? "¡Producto agregado!" : "¡Producto existente!"}
         message={"Revise su lista de favoritos"}
-        color={"#FF0063"}
+        color={"#DD8643"}
         iconName={"cards-heart"}
       />
     </TouchableOpacity>
@@ -73,4 +73,3 @@ const Product = ({ item }) => {
 };
 
 export default Product;
-
