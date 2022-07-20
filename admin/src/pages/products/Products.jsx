@@ -19,6 +19,7 @@ import columns from './inputs'
                 <SideBar logout={logout}/>
             <div className="container">
                 <List 
+                tipo= 'Producto'
                 title = 'Productos existentes'
                 rows = {rows}
                 columns = {columns}
