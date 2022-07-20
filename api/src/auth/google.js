@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport');
 const { OAuth2Strategy } = require('passport-google-oauth');
 const User = require('../models/user/userSchema');
-const jwt = require('jsonwebtoken');
+const getToken = require('../config/jwt.config.js').getToken
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRECT, JWT_SECRET, SECURE_PASS } = process.env;
 
 
@@ -15,7 +15,7 @@ passport.use('auth-google', new OAuth2Strategy(
         try {
             const user = await User.findOne({email: profile.emails[0].value})
             if(user){
-                const token = jwt.sign({id: user._id}, JWT_SECRET)
+                const token = getToken(user._id)
                 done(null, token)
             }else {
                 const newUser={
