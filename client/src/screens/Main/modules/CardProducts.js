@@ -1,56 +1,32 @@
-import React, { useState } from 'react'
-import { Button, FlatList, Image, Modal, Text, TouchableOpacity, View } from 'react-native'
+import React from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "../Styles/Cart.jsx";
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux';
-import { addItems } from '../../../redux/slices/products.js';
-import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import useShoppingCart from "../customHooks/useShoppingCart.js";
 
-const CardProducts = ({ productsCart }) => {
-  const dispatch = useDispatch();
+const CardProducts = () => {
   const navigation = useNavigation();
-
-  const handleRemove = async (id) => {
-    const newProductsCart = productsCart.filter(product => product.id !== id);
-    await AsyncStorage.setItem("@shoppingCart", JSON.stringify(newProductsCart));
-    dispatch(addItems(-1));
-    return true
-  }
-
-
-  const handleCount = (id, operation) => {
-    productsCart.forEach(product => {
-      if (product.id === id) {
-        if (operation === 'add') {
-          product.count += 1
-          product.price = (product.priceOne * product.count).toFixed(2)
-        } else {
-          if (product.count === 1) {
-            return
-          }
-          product.count -= 1
-          product.price = (product.price - product.priceOne).toFixed(2)
-        }
-      }
-    });
-    AsyncStorage.setItem("@shoppingCart", JSON.stringify(productsCart));
-    dispatch(addItems(1));
-  }
-
-  
+  const { productsCart, handleRemove, handleCount } = useShoppingCart();
 
   return (
     <View style={styles.containerProducts}>
-
       <FlatList
         data={productsCart}
         renderItem={({ item }) => (
-          <TouchableOpacity onLongPress={() => { navigation.navigate('Details', { itemId: item.id }) }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              navigation.navigate("Details", { itemId: item.id });
+            }}
+          >
             <View style={styles.containerProduct}>
               <View style={styles.containerProductImage}>
-                <Image source={{ uri: item.image }} resizeMode='contain' style={styles.productImage} />
+                <Image
+                  source={{ uri: item.image }}
+                  resizeMode="contain"
+                  style={styles.productImage}
+                />
               </View>
               <View style={styles.containerProductInfo}>
                 <View style={styles.containerNameTrash}>
@@ -59,36 +35,61 @@ const CardProducts = ({ productsCart }) => {
                     <Text style={styles.productBrand}>{item.brand}</Text>
                   </View>
                   <View style={styles.containerTrash}>
-                    <TouchableOpacity onPress={() => { handleRemove(item.id) }}>
-                      <AntDesign name="closecircleo" size={24} color="crimson" />
+                    <TouchableOpacity
+                      onPress={() => {
+                        handleRemove({ id: item.id });
+                      }}
+                    >
+                      <AntDesign
+                        name="closecircleo"
+                        size={24}
+                        color="crimson"
+                      />
                     </TouchableOpacity>
                   </View>
-
                 </View>
                 <View style={styles.productPricePlus}>
                   <Text style={styles.productPrice}>$ {item.price}</Text>
 
                   <View style={styles.containerProductCount}>
                     <View style={styles.containerPlus}>
-                      {
-                        item.count === 1 ?
-                          <TouchableOpacity onPress={() => { handleRemove(item.id) }}>
-                            <Ionicons name="trash-outline" size={24} color="red" />
-                          </TouchableOpacity>
-                          :
-                          <TouchableOpacity onPress={() => handleCount(item.id, 'subs')}>
-                            <AntDesign name="minuscircleo" size={24} color="#000" />
-                          </TouchableOpacity>
-                      }
+                      {item.count === 1 ? (
+                        <TouchableOpacity
+                          onPress={() => {
+                            handleRemove({ id: item.id });
+                          }}
+                        >
+                          <Ionicons
+                            name="trash-outline"
+                            size={24}
+                            color="red"
+                          />
+                        </TouchableOpacity>
+                      ) : (
+                        <TouchableOpacity
+                          onPress={() =>
+                            handleCount({ id: item.id, operation: "subs" })
+                          }
+                        >
+                          <AntDesign
+                            name="minuscircleo"
+                            size={24}
+                            color="#000"
+                          />
+                        </TouchableOpacity>
+                      )}
 
                       <Text style={styles.productCount}>{item.count}</Text>
 
-                      <TouchableOpacity onPress={() => handleCount(item.id, 'add')}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          handleCount({ id: item.id, operation: "add" })
+                        }
+                      >
                         <AntDesign name="pluscircleo" size={24} color="#000" />
                       </TouchableOpacity>
                     </View>
                   </View>
-
                 </View>
               </View>
             </View>
@@ -96,10 +97,8 @@ const CardProducts = ({ productsCart }) => {
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-
     </View>
+  );
+};
 
-  )
-}
-
-export default CardProducts
+export default CardProducts;
