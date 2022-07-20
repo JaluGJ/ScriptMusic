@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useCountCart = () => {
     const { newItems } = useSelector((state) => state.products);
-        const [countProducts, setCountProducts] = useState(0);
+    const [countProducts, setCountProducts] = useState(0);
 
     useEffect(() => {
         AsyncStorage.getItem("@shoppingCart").then(
