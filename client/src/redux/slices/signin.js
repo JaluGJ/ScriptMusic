@@ -44,7 +44,7 @@ export const {
   setUser,
   updateIMGUser,
   updateName,
-  updateLastname
+  updateLastname,
 } = signinSlice.actions;
 
 export default signinSlice.reducer;
@@ -129,39 +129,45 @@ export const updateIMG = (image, userToken) => async (dispatch) => {
   };
   dispatch(updateIMGUser(image));
   try {
-    const { data } = await axios.patch(`${apiUrl}profile`, image, config);
-    console.log(data.user);
+    await axios.put(`${apiUrl}profile`, { image }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ image }));
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const putName = (name, userToken) => async (dispatch) => {
+export const putName = (firstName, userToken) => async (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  dispatch(updateName(name));
+  dispatch(updateName(firstName));
   try {
-    const { data } = await axios.patch(`${apiUrl}profile`, name, config);
-    console.log(data.user);
+    await axios.put(`${apiUrl}profile`, { firstName }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ firstName }));
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const putLastName = (apellido, userToken) => async (dispatch) => {
+export const putLastName = (lastName, userToken) => async (dispatch) => {
   const config = {
     headers: {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  dispatch(updateLastname(apellido));
+  dispatch(updateLastname(lastName));
   try {
-    const { data } = await axios.patch(`${apiUrl}profile`, apellido, config);
-    console.log(data.user);
+    await axios.put(`${apiUrl}profile`, { lastName }, config);
+    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ lastName }));
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
