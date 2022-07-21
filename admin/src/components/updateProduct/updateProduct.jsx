@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 
 export default function UpdateProduct({ logout}){
     const { id } = useParams()
+    const userToken = localStorage.user;
     const product = useSelector(state => state.product)
     const dispatch  =  useDispatch()
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
@@ -66,7 +67,7 @@ export default function UpdateProduct({ logout}){
             return alert('Por favor verifique los campos')
         }
         console.log(input)
-        dispatch(updateProduct(id, input))
+        dispatch(updateProduct(id, input, userToken))
         toast.success('Producto Actualizado', {
             position: "top-center",
             autoClose: 4000,
