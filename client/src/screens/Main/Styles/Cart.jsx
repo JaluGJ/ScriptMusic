@@ -33,7 +33,7 @@ let styles = StyleSheet.create({
   },
   textLinked: {
     fontSize: 20,
-    color: "#DD8643",
+    color: "#695f57",
     letterSpacing: 2,
   },
   containerNav: {

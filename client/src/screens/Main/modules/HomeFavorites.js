@@ -3,6 +3,8 @@ import useFavorites from "../../../customHooks/useFavorites";
 import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { vh, vw } from "react-native-expo-viewport-units";
+import { AntDesign } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 import styles from "../Styles/Favorites.jsx";
 export default function EmptyFavs() {
     const [favourites] = useFavorites()
@@ -15,86 +17,116 @@ export const FAVORITOS = ({ favorite }) => {
         <View style={{
             marginHorizontal: 20
         }}>
-            <View style={{
-                width: vw(90),
-                height: vh(45),
-                borderRadius: 50,
-                marginHorizontal: 20,
-                backgroundColor: 'black',
-                shadowColor: "#000",
-                shadowOffset: {
-                    width: 0,
-                    height: 1,
-                },
-                marginHorizontal: 5,
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 1,
-                borderWidth: 2,
-                borderColor: 'white'
-            }}>
-                <Text style={{
-                    fontSize: 20,
-                    letterSpacing: 6,
-                    padding: 20,
-                    color: 'white',
-                }}>Tus favoritos</Text>
-                <View style={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap'
-                }}>
+            <View style={styles.containerFavHome}>
+                <Text style={styles.titleFavHome}>Tus favoritos</Text>
+                <View style={styles.productsFavHome}>
                     {
                         favorite.map((fav, i) => {
                             if (i > 3) {
                                 return
                             }
-                            
+
                             return (
-                                <View key={i} style={{
-                                    width: '50%',
-                                    height: vh(16),
-                                    elevation: 5,
-                                    borderWidth: 2,
-                                    borderColor: 'white'
-                                }}>
+                                <View key={i} style={styles.productFavHome}>
                                     <View style={{
                                         justifyContent: 'center',
                                         alignItems: 'center',
+                                        backgroundColor: 'white'
                                     }}>
+                                        <View style={{
+                                            position: 'absolute',
+                                            right: 100,
+                                            bottom: 10,
+                                            width: vw(15),
+                                            height: vw(25),
+                                            backgroundColor: "black",
+                                            borderRadius: 90,
+                                            transform: [{ rotate: "-15deg" }],
+                                        }}></View>
+                                        <View style={{
+                                            position: 'absolute',
+                                            right: 110,
+                                            bottom: 5,
+                                            width: vw(20),
+                                            height: vw(25),
+                                            backgroundColor: "black",
+                                            borderRadius: 40,
+                                            transform: [{ rotate: "-15deg" }],
+                                        }}></View>
+                                        <View style={{
+                                            position: 'absolute',
+                                            right: 10,
+                                            top: 10,
+                                        }}>
+                                            <Fontisto name="heart" size={35} color="black" />
+                                        </View>
+                                        <View style={{
+                                            width: vw(50),
+                                            height: vh(20),
+                                        }}>
+                                            <Image
+                                                style={{
+                                                    width: vw(32),
+                                                    height: vh(25),
+                                                    transform: [{ rotate: "-10deg" }],
+                                                    position: 'absolute',
+                                                    left: 0,
+                                                    top: 10,
+                                                }}
+                                                resizeMode='contain'
+                                                source={{ uri: fav.image }}
+                                            />
+                                        </View>
 
-                                        <Image
-                                            style={{
-                                                width: vw(20),
-                                                height: vh(10),
-                                            }}
-                                            resizeMode="contain"
-                                            source={{ uri: fav.image }}
-                                        />
                                     </View>
                                     <View style={{
-
+                                        position: 'absolute',
+                                        right: 10,
+                                        bottom: 10,
+                                        borderRadius: 10,
+                                        marginHorizontal: 20,
+                                        backgroundColor: 'white',
+                                        shadowColor: "#DD8643",
+                                        shadowOffset: {
+                                            width: 5,
+                                            height: 1,
+                                        },
+                                        marginHorizontal: 5,
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 3.84,
+                                        elevation: 2,
                                     }}>
                                         <Text
                                             style={{
-                                                color: 'white',
+                                                color: "black",
                                                 textAlign: 'center',
                                                 alignItems: 'flex-end',
-                                                paddingTop: 20
+                                                paddingTop: 4
                                             }}
                                         >{fav.model}</Text>
                                     </View>
-                                    {/* <View style={{
-                                        width: vw(100),
-                                    }}>
-                                        <Text style={{
-                                            color: 'white',
-                                        }}>Ver mas favoritos</Text>
-                                    </View> */}
                                 </View>
                             )
                         })
                     }
-
+                </View>
+                <View style={{
+                    height: vh(7),
+                    width: vw(90),
+                    justifyContent: 'space-around',
+                    flexDirection: 'row',
+                    backgroundColor: 'black',
+                    borderBottomLeftRadius: 30,
+                    borderBottomRightRadius: 30,
+                    alignItems: 'center'
+                }}>
+                    <Text style={{
+                        color: "#DD8643",
+                        textAlign: 'center',
+                        fontSize: 15,
+                        letterSpacing: 6,
+                    }}>Ver mas favoritos</Text>
+                    <AntDesign name="right" size={30} color="#DD8643" />
                 </View>
             </View>
         </View>
