@@ -8,7 +8,6 @@ import { Icon } from "@rneui/themed";
 import styles from "./styles/CustomAlert";
 import { ModalPoup } from "./CustomAlert";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlag, setModalAlert } from "../redux/slices/payments";
 
 const CustomAlertPayment = ({
   visible,
