@@ -42,12 +42,17 @@ export const getOneProduct = (id) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const addProduct = (product) => (dispatch) => {
-    axios.post(`${baseUrl}/products`, product)
+export const addProduct = (product, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userToken}`,
+        },
+    };
+    axios.post(`${baseUrl}/products`, product, config)
         .then(res => {
             dispatch({
                 type: ADD_PRODUCT,
-                payload: res.data
+                payload: res.data.product
             })
         })
         .catch(err => console.log(err))
