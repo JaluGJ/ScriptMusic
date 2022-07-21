@@ -1,5 +1,5 @@
 import React from 'react'
-import useFavorites from "../customHooks/useFavorites.js";
+import useFavorites from "../../../customHooks/useFavorites";
 import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { vh, vw } from "react-native-expo-viewport-units";
@@ -83,13 +83,13 @@ export const FAVORITOS = ({ favorite }) => {
                                             }}
                                         >{fav.model}</Text>
                                     </View>
-                                    <View style={{
-                                        width: vw(),
+                                    {/* <View style={{
+                                        width: vw(100),
                                     }}>
                                         <Text style={{
                                             color: 'white',
                                         }}>Ver mas favoritos</Text>
-                                    </View>
+                                    </View> */}
                                 </View>
                             )
                         })

@@ -14,7 +14,6 @@ import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
-import { useNavigation } from "@react-navigation/native";
 
 import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
