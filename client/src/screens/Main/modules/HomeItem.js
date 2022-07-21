@@ -6,7 +6,7 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
 
 
-const HomeItem = ({ promoimg, button, price, containerInfo, containerText, containerImage, image, id }) => {
+const HomeItem = ({ promoimg, model, button, price, image, id, containerInfo, containerText, containerImage, containerModel }) => {
 
     //console.log(promoimg)
     //const {promoOne} = promoimg
@@ -20,7 +20,9 @@ const HomeItem = ({ promoimg, button, price, containerInfo, containerText, conta
                 }
 
             >
+
                 <View style={styles.container}>
+
                     <Image
                         style={{
                             width: vw(90),
@@ -28,13 +30,16 @@ const HomeItem = ({ promoimg, button, price, containerInfo, containerText, conta
                             borderRadius: 50,
                             borderWidth: 1,
                             position: 'absolute',
-                            
+
                         }}
                         resizeMode='contain'
                         source={promoimg}
                     >
                     </Image>
                     <View style={containerInfo}>
+                        <View style={containerModel}>
+                            <Text style={styles.price}>{model}</Text>
+                        </View>
                         <View style={containerText}>
                             <Text style={styles.price}>${price}</Text>
                         </View>

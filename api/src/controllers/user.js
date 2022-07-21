@@ -369,5 +369,29 @@ module.exports = {
                 next(error)
             }
             )
+    },
+
+
+    validateToken: async (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if(!autorization){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if(!data){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if(!user){
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if(!user.isAdmin){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        return res.json({ user: user.email })
     }
 }

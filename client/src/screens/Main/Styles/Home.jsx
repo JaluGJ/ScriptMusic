@@ -62,6 +62,15 @@ const styles = StyleSheet.create({
     },
     offTitle:{
         opacity: 1,
+    },
+    textCategories:{
+        fontSize: 20,
+        letterSpacing: 2,
+        color: "#DD8643",
+        textAlign:'center'
+    },
+    containerNewCartegories:{
+        marginBottom:15,
     }
 })
 

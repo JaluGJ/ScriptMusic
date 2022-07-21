@@ -1,11 +1,9 @@
 import { StyleSheet } from 'react-native'
 import { vh, vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
-
     categories: {
-        padding: 10,
         flexDirection: 'row',
-        
+        paddingVertical:vh(3)
     },
     button: {
         backgroundColor: "#131010",
@@ -14,12 +12,12 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
         marginHorizontal: 5,
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5,
+        elevation: 1,
         width: vw(16),
         height: vh(8),
         borderWidth:1,

@@ -13,16 +13,17 @@ export const instruments = [
     promoTwo = {
         id: 2,
         image: promo2,
+        containerModel: styles.containerModel,
         containerInfo: styles.containerInfo,
         containerText: styles.containerText,
     },
     promoOne = {
         id: 3,
         image: promo1,
+        containerModel: styles.containerModelUp,
         containerInfo: styles.containerInfoCircle,
         containerText: styles.containerTextCircle,
         containerImage: styles.containerImageCircle,
-        
     },
     promoFor={ 
         id: 4,
