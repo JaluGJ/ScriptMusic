@@ -1,48 +1,65 @@
 import {useState, useEffect}from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './components/Home/Home';
 import UpdateProduct from './components/updateProduct/updateProduct';
 import NewProduct from './components/Newproduct/NewProduct';
 import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
+import validate from './pages/login/validate.js'
 
 function App() {
-
   const [auth, setAuth] = useState(null);
-  console.log(auth)
+
+  useEffect(() => {
+    const data = localStorage.getItem('user');
+    if (data !== "null") {
+      setAuth(data);
+    }
+    if(data === "null"){
+      setAuth(null);
+    }
+  }, [])
+
   useEffect(() => {
     const u = localStorage.getItem('user');
-    u && JSON.parse(u) ? setAuth(true) : setAuth(false)
+    const e = localStorage.getItem('email');
+    if(u !== null){
+      validate(u)
+    .then(res => {
+      if (res === e) {
+        return setAuth(u);
+      }
+      setAuth(false)
+      return localStorage.clear('user')
+    })
+  }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('user', auth);
-  }, [auth]);
 
   return (
     <div className="App">
-      <BrowserRouter>
         <Routes>
           {
             !auth && (
-              <Route path='/' element={<Login authenticate={() => setAuth(true)} />} />
+              <>
+                <Route path="/" element={<Login/>} />
+              </>
             )
           }
           {
             auth && (
               <>
-               {/*  <Route path='/home' element={<Home />} /> */}
-                <Route path='/products' element={<Products logout={() => setAuth(false)}/>} />
-                <Route path='/products/new' element={<NewProduct logout={() => setAuth(false)}/>} />
-                <Route path='/products/:id' element={<UpdateProduct logout={() => setAuth(false)}/>} />
-                <Route path='/users/' element={<Users logout={() => setAuth(false)}/>} />
+                <Route path="/" element={<Home/>} />
+                <Route path='/products' element={<Products/>} />
+                <Route path='/products/new' element={<NewProduct/>} />
+                <Route path='/products/:id' element={<UpdateProduct/>} />
+                <Route path='/users' element={<Users/>} />
               </>
             )
           }
-          <Route path='*' element={<Navigate to={auth ? '/products' : '/'} />} />
+          <Route path="*" element={auth ? <Users/> : <Login/>} />
         </Routes>
-      </BrowserRouter>
     </div>
   )
 }
