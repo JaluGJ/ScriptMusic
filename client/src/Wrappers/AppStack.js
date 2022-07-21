@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import useFavorites from "../screens/Main/customHooks/useFavorites";
-import useCountCart from "../screens/Main/customHooks/useCountCart";
+import useFavorites from "../customHooks/useFavorites";
+import useCountCart from "../customHooks/useCountCart";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {

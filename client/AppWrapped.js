@@ -1,7 +1,7 @@
 import AuthStack from "./src/Wrappers/AuthStack";
 import AppStack from "./src/Wrappers/AppStack";
 import { ActivityIndicator, View } from "react-native";
-import useLogin from "./src/screens/Main/customHooks/useLogin";
+import useLogin from "./src/customHooks/useLogin";
 
 export default function AppWrapped() {
   const [token, isLoading] = useLogin()

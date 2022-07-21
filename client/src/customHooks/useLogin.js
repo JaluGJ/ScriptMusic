@@ -1,7 +1,7 @@
 import{ useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { changeToken, changeUser } from '../../../redux/slices/signin';
+import { changeToken, changeUser } from '../redux/slices/signin';
 
 const useLogin = () => {
     let { token , err, isLoading } = useSelector((state) => state.signin);

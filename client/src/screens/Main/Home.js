@@ -14,6 +14,8 @@ import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
+import { useNavigation } from "@react-navigation/native";
+
 import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
 import { instruments } from './modules/HomePromos.js'
@@ -36,11 +38,10 @@ const Home = () => {
   ); //12 - 24
   const navigation = useNavigation();
 
-
   const submitHandle = (search) => {
     dispatch(searchProducts(search));
     setSearch('')
-    navigation.navigate('Products');
+    navigation.navigate('Products')
   }
   useEffect(() => {
     dispatch(getAllProducts());

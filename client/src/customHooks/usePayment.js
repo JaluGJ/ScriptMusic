@@ -2,10 +2,10 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useConfirmPayment } from '@stripe/stripe-react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPaymentIntent, fetchStatusPayment } from '../helpers/payments';
+import { fetchPaymentIntent, fetchStatusPayment } from '../screens/Main/helpers/payments';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { create } from '../../../redux/slices/signin';
-import { removeItems } from '../../../redux/slices/products';
+import { create } from '../redux/slices/signin';
+import { removeItems } from '../redux/slices/products';
 import { useNavigation } from '@react-navigation/native';
 
 const usePayment = ({setModal}) => {

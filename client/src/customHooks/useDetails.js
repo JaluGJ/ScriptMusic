@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetails } from '../../../redux/slices/products';
+import { getProductDetails } from '../redux/slices/products';
 
 const useDetails = ({itemId}) => {
     const navigation = useNavigation();
