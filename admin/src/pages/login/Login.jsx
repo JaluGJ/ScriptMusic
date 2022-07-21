@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { loginUser } from '../../redux/actions'
 import logo from '../../assets/logo.png'
 import { useNavigate } from "react-router-dom";
-import { adminLogin } from '../../redux/actions';
+// import { adminLogin } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginValidate from './inputs.js'
+import validate from './validate.js'
 
-const Login = ({ authenticate }) => {
+const Login = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    const token = useSelector(state => state.token)
+    // const token = useSelector(state => state.token)
     const [input, setInput] = useState({
         email: '',
         password: ''
@@ -26,17 +27,70 @@ const Login = ({ authenticate }) => {
         })
     }
 
+    // function handleSubmit(e) {
+    //     e.preventDefault();
+    //     loginValidate(input)
+    //         .then(res => {
+    //             console.log("res", res)
+    //             if (res) {
+    //                 localStorage.setItem('user', res);
+    //                 validate(res)
+    //                     .then(res => {
+    //                         console.log("res", res)
+    //                         if (res === input.email) {
+    //                             localStorage.setItem('email', input.email)
+    //                             toast.success("Bienvenido", {
+    //                                 position: "top-center",
+    //                                 autoClose: 5000,
+    //                                 hideProgressBar: false,
+    //                                 closeOnClick: true,
+    //                                 pauseOnHover: true,
+    //                                 draggable: true,
+    //                                 progress: undefined,
+    //                             });
+    //                             const data = localStorage.getItem('user')
+    //                             if (data !== "null") {
+    //                                 return authenticate().navigate('/users')
+    //                             }
+    //                         } else {
+    //                             return toast.error("Usuario o contraseña incorrectos", {
+    //                                 position: "top-center",
+    //                                 autoClose: 5000,
+    //                                 hideProgressBar: false,
+    //                                 closeOnClick: true,
+    //                                 pauseOnHover: true,
+    //                                 draggable: true,
+    //                                 progress: undefined,
+    //                             });
+    //                         }
+    //                     })
+    //             } else {
+    //                 return toast.error("Usuario o contraseña incorrectos", {
+    //                     position: "top-center",
+    //                     autoClose: 5000,
+    //                     hideProgressBar: false,
+    //                     closeOnClick: true,
+    //                     pauseOnHover: true,
+    //                     draggable: true,
+    //                     progress: undefined,
+    //                 });
+    //             }
+    //         })
+    // }
+
+
     async function handleSubmit(e) {
-        e.preventDefault()
-        console.log(input)
-        const token = await loginValidate(input)
-        // Aca guardar el token
-        console.log(token)
-        token !== undefined
-            ?
-            authenticate().
-            navigate('/home')
-            : toast.error('Usuario o contraseña incorrecto.', {
+        e.preventDefault();
+        const token = await loginValidate(input);
+        if (token){
+            console.log("TOKEEEEEN")
+            const e = await validate(token)
+            if (e === input.email) {
+                localStorage.setItem('user', token)
+                localStorage.setItem('email', e)
+            }
+        } else {
+            return toast.error('Usuario o contraseña incorrecto.', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -45,6 +99,24 @@ const Login = ({ authenticate }) => {
                 draggable: true,
                 progress: undefined,
             });
+        }
+        const data = localStorage.getItem('user')
+        if(data !== "null"){
+            console.log("WTF", token)
+            toast.done('TODO OK.', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            navigate('/products')
+            return window.location.reload()
+        }
+        navigate('/login')
+        return window.location.reload()
     }
 
     return (

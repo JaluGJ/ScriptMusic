@@ -12,8 +12,12 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from "react-router-dom";
 
+const reload = () => {
+    localStorage.clear('user')
+    window.location.reload();
+}
 
-export default function SideBar({logout}) {
+export default function SideBar() {
     return (
         <div className='sidebar'>
             <div className="items">
@@ -77,7 +81,7 @@ export default function SideBar({logout}) {
                     </li>
                     <li>
                         <LogoutOutlinedIcon className='icon' />
-                        <span onClick={logout}>Desconectarse</span>
+                        <span onClick={() => reload()}>Desconectarse</span>
                     </li>
                 </ul>
             </div>
