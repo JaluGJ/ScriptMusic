@@ -151,7 +151,7 @@ module.exports = {
         }
       })
       if (!product.ratYCom.length) {
-        return res.json({ product: producto, rating: 0 })
+        return res.json({ product, rating: 0 })
       }
       let valRating = []
       product.ratYCom?.forEach(rat => {
