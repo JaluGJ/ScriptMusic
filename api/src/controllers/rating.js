@@ -35,11 +35,11 @@ module.exports={
       //
 
       if (!rating){
-        return res.json({msg: 'Es necesario que des una puntuación'})
+        return res.status(404).json({msg: 'Es necesario que des una puntuación'})
       }
       let compro = user.bought.find(elem => elem.id === productId)
       if (!compro){
-        return res.json({msg: 'el usuario no ha comprado este articulo'})
+        return res.status(404).json({msg: 'el usuario no ha comprado este articulo'})
       }
       if (!comment){ //si no tiene comentario, se guarda sin comentario.
         let woComment = new Rating ({
