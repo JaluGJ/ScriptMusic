@@ -9,11 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function NewProduct({inputs, title, logout}){
+export default function NewProduct({logout}){
     const types = useSelector(state=> state.types)
     const dispatch  =  useDispatch()
     const navigate = useNavigate()
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
+    const userToken = localStorage.user
+
     
     useEffect(() => {
         dispatch(getAllProducts());
@@ -51,7 +53,7 @@ export default function NewProduct({inputs, title, logout}){
             window.location.reload()
             return alert('Por favor verifique los campos')
         }
-        dispatch(addProduct(input))
+        dispatch(addProduct(input, userToken))
         toast.success('Producto agregado exitosamente', {
             position: "top-center",
             autoClose: 4000,
@@ -94,9 +96,6 @@ export default function NewProduct({inputs, title, logout}){
                         <div className="formInput">
                            
                             <label> Imagen </label>
-                            {/* <input 
-                            type="file" 
-                            onChange={e => setFile(e.target.files[0])}/> */}
                             <input 
                             type="text"
                             placeholder='Agrega un link de imagen'
@@ -137,7 +136,6 @@ export default function NewProduct({inputs, title, logout}){
                             placeholder='135'
                             name='price'
                             value={input.price}
-                            // min='1'
                             onChange={(e) => handleinput(e)}/>
                             {error.price && (
                             <p>{ error.price }</p>
@@ -149,7 +147,6 @@ export default function NewProduct({inputs, title, logout}){
                             placeholder='50'
                             name='stock'
                             value={input.stock}
-                            // min='0'
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
