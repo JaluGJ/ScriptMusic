@@ -4,7 +4,7 @@ import styles from "../Styles/Cart.jsx";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import useShoppingCart from "../customHooks/useShoppingCart.js";
+import useShoppingCart from "../../../customHooks/useShoppingCart.js";
 
 const CardProducts = () => {
   const navigation = useNavigation();

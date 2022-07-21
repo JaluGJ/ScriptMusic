@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addItems } from "../../../redux/slices/products";
+import { addItems } from "../redux/slices/products";
 
 const useShoppingCart = () => {
   const { newItems } = useSelector((state) => state.products);
