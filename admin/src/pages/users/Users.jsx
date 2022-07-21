@@ -9,9 +9,10 @@ import columns from './inputs'
 function Users() {
   const dispatch = useDispatch()
   const rows = useSelector(state => state.users)
+  const userToken = localStorage.user;
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllUsers(userToken));
   }, [])
   return (
     <div className="users">

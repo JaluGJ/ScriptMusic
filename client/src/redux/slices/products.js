@@ -59,7 +59,7 @@ export const getProductDetails = (id)=> (dispatch) =>{
     axios.get(`${apiUrl}products/${id}`)
     .then(res=>{
         dispatch(setProductsStatusCode(res.status))
-        dispatch(setProductsDetails(res.data))
+        dispatch(setProductsDetails(res.data.product))
     })
     .catch(err=>{
         console.log(err)

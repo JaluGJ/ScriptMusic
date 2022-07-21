@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   containerInput: {
     width: "100%",
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   input: {
     backgroundColor: "#d9d9d9",
@@ -40,8 +40,16 @@ const styles = StyleSheet.create({
   containerButton: {
     width: "50%",
   },
-  button: {
+  buttonErr: {
     backgroundColor: "#a9a9a9",
+    height: 35,
+    borderRadius: 100,
+    fontSize: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    backgroundColor: "#DA952D",
     height: 35,
     borderRadius: 100,
     fontSize: 16,

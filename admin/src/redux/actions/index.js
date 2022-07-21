@@ -1,6 +1,7 @@
 import axios from "axios"
 // lo de la linea 3 iria en un .env, solo la parte de localhost:3001, la parte de http si va asi 
-const baseUrl = "https://sm.up.railway.app"
+// const baseUrl = "https://sm.up.railway.app"
+const baseUrl = "http://localhost:3001"
 
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
@@ -31,12 +32,17 @@ export const getAllProducts = () => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const getOneProduct = (id) => (dispatch) => {
+export const getOneProduct = (id, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
     axios.get(`${baseUrl}/products/${id}`)
         .then(res => {
             dispatch({
                 type: GET_ONE_PRODUCT,
-                payload: res.data
+                payload: res.data.product
             })
         })
         .catch(err => console.log(err))
@@ -58,8 +64,13 @@ export const addProduct = (product, userToken) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const updateProduct = (id, product) => (dispatch) => {
-    axios.put(`${baseUrl}/products/${id}`, product)
+export const updateProduct = (id, product, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+    axios.put(`${baseUrl}/products/${id}`, product, config)
         .then(res => {
             dispatch({
                 type: UPDATE_PRODUCT,
@@ -90,8 +101,13 @@ export const clearCache = () => (dispatch) => {
 
 // USER ACTIONS
 
-export const getAllUsers = () => (dispatch) => {
-    axios.get(`${baseUrl}/users`)
+export const getAllUsers = (userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+    axios.get(`${baseUrl}/users`, config)
         .then(res => {
             dispatch({
                 type: GET_ALL_USERS,

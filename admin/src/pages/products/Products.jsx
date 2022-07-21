@@ -13,9 +13,11 @@ const Products = () => {
     useEffect(() => {
         dispatch(getAllProducts());
     }, [])
+    const userToken = localStorage.user
 
     return(
         <div className="products">
+            {console.log(userToken)}
                 <SideBar/>
             <div className="container">
                 <List 
