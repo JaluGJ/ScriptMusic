@@ -7,6 +7,7 @@ const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
 const { soldProducts } = require('../controllers/soldInfo')
 const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers/favourites')
+const { addRating } = require('../controllers/rating')
 
 const routes = Router()
 
@@ -22,6 +23,11 @@ routes.get('/products/:id', getProductById)
 routes.delete('/products/:id', deleteProduct)
 
 routes.put('/products/:id', updateProduct)
+
+    // rating & comment
+
+routes.post('/rating', addRating)
+
 // PRODUCTS ROUTES
 
 // USER ROUTES

@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require('mongoose')
 
 // modelsProduct 
 // "model": 
@@ -31,6 +31,12 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    ratYCom: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Rating"
+        }
+    ],
     stock: {
         type: Number,
         required: true
