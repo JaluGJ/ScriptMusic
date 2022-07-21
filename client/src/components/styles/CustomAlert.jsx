@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       height: '100%',
       paddingHorizontal: 50,
     },
-    buttonGreen:{
+    buttonCloseSuccessful:{
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#01A601',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
       height: '100%',
       paddingHorizontal: 50,
     },
-    buttonRed:{
+    buttonCloseError:{
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#F70000',

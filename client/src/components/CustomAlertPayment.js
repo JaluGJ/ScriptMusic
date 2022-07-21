@@ -10,20 +10,17 @@ import { ModalPoup } from "./CustomAlert";
 import { useDispatch, useSelector } from "react-redux";
 
 const CustomAlertPayment = ({
-  alert,
-  setAlert,
+  visible,
   flag,
-  setFlag,
   title,
   message,
-  button,
   color,
   iconName,
 }) => {
   const dispatch = useDispatch();
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ModalPoup visible={alert}>
+      <ModalPoup visible={visible}>
         <View style={{ alignItems: "center" }}></View>
         <View style={{ alignItems: "center" }}>
           <Icon
@@ -38,13 +35,13 @@ const CustomAlertPayment = ({
         <View style={styles.bottom}>
           <TouchableOpacity
             onPress={() => {
-              setAlert(!alert)
+              dispatch(setModalAlert(false))
               setTimeout(() =>{
-                setFlag(1)
-               }, 500);
+                 dispatch(setFlag(true))
+                }, 500);
             }}
             
-            style={flag? styles.buttonGreen: styles.buttonRed }
+            style={flag ? styles.buttonCloseSuccessful : styles.buttonCloseError}
           >
             <Text style={styles.buttonText}>OK</Text>
           </TouchableOpacity>
