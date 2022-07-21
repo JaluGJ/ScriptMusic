@@ -1,7 +1,7 @@
 import{ useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { changeToken, changeUser, cleanErr } from '../../../redux/slices/signin';
+import { changeToken, changeUser, cleanErr } from '../redux/slices/signin';
 import { Alert } from 'react-native';
 
 const useLogin = () => {
