@@ -31,12 +31,17 @@ export const getAllProducts = () => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const getOneProduct = (id) => (dispatch) => {
+export const getOneProduct = (id, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
     axios.get(`${baseUrl}/products/${id}`)
         .then(res => {
             dispatch({
                 type: GET_ONE_PRODUCT,
-                payload: res.data
+                payload: res.data.product
             })
         })
         .catch(err => console.log(err))
@@ -53,8 +58,13 @@ export const addProduct = (product) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const updateProduct = (id, product) => (dispatch) => {
-    axios.put(`${baseUrl}/products/${id}`, product)
+export const updateProduct = (id, product, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+    axios.put(`${baseUrl}/products/${id}`, product, config)
         .then(res => {
             dispatch({
                 type: UPDATE_PRODUCT,
