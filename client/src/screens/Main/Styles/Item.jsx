@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
     },/* no tocar */ 
     
     price:{
-        height: vh(6),
         justifyContent:'center',
         alignItems:'center',
         textAlign:'center',
         fontSize:35,
         color: '#ffffff',
         paddingVertical:10,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        flexWrap:'wrap',
     },/* no tocar */
     
     modelText:{
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
         fontSize:20,
         color: '#DD8643',
     },
-
+    absoluteTouchable:{
+        marginBottom:10
+    },
 
     /* Primer promo cuadrado vacio */
     offcontainerInfo:{
@@ -48,14 +50,23 @@ const styles = StyleSheet.create({
 
 
     /* Segunda promo doble circulo */
+    containerModel:{
+        position: 'absolute',
+        left: vw(10),
+        height: vh(25),
+    },
     containerInfo:{
-        width: vw(100),
+        width: vw(90),
         marginTop:vh(10),
         flexDirection:'row',
         justifyContent:'center',
     },
     containerText:{
         justifyContent:'center',
+    },
+    containerModelUp:{
+        position: 'absolute',
+        top: vh(-10),
     },
     /* Tercer promo circulo en medio*/
     containerInfoCircle:{

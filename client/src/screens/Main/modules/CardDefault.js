@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, Image, StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import emptyCart from "../../../../assets/carrito1.png";
-import styles from "./styles/CardDefault.jsx";
+import styles from "../Styles/CardDefault.jsx";
 
 const CardDefault = () => {
     const navigation = useNavigation();

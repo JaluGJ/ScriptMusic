@@ -5,7 +5,7 @@ import styles from "./Styles/Favorites.jsx";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import FavProducts from "./modules/FavProducts";
-import useFavorites from "./customHooks/useFavorites";
+import useFavorites from "../../customHooks/useFavorites";
 
 export default function EmptyFavs() {
   const [favourites,loading] = useFavorites()

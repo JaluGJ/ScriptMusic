@@ -8,10 +8,10 @@ module.exports = {
     if (search) {
       try {
         const firstSearch = await Product.find({ model: { $regex: search, $options: "i" } })
-        if(firstSearch.length === 0){
+        if (firstSearch.length === 0) {
           const secondSearch = await Product.find({ type: { $regex: search, $options: "i" } })
-          if(secondSearch.length === 0){
-            return res.status(404).json({msg:"No se encontro ningun producto"});
+          if (secondSearch.length === 0) {
+            return res.status(404).json({ msg: "No se encontro ningun producto" });
           }
           return res.json(secondSearch).end();
         }
@@ -29,9 +29,9 @@ module.exports = {
           .then((products) => {
             return res.json(products).end();
           })
-            .catch((error)=>{
-              next(error)
-            })
+          .catch((error) => {
+            next(error)
+          })
       }
 
       if (price === "lower") {
@@ -40,9 +40,9 @@ module.exports = {
           .then((products) => {
             return res.json(products).end();
           })
-          .catch((error)=>{
+          .catch((error) => {
             next(error)
-          }) 
+          })
       }
     }
 
@@ -59,13 +59,13 @@ module.exports = {
 
       return Product.find({ category: category }).then((products) => {
         if (products.length === 0) {
-          return res.status(404).json({msg:"No existen productos con esta categoria"});
+          return res.status(404).json({ msg: "No existen productos con esta categoria" });
         }
         return res.json(products).end();
       })
-      .catch((error)=>{
-        next(error)
-      })
+        .catch((error) => {
+          next(error)
+        })
     }
 
     if (category && price) {
@@ -85,11 +85,11 @@ module.exports = {
           .sort({ price: -1 })
           .then((products) => {
             if (products.length === 0) {
-              return res.status(404).json({msg:"No existen productos con esta categoria"});
+              return res.status(404).json({ msg: "No existen productos con esta categoria" });
             }
             return res.json(products).end();
           })
-          .catch((error)=>{
+          .catch((error) => {
             next(error)
           })
       }
@@ -110,11 +110,11 @@ module.exports = {
           .sort({ price: 1 })
           .then((products) => {
             if (products.length === 0) {
-              return res.status(404).json({msg:"No existen productos con esta categoria"});
+              return res.status(404).json({ msg: "No existen productos con esta categoria" });
             }
             return res.json(products).end();
           })
-          .catch((error)=>{
+          .catch((error) => {
             next(error)
           })
       }
@@ -131,7 +131,24 @@ module.exports = {
 
   getProductById: (req, res, next) => {
     const { id } = req.params;
-    return Product.findById(id)
+    return Product.findById(id).populate({
+      path: "ratYCom",
+      select: {
+        rating: 1,
+        comment: 1,
+        date: 1,
+        _id: 0
+      },
+      populate: {
+        path: "userId",
+        select: {
+          fisrtName: 1,
+          lastName: 1,
+          image: 1,
+          _id: 0
+        }
+      }
+    })
       .then((product) => {
         return res.json(product);
       })
@@ -140,36 +157,75 @@ module.exports = {
       });
   },
 
+  //lee esto Enzo, o cualquiera, y digame si le parece bien.
+
+  /*async (req, res, next){
+    try{
+      const { id } = req.params
+      const producto = await Product.findById(id).populate({
+        path: "ratYCom",
+        select: {
+          rating: 1,
+          comment: 1,
+          date: 1,
+          _id: 0
+        },
+        populate: {
+          path: "userId",
+          select: {
+            fisrtName: 1,
+            lastName: 1,
+            image: 1,
+            _id: 0
+          }
+        }
+      }
+      if (!product.ratYCom.length){
+        return res.json({product: producto, rating: 0})
+      }
+      let valRating = []
+      product.ratYCom?.forEach(rat => {
+        valRating.push(rat.rating)
+      })
+      let sumRating = valRating.reduce((a,b)=>a+b)/valRating.length
+      return res.json({product: producto, rating:sumRating })
+    } catch (err){
+      next(err)
+    }
+  }
+
+   */
+
   updateProduct: (req, res, next) => {
 
     const autorization = req.get('Authorization')
-    if(!autorization){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!autorization) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const token = autorization.split(' ')[1]
     const data = getTokenData(token)
-    if(!data){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(!data.isAdmin){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data.isAdmin) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
     const { id } = req.params;
     const { model, brand, price, type, category, stock, image, description } = req.body;
 
-    if (!model) return res.status(404).json({msg:"Falta informacion de model"});
-    if(!brand) return res.status(404).json({msg:'Falta informacion de brand'});
-    if(!price) return res.status(404).json({msg:'Falta informacion de price'});
-    if(!type)  return res.status(404).json({msg:'Falta informacion de type'});
-    if(!category) return res.status(404).json({msg:'Falta informacion de category'});
-    if(!stock) return res.status(404).json({msg:'Falta infromacion de stock'});
-    if(!image) return res.status(404).json({msg:'Falta informacion de image'});
-    if(!description) return res.status(404).json({msg:'Falta informacion de description'});
-    
+    if (!model) return res.status(404).json({ msg: "Falta informacion de model" });
+    if (!brand) return res.status(404).json({ msg: 'Falta informacion de brand' });
+    if (!price) return res.status(404).json({ msg: 'Falta informacion de price' });
+    if (!type) return res.status(404).json({ msg: 'Falta informacion de type' });
+    if (!category) return res.status(404).json({ msg: 'Falta informacion de category' });
+    if (!stock) return res.status(404).json({ msg: 'Falta infromacion de stock' });
+    if (!image) return res.status(404).json({ msg: 'Falta informacion de image' });
+    if (!description) return res.status(404).json({ msg: 'Falta informacion de description' });
+
 
     const newProduct = {
       model,
@@ -194,19 +250,19 @@ module.exports = {
   deleteProduct: (req, res, next) => {
 
     const autorization = req.get('Authorization')
-    if(!autorization){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!autorization) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const token = autorization.split(' ')[1]
     const data = getTokenData(token)
-    if(!data){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(!data.isAdmin){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data.isAdmin) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
     const { id } = req.params;
@@ -222,31 +278,31 @@ module.exports = {
   uploadProduct: (req, res, next) => {
 
     const autorization = req.get('Authorization')
-    if(!autorization){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!autorization) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const token = autorization.split(' ')[1]
     const data = getTokenData(token)
-    if(!data){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if(!data.isAdmin){
-        return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    if (!data.isAdmin) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const { model, brand, price, type, category, stock, image, description } = req.body;
 
-    if (!model) return res.status(404).json({msg:"Falta informacion necesaria de model"});
-    if(!brand) return res.status(404).json({msg:'Falta informacion necesaria de brand'});
-    if(!price) return res.status(404).json({msg:'Falta informacion necesaria de price'});
-    if(!type) return res.status(404).json({msg:'Falta informacion necesaria de type'});
-    if(!category) return res.status(404).json({msg:'Falta informacion necesaria de category'});
-    if(!stock) return res.status(404).json({msg:'Falta informacion necesaria de stock'});
-    if(!image) return res.status(404).json({msg:'Falta informacion necesaria de image'});
-    if(!description) return res.status(404).json({msg:'Falta informacion necesaria de description'});
-      
+    if (!model) return res.status(404).json({ msg: "Falta informacion necesaria de model" });
+    if (!brand) return res.status(404).json({ msg: 'Falta informacion necesaria de brand' });
+    if (!price) return res.status(404).json({ msg: 'Falta informacion necesaria de price' });
+    if (!type) return res.status(404).json({ msg: 'Falta informacion necesaria de type' });
+    if (!category) return res.status(404).json({ msg: 'Falta informacion necesaria de category' });
+    if (!stock) return res.status(404).json({ msg: 'Falta informacion necesaria de stock' });
+    if (!image) return res.status(404).json({ msg: 'Falta informacion necesaria de image' });
+    if (!description) return res.status(404).json({ msg: 'Falta informacion necesaria de description' });
+
     const product = new Product({
       model,
       brand,
@@ -260,7 +316,7 @@ module.exports = {
 
     product.save()
       .then(() => {
-        return res.json({msg:"Producto guardado", product});
+        return res.json({ msg: "Producto guardado", product });
       })
       .catch((error) => {
         next(error);

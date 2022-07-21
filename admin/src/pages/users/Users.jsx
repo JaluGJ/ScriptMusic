@@ -6,7 +6,7 @@ import './Users.scss';
 import { getAllUsers } from '../../redux/actions';
 import columns from './inputs'
 
-function Users({ logout }) {
+function Users() {
   const dispatch = useDispatch()
   const rows = useSelector(state => state.users)
 
@@ -15,7 +15,7 @@ function Users({ logout }) {
   }, [])
   return (
     <div className="users">
-      <SideBar />
+      <SideBar/>
       <div className="container">
         <List
           tipo='Usuario'

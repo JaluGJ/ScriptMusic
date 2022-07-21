@@ -12,7 +12,7 @@ import CardProducts from "./modules/CardProducts";
 import styles from "./Styles/Cart.jsx";
 import CartModalBotton from "./modules/CartModalBotton";
 import CartModalTop from "./modules/CartModalTop";
-import useShoppingCart from "./customHooks/useShoppingCart";
+import useShoppingCart from "../../customHooks/useShoppingCart";
 
 export default function EmptyCart() {
   const [modal, setModal] = useState(false);

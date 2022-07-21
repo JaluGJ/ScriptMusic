@@ -1,12 +1,13 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, updateProfile, googleLogin } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, updateProfile, googleLogin, validateToken } = require('../controllers/user')
 const postPromo = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
 const { soldProducts } = require('../controllers/soldInfo')
 const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers/favourites')
+const { addRating } = require('../controllers/rating')
 
 const routes = Router()
 
@@ -22,6 +23,11 @@ routes.get('/products/:id', getProductById)
 routes.delete('/products/:id', deleteProduct)
 
 routes.put('/products/:id', updateProduct)
+
+    // rating & comment
+
+routes.post('/rating', addRating)
+
 // PRODUCTS ROUTES
 
 // USER ROUTES
@@ -79,8 +85,11 @@ routes.get('/sold', soldProducts )
 
 routes.post('/create-promo', postPromo )
 
-// PROMOS ROUTES
+// PROMOS ROUTE
 
-// routes.get('/google', (req,res)=> res.send(req.user));
+// AUTH
+
+routes.get('/validate-token', validateToken)
+
 
 module.exports = routes
