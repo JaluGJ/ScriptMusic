@@ -5,13 +5,11 @@ import {
   TextInput,
   View,
   Image,
-  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   CardField,
   useConfirmPayment,
-  CardForm,
 } from "@stripe/stripe-react-native";
 import { fetchPaymentIntent, fetchStatusPayment } from "../helpers/payments.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,11 +18,99 @@ import { removeItems } from "../../../redux/slices/products.js";
 import styles from "../Styles/CartPayment.jsx";
 import logo from "../../../../assets/instrumentos/logo2.png";
 import { vh, vw } from "react-native-expo-viewport-units";
-import { create } from "../../../redux/slices/signin.js";
-import usePayment from "../../../customHooks/usePayment";
-const CartModalBotton = ({ setModal }) => {
+const CartModalBotton = ({ setModal, setAlert, alert, flag, setFlag }) => {
 
-  const { handlerPayPress, setEmail, setCardDetails, loading } = usePayment({ setModal });
+
+  const [email, setEmail] = useState("");
+  const [cardDetails, setCardDetails] = useState("");
+  const [body, setBody] = useState({});
+  const { user } = useSelector((state) => state.signin);
+  const { confirmPayment, loading } = useConfirmPayment();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    AsyncStorage.getItem("@shoppingCart")
+      .then((res) => {
+        setBody({
+          items: JSON.parse(res),
+          userId: user.id,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+  const handlerPayPress = async () => {
+    if (!email || !cardDetails?.complete) {
+      setFlag(false)
+      setModal(false)
+      setAlert(!alert)
+      return;
+    }
+    try {
+      const { clientSecret, error } = await fetchPaymentIntent(body);
+      console.log(body)
+      if (error) {
+        alert(error);
+        return;
+      } else {
+        const { paymentIntent, error } = await confirmPayment(clientSecret, {
+          type: "Card",
+          billing_details: {
+            email,
+          },
+        });
+
+
+        if (error) {
+          const { err } = await fetchStatusPayment(body, "Failed");
+          if (err) {
+            console.log(err);
+          }
+          setFlag(3)
+          setModal(false)
+          setAlert(!alert)
+          return;
+        } else if (paymentIntent) {
+          setFlag(2)
+          setModal(false);
+          setAlert(!alert);
+          dispatch(removeItems());
+          const { msg, err } = await fetchStatusPayment(body, "Successful");
+          if (msg) {
+            console.log("articulo pagado y agregado correctamente");
+          } else if (err) {
+            console.log(err);
+          }
+
+          setFlag(2)
+          setModal(false);
+          setAlert(!alert);
+          
+          /* Alert.alert("Estado de pago", "Exitoso", [
+            {
+              text: "OK",
+              onPress: () => {
+
+              },
+            },
+          ]); */
+
+        } else {
+
+          await fetchStatusPayment(body, "Failed");
+
+          Alert.alert("Estado de pago", "Fallido", [
+            { text: "OK", onPress: () => console.log("OK Pressed") },
+          ]);
+        }
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
 
 
   return (
