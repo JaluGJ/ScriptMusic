@@ -1,7 +1,6 @@
 import axios from "axios"
 // lo de la linea 3 iria en un .env, solo la parte de localhost:3001, la parte de http si va asi 
-// const baseUrl = "https://sm.up.railway.app"
-const baseUrl = "http://localhost:3001"
+const baseUrl = "https://sm.up.railway.app"
 
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
@@ -38,7 +37,7 @@ export const getOneProduct = (id, userToken) => (dispatch) => {
           Authorization: `Bearer ${userToken}`,
         },
       };
-    axios.get(`${baseUrl}/products/${id}`)
+    axios.get(`${baseUrl}/products/${id}`, config)
         .then(res => {
             dispatch({
                 type: GET_ONE_PRODUCT,
@@ -58,7 +57,7 @@ export const addProduct = (product, userToken) => (dispatch) => {
         .then(res => {
             dispatch({
                 type: ADD_PRODUCT,
-                payload: res.data.product
+                payload: res.data
             })
         })
         .catch(err => console.log(err))
@@ -117,8 +116,13 @@ export const getAllUsers = (userToken) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const getOneUser = (id) => (dispatch) => {
-    axios.get(`${baseUrl}/users/${id}`)
+export const getOneUser = (id, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+    axios.get(`${baseUrl}/users/${id}`, config)
         .then(res => {
             dispatch({
                 type: GET_ONE_USER,
@@ -128,8 +132,13 @@ export const getOneUser = (id) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// export const addUser = (user) => (dispatch) => {
-//     axios.post(`${baseUrl}/users`, user)
+// export const addUser = (user, userToken) => (dispatch) => {
+//     const config = {
+//         headers: {
+//           Authorization: `Bearer ${userToken}`,
+//         },
+//       };
+//     axios.post(`${baseUrl}/users`, user, config)
 //         .then(res => {
 //             dispatch({
 //                 type: ADD_USER,
@@ -140,7 +149,7 @@ export const getOneUser = (id) => (dispatch) => {
 // }
 
 export const adminLogin = (user) => (dispatch) => {
-    axios.post(`https://sm.up.railway.app/loginAdmin`, user)
+    axios.post(`${baseUrl}/loginAdmin`, user)
     .then(res => {
             console.log(res.data.token)
             dispatch({
