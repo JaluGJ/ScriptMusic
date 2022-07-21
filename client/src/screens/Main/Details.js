@@ -14,9 +14,9 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./Styles/Detail.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { postFavourite } from "../../redux/slices/favourites.js";
-import useShoppingCart from "./customHooks/useShoppingCart.js";
-import useDetails from "./customHooks/useDetails.js";
-import useFavorites from "./customHooks/useFavorites.js";
+import useShoppingCart from "../../customHooks/useShoppingCart";
+import useDetails from "../../customHooks/useDetails";
+import useFavorites from "../../customHooks/useFavorites";
 import CustomAlertComponent from "../../components/CustomAlert.js";
 
 const Details = ({ route }) => {

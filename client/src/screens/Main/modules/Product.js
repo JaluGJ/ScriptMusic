@@ -6,7 +6,7 @@ import styles from "../Styles/Product.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { postFavourite } from "../../../redux/slices/favourites.js";
 import CustomAlertComponent from "../../../components/CustomAlert.js";
-import useFavorites from "../customHooks/useFavorites.js";
+import useFavorites from "../../../customHooks/useFavorites.js";
 
 const Product = ({ item }) => {
   const { model, image, price, brand, id } = item;

@@ -9,7 +9,7 @@ import styles from '../Styles/CartPayment.jsx'
 import logo from '../../../../assets/instrumentos/logo2.png'
 import { vh, vw } from "react-native-expo-viewport-units";
 import { create } from "../../../redux/slices/signin.js";
-import usePayment from "../customHooks/usePayment.js";
+import usePayment from "../../../customHooks/usePayment";
 const CartModalBotton = ({setModal}) => {
 
   const { handlerPayPress, setEmail, setCardDetails, loading } = usePayment({setModal});
