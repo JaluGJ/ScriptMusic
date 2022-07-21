@@ -143,7 +143,7 @@ export default function NewProduct({inputs, title, logout}){
                             <p>{ error.price }</p>
                             )}
 
-                            <label>Disponibles</label>
+                            <label>Disponible</label>
                             <input 
                             type="number" 
                             placeholder='50'
@@ -153,6 +153,17 @@ export default function NewProduct({inputs, title, logout}){
                             onChange={(e) => handleinput(e)}/>
                             {error.stock && (
                             <p>{ error.stock }</p>
+                            )}
+
+                            <label>Tipo</label>
+                            <input 
+                            type="text" 
+                            placeholder='Acústico'
+                            name='type'
+                            value={input.type}
+                            onChange={(e) => handleinput(e)}/>
+                            {error.type && (
+                            <p>{ error.type }</p>
                             )}
 
 
@@ -167,16 +178,6 @@ export default function NewProduct({inputs, title, logout}){
                             <p>{ error.category }</p>
                             )}
 
-                            <label> Tipo </label>
-                            <select name='type' defaultValue="Tipo"
-                            onChange={e => handleinput(e)}>
-                            <option disabled={true}>Tipo</option>
-                            { types.map(e =>
-                            <option value={e} key={e}>{e}</option>)}
-                            </select>
-                            {error.type && (
-                            <p>{ error.type }</p>
-                            )}
 
                             <label>Descripción</label>
                             <textarea 
