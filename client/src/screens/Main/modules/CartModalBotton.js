@@ -22,10 +22,10 @@ import logo from "../../../../assets/instrumentos/logo2.png";
 import { vh, vw } from "react-native-expo-viewport-units";
 import { create } from "../../../redux/slices/signin.js";
 import usePayment from "../../../customHooks/usePayment";
-const CartModalBotton = ({setModal}) => {
+const CartModalBotton = ({ setModal }) => {
 
-  const { handlerPayPress, setEmail, setCardDetails, loading } = usePayment({setModal});
-  
+  const { handlerPayPress, setEmail, setCardDetails, loading } = usePayment({ setModal });
+
 
   return (
     <View style={styles.containerCard}>
@@ -52,14 +52,6 @@ const CartModalBotton = ({setModal}) => {
           }}
           style={styles.input}
         />
-        
-        <TouchableOpacity
-          onPress={()=>handlerPayPress()}
-          style={styles.buttoPage}
-          disabled={loading}
-        >
-          <Text style={styles.buttoPageText}>PAGAR</Text>
-        </TouchableOpacity>
       </View>
       <CardField
         postalCodeEnabled={true}
