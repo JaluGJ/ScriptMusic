@@ -129,40 +129,10 @@ module.exports = {
       });
   },
 
-  getProductById: (req, res, next) => {
-    const { id } = req.params;
-    return Product.findById(id).populate({
-      path: "ratYCom",
-      select: {
-        rating: 1,
-        comment: 1,
-        date: 1,
-        _id: 0
-      },
-      populate: {
-        path: "userId",
-        select: {
-          fisrtName: 1,
-          lastName: 1,
-          image: 1,
-          _id: 0
-        }
-      }
-    })
-      .then((product) => {
-        return res.json(product);
-      })
-      .catch((error) => {
-        next(error);
-      });
-  },
-
-  //lee esto Enzo, o cualquiera, y digame si le parece bien.
-
-  /*async (req, res, next){
-    try{
+  getProductById: async (req, res, next) => {
+    try {
       const { id } = req.params
-      const producto = await Product.findById(id).populate({
+      const product = await Product.findById(id).populate({
         path: "ratYCom",
         select: {
           rating: 1,
@@ -179,22 +149,53 @@ module.exports = {
             _id: 0
           }
         }
-      }
-      if (!product.ratYCom.length){
-        return res.json({product: producto, rating: 0})
+      })
+      if (!product.ratYCom.length) {
+        return res.json({ product: producto, rating: 0 })
       }
       let valRating = []
       product.ratYCom?.forEach(rat => {
         valRating.push(rat.rating)
       })
-      let sumRating = valRating.reduce((a,b)=>a+b)/valRating.length
-      return res.json({product: producto, rating:sumRating })
-    } catch (err){
+      let sumRating = valRating.reduce((a, b) => a + b) / valRating.length
+      return res.json({ product, rating: sumRating })
+    } catch (err) {
       next(err)
     }
-  }
+  },
+  
+  //lee esto Enzo, o cualquiera, y digame si le parece bien.
 
-   */
+  // (req, res, next) => {
+  //   const { id } = req.params;
+  //   return Product.findById(id).populate({
+  //     path: "ratYCom",
+  //     select: {
+  //       rating: 1,
+  //       comment: 1,
+  //       date: 1,
+  //       _id: 0
+  //     },
+  //     populate: {
+  //       path: "userId",
+  //       select: {
+  //         fisrtName: 1,
+  //         lastName: 1,
+  //         image: 1,
+  //         _id: 0
+  //       }
+  //     }
+  //   })
+  //     .then((product) => {
+  //       return res.json(product);
+  //     })
+  //     .catch((error) => {
+  //       next(error);
+  //     });
+  // },
+
+
+
 
   updateProduct: (req, res, next) => {
 
