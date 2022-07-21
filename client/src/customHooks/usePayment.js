@@ -5,13 +5,12 @@ import { fetchPaymentIntent, fetchStatusPayment } from "../screens/Main/helpers/
 import { useDispatch, useSelector } from "react-redux";
 import { useConfirmPayment } from "@stripe/stripe-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { create } from "../redux/slices/signin";
 
 const usePayments = ({ modal, setModal }) => {
   const [email, setEmail] = useState("");
   const [cardDetails, setCardDetails] = useState("");
   const [body, setBody] = useState({});
-  const { user, token } = useSelector((state) => state.signin);
+  const { user } = useSelector((state) => state.signin);
   const { confirmPayment, loading } = useConfirmPayment();
   const dispatch = useDispatch();
 
@@ -65,7 +64,6 @@ const usePayments = ({ modal, setModal }) => {
           } else if (err) {
             console.log(err);
           }
-          dispatch(create(token));
 
           Alert.alert("Estado de pago", "Exitoso", [
             {
