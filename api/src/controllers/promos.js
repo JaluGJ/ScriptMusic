@@ -221,6 +221,45 @@ const getPromos = async (req, res, next) => {
 
 
 
+const getPromoById = async (req, res, next) => {
+  try {
+
+    const {id} = req.params
+    if(!id) return res.status(404).json({ message: 'No se ha indicado id' })
+    
+    const autorization = req.get('Authorization')
+    if (!autorization) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    const token = autorization.split(' ')[1]
+    const data = getTokenData(token)
+    if (!data) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    const user = await User.findById(data.id)
+    if (!user) {
+      return res.status(404).json({ message: 'No se ha encontrado usuario' })
+    }
+
+    const promo = await promosProductModel.findById(id).populate('items', { _id: 0, user: 0 })
+    if (!promo) {
+      return res.status(404).json({ message: 'No se ha encontrado promocion' })
+    }
+
+    return res.json(promo)
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
 
 
 const deletePromo = async (req, res, next) => {
@@ -266,5 +305,6 @@ const deletePromo = async (req, res, next) => {
 module.exports = {
   createPromo,
   getPromos,
-  deletePromo
+  deletePromo,
+  getPromoById
 };
