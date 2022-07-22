@@ -2,6 +2,7 @@ const promosProductModel = require('../models/promosProduct/promosProductSchema'
 const Product = require("../models/product/productSchema.js");
 const User = require('../models/user/userSchema');
 const { getTokenData } = require("../config/jwt.config.js");
+const sendNotifications = require('../config/sendNotifications');
 
 const createPromo = async (req, res, next) => {
   try {
@@ -79,6 +80,7 @@ const createPromo = async (req, res, next) => {
           promoName
         })
         newPromo.save()
+        await sendNotifications(newPromo.promoName)
         return res.status(200).json({ message: 'Promo creada' })
       } catch (error) {
         next(error)
@@ -130,6 +132,7 @@ const createPromo = async (req, res, next) => {
         promoName
       })
       newPromo.save()
+      await sendNotifications(newPromo.promoName)
       return res.status(200).json({ message: 'Promo creada' })
     }
 
@@ -176,6 +179,7 @@ const createPromo = async (req, res, next) => {
       })
 
       newPromo.save()
+      await sendNotifications(newPromo.promoName)
       return res.status(200).json({ message: 'Promo creada' })
     }
 
