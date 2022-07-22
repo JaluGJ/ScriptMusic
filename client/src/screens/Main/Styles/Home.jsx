@@ -71,6 +71,28 @@ const styles = StyleSheet.create({
     },
     containerNewCartegories:{
         marginBottom:15,
+    },
+    containerTextCategories:{
+        padding: 20,
+    },
+    titleCategories:{
+        
+        fontSize:20,
+        letterSpacing: 2,
+    },
+    containerNewCartegories:{
+        backgroundColor:'white',
+        marginVertical:35,
+        marginHorizontal:10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 2,
+        borderRadius:10
     }
 })
 

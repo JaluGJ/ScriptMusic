@@ -18,7 +18,7 @@ import CustomAlertPayment from "../../components/CustomAlertPayment";
 export default function EmptyCart() {
   const [alert, setAlert] = useState(false);
   const [modal, setModal] = useState(false);
-  const [flag, setFlag] = useState(1);
+  const [flag, setFlag] = useState(false);
   const { productsCart, totalPrice } = useShoppingCart();
 
   return (
