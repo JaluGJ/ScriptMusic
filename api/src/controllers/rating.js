@@ -1,6 +1,7 @@
-const User = require('../models/user/userSchema')
-//const Product = require('../models/product/productSchema')
-const Rating = require('../models/ratingYComments/ratComSchema')
+const User = require('../models/user/userSchema.js')
+const Products = require('../models/product/productSchema')
+const Rating = require('../models/ratingYComments/ratComSchema.js')
+const getTokenData = require("../config/jwt.config.js").getTokenData;
 
 
 //tal vez, sea necesario una nueva tabla que sea comentarios y rating.
@@ -10,43 +11,47 @@ module.exports={
   addRating: async (req, res, next) => {
     try {
       //autorizacion
-      const autorization = req.get('Authorization')
+
+       const autorization = req.get('Authorization')
       if (!autorization) {
-        return res.status(401).json({ msg: 'No tienes permisos para hacer esto 1' })
+        return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
       }
       if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
-        return res.status(401).json({ msg: 'No tienes permisos para hacer esto 2' })
+        return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
       }
       const token = autorization.split(' ')[1]
       const data = getTokenData(token)
       if (!data) {
-        return res.status(401).json({ msg: 'No tienes permisos para hacer esto 3' })
-      }
+        return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
+      } 
       //busqueda de usuario
       const user = await User.findById(data.id)
       if (!user) {
-        return res.status(401).json({ msg: 'No tienes permiso para hacer esto 4' })
+        return res.status(401).json({ msg: 'No tienes permiso para hacer esto' })
       }
       //logica de si va todo bien
       const {rating, comment, productId} = req.body 
       //rating debe ser un numero entre 1 y 10 
       //comment debe ser una string. 
       //el id del producto debe encontrarse entre los id comprados por el usuario
-      //
 
       if (!rating){
         return res.status(404).json({msg: 'Es necesario que des una puntuación'})
       }
-      let compro = user.bought.find(elem => elem.id === productId)
+      let compro = user.bought.find(elem => elem._id.toString() === productId)
       if (!compro){
         return res.status(404).json({msg: 'el usuario no ha comprado este articulo'})
       }
       if (!comment){ //si no tiene comentario, se guarda sin comentario.
         let woComment = new Rating ({
+          rating,
           userId: data.id,
           productId,
           date: Date()
         })
+        //guardar el woComment._id en los productos
+        let prod = await Products.findById(productId)
+        await Products.findByIdAndUpdate(productId, {$set: {ratYCom: [...prod.ratYCom, woComment._id]}})
 
         await woComment.save()
         return  res.json({msg: 'El usuario guardo el rating con exito'})
@@ -54,11 +59,14 @@ module.exports={
       }
       //Si tiene comentario, se guarda con comentario.
       let wComment = new Rating ({
+        rating,
         userId: data.id,
         productId,
         comment,
         date: Date()
       })
+      let prod = await Products.findById(productId)
+      await Products.findByIdAndUpdate(productId, {$set: {ratYCom: [...prod.ratYCom, wComment._id]}})
 
       await wComment.save()
       return res.json({msg: 'El usuario guardó el rating y el comentario con exito'})
