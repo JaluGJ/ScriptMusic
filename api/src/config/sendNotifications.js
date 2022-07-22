@@ -15,7 +15,7 @@ async function sendMultiplePushNotifications({ body }) {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        to: [sendUser], // <-- replace with a list of Expo push tokens
+        to: sendUser, // <-- replace with a list of Expo push tokens
         title: 'Mira nuestra nueva oferta!',
         body: `Tenemos una nueva promo disponible: ${body}`,
       }),
