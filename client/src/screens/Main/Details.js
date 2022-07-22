@@ -202,7 +202,7 @@ const Details = ({ route }) => {
               flag={flag}
               title={!flag ? "¡Producto agregado!" : "¡Producto agregado anteriormente!"}
               message={"Revise su lista de favoritos"}
-              color={"#FF0063"}
+              color={"#DD8643"}
               iconName={"cards-heart"}
             />
           </SafeAreaView>

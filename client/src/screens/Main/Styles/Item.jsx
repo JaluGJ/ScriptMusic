@@ -13,30 +13,13 @@ const styles = StyleSheet.create({
     },/* no tocar */ 
     
     price:{
-        justifyContent:'center',
-        alignItems:'center',
         textAlign:'center',
         fontSize:35,
         color: '#ffffff',
         paddingVertical:10,
         fontWeight:'bold',
-        flexWrap:'wrap',
     },/* no tocar */
     
-    modelText:{
-        textAlign:'center',
-        fontSize:20,
-        color: '#ffffff',
-    },
-    secondText:{
-        width: vw(70),
-        flexDirection:'row',
-        justifyContent:'space-around',
-    },
-    Text:{
-        fontSize:20,
-        color: '#DD8643',
-    },
     absoluteTouchable:{
         marginBottom:10
     },
@@ -82,6 +65,14 @@ const styles = StyleSheet.create({
     },
     containerImageCircle:{
         position: 'absolute',
+        bottom:5,
+        transform: [{ rotate: "-25deg" }],
+    },
+    /* Quinto producto */
+    containerImageCircleRotate:{
+        position: 'absolute',
+        bottom:5,
+        transform: [{ rotate: "25deg" }],
     }
 })
 

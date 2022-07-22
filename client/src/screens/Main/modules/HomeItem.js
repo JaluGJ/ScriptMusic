@@ -6,7 +6,7 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Item';
 
 
-const HomeItem = ({ promoimg, model, button, price, image, id, containerInfo, containerText, containerImage, containerModel }) => {
+const HomeItem = ({ promoimg, model, price, image, id, containerInfo, containerText, containerImage, containerModel }) => {
 
     //console.log(promoimg)
     //const {promoOne} = promoimg
@@ -48,19 +48,13 @@ const HomeItem = ({ promoimg, model, button, price, image, id, containerInfo, co
                                 style={{
                                     width: vw(45),
                                     height: vh(30),
-
+                                    
                                 }}
                                 resizeMode="contain"
                                 source={{ uri: image }}
                             />
                         </View>
                     </View>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.absoluteTouchable}>
-                <View style={styles.secondText}>
-                    <Text style={styles.Text}>{button}</Text>
-                    <AntDesign name="right" size={24} color="#DD8643" />
                 </View>
             </TouchableOpacity>
 
