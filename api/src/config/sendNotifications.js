@@ -4,7 +4,8 @@ const User = require('../models/user/userSchema.js')
 async function sendMultiplePushNotifications({ body }) {
 
     const users = await User.find({})
-    const sendUser = users.filter(user => user.pushToken)
+    const tokens = users.filter(user => user.pushToken).map(c=> c.pushToken)
+    //const sendUser = users.filter(user => user.pushToken)
 
     await fetch('https://exp.host/--/api/v2/push/send', {
       method: 'POST',
@@ -15,7 +16,7 @@ async function sendMultiplePushNotifications({ body }) {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        to: sendUser, // <-- replace with a list of Expo push tokens
+        to: tokens, // <-- replace with a list of Expo push tokens
         title: 'Mira nuestra nueva oferta!',
         body: `Tenemos una nueva promo disponible: ${body}`,
       }),
