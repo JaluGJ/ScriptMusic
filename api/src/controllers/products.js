@@ -160,7 +160,7 @@ module.exports = {
       product.ratYCom?.forEach(rat => {
         valRating.push(rat.rating)
       })
-      let sumRating = valRating.reduce((a, b) => a + b) / valRating.length
+      let sumRating = Math.floor(valRating.reduce((a, b) => a + b) / valRating.length)
       return res.json({ product, rating: sumRating })
     } catch (err) {
       next(err)

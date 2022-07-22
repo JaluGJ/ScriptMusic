@@ -36,7 +36,7 @@ export const productsSlice = createSlice({
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems} = productsSlice.actions;
+export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setSaveProducts} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -127,3 +127,4 @@ export const cleanProducts = () => (dispatch) =>{
     dispatch(setProductsList([]))
     dispatch(setProductsStatusCode(0))
 }
+
