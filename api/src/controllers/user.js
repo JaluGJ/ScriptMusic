@@ -370,7 +370,7 @@ module.exports = {
             }
             )
     },
-
+    
 
     validateToken: async (req, res, next) => {
         const autorization = req.get('Authorization')
