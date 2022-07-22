@@ -19,6 +19,7 @@ const initialState = {
     categories: [],
     token: [],
     users: [],
+    user: [],
 }
 
 export const rootReducer = (state = initialState, action) => {

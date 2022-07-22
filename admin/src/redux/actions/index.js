@@ -1,6 +1,7 @@
 import axios from "axios"
 // lo de la linea 3 iria en un .env, solo la parte de localhost:3001, la parte de http si va asi 
-const baseUrl = "https://sm.up.railway.app"
+// const baseUrl = "https://sm.up.railway.app"
+const baseUrl = "http://localhost:3001"
 
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"

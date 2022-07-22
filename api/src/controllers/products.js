@@ -1,4 +1,6 @@
+const { getTokenData } = require("../config/jwt.config.js");
 const Product = require("../models/product/productSchema.js");
+const User = require('../models/user/userSchema.js')
 
 module.exports = {
 
@@ -197,7 +199,7 @@ module.exports = {
 
 
 
-  updateProduct: (req, res, next) => {
+  updateProduct: async (req, res, next) => {
 
     const autorization = req.get('Authorization')
     if (!autorization) {
@@ -211,7 +213,8 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    const user = await User.findById(data.id)
+    if (!user.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
@@ -248,7 +251,7 @@ module.exports = {
       });
   },
 
-  deleteProduct: (req, res, next) => {
+  deleteProduct: async (req, res, next) => {
 
     const autorization = req.get('Authorization')
     if (!autorization) {
@@ -262,7 +265,8 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    const user = await User.findById(data.id)
+    if (!user.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
@@ -276,7 +280,7 @@ module.exports = {
       });
   },
 
-  uploadProduct: (req, res, next) => {
+  uploadProduct: async (req, res, next) => {
 
     const autorization = req.get('Authorization')
     if (!autorization) {
@@ -290,7 +294,8 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    const user = await User.findById(data.id)
+    if (!user.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const { model, brand, price, type, category, stock, image, description } = req.body;
