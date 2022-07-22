@@ -19,21 +19,9 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import { instruments } from './modules/HomePromos.js'
 import { useNavigation } from '@react-navigation/native'
 const Home = () => {
-  const { list: products } = useSelector((state) => state.products);
-  const { statusCode: statusCode } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [search, setSearch] = useState('');
-
-  const { page } = useSelector((state) => state.pagination);
-  const instrumentsPerPage = 12;
-
-  const indexOfLastInstrument = page * instrumentsPerPage; //2 * 12
-  const indexOfFirstInstrument = indexOfLastInstrument - instrumentsPerPage; //24 - 12 = 12
-  const currentInstruments = products.slice(
-    indexOfFirstInstrument,
-    indexOfLastInstrument
-  ); //12 - 24
   const navigation = useNavigation();
 
   const submitHandle = (search) => {
@@ -41,9 +29,7 @@ const Home = () => {
     setSearch('')
     navigation.navigate('Products')
   }
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, []);
+
 
   return (
     <View style={styles.wrapper}>

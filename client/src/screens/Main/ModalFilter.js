@@ -6,12 +6,11 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import ModalButtons from './modules/ModalButtons';
 import { useDispatch, useSelector } from "react-redux";
-import { getAllFilterProducts } from '../../redux/slices/products';
+import { changeProducts, getAllFilterProducts } from '../../redux/slices/products';
 
 
 const ModalFilter = ({ modal, setModal }) => {
     const dispatch = useDispatch();
-    // const { category } = useSelector(state => state.products);
     const navigation = useNavigation();
     const [filters, setFilters] = useState({
         category: '',
@@ -28,9 +27,9 @@ const ModalFilter = ({ modal, setModal }) => {
 
                     <Text style={styles.textNav}>FILTROS</Text>
                     <TouchableOpacity
-                        onPress={() =>
+                        onPress={() =>{
                             setModal(!modal)
-                        }>
+                        }}>
                         <Ionicons name="filter-sharp" size={34} color="white" />
                     </TouchableOpacity>
 
