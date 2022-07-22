@@ -3,7 +3,7 @@ const Sold = require('../models/sold/soldSchema.js')
 module.exports = {
   soldProducts: (req, res, next) => {
     
-      Sold.find({})
+      return Sold.find({})
       .populate("items",{
           model:1,
           brand:1,
@@ -19,7 +19,5 @@ module.exports = {
       .catch((error)=>{
         next(error)
       })
-    
-    return
   }
 }
