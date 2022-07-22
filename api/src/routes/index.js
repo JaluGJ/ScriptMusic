@@ -1,7 +1,7 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, profileAdmin, updateProfile, googleLogin, validateToken } = require('../controllers/user')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, profileAdmin, updateProfile, googleLogin, validateToken, getOneUser } = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
@@ -49,6 +49,8 @@ routes.get('/profile', profile)
 routes.put('/profile', updateProfile)
 
 routes.get('/users', getAllUsers)
+
+routes.get('/user/:id', getOneUser)
 
 routes.get('/admin-profile', profileAdmin)
 
