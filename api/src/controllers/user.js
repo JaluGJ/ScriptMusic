@@ -14,7 +14,7 @@ module.exports = {
         try {
             const { _id } = req.user
             const token = getToken(_id)
-            res.status(200).json({token})
+            res.status(200).json({ token })
         }
         catch (error) {
             next(error)
@@ -78,7 +78,7 @@ module.exports = {
             next(error)
         }
     },
-    
+
 
     loginUser: async (req, res, next) => {
         const { email, password } = req.body
@@ -124,27 +124,27 @@ module.exports = {
         }
     },
 
-    
+
     profileAdmin: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
             if (!autorization) {
-              return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
-              return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const token = autorization.split(' ')[1]
             const data = getTokenData(token)
             if (!data) {
-              return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const user = await User.findById(data.id)
-            if(!user) {
-              return res.status(404).json({ message: 'No se ha encontrado usuario' })
+            if (!user) {
+                return res.status(404).json({ message: 'No se ha encontrado usuario' })
             }
             if (!user.isAdmin) {
-              return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             return res.json({ user })
         } catch (error) {
@@ -171,20 +171,20 @@ module.exports = {
                 path: "bought",
                 select: {
                     quantity: 1,
-                    date:1,
+                    date: 1,
                     _id: 1
                 },
                 populate: {
                     path: "items",
                     select: {
-                        model:1,
-                        brand:1,
-                        price:1,
-                        type:1,
-                        category:1,
-                        image:1,
-                        description:1,
-                        _id:1 
+                        model: 1,
+                        brand: 1,
+                        price: 1,
+                        type: 1,
+                        category: 1,
+                        image: 1,
+                        description: 1,
+                        _id: 1
                     }
                 }
             }).populate("favourites", {
@@ -226,7 +226,7 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
-            if(!firstName && !lastName && !image){
+            if (!firstName && !lastName && !image) {
                 return res.status(400).json({ message: 'No se ha modificado ningun dato' })
             }
             if (firstName) {
@@ -246,7 +246,7 @@ module.exports = {
     },
 
 
-    banUser : async (req, res, next) => {
+    banUser: async (req, res, next) => {
         try {
             const { id } = req.params
             const autorization = req.get('Authorization')
@@ -265,7 +265,7 @@ module.exports = {
             if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if(!user.isAdmin){
+            if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const userToBan = await User.findById(id)
@@ -284,7 +284,7 @@ module.exports = {
     },
 
 
-    unBanUser : async (req, res, next) => {
+    unBanUser: async (req, res, next) => {
         try {
             const { id } = req.params
             const autorization = req.get('Authorization')
@@ -303,7 +303,7 @@ module.exports = {
             if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if(!user.isAdmin){
+            if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const userToUnBan = await BannedUser.findById(id)
@@ -339,7 +339,7 @@ module.exports = {
             if (!user) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            if(!user.isAdmin){
+            if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const bannedUsers = await BannedUser.find()
@@ -350,75 +350,105 @@ module.exports = {
     },
 
 
-    getAllUsers : async (req, res, next) => {
+    getAllUsers: async (req, res, next) => {
         const autorization = req.get('Authorization')
-        if(!autorization){
+        if (!autorization) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
-        if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         const token = autorization.split(' ')[1]
         const data = getTokenData(token)
-        if(!data){
+        if (!data) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         const user = await User.findById(data.id)
-        if(!user){
+        if (!user) {
             return res.status(401).json({ message: 'No se ha encontrado al usuario' })
         }
-        if(!user.isAdmin){
+        if (!user.isAdmin) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
-        User.find({}).populate({
+        try {
+            const users = await User.find({})
+            return res.json({ users })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    getOneUser: async (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if (!user.isAdmin) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const { id } = req.params
+        User.findById(id).populate({
             path: "bought",
             select: {
                 quantity: 1,
-                date:1,
+                date: 1,
                 _id: 1
             },
             populate: {
                 path: "items",
                 select: {
-                    model:1,
-                    brand:1,
-                    price:1,
-                    type:1,
-                    category:1,
-                    image:1,
-                    description:1,
-                    _id:1                
+                    model: 1,
+                    brand: 1,
+                    price: 1,
+                    type: 1,
+                    category: 1,
+                    image: 1,
+                    description: 1,
+                    _id: 1
                 }
             }
-        })
-            .then((users) => {
+        }).then((users) => {
+                if(!users) {
+                    return res.status(404).json({ message: 'No se ha encontrado al usuario' })
+                }
                 return res.json(users)
-            }
-            ).catch((error) => {
+            }).catch((error) => {
                 next(error)
-            }
-            )
+            })
     },
-    
+
 
     validateToken: async (req, res, next) => {
         const autorization = req.get('Authorization')
-        if(!autorization){
+        if (!autorization) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
-        if(autorization.split(' ')[0].toLowerCase() !== 'bearer'){
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         const token = autorization.split(' ')[1]
         const data = getTokenData(token)
-        if(!data){
+        if (!data) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         const user = await User.findById(data.id)
-        if(!user){
+        if (!user) {
             return res.status(401).json({ message: 'No se ha encontrado al usuario' })
         }
-        if(!user.isAdmin){
+        if (!user.isAdmin) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         return res.json({ user: user.email })
