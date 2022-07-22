@@ -1,0 +1,102 @@
+.updateuser{
+    display: flex;
+    width: 100%;
+
+    .container{
+        flex: 6;
+
+        .top{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+           padding: 10px;
+           margin: 20px;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+
+           .title{
+            color:#DD8643;
+            font-size: 20px;
+            padding-right: 30px;
+        }
+
+        button{
+            width: 120px;
+            background-color: #DD8643;
+            padding: 7px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            align-items: center;
+            justify-content: space-around;
+            display: flex;
+            
+            border-radius: 10px;
+
+            
+        }
+
+        }
+        .bottom{
+           box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+           padding: 10px;
+           margin: 20px;
+           display: flex;
+           justify-content: space-around;
+           flex-direction: column;
+           align-items: center;
+            
+           .image{
+                padding-bottom: 30px; 
+                width: 100%;
+                height: 40%;  
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+
+            .forminput{
+                text-align: center;
+                height: 100%;
+                
+                p{
+                    font-size: 10px;
+                    margin-bottom: 5px;
+                    color: red;
+                    
+                }
+                label{
+                    
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #FFC680;
+                    width: 100%;
+                    
+                    
+                }
+
+                select{
+                    width: 100%;
+                    padding: 5px;
+                    border: none;
+                    border-bottom: 1px solid gray;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    font-size: 12px;
+
+                }
+                input{
+                    width: 100%;
+                    padding: 5px;
+                    border: none;
+                    border-bottom: 1px solid gray;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        
+    }
+}
