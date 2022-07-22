@@ -3,7 +3,6 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 
-
 export default function List({ rows, columns, title, tipo }) {
     return (
         <div className="list">
@@ -19,8 +18,8 @@ export default function List({ rows, columns, title, tipo }) {
                     <DataGrid
                         rows={rows}
                         columns={columns}
-                        pageSize={30}
-                        rowsPerPageOptions={[6]}                      
+                        pageSize={40}
+                        rowsPerPageOptions={[40]}                      
                     />
             </div>
         </div>

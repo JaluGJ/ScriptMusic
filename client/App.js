@@ -6,7 +6,17 @@ import store from "./src/redux/store.js";
 import AppWrapped from "./AppWrapped";
 import { StripeProvider } from '@stripe/stripe-react-native'; 
 import { LogBox } from 'react-native';
+import * as Notifications from 'expo-notifications';
 LogBox.ignoreAllLogs();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    // if we are in the app, will show a notification or not
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   return (
