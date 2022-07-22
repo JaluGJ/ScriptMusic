@@ -19,6 +19,7 @@ import { FormikSubmit } from "./validation/FormikSubmit.js";
 import { cleanCache, postUser } from "../../redux/slices/signup.js";
 import { useDispatch, useSelector } from "react-redux";
 import { errFalse } from "../../redux/slices/signup.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const initialValues = {
   firstName: "",
@@ -26,7 +27,12 @@ const initialValues = {
   email: "",
   password: "",
   passwordConfirmation: "",
+  pushToken: "",
 };
+
+AsyncStorage.getItem("@pushToken").then((pushToken)=>{
+  initialValues.pushToken = pushToken;
+}).catch(err=>console.log(err))
 
 export default function Register() {
   const navigation = useNavigation();
