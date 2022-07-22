@@ -31,6 +31,7 @@ export const instruments = [
     },
     promoFive={
         id: 5,
+        containerImage: styles.containerImageCircleRotate,
         image: promo5,
     },
 ]

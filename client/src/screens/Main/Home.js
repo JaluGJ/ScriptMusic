@@ -4,7 +4,9 @@ import {
   StatusBar,
   ScrollView,
   Image,
-  Text
+  Text,
+  TouchableOpacity,
+  Pressable
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, searchProducts } from "../../redux/slices/products";
@@ -58,12 +60,8 @@ const Home = () => {
               button={'Ver mas ofertas'}
             />
 
-            <Image
-              source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
-              style={{ width: '100%', height: vh(30), marginVertical: 20, }}
 
-            />
-            {/* <HomeFavorites /> */}
+            <HomeFavorites />
             <HomeItem
               promoimg={promoTwo.image}
               containerInfo={promoTwo.containerInfo}
@@ -102,7 +100,7 @@ const Home = () => {
               promoimg={promoFor.image}
               containerInfo={promoOne.containerInfo}
               containerText={promoOne.containerText}
-              containerImage={promoOne.containerImage}
+              containerImage={promoFive.containerImage}
               containerModel={promoOne.containerModel}
               model={'VIOLIN '}
               price={89.99}
@@ -110,6 +108,27 @@ const Home = () => {
               image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996915/script_music_img/Gliga_Gems_II_34_Viol%C3%ADn_jgqygm.png"}
               id={"62d4db52da220153870d780b"}
             />
+            <View style={{
+              marginHorizontal: 25,
+              borderColor: 'white',
+              borderWidth: 2,
+              elevation: 1,
+              borderRadius: 30
+            }}>
+              <TouchableOpacity>
+
+                <Image
+                  source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
+                  style={{
+                    width: '100%',
+                    height: vh(30),
+                    borderRadius: 30
+                  }}
+                />
+
+              </TouchableOpacity>
+
+            </View>
             <View style={styles.containerNewCartegories}>
               <View style={styles.containerTextCategories}>
                 <Text style={styles.titleCategories}>Categorias</Text>
