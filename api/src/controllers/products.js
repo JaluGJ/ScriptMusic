@@ -1,3 +1,4 @@
+const { getTokenData } = require("../config/jwt.config.js");
 const Product = require("../models/product/productSchema.js");
 
 module.exports = {
@@ -211,7 +212,7 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    if (data.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
@@ -262,7 +263,7 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    if (data.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
 
@@ -290,7 +291,7 @@ module.exports = {
     if (!data) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
-    if (!data.isAdmin) {
+    if (data.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const { model, brand, price, type, category, stock, image, description } = req.body;
