@@ -1,8 +1,8 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, updateProfile, googleLogin, validateToken } = require('../controllers/user')
-const postPromo = require('../controllers/promos')
+const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, profileAdmin, updateProfile, googleLogin, validateToken, getOneUser } = require('../controllers/user')
+const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
 const { soldProducts } = require('../controllers/soldInfo')
@@ -50,6 +50,10 @@ routes.put('/profile', updateProfile)
 
 routes.get('/users', getAllUsers)
 
+routes.get('/user/:id', getOneUser)
+
+routes.get('/admin-profile', profileAdmin)
+
      //favs
 
 routes.post('/profile/favs', newFavourite)
@@ -82,8 +86,13 @@ routes.get('/sold', soldProducts )
 // SOLD ROUTES
 
 // PROMOS ROUTES
+routes.get('/promos', getPromos)
 
-routes.post('/create-promo', postPromo )
+routes.post('/create-promo', createPromo)
+
+routes.delete('/delete-promo/:id', deletePromo)
+
+routes.get('/promos/:id', getPromoById)
 
 // PROMOS ROUTE
 

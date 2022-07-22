@@ -46,7 +46,7 @@ export const rootReducer = (state = initialState, action) => {
         case UPDATE_PRODUCT:
             return {
                 ...state,
-                products: state.products.map(product => product._id === action.payload._id ? action.payload : product)
+                products: state.products.map(product => product.id === action.payload._id ? action.payload : product)
             }
         case DELETE_PRODUCT:
             return {

@@ -18,7 +18,8 @@ import useShoppingCart from "../../customHooks/useShoppingCart";
 import useDetails from "../../customHooks/useDetails";
 import useFavorites from "../../customHooks/useFavorites";
 import CustomAlertComponent from "../../components/CustomAlert.js";
-
+import { vh, vw } from "react-native-expo-viewport-units";
+import { AirbnbRating } from '@rneui/themed';
 const Details = ({ route }) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
@@ -29,6 +30,34 @@ const Details = ({ route }) => {
   const [showModal, setShowModal] = useState(false);
   const [flag, setFlag] = useState(false);
   const [favourites] = useFavorites();
+  /* console.log(details.ratYCom) */
+
+  let ratYCom = [
+    {
+      "ratting": 4,
+      "comment": {
+        "user": "machao",
+        "img": 'https://i.postimg.cc/rwxFv4SF/machado.png',
+        "text": "vamooo bocaaa"
+      }
+    },
+    {
+      "ratting": 5,
+      "comment": {
+        "user": "Orancio",
+        "img": 'https://i.postimg.cc/fT3bfpyd/hori.png',
+        "text": "re feas las alertasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+      }
+    },
+    {
+      "ratting": 2,
+      "comment": {
+        "user": "Jorge Polo",
+        "img": 'https://i.postimg.cc/FRtbh36W/unknown.png',
+        "text": "jorge"
+      }
+    }
+  ]
 
   return (
     <>
@@ -113,10 +142,56 @@ const Details = ({ route }) => {
                   </TouchableOpacity>
                 </View>
 
+              </View>
+              <View style={styles.containerDetailComment}>
+                <View >
+                  <Text style={styles.commentTitle}>Opiniones de este producto:</Text>
+                </View>
                 <View>
-                  <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>COMPRAR</Text>
-                  </TouchableOpacity>
+                  {
+                    ratYCom.map((c, i) => {
+                      /* console.log(c.comment.img) */
+                      return (
+                        <View style={styles.containerComment} key={i}>
+                          <View style={styles.containerInfoComment}>
+                            <View style={styles.containerImgComment}>
+                              <Image
+                                source={{ uri: c.comment.img }}
+                                style={{
+                                  width: vw(10),
+                                  height: vh(5),
+                                  padding: 10,
+                                  borderRadius:100,
+                                }}
+                              />
+                            </View>
+                            <View>
+                              <Text style={styles.nameComment}>{c.comment.user}</Text>
+                              <View style={styles.commentText}>
+                                <Text>{c.comment.text}</Text>
+                              </View>
+                            </View>
+                          </View>
+                          {/* <AirbnbRating isDisabled={true}/>{c.ratting} */}
+                          <View style={styles.rattingNum}>
+                            <AirbnbRating 
+                              defaultRating={c.ratting}
+                              size={10}
+                              isDisabled={true}
+                              reviews={[
+                                'Terrible',
+                                'Malo',
+                                'Aceptable',
+                                'Bueno',
+                                'Increible',
+                              ]}
+                              reviewSize={15}
+                            />
+                          </View>
+                        </View>
+                      )
+                    })
+                  }
                 </View>
               </View>
             </View>
