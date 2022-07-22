@@ -40,7 +40,7 @@ export default function UpdateProduct({ logout}){
         description: product.description
     })
     useEffect(() => {
-        dispatch(getOneProduct(id))
+        dispatch(getOneProduct(id, userToken))
         dispatch(getAllProducts())
         return () => {
             dispatch(clearCache())
