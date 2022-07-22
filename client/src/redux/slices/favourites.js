@@ -38,10 +38,7 @@ export const postFavourite = (userToken,productId) => async (dispatch) => {
             productsId: productId
       }
       try {
-        const {data} = await axios.post(`${apiUrl}profile/favs`,datos,config);
-        if(data.msg==='se ha guardado con exito'){
-            dispatch(setFavourite(data.favs));
-        }
+        await axios.post(`${apiUrl}profile/favs`,datos,config);  
     } catch (error) {
         console.log(error)
     }
