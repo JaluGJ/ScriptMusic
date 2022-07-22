@@ -130,6 +130,7 @@ module.exports = {
         next(error);
       });
   },
+  
 
   getProductById: async (req, res, next) => {
     try {
@@ -165,38 +166,6 @@ module.exports = {
       next(err)
     }
   },
-  
-  //lee esto Enzo, o cualquiera, y digame si le parece bien.
-
-  // (req, res, next) => {
-  //   const { id } = req.params;
-  //   return Product.findById(id).populate({
-  //     path: "ratYCom",
-  //     select: {
-  //       rating: 1,
-  //       comment: 1,
-  //       date: 1,
-  //       _id: 0
-  //     },
-  //     populate: {
-  //       path: "userId",
-  //       select: {
-  //         fisrtName: 1,
-  //         lastName: 1,
-  //         image: 1,
-  //         _id: 0
-  //       }
-  //     }
-  //   })
-  //     .then((product) => {
-  //       return res.json(product);
-  //     })
-  //     .catch((error) => {
-  //       next(error);
-  //     });
-  // },
-
-
 
 
   updateProduct: async (req, res, next) => {
@@ -214,6 +183,9 @@ module.exports = {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
     const user = await User.findById(data.id)
+    if(!user) {
+      return res.status(404).json({ message: 'No se ha encontrado usuario' })
+    }
     if (!user.isAdmin) {
       return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
     }
@@ -251,6 +223,7 @@ module.exports = {
       });
   },
 
+
   deleteProduct: async (req, res, next) => {
 
     const autorization = req.get('Authorization')
@@ -280,6 +253,7 @@ module.exports = {
       });
   },
 
+
   uploadProduct: async (req, res, next) => {
 
     const autorization = req.get('Authorization')
@@ -300,10 +274,10 @@ module.exports = {
     }
     const { model, brand, price, type, category, stock, image, description } = req.body;
 
-    if (!model) return res.status(404).json({ msg: "Falta informacion necesaria de model" });
-    if (!brand) return res.status(404).json({ msg: 'Falta informacion necesaria de brand' });
-    if (!price) return res.status(404).json({ msg: 'Falta informacion necesaria de price' });
-    if (!type) return res.status(404).json({ msg: 'Falta informacion necesaria de type' });
+    if (!model) return res.status(404).json({ msg: 'Falta enviar nombre del modelo' });
+    if (!brand) return res.status(404).json({ msg: 'Falta enviar la marca' });
+    if (!price) return res.status(404).json({ msg: 'Falta enviar el precio' });
+    if (!type) return res.status(404).json({ msg: 'Falta enviar el tipo de modelo' });
     if (!category) return res.status(404).json({ msg: 'Falta informacion necesaria de category' });
     if (!stock) return res.status(404).json({ msg: 'Falta informacion necesaria de stock' });
     if (!image) return res.status(404).json({ msg: 'Falta informacion necesaria de image' });
