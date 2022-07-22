@@ -33,7 +33,7 @@ module.exports = {
         user.favourites = [productsId]
         await user.save() 
         let userUpdate = await user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
-        return res.json({ msg: 'se ha guardado con exito', favs: userUpdate.favourites })
+        return res.json({ msg: 'se ha guardado con exito'/*, favs: userUpdate.favourites*/ })
       }
       
       //const favoritos = user.favourites
@@ -47,7 +47,7 @@ module.exports = {
       user.favourites = [...user.favourites, productsId]
       await user.save()
       let userUpdate = await user.populate('favourites', { model: 1,brand: 1,price: 1,type: 1,category: 1,image: 1,description: 1,_id: 1})
-      return res.json({ msg: 'se ha guardado con exito', favs: userUpdate.favourites})
+      return res.json({ msg: 'se ha guardado con exito'/*,favs: userUpdate.favourites*/})
     } catch (error) {
       return next(error)
     }

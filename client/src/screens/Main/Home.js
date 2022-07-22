@@ -78,7 +78,7 @@ const Home = () => {
               style={{ width: '100%', height: vh(30), marginVertical: 20, }}
 
             />
-            <HomeFavorites />
+            {/* <HomeFavorites /> */}
             <HomeItem
               promoimg={promoTwo.image}
               containerInfo={promoTwo.containerInfo}
@@ -126,8 +126,12 @@ const Home = () => {
               id={"62d4db52da220153870d780b"}
             />
             <View style={styles.containerNewCartegories}>
-            <HomeCategories botton={true} />
-
+              <View style={styles.containerTextCategories}>
+                <Text style={styles.titleCategories}>Categorias</Text>
+              </View>
+              <View style={styles.containerBottonCategories}>
+                <HomeCategories botton={true} />
+              </View>
             </View>
           </View>
           <ModalFilter

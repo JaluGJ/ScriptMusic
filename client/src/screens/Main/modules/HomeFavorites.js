@@ -7,8 +7,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import styles from "../Styles/Favorites.jsx";
 export default function EmptyFavs() {
-    const [favourites] = useFavorites()
-    return favourites.length > 3 ? <FAVORITOS favorite={favourites} /> : <SINFAVORITOS />
+    const [favourites,loading] = useFavorites()
+
+    return  favourites.length > 3 ? <FAVORITOS favorite={favourites} /> : <SINFAVORITOS />
 }
 
 export const FAVORITOS = ({ favorite }) => {
