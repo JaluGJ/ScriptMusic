@@ -16,6 +16,10 @@ export default function UpdateProduct({ logout }) {
     const product = useSelector(state => state.product)
     const dispatch = useDispatch()
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
+
+    const [error, setError] = useState({})
+    const [input, setInput] = useState({})
+
     useEffect(() => {
         setInput({
             model: product.model,
@@ -29,11 +33,9 @@ export default function UpdateProduct({ logout }) {
         })
     }, [product])
 
-    const [error, setError] = useState({})
-    const [input, setInput] = useState({ })
     useEffect(() => {
+        dispatch(getAllProducts());
         dispatch(getOneProduct(id, userToken))
-        dispatch(getAllProducts())
         return () => {
             dispatch(clearCache())
         }
@@ -58,7 +60,6 @@ export default function UpdateProduct({ logout }) {
             window.location.reload()
             return alert('Por favor verifique los campos')
         }
-        console.log(input)
         dispatch(updateProduct(id, input, userToken))
         toast.success('Producto Actualizado', {
             position: "top-center",
@@ -99,6 +100,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Imagen</label>
                                     <input
+                                        key='Imagen'
                                         type="text"
                                         placeholder={product.image}
                                         name='image'
@@ -111,6 +113,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Modelo</label>
                                     <input
+                                        key='Modelo'
                                         type="text"
                                         placeholder={product.model}
                                         name='model'
@@ -122,6 +125,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Marca</label>
                                     <input
+                                        key='Marca'
                                         type="text"
                                         placeholder={product.brand}
                                         name='brand'
@@ -133,6 +137,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Precio</label>
                                     <input
+                                        key='Precio'
                                         type="number"
                                         placeholder={product.price}
                                         name='price'
@@ -144,6 +149,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Disponible</label>
                                     <input
+                                        key='Disponible'
                                         type="number"
                                         placeholder={product.stock}
                                         name='stock'
@@ -155,6 +161,7 @@ export default function UpdateProduct({ logout }) {
 
                                     <label>Tipo</label>
                                     <input
+                                        key='Tipo'
                                         type="text"
                                         placeholder={product.type}
                                         name='type'
@@ -184,7 +191,6 @@ export default function UpdateProduct({ logout }) {
                                     {error.description && (
                                         <p>{error.description}</p>
                                     )}
-
 
                                     {!Object.keys(error).length && !checkprops(input) ?
                                         <button >ACTUALIZAR PRODUCTO</button> :
