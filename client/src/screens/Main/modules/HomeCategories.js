@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllFilterProducts } from '../../../redux/slices/products.js'
+import { cleanProducts, getAllFilterProducts } from '../../../redux/slices/products.js'
 import bajo2 from '../../../../assets/instrumentos/bajo2.png'
 import guitarra2 from '../../../../assets/instrumentos/guitarra2.png'
 import percusion2 from '../../../../assets/instrumentos/percusion2.png'
@@ -24,6 +24,14 @@ const HomeCategories = ({botton}) => {
     const dispatch = useDispatch()
     const { category: category } = useSelector((state) => state.products);
     const navigation = useNavigation();
+
+    useEffect(() => {
+      const unsubscribe = navigation.addListener('focus', () => {
+        dispatch(cleanProducts())
+      })
+        return unsubscribe
+    }, [])
+    
 
     return (
         <View style={botton?styles.categoriesHome:styles.categories}>
