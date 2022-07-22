@@ -11,21 +11,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 function UpdateUser() {
     const { id } = useParams();
     const dispatch = useDispatch();
-    // const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
     const [input, setInput] = useState({
         firstName: '',
         lastName: '',
         email: '',
         image: '',
     });
+    const userToken = localStorage.user;
 
     useEffect(() => {
-        dispatch(getOneUser(id))
+        dispatch(getOneUser(id, userToken))
     }, [])
-
-
-
-
 
     return (
         <div className="updateuser">

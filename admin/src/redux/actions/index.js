@@ -3,6 +3,7 @@ import axios from "axios"
 const baseUrl = "https://sm.up.railway.app"
 
 
+
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
