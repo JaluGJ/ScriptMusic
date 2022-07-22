@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
     },
     containerNoProducts:{
-        marginBottom:40,
+        // marginBottom:40,
         alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: 100,
     },
     notProducts:{
