@@ -23,7 +23,7 @@ module.exports = {
 
 
     registerUser: async (req, res, next) => {
-        let { email, password, firstName, lastName, isAdmin } = req.body
+        let { email, password, firstName, lastName, isAdmin, pushToken } = req.body
         try {
             const user = await User.findOne({ email })
             if (user) {
@@ -37,7 +37,8 @@ module.exports = {
                 password: await bcrypt.hash(password, 10),
                 firstName,
                 lastName,
-                isAdmin
+                isAdmin,
+                pushToken
             }
             const ban = await BannedUser.findOne({ email })
             if (ban) {
