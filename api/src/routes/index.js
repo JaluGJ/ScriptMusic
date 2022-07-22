@@ -63,7 +63,7 @@ routes.delete('/profile/favs', deleteFavoutite)
 
 // PASSPORT ROUTES
 
-routes.get('/google', googleLogin);
+// routes.get('/google', googleLogin);
 
 // PASSPORT ROUTES
 
