@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { vw } from "react-native-expo-viewport-units";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -108,6 +109,57 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 2,
   },
+  containerDetailComment:{
+    backgroundColor: 'white',
+    marginVertical: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 2,
+    borderRadius: 10,
+    marginHorizontal:10,
+    borderWidth:1,
+    borderColor:'#00000053'
+  },
+  containerComment:{
+    marginVertical:5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.84,
+    elevation: 1,
+  },
+  commentTitle:{
+    fontSize:20,
+    letterSpacing: 2,
+    padding: 20,
+  },
+  containerInfoComment:{
+    flexDirection:'row',
+    padding: 25,
+  },
+  containerImgComment:{
+    borderRadius:100,
+    marginRight:25,
+  },
+  commentText:{
+    width: vw(50),
+  },  
+  nameComment:{
+    fontSize:18,
+  },
+  rattingNum:{
+    position: 'absolute',
+    right: 0,
+  },
+
 });
 
 export default styles;

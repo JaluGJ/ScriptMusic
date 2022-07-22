@@ -9,8 +9,8 @@ import useFavorites from "../../customHooks/useFavorites";
 
 export default function EmptyFavs() {
   const [favourites,loading] = useFavorites()
-  console.log(favourites.length)
-  return loading ? <Loading/> : favourites.length > 0 ? <FAVORITOS favorite={favourites} /> : <SINFAVORITOS />
+
+  return loading ? <Loading/> : favourites.length > 0 ? <FAVORITOS favourites={favourites} /> : <SINFAVORITOS />
 }
 
 export const Loading = () =>{
@@ -24,7 +24,7 @@ export const Loading = () =>{
 }
 
 
-export const FAVORITOS = ({ favorite }) => {
+export const FAVORITOS = ({ favourites }) => {
   
   return (
     <View style={styles.wrapper}>
@@ -39,7 +39,7 @@ export const FAVORITOS = ({ favorite }) => {
           </View>
           <View>
             
-            {favorite.map((item) => (
+            {favourites.map((item) => (
               <FavProducts 
                 key={item.id}
                 id={item.id}

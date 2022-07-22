@@ -13,12 +13,9 @@ import styles from "./Styles/Cart.jsx";
 import CartModalBotton from "./modules/CartModalBotton";
 import CartModalTop from "./modules/CartModalTop";
 import useShoppingCart from "../../customHooks/useShoppingCart";
-import CustomAlertPayment from "../../components/CustomAlertPayment";
 
 export default function EmptyCart() {
-  const [alert, setAlert] = useState(false);
   const [modal, setModal] = useState(false);
-  const [flag, setFlag] = useState(false);
   const { productsCart, totalPrice } = useShoppingCart();
 
   return (
@@ -55,10 +52,6 @@ export default function EmptyCart() {
                       <CartModalBotton
                         modal={modal}
                         setModal={setModal}
-                        alert={alert}
-                        setAlert={setAlert}
-                        flag={flag}
-                        setFlag={setFlag}
                         />
                     </View>
                   </View>
@@ -71,21 +64,6 @@ export default function EmptyCart() {
                     </View>
                   </View> */}
               </Modal>
-              <CustomAlertPayment
-                flag={flag}
-                setFlag={setFlag}
-                alert={alert}
-                setAlert={setAlert}
-                title={
-                  flag? "¡Su pago a sido exitoso!"
-                    : "¡Su pago a sido denegado!"
-                }
-                message={
-                  flag ?"Gracias por su compra" : "Por favor revise sus datos"
-                }
-                color={flag? "#01A601" : "#F70000"}
-                iconName={flag? "check-decagram" : "alert-circle"}
-              />
             </>
           )}
         </View>

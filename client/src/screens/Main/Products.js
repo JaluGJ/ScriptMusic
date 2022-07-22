@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, FlatList, StatusBar, Animated } from "react-native";
+import { View, Text, FlatList, StatusBar, Animated, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import HomeNav from './modules/HomeNav.js';
 import Product from './modules/Product.js';
@@ -7,14 +7,13 @@ import ModalFilter from './ModalFilter.js';
 import styles from "./Styles/Products";
 import { cleanProducts, searchProducts } from "../../redux/slices/products";
 
-const Products = () => {
+const Products = ({navigation}) => {
     const { list: products } = useSelector((state) => state.products);
     const { category } = useSelector((state) => state.products);
     const { statusCode: statusCode } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState('');
-    
 
     const submitHandle = (search) => {
         dispatch(searchProducts(search));
@@ -54,7 +53,13 @@ const Products = () => {
                 </View>
                     
 
-                    {statusCode  >= 400 ?
+                    {products.length === 0 ? (
+                        <View style={styles.containerNoProducts}>
+                             <ActivityIndicator size="large" color="#0000ff" />
+                        </View>
+                    ) 
+                                       
+                    : statusCode >= 400 ?
                         <View style={styles.containerNoProducts}>
                             <Text style={styles.notProducts}>No existen coincidencias.</Text>
                         </View>
