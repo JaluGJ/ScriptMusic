@@ -1,14 +1,19 @@
-const promosProductModel = require('../models/promosProduct/promosProductSchema');
-const Product = require('../models/promosProduct/promosProductSchema');
+const Promo = require('../models/promosProduct/promosProductSchema.js');
+const Product = require('../models/product/productSchema.js');
 
-const postPromo = (req, res, next) =>{
+const postPromo = async (req, res, next) =>{
  const{items, price, stock, description, image, promo} = req.body;
-switch (promo) {
+ try {
+  
+ } catch (error) {
+  
+ }
+/*switch (promo) {
     case 'descuento': 
       Product.stock -= stock     
     case 'combo':
       items.map((item)=>{
-      let buscar =  Product.findById(item)
+      let buscar = Product.findById(item)
       buscar.stock -= stock
       })
     case '2X1':
@@ -17,7 +22,7 @@ switch (promo) {
     default:
         break;
     }
-
+*/
     if (items.length === 0) return res.status(404).json({msg:"No se ha añadido productos"});
     if(!price) return res.status(404).json({msg:'No se ha indicado precio'});
     if(!stock) return res.status(404).json({msg:'No se ha indicado stock'});
@@ -25,7 +30,7 @@ switch (promo) {
     if(!image) return res.status(404).json({msg:'No se ha añadido image'});
     if(!promo) return res.status(404).json({msg:'No se ha añadido promo'});
 
-    const newPromo = new promosProductModel({ 
+    const newPromo = new Promo({ 
      items,
      price, 
      stock,
@@ -40,6 +45,11 @@ switch (promo) {
     .catch((error)=>{
     next(error)
       })
+    }
+
+
+    const getPromos = async (req, res, next) => {
+
     }
 
     module.exports= postPromo;
