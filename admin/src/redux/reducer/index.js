@@ -7,6 +7,7 @@ import {
     DELETE_PRODUCT,
     GET_ALL_USERS,
     GET_ONE_USER,
+    ADD_USER,
     ADMIN_LOGIN,
     DELETE_TOKEN,
     CLEAR_CACHE
@@ -63,11 +64,11 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload
             }
-        // case ADD_USER:
-        //     return {
-        //         ...state,
-        //         users: [...state.users, action.payload]
-        //     }
+        case ADD_USER:
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            }
 
         case ADMIN_LOGIN:
             return {

@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { validate, checkprops } from './error'
 import { clearCache, getAllUsers, getOneUser } from '../../redux/actions'
 import SideBar from '../SideBar/SideBar'
 import './UpdateUser.scss'
@@ -122,7 +123,7 @@ export default function UpdateUser({logout}) {
                             {error.email && (
                             <p>{error.email}</p>
                         )}
-                             {!Object.keys(error).length ?
+                             {!Object.keys(error).length && !checkprops(input) ?
                                         <button >ACTUALIZAR PRODUCTO</button> :
                                         <button disabled >ACTUALIZAR PRODUCTO</button>
                                     }
