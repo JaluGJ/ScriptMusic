@@ -50,7 +50,7 @@ const getTemplate = (name, token) => {
       <p style="color: #000000;font-size: 30px; font-weight: bold">¡Hola, ${name}!</p>
       <p style="color: #000000;font-size: 15px;">Estamos muy contentos por tenerte con nosotros. Para continuar, necesitamos que confirmes tu cuenta, solo presiona el siguiente botón:</p>
       
-      <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="https://sm.up.railway.app/user/confirm/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Confirmar cuenta</button></a><br/>
+      <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="https://sm.up.railway.app/user/confirm/token/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Confirmar cuenta</button></a><br/>
       <p>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
       <p style="color: #000000;font-size: 15px;">Saludos, el equipo de ScriptMusic.</p>
       </div>
