@@ -26,6 +26,7 @@ const { statusPayment } = require('../controllers/statusPayments')
 const { soldProducts } = require('../controllers/soldInfo')
 const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers/favourites')
 const { addRating } = require('../controllers/rating')
+const { getTickets } = require('../controllers/ticket')
 
 const routes = Router()
 
@@ -132,6 +133,12 @@ routes.delete('/delete-promo/:id', deletePromo)
 routes.get('/promos/:id', getPromoById)
 
 // PROMOS ROUTE
+
+// TICKETS ROUTE
+
+routes.get('/tickets', getTickets)
+
+// TICKETS ROUTE
 
 // AUTH
 
