@@ -75,11 +75,10 @@ const getTemplateBanUser = (name) => {
 `
 }
 
-const getTemplateUUnBanUser = (name) => {
+const getTemplateUnBanUser = (name) => {
   return `
   <div>Hola ${name}.</div>
-  <div>Hemos recibido tu solicitud y ha sucedido un problema, el email que usted intenta registrar ha sido baneado.</div>
-  <div>Disculpe los inconvenientes.</div>
+  <div>Ya puedes volver a registrarte con este correo electronico y seguir disfrutando de ScriptMusic, muchas gracias por elegirnos.</div>
   <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
 `
 }
@@ -111,5 +110,5 @@ module.exports = {
   getTemplateBougthSuccess,
   getTemplateBaned,
   getTemplateBanUser,
-  getTemplateUUnBanUser,
+  getTemplateUnBanUser,
 };
