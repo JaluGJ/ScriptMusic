@@ -2,7 +2,6 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   TouchableOpacity,
   StatusBar,
 } from "react-native";
@@ -18,7 +17,7 @@ import loginSchema from "./validation/schemas/LoginSchema";
 import { FormikInputValue } from "./validation/FormikInputValue";
 import { FormikSubmit } from "./validation/FormikSubmit";
 import { useDispatch } from "react-redux";
-import { google, loginUser } from "../../redux/slices/signin";
+import { loginUser } from "../../redux/slices/signin";
 
 const initialValues = {
   email: "",
@@ -78,9 +77,15 @@ export default function Login() {
           }}
         </Formik>
 
-        {/* <FormikSubmit onPress={() => dispatch(google())} name="Acá va ingresar con Google" /> */}
+        <FormikSubmit
+          // onPress={() => }
+          name="Acá va ingresar con Google"
+        />
 
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")} style={{alignItems: "center"}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("ForgotPassword")}
+          style={{ alignItems: "center" }}
+        >
           <Text style={styles.forgotPass}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
         <View style={styles.containerRegisterNow}>
