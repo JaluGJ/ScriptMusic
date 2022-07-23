@@ -10,7 +10,6 @@ import { deleteProduct } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-
 const Products = () => {
     
     const dispatch = useDispatch()
@@ -18,7 +17,7 @@ const Products = () => {
     const userToken = localStorage.user
 
     //--------------------------------------------------------------------------------------------------------------------------------
-    function handleDelete(e, id){
+    function handleDeleteProduct(e, id){
         e.preventDefault();
         dispatch(deleteProduct(id, userToken))
         toast.success('Producto Eliminado', {
@@ -58,7 +57,7 @@ const Products = () => {
             align: 'center',
             width: 30,
             renderCell: (cellValues) => {
-                return  <DeleteIcon onClick={(e) => handleDelete(e, cellValues.row.id)} /> 
+                return  <Link style={{ textDecoration: "none", color: 'black'}} to={''}><DeleteIcon onClick={(e) => handleDeleteProduct(e, cellValues.row.id)} /> </Link>
             },
          }
     ]

@@ -10,7 +10,8 @@ import {
     ADD_USER,
     ADMIN_LOGIN,
     DELETE_TOKEN,
-    CLEAR_CACHE
+    CLEAR_CACHE,
+    DELETE_USER
 } from "../actions"
 
 const initialState = {
@@ -68,6 +69,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: [...state.users, action.payload]
+            }
+
+        case DELETE_USER:
+            return {
+                ...state,
+                users: state.users.filter(user => user._id !== action.payload._id)
             }
 
         case ADMIN_LOGIN:
