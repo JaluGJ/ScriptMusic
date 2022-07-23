@@ -1,4 +1,5 @@
 const User = require('../models/user/userSchema.js')
+const fetch = require('node-fetch')
 
 
 async function sendMultiplePushNotifications({ body }) {
