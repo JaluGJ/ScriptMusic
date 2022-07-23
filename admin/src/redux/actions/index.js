@@ -157,21 +157,21 @@ export const addUser = (user, userToken) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// export const deleteUser = (user, userToken) => (dispatch) => {
-//   const config = {
-//       headers: {
-//         Authorization: `Bearer ${userToken}`,
-//       },
-//     };
-//   axios.post(`${baseUrl}/signupFront`, user, config)
-//       .then(res => {
-//           dispatch({
-//               type: DELETE_USER,
-//               payload: res.data.userAdd,
-//           })
-//       })
-//       .catch(err => console.log(err))
-// }
+export const deleteUser = (user, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };     
+    axios.delete(`${baseUrl}/user/${id}`, config)
+        .then(res => {
+            dispatch({
+                type: DELETE_USER,
+                payload: res.data
+          })
+        })
+        .catch(err => console.log(err))
+} 
 
 export const adminLogin = (user) => (dispatch) => {
   axios
