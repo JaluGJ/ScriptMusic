@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -23,9 +24,11 @@ export const { setFlag, setErr } = signupSlice.actions;
 
 export default signupSlice.reducer;
 
-export const postUser = (obj) => (dispatch) => {
+export const postUser = (obj) => async (dispatch) => {
+  let token = await AsyncStorage.getItem("@pushToken1")
+
   axios
-    .post(`${apiUrl}signup`, obj)
+    .post(`${apiUrl}signup`, {...obj, pushToken: token})
     .then((res) => {
       dispatch(setFlag(true));
       dispatch(setErr(false));
