@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { addUser } from "../../redux/actions";
-import { validate, checkprops } from "./errors";
+import { validate, checkprops } from "./error";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReacToastify.css'
 import {useNavigate, Link} from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function NewUser({logout}){
 const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const userToken = localStorage.user
 
 
 useEffect(() => {
-    dispatch();
+  //  dispatch();
     setError(validate(input))
 }, [])
 
