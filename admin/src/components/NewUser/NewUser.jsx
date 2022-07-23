@@ -6,6 +6,9 @@ import { useState } from "react";
 import { addUser } from "../../redux/actions";
 import { validate, checkprops } from "./error";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import {useNavigate, Link} from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -16,7 +19,6 @@ const userToken = localStorage.user
 
 
 useEffect(() => {
-  //  dispatch();
     setError(validate(input))
 }, [])
 
@@ -79,14 +81,13 @@ function handleSubmit(e) {
             <div className="bottom">
                 <div className="left">
                     <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
-
                 </div>
                 <div className="rigth">
                     <form onSubmit={e => handleSubmit(e)}>
                         <div className="formInput">
 
-                                <label>Nombre</label>
-                                <input
+                            <label>Nombre</label>
+                            <input
                                 type="text"
                                 placeholder= 'Ingrese Nombre'
                                 name='firstName'
@@ -121,6 +122,18 @@ function handleSubmit(e) {
                             <p>{error.email}</p>
                         )}
 
+                            <label>Contraseña</label>
+                            <input
+                                type="password"
+                                placeholder='1234ABcd'
+                                name='password'
+                                value={input.password}
+                                 onChange={(e) => handleinput(e)}
+                            />
+                            {error.password && (
+                            <p>{error.password}</p>
+                        )}
+
                             <label> Imagen </label>
                                 <input
                                 type="text"
@@ -130,7 +143,7 @@ function handleSubmit(e) {
                                 onChange={(e) => handleinput(e)}
                             />
                             {error.image && (
-                                <p>{error.image}</p>
+                            <p>{error.image}</p>
                             )}
 
                             {!Object.keys(error).length && !checkprops(input) ?

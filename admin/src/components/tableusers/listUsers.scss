@@ -1,7 +1,7 @@
-.list{
+.listUsers{
     height: 97%;
 
-    .top{
+    .topUsers{
         box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
         height: 30px;
         padding: 10px;
@@ -10,12 +10,12 @@
         justify-content: space-between;
         align-items: center;
         
-        .title{
+        .titleUsers{
             color:#000000;
             font-size: 20px;
         }
         
-        .btn{
+        .btnUsers{
             width: 150px;
             height: 40px;
             background-color: #DD8643;
@@ -30,7 +30,7 @@
             font-size: 12px;
         }
     }
-    .bottom{
+    .bottomUsers{
         box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
         padding: 10px;
         margin: 20px;

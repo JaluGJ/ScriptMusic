@@ -2,7 +2,7 @@ import SideBar from '../SideBar/SideBar'
 import './NewProduct.scss'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getAllProducts } from '../../redux/actions'
+import { addProduct } from '../../redux/actions'
 import { useState } from 'react';
 import { validate, checkprops } from './errors';
 import { useNavigate, Link } from "react-router-dom";
@@ -19,7 +19,6 @@ export default function NewProduct({ logout }) {
 
 
     useEffect(() => {
-        // dispatch(getAllProducts());
         setError(validate(input))
     }, [])
 

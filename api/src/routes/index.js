@@ -1,7 +1,22 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, profileAdmin, updateProfile, googleLogin, validateToken, getOneUser, banUser, unBanUser, getUserBanned } = require('../controllers/user')
+const { getAllUsers, 
+    registerUser, 
+    loginUser, 
+    loginAdmin, 
+    confirmUser, 
+    profile, 
+    profileAdmin, 
+    updateProfile, 
+    googleLogin, 
+    validateToken, 
+    getOneUser, 
+    banUser, 
+    unBanUser, 
+    getUserBanned, 
+    addUserFromAdmin 
+} = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
@@ -36,7 +51,9 @@ routes.post('/rating', addRating)
 
 routes.post('/login', loginUser)
 
-routes.post('/signup', registerUser)
+routes.post('/signup', registerUser) //Esta para la app
+
+routes.post('/signupFront', addUserFromAdmin) //Esta para el admin
 
 routes.post('/loginAdmin', loginAdmin)
 

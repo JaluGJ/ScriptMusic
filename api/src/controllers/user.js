@@ -23,15 +23,19 @@ module.exports = {
 
 
     registerUser: async (req, res, next) => {
+
         let { email, password, firstName, lastName, isAdmin, pushToken } = req.body
+
         try {
             const user = await User.findOne({ email })
             if (user) {
                 return res.status(404).json({ message: 'El e-mail ya ha sido tomado' })
             }
+
             isAdmin === undefined ?
                 isAdmin = false :
                 isAdmin = true
+
             const newUser = {
                 email,
                 password: await bcrypt.hash(password, 10),
@@ -40,20 +44,68 @@ module.exports = {
                 isAdmin,
                 pushToken
             }
+
             const ban = await BannedUser.findOne({ email })
             if (ban) {
                 const template = getTemplateBaned(ban.email)
                 await sendEmail(template)
                 return res.status(404).json({ message: 'El usuario ha sido baneado' })
             }
+
             const userCreated = await User.create(newUser)
             const token = getToken(userCreated._id)
             const template = getTemplate(userCreated.firstName, token)
+
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
             return res.status(200).json({ userCreated })
         } catch (error) {
             next(error)
         }
+    },
+
+    addUserFromAdmin: async (req, res, next) => {
+
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user.isAdmin) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+
+        let { email, password, firstName, lastName, image, isAdmin, pushToken } = req.body
+
+        if (!email) return res.status(404).json({ msg: 'Falta enviar correo electrónico' });
+        if (!password) return res.status(404).json({ msg: 'Falta rellenar la contraseña' });
+        if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
+        if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
+        if (!image) return res.status(404).json({ msg: 'Falta ingresar imagen' });
+
+        const userAdd = new User({
+            email,
+            password: await bcrypt.hash(password, 10),
+            firstName,
+            lastName,
+            isAdmin,
+            pushToken,
+        });
+
+        userAdd.save()
+            .then(() => {
+                return res.json({ msg: "Usuario guardado", userAdd});
+            })
+            .catch((error) => {
+                next(error);
+            })
     },
 
 
