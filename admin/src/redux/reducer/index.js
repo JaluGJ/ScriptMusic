@@ -12,7 +12,8 @@ import {
     DELETE_TOKEN,
     CLEAR_CACHE,
     DELETE_USER,
-    BAN_USER
+    BAN_USER,
+    UN_BAN_USER
 } from "../actions"
 
 const initialState = {
@@ -82,6 +83,12 @@ export const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
             }
+
+        case  UN_BAN_USER: 
+        return {
+            ...state,
+            
+        }
 
         case ADMIN_LOGIN:
             return {
