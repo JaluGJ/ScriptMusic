@@ -15,7 +15,10 @@ const { getAllUsers,
     banUser, 
     unBanUser, 
     getUserBanned, 
-    addUserFromAdmin 
+    addUserFromAdmin,
+    forgotPassword,
+    forgotPasswordUser,
+    resetPassword,
 } = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
@@ -25,6 +28,9 @@ const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers
 const { addRating } = require('../controllers/rating')
 
 const routes = Router()
+
+
+// FALTA USAR EL RESEEEEEEEET PASSWORD
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
 
@@ -64,6 +70,10 @@ routes.get('/user/confirm/token/:token', confirmUser)
 routes.get('/profile', profile)
 
 routes.put('/profile', updateProfile)
+
+routes.post('/user/forgotPassword', forgotPassword)
+
+routes.get('/user/reset/token/:token', forgotPasswordUser)
 
 routes.get('/users', getAllUsers)
 
