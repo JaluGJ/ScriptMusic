@@ -16,6 +16,7 @@ export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_ONE_USER = "GET_ONE_USER"
 export const ADD_USER = "ADD_USER"
 export const DELETE_USER = 'DELETE_USER'
+export const BAN_USER = 'BAN_USER'
 
 // PRODUCTS ACTIONS
 
@@ -32,36 +33,36 @@ export const getAllProducts = () => (dispatch) => {
 };
 
 export const getOneProduct = (id, userToken) => (dispatch) => {
-    const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      };
-      console.log(config)
-    axios.get(`${baseUrl}/products/${id}`, config)
-        .then(res => {
-            dispatch({
-                type: GET_ONE_PRODUCT,
-                payload: res.data.product
-            })
-        })
-        .catch(err => console.log(err))
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  console.log(config)
+  axios.get(`${baseUrl}/products/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: GET_ONE_PRODUCT,
+        payload: res.data.product
+      })
+    })
+    .catch(err => console.log(err))
 }
 
 export const addProduct = (product, userToken) => (dispatch) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${userToken}`,
-        },
-    };
-    axios.post(`${baseUrl}/products`, product, config)
-        .then(res => {
-            dispatch({
-                type: ADD_PRODUCT,
-                payload: res.data.product
-            })
-        })
-        .catch(err => console.log(err))
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.post(`${baseUrl}/products`, product, config)
+    .then(res => {
+      dispatch({
+        type: ADD_PRODUCT,
+        payload: res.data.product
+      })
+    })
+    .catch(err => console.log(err))
 }
 
 export const updateProduct = (id, product, userToken) => (dispatch) => {
@@ -82,19 +83,19 @@ export const updateProduct = (id, product, userToken) => (dispatch) => {
 };
 
 export const deleteProduct = (id, userToken) => (dispatch) => {
-    const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      };
-    axios.delete(`${baseUrl}/products/${id}`, config)
-        .then(res => {
-            dispatch({
-                type: DELETE_PRODUCT,
-                payload: res.data
-            })
-        })
-        .catch(err => console.log(err))
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.delete(`${baseUrl}/products/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err))
 }
 
 export const clearCache = () => (dispatch) => {
@@ -142,36 +143,51 @@ export const getOneUser = (id, userToken) => (dispatch) => {
 };
 
 export const addUser = (user, userToken) => (dispatch) => {
-    const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      };
-    axios.post(`${baseUrl}/signupFront`, user, config)
-        .then(res => {
-            dispatch({
-                type: ADD_USER,
-                payload: res.data.userAdd,
-            })
-        })
-        .catch(err => console.log(err))
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.post(`${baseUrl}/signupFront`, user, config)
+    .then(res => {
+      dispatch({
+        type: ADD_USER,
+        payload: res.data.userAdd,
+      })
+    })
+    .catch(err => console.log(err))
 }
 
-export const deleteUser = (user, userToken) => (dispatch) => {
-    const config = {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      };     
-    axios.delete(`${baseUrl}/user/${id}`, config)
-        .then(res => {
-            dispatch({
-                type: DELETE_USER,
-                payload: res.data
-          })
-        })
-        .catch(err => console.log(err))
-} 
+export const deleteUser = (id, userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.delete(`${baseUrl}/user/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: DELETE_USER,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err))
+}
+
+export const banUser = (id, userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.post(`${baseUrl}/ban/user/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: BAN_USER,
+        payload: res.data.user
+      })
+    })
+}
 
 export const adminLogin = (user) => (dispatch) => {
   axios
