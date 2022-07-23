@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser } = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword} = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
@@ -62,6 +62,111 @@ module.exports = {
             next(error)
         }
     },
+
+
+    forgotPassword: async (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(404).json({ message: 'El usuario no existe' })
+        }
+
+        const { email } = req.body
+        try {
+            const user = await User.findOne({ email })
+            if (!user) {
+                return res.status(404).json({ message: 'El e-mail no existe' })
+            }
+            const token = getToken(user._id)
+            const template = getTemplateForgotPassword(user.firstName, token)
+            await sendEmail(user.email, 'Recuperar contraseña', template)
+            return res.status(200).json({ message: 'Se ha enviado un correo para recuperar la contraseña' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    forgotPasswordUser: async (req, res, next) => {
+        const { token } = req.params
+        try {
+            const data = getTokenData(token)
+            if(!data){
+                return res.status(401).json({ message: 'El token o el usuario no existe' })
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.status(404).json({ message: 'El token o el usuario no existe' })
+            }
+            const newUserPassword = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+            user.password = await bcrypt.hash(newUserPassword, 10)
+            await user.save()
+            const template = getTemplateForgotPasswordNewPassword(user.firstName, newUserPassword)
+            await sendEmail(user.email, 'Nueva contraseña', template)
+            return res.status(200).json({ message: 'Se ha cambiado la contraseña por una provisional' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    resetPassword: async (req, res, next) => {
+        
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(404).json({ message: 'El usuario no existe' })
+        }
+        if(!user.isConfirmed){
+            return res.status(404).json({ message: 'El usuario no ha confirmado su cuenta' })
+        }
+
+        let { email, password, newPassword } = req.body
+        try {
+            const user = await User.findOne({ email })
+            if (!user) {
+                return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
+            }
+            const isMatch = await user.comparePassword(password)
+            if (!isMatch) {
+                return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
+            }
+            if (email !== user.email) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if (!password || !newPassword) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            newPassword = await bcrypt.hash(password, 10)
+            await User.findByIdAndUpdate(user._id, { password: newPassword })
+            return res.status(200).json({ message: 'Se ha cambiado la contraseña' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
 
     addUserFromAdmin: async (req, res, next) => {
 

@@ -93,6 +93,7 @@ const getTemplateBougthFail = (name) => {
   `
 }
 
+
 const getTemplateBougthSuccess = (name) => {
     return `
       <div>Hola ${name}.</div>
@@ -100,6 +101,29 @@ const getTemplateBougthSuccess = (name) => {
       <div>Puedes ver mas detalles de la misma en la sección de 'Mis Compras' en la app.</div>
       <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
     `
+}
+
+
+const getTemplateForgotPassword = (name, token) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos recibido una solicitud para restablecer tu contraseña.</div>
+  <div>Para restablecer tu contraseña, solo presiona el siguiente botón:</div>
+  <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="https://sm.up.railway.app/user/reset/token/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Restablecer contraseña</button></a><br/>
+  <p>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
+  <p>Saludos, el equipo de ScriptMusic.</p>
+  `
+}
+
+const getTemplateForgotPasswordNewPassword = (name, newPassword) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Tu nueva contraseña es la siguiente:</div>
+  <div>${newPassword}</div>
+  <div>Recuerda cambiarla en el menor tiempo posible.</div>
+  <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
+  <p>Saludos, el equipo de ScriptMusic.</p>
+  `
 }
 
 
@@ -111,4 +135,6 @@ module.exports = {
   getTemplateBaned,
   getTemplateBanUser,
   getTemplateUnBanUser,
+  getTemplateForgotPassword,
+  getTemplateForgotPasswordNewPassword
 };
