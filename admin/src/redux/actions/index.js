@@ -14,7 +14,7 @@ export const DELETE_TOKEN = 'DELETE_TOKEN'
 export const CLEAR_CACHE = 'CLEAR_CACHE'
 export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_ONE_USER = "GET_ONE_USER"
-// export const ADD_USER = "ADD_USER"
+export const ADD_USER = "ADD_USER"
 
 // PRODUCTS ACTIONS
 
@@ -117,7 +117,7 @@ export const getAllUsers = (userToken) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: GET_ALL_USERS,
-        payload: res.data,
+        payload: res.data.users
       });
     })
     .catch((err) => console.log(err));
@@ -130,7 +130,7 @@ export const getOneUser = (id, userToken) => (dispatch) => {
     },
   };
   axios
-    .get(`${baseUrl}/profile?=/${id}`, config)
+    .get(`${baseUrl}/user/${id}`, config)
     .then((res) => {
       dispatch({
         type: GET_ONE_USER,
@@ -140,21 +140,21 @@ export const getOneUser = (id, userToken) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-// export const addUser = (user, userToken) => (dispatch) => {
-//     const config = {
-//         headers: {
-//           Authorization: `Bearer ${userToken}`,
-//         },
-//       };
-//     axios.post(`${baseUrl}/users`, user, config)
-//         .then(res => {
-//             dispatch({
-//                 type: ADD_USER,
-//                 payload: res.data
-//             })
-//         })
-//         .catch(err => console.log(err))
-// }
+export const addUser = (user, userToken) => (dispatch) => {
+    const config = {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      };
+    axios.post(`${baseUrl}/users`, user, config)
+        .then(res => {
+            dispatch({
+                type: ADD_USER,
+                payload: res.data.users
+            })
+        })
+        .catch(err => console.log(err))
+}
 
 export const adminLogin = (user) => (dispatch) => {
   axios
