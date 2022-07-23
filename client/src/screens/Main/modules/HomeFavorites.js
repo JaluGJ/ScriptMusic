@@ -14,7 +14,7 @@ export default function EmptyFavs() {
 }
 
 export const FAVORITOS = ({ favorite }) => {
-
+    const navigation = useNavigation();
     return (
         <View style={{
             marginHorizontal: 20
@@ -65,7 +65,7 @@ export const FAVORITOS = ({ favorite }) => {
 
                             return (
                                 <View key={i} style={styles.productFavHome} blurRadius={1}>
-                                    <View style={styles.image}>
+                                    <View style={styles.imageFav}>
                                         <Image
                                             style={{
                                                 width: vw(30),
@@ -91,7 +91,9 @@ export const FAVORITOS = ({ favorite }) => {
                             )
                         })
                     }
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity
+                        onPress={()=> navigation.navigate('Favorites')}
+                    >
                         <View style={styles.containerFavTitle}>
 
                             <Text style={{
@@ -102,7 +104,7 @@ export const FAVORITOS = ({ favorite }) => {
                             <AntDesign name="right" size={20} color="#DD8643" />
 
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>
