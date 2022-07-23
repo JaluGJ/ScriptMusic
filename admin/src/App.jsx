@@ -4,7 +4,7 @@ import Home from './components/Home/Home';
 import UpdateProduct from './components/updateProduct/updateProduct';
 import NewProduct from './components/Newproduct/NewProduct';
 import UpdateUser from './components/UpdateUser/UpdateUser';
-import NewUser from './components/NewUser/NewUser';
+import NewUser from './components/NewUser/NewUser'
 import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
