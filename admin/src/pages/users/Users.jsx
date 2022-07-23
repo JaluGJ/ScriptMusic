@@ -3,24 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import SideBar from '../../components/SideBar/SideBar';
 import List from '../../components/tableusers/listUsers';
 import './Users.scss';
-import { banUser, getAllUsers } from '../../redux/actions';
+import { banUser, getAllUsers, unBanUser,deleteUser } from '../../redux/actions';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { deleteUser } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-function Users() {
-
+export default function Users() {
   const dispatch = useDispatch()
   const rows = useSelector(state => state.users)
   const userToken = localStorage.user;
 
   //--------------------------------------------------------------------------------------------------------------------------------
   function handleDeleteUser(e, id) {
-    e.preventDefault();
+    e.preventDefault(e);
     dispatch(deleteUser(id, userToken))
     toast.success('Usuario Eliminado', {
       position: "top-center",
@@ -31,12 +29,12 @@ function Users() {
       draggable: true,
       progress: undefined,
     });
-    dispatch(getAllUsers());
+    dispatch(getAllUsers(userToken));
   }
 
   function handleBanUser(e, id){
-    e.preventDefault();
-    dispatch(banUser(id));
+    e.preventDefault(e);
+    dispatch(banUser(id, userToken));
     toast.success('Usuario Bloqueado', {
       position: "top-center",
       autoClose: 4000,
@@ -46,7 +44,22 @@ function Users() {
       draggable: true,
       progress: undefined,
     });
-    dispatch(getAllUsers());
+    dispatch(getAllUsers(userToken));
+  }
+
+  function handleUnBanUser(e, id){
+    e.preventDefault(e);
+    dispatch(unBanUser(id, userToken));
+    toast.success('Usuario Desloqueado', {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    dispatch(getAllUsers(userToken));
   }
   // PARA IMPLEMENTAR EL DELETEUSER SE TRAJO EL INPUTS Y SE ELIMINO,
   // PORQUE NO ESTABA RECIBIENDO EL DISPATH PARA REALIZAR LA ACCION.
@@ -68,14 +81,8 @@ function Users() {
       field: 'isConfirmed', headerName: 'Validado', width: 100, headerAlign: 'center', align: 'center'
     },
     {
-      field: 'delete',
-      headerName: '',
-      headerAlign: 'center',
-      align: 'center',
-      width: 30,
-      renderCell: (cellValues) => {
-        return <DeleteIcon onClick={(e) => handleDeleteUser(e, cellValues.row.id)} />
-      },
+      field: 'delete', headerName: '', headerAlign: 'center', align: 'center', width: 30,
+      renderCell: (cellValues) => {return <DeleteIcon onClick={(e) => handleDeleteUser(e, cellValues.row.id)} />}
     },
     {
       field: 'banuser', headerName: 'Bloquear', width: 100, headerAlign: 'center', align: 'center',
@@ -83,7 +90,7 @@ function Users() {
     },
     {
       field: 'unbanuser', headerName: 'Desbloquear', width: 100, headerAlign: 'center', align: 'center',
-      renderCell: (cellValues) => {return <PersonRoundedIcon className='green'  />}
+      renderCell: (cellValues) => {return <PersonRoundedIcon onClick={(e) => handleUnBanUser(e, cellValues.row.id)} className='green'  />}
     },
   ]
   //--------------------------------------------------------------------------------------------------------------------------------
@@ -107,5 +114,3 @@ function Users() {
     </div>
   )
 }
-
-export default Users

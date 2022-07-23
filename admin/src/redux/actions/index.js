@@ -17,6 +17,7 @@ export const GET_ONE_USER = "GET_ONE_USER"
 export const ADD_USER = "ADD_USER"
 export const DELETE_USER = 'DELETE_USER'
 export const BAN_USER = 'BAN_USER'
+export const UN_BAN_USER = 'UN_BAN_USER'
 
 // PRODUCTS ACTIONS
 
@@ -168,7 +169,7 @@ export const deleteUser = (id, userToken) => (dispatch) => {
     .then(res => {
       dispatch({
         type: DELETE_USER,
-        payload: res.data
+        payload: res.data.users
       })
     })
     .catch(err => console.log(err))
@@ -184,7 +185,22 @@ export const banUser = (id, userToken) => (dispatch) => {
     .then(res => {
       dispatch({
         type: BAN_USER,
-        payload: res.data.user
+        payload: res.data.users
+      })
+    })
+}
+
+export const unBanUser = (id, userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.post(`${baseUrl}/unban/user/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: UN_BAN_USER,
+        payload: res.data.users
       })
     })
 }
