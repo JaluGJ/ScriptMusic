@@ -15,6 +15,7 @@ export const CLEAR_CACHE = 'CLEAR_CACHE'
 export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_ONE_USER = "GET_ONE_USER"
 export const ADD_USER = "ADD_USER"
+export const DELETE_USER = 'DELETE_USER'
 
 // PRODUCTS ACTIONS
 
@@ -146,15 +147,31 @@ export const addUser = (user, userToken) => (dispatch) => {
           Authorization: `Bearer ${userToken}`,
         },
       };
-    axios.post(`${baseUrl}/users`, user, config)
+    axios.post(`${baseUrl}/signupFront`, user, config)
         .then(res => {
             dispatch({
                 type: ADD_USER,
-                payload: res.data.users
+                payload: res.data.userAdd,
             })
         })
         .catch(err => console.log(err))
 }
+
+// export const deleteUser = (user, userToken) => (dispatch) => {
+//   const config = {
+//       headers: {
+//         Authorization: `Bearer ${userToken}`,
+//       },
+//     };
+//   axios.post(`${baseUrl}/signupFront`, user, config)
+//       .then(res => {
+//           dispatch({
+//               type: DELETE_USER,
+//               payload: res.data.userAdd,
+//           })
+//       })
+//       .catch(err => console.log(err))
+// }
 
 export const adminLogin = (user) => (dispatch) => {
   axios

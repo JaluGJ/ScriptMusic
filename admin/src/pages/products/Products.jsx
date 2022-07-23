@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SideBar from '../../components/SideBar/SideBar';
-import List from '../../components/tableproducts/List';
+import List from '../../components/tableproducts/listProducts'
 import './Products.scss';
 import { getAllProducts } from '../../redux/actions'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,6 +15,7 @@ const Products = () => {
     
     const dispatch = useDispatch()
     const rows = useSelector(state => state.products)
+    const userToken = localStorage.user
 
     //--------------------------------------------------------------------------------------------------------------------------------
     function handleDelete(e, id){
@@ -66,7 +67,6 @@ const Products = () => {
     useEffect(() => {
         dispatch(getAllProducts());
     }, [dispatch])
-    const userToken = localStorage.user
 
     return(
         <div className="products">
