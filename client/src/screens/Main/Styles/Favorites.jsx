@@ -102,11 +102,11 @@ let styles = StyleSheet.create({
   /*************** HOME FAV ******************/
   containerFavHome: {
     width: vw(90),
-    height: vh(45),
+    height: vh(60),
     borderRadius: 50,
     marginHorizontal: 20,
-    backgroundColor: '#000000',
-    shadowColor: "#ff994b",
+    backgroundColor: '#fafafa',
+    shadowColor: "#00000096",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -114,7 +114,12 @@ let styles = StyleSheet.create({
     marginHorizontal: 5,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 1,
+    elevation: 2,
+  },
+  containerFavTitle:{
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
   },
   titleFavHome: {
     fontSize: 20,
@@ -124,13 +129,36 @@ let styles = StyleSheet.create({
   },
   productsFavHome: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent:'center',
+    alignItems:'center'
   },
   productFavHome: {
-    width: '50%',
-    height: vh(16),
-    borderWidth: 0.5,
+    width: '48%',
+    height: vh(24),
+    elevation:1,
+    borderColor:'#36281c7f',
+    margin: 3,
+    borderRadius:20,
+    backgroundColor: '#ffffff',
+    
   },
+  imageFav:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textProduct:{
+    height:vh(8),
+    justifyContent:'space-around',
+    alignItems:'center'
+  },
+  modelText:{
+    fontSize:18
+  },
+  price:{
+    fontSize:15,
+    letterSpacing:2
+  }
 });
 
 export default styles;

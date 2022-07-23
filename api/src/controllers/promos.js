@@ -2,6 +2,7 @@ const promosProductModel = require('../models/promosProduct/promosProductSchema'
 const Product = require("../models/product/productSchema.js");
 const User = require('../models/user/userSchema');
 const { getTokenData } = require("../config/jwt.config.js");
+const sendNotifications = require('../config/sendNotifications');
 
 const createPromo = async (req, res, next) => {
   try {
@@ -79,6 +80,7 @@ const createPromo = async (req, res, next) => {
           promoName
         })
         newPromo.save()
+        await sendNotifications(newPromo.promoName)
         return res.status(200).json({ message: 'Promo creada' })
       } catch (error) {
         next(error)
@@ -130,6 +132,7 @@ const createPromo = async (req, res, next) => {
         promoName
       })
       newPromo.save()
+      await sendNotifications(newPromo.promoName)
       return res.status(200).json({ message: 'Promo creada' })
     }
 
@@ -176,6 +179,7 @@ const createPromo = async (req, res, next) => {
       })
 
       newPromo.save()
+      await sendNotifications(newPromo.promoName)
       return res.status(200).json({ message: 'Promo creada' })
     }
 
@@ -214,6 +218,45 @@ const getPromos = async (req, res, next) => {
     }
 
     return res.json(promos)
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
+const getPromoById = async (req, res, next) => {
+  try {
+
+    const {id} = req.params
+    if(!id) return res.status(404).json({ message: 'No se ha indicado id' })
+    
+    const autorization = req.get('Authorization')
+    if (!autorization) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    const token = autorization.split(' ')[1]
+    const data = getTokenData(token)
+    if (!data) {
+      return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    }
+
+    const user = await User.findById(data.id)
+    if (!user) {
+      return res.status(404).json({ message: 'No se ha encontrado usuario' })
+    }
+
+    const promo = await promosProductModel.findById(id).populate('items', { _id: 0, user: 0 })
+    if (!promo) {
+      return res.status(404).json({ message: 'No se ha encontrado promocion' })
+    }
+
+    return res.json(promo)
   } catch (error) {
     next(error)
   }
@@ -266,5 +309,6 @@ const deletePromo = async (req, res, next) => {
 module.exports = {
   createPromo,
   getPromos,
-  deletePromo
+  deletePromo,
+  getPromoById
 };

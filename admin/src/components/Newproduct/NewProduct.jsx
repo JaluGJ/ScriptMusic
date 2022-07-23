@@ -2,7 +2,7 @@ import SideBar from '../SideBar/SideBar'
 import './NewProduct.scss'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, getAllProducts } from '../../redux/actions'
+import { addProduct } from '../../redux/actions'
 import { useState } from 'react';
 import { validate, checkprops } from './errors';
 import { useNavigate, Link } from "react-router-dom";
@@ -19,7 +19,6 @@ export default function NewProduct({ logout }) {
 
 
     useEffect(() => {
-        dispatch(getAllProducts());
         setError(validate(input))
     }, [])
 
@@ -88,10 +87,6 @@ export default function NewProduct({ logout }) {
                 </div>
                 <div className="bottom">
                     <div className="left">
-                        {/* <img 
-                        src={file ? URL.createObjectURL(file) 
-                        : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} 
-                    alt="" /> */}
                         <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
 
                     </div>
@@ -192,7 +187,7 @@ export default function NewProduct({ logout }) {
 
 
                                 {!Object.keys(error).length && !checkprops(input) ?
-                                    <button >CREAR</button> :
+                                    <button>CREAR</button> :
                                     <button disabled >CREAR</button>
                                 }
                             </div>

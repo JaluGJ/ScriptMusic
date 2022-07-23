@@ -7,9 +7,12 @@ import {
     DELETE_PRODUCT,
     GET_ALL_USERS,
     GET_ONE_USER,
+    ADD_USER,
     ADMIN_LOGIN,
     DELETE_TOKEN,
-    CLEAR_CACHE
+    CLEAR_CACHE,
+    DELETE_USER,
+    BAN_USER
 } from "../actions"
 
 const initialState = {
@@ -46,7 +49,7 @@ export const rootReducer = (state = initialState, action) => {
         case UPDATE_PRODUCT:
             return {
                 ...state,
-                products: state.products.map(product => product._id === action.payload._id ? action.payload : product)
+                products: state.products.map(product => product.id === action.payload._id ? action.payload : product)
             }
         case DELETE_PRODUCT:
             return {
@@ -63,11 +66,22 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload
             }
-        // case ADD_USER:
-        //     return {
-        //         ...state,
-        //         users: [...state.users, action.payload]
-        //     }
+        case ADD_USER:
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            }
+
+        case DELETE_USER:
+            return {
+                ...state,
+                users: state.users.filter(user => user._id !== action.payload._id)
+            }
+
+        case BAN_USER:
+            return{
+                ...state,
+            }
 
         case ADMIN_LOGIN:
             return {

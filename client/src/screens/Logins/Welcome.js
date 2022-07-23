@@ -1,8 +1,9 @@
-import { View, Text, TouchableOpacity, Image, StatusBar } from "react-native";
+import { View, Text, TouchableOpacity, Image, StatusBar, Platform } from "react-native";
 import React from "react";
 import styles from "./styles/Welcome.jsx";
 import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
+
 
 export default function Welcome() {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ export default function Welcome() {
         <View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Register")}
+            onPress={()=>navigation.navigate("Register")}
           >
             <Text style={styles.buttonText}>REGISTRARSE</Text>
           </TouchableOpacity>

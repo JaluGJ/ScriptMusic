@@ -27,6 +27,10 @@ const userSchema = new Schema({
     required: true,
     default: false
   },
+  pushToken: {
+    type: String,
+    required: false
+  },
   favourites: [
     {
       type: Schema.Types.ObjectId,

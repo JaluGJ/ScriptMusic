@@ -1,8 +1,26 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, registerUser, loginUser, loginAdmin, confirmUser, profile, profileAdmin, updateProfile, googleLogin, validateToken } = require('../controllers/user')
-const { createPromo, deletePromo, getPromos } = require('../controllers/promos')
+const { getAllUsers, 
+    registerUser, 
+    loginUser, 
+    loginAdmin, 
+    confirmUser, 
+    profile, 
+    profileAdmin, 
+    updateProfile, 
+    googleLogin, 
+    validateToken, 
+    getOneUser, 
+    banUser, 
+    unBanUser, 
+    getUserBanned, 
+    addUserFromAdmin,
+    forgotPassword,
+    forgotPasswordUser,
+    resetPassword,
+} = require('../controllers/user')
+const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
 const { soldProducts } = require('../controllers/soldInfo')
@@ -11,6 +29,9 @@ const { addRating } = require('../controllers/rating')
 const { getTickets } = require('../controllers/ticket')
 
 const routes = Router()
+
+
+// FALTA USAR EL RESEEEEEEEET PASSWORD
 
 //hacer todas las rutas a esos componentes con el router.use('/algo', algo)
 
@@ -37,11 +58,13 @@ routes.post('/rating', addRating)
 
 routes.post('/login', loginUser)
 
-routes.post('/signup', registerUser)
+routes.post('/signup', registerUser) //Esta para la app
+
+routes.post('/signupFront', addUserFromAdmin) //Esta para el admin
 
 routes.post('/loginAdmin', loginAdmin)
 
-routes.get('/user/confirm/:token', confirmUser)
+routes.get('/user/confirm/token/:token', confirmUser)
 
     //user info
 
@@ -49,11 +72,27 @@ routes.get('/profile', profile)
 
 routes.put('/profile', updateProfile)
 
+routes.post('/user/forgotPassword', forgotPassword)
+
+routes.get('/user/reset/token/:token', forgotPasswordUser)
+
 routes.get('/users', getAllUsers)
+
+routes.get('/user/:id', getOneUser)
 
 routes.get('/admin-profile', profileAdmin)
 
      //favs
+// USER BAN
+
+routes.get('/ban/user', getUserBanned)
+
+routes.post('/ban/user/:id', banUser)
+
+routes.post('/unban/user/:id', unBanUser)
+
+
+// USER BAN
 
 routes.post('/profile/favs', newFavourite)
 
@@ -90,6 +129,8 @@ routes.get('/promos', getPromos)
 routes.post('/create-promo', createPromo)
 
 routes.delete('/delete-promo/:id', deletePromo)
+
+routes.get('/promos/:id', getPromoById)
 
 // PROMOS ROUTE
 

@@ -37,7 +37,9 @@
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "expo-notifications": "~0.15.4",
+    "expo-device": "~4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -4,6 +4,7 @@ import Home from './components/Home/Home';
 import UpdateProduct from './components/updateProduct/updateProduct';
 import NewProduct from './components/Newproduct/NewProduct';
 import UpdateUser from './components/UpdateUser/UpdateUser';
+import NewUser from './components/NewUser/NewUser'
 import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
@@ -56,6 +57,7 @@ function App() {
                 <Route path='/products/new' element={<NewProduct/>} />
                 <Route path='/products/:id' element={<UpdateProduct/>} />
                 <Route path='/users' element={<Users/>} />
+                <Route path='/users/new' element={<NewUser/>} />
                 <Route path='/users/:id' element={<UpdateUser/>} />
               </>
             )
