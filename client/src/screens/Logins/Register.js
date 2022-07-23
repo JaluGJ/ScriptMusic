@@ -20,23 +20,20 @@ import { cleanCache, postUser } from "../../redux/slices/signup.js";
 import { useDispatch, useSelector } from "react-redux";
 import { errFalse } from "../../redux/slices/signup.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useNotifications from "../../customHooks/useNotifications.js";
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  passwordConfirmation: "",
-  pushToken: "",
-};
-
-AsyncStorage.getItem("@pushToken").then((pushToken)=>{
-  initialValues.pushToken = pushToken;
-}).catch(err=>console.log(err))
 
 export default function Register() {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  };
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {setPushToken} = useNotifications();
   const { err, flag } = useSelector((state) => state.signup);
 
   let handleErrorCheck = (err, flag) => {
@@ -61,6 +58,10 @@ export default function Register() {
     return dispatch(cleanCache());
   }, [err, flag]);
 
+  useEffect(() => {
+    setPushToken()
+  }, []);
+
   return (
     <>
       <StatusBar />
@@ -73,7 +74,9 @@ export default function Register() {
           <Formik
             validationSchema={registerSchema}
             initialValues={initialValues}
-            onSubmit={(obj) => dispatch(postUser(obj))}
+            onSubmit={(obj) =>{
+               dispatch(postUser(obj))
+              }}
           >
             {({ handleSubmit }) => {
               return (
