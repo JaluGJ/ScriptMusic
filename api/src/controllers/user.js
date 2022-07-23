@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword} = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword, getTemplateForgotPassword} = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
@@ -65,23 +65,6 @@ module.exports = {
 
 
     forgotPassword: async (req, res, next) => {
-        const autorization = req.get('Authorization')
-        if (!autorization) {
-            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-        }
-        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
-            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-        }
-        const token = autorization.split(' ')[1]
-        const data = getTokenData(token)
-        if (!data) {
-            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-        }
-        const user = await User.findById(data.id)
-        if (!user) {
-            return res.status(404).json({ message: 'El usuario no existe' })
-        }
-
         const { email } = req.body
         try {
             const user = await User.findOne({ email })
