@@ -143,7 +143,7 @@ let styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     
   },
-  image:{
+  imageFav:{
     justifyContent:'center',
     alignItems:'center'
   },
