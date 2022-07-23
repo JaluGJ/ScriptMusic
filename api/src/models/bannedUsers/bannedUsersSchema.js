@@ -4,7 +4,10 @@ const bannedUserSchema = new Schema ({
 
     email: {
         type: String
-    }
+    },
+    banID: {
+        type: String
+    },
 })
 
 bannedUserSchema.set('toJSON', {

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUUnBanUser } = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
@@ -272,10 +272,10 @@ module.exports = {
             if (!userToBan) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const { email, name } = userToBan
-            const template = getTemplateBanUser(name)
-            await sendEmail(email, template)
-            await BannedUser.create({ email })
+            const { email, firstName, _id } = userToBan
+            const template = getTemplateBanUser(firstName)
+            await sendEmail(email, 'Hoy tenemos una mala noticia',template)
+            await BannedUser.create({ email, banID: _id })
             await userToBan.remove()
             return res.json({ message: 'Usuario baneado' })
         } catch (error) {
@@ -306,13 +306,13 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const userToUnBan = await BannedUser.findById(id)
+            const userToUnBan = await BannedUser.findOne({ banID: id })
             if (!userToUnBan) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
             const { email } = userToUnBan
             const template = getTemplateUnBanUser(email)
-            await sendEmail(email, template)
+            await sendEmail(email, 'Hoy tenemos una buena noticia' ,template)
             await userToUnBan.remove()
             return res.json({ message: 'Usuario desbaneado' })
         } catch (error) {
@@ -342,8 +342,15 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const bannedUsers = await BannedUser.find()
-            return res.json({ bannedUsers })
+            try {
+                const bannedUsers = await BannedUser.find()
+                if(!bannedUsers || bannedUsers.length === 0) {
+                    return res.status(404).json({ message: 'No se han encontrado usuarios baneados' })
+                }
+                return res.json({ bannedUsers })   
+            } catch (error) {
+                next(error)
+            }
         } catch (error) {
             next(error)
         }
