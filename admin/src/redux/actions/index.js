@@ -3,7 +3,6 @@ import axios from "axios"
 // const baseUrl = "https://sm.up.railway.app"
 const baseUrl = "http://localhost:3001"
 
-
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
@@ -18,6 +17,7 @@ export const ADD_USER = "ADD_USER"
 export const DELETE_USER = 'DELETE_USER'
 export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
+export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 
 // PRODUCTS ACTIONS
 
@@ -225,3 +225,24 @@ export const deleteToken = () => {
 };
 
 // USER ACTIONS
+
+// PROMOS ACTIONS
+
+export const getAllPromos = (userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios
+    .get(`${baseUrl}/promos`, config)
+    .then((res) => {
+      dispatch({
+        type: GET_ALL_PROMOS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+// PROMOS ACTIONS
