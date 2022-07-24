@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { vh, vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
     wrapper: {
         height: "100%",
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: "#F9F9F9",
-        borderRadius: 100,
+        borderRadius: 5,
         paddingVertical: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         zIndex: 0,
         padding: 10,
-        width: 320,
+        width: vw(55),
         height:40,
         letterSpacing: 2,
     },
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     titleCategories:{
-        
+        color: "#DD8643",
         fontSize:20,
         letterSpacing: 2,
     },
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 2,
+        elevation: 1,
         borderRadius:10
     }
 })

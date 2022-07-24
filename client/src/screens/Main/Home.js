@@ -48,7 +48,7 @@ const Home = () => {
             setModal={setModal}
             submitHandle={submitHandle}
           />
-          <MyCarousel />
+          {/* <MyCarousel /> */}
           <HomeCategories />
           <View style={styles.containerMain}>
 
@@ -64,7 +64,7 @@ const Home = () => {
                   style={{
                     width: vw(90),
                     height: vh(45),
-                    borderRadius: 50,
+                    borderRadius: 10,
                     borderWidth: 1,
 
                   }}
@@ -85,7 +85,8 @@ const Home = () => {
               borderColor: 'white',
               borderWidth: 2,
               elevation: 1,
-              borderRadius: 30
+              borderRadius: 10,
+              marginVertical:20
             }}>
               <TouchableOpacity>
 
