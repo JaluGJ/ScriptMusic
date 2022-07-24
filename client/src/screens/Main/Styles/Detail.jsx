@@ -4,7 +4,7 @@ import { vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
   wrapper: {
     height: "100%",
-    backgroundColor: "#000000",
+    backgroundColor: "#0000005e",
     flex: 1,
   },
   container: {

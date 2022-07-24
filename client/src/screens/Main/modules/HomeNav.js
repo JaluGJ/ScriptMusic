@@ -21,8 +21,8 @@ const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
       >
         <Image
           style={{
-            width: 45,
-            height: 45,
+            width: 50,
+            height: 50,
             borderRadius: 100,
           }}
           source={user ? { uri: user.image } : userIMG}
@@ -38,7 +38,7 @@ const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
 
       <Ionicons
         name="filter-sharp"
-        size={34}
+        size={36}
         color="#DD8643"
         onPress={() => {
           setModal(!modal);

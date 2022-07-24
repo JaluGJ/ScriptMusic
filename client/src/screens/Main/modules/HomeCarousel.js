@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { SafeAreaView, View, ScrollView, Image, Dimensions, Animated } from 'react-native';
+import { View, Image } from 'react-native';
 import { promos } from '../../../../promo.js';
 import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Carousel';
