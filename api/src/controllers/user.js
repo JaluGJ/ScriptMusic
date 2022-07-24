@@ -128,23 +128,21 @@ module.exports = {
 
         let { email, password, newPassword } = req.body
         try {
+            if (!password || !newPassword) {
+                return res.status(404).json({ message: 'Todos los campos son obligatorios' })
+            }
             const user = await User.findOne({ email })
             if (!user) {
                 return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
             }
             const isMatch = await user.comparePassword(password)
             if (!isMatch) {
-                return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
-            }
-            if (email !== user.email) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-            }
-            if (!password || !newPassword) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'E-mail o contraseña incorrecta' })
             }
             newPassword = await bcrypt.hash(password, 10)
-            await User.findByIdAndUpdate(user._id, { password: newPassword })
-            return res.status(200).json({ message: 'Se ha cambiado la contraseña' })
+            user.password = newPassword
+            await user.save()
+            return res.json({ message: 'Se ha cambiado la contraseña' })
         } catch (error) {
             next(error)
         }
@@ -170,30 +168,32 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
 
-        let { email, password, firstName, lastName, image, isAdmin, pushToken } = req.body
+        const { email, password, firstName, lastName, image, pushToken } = req.body
 
         if (!email) return res.status(404).json({ msg: 'Falta enviar correo electrónico' });
         if (!password) return res.status(404).json({ msg: 'Falta rellenar la contraseña' });
         if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
         if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
-        if (!image) return res.status(404).json({ msg: 'Falta ingresar imagen' });
 
-        const userAdd = new User({
-            email,
-            password: await bcrypt.hash(password, 10),
-            firstName,
-            lastName,
-            isAdmin,
-            pushToken,
-        });
+        if(User.findOne({ email })){
+            return res.status(404).json({ msg: 'El correo electrónico ya existe' });
+        }
 
-        userAdd.save()
-            .then(() => {
-                return res.json({ msg: "Usuario guardado", userAdd});
+        try {
+            const newUser = new User({
+                email,
+                password,
+                firstName,
+                lastName,
+                image,
+                isAdmin: true,
+                pushToken
             })
-            .catch((error) => {
-                next(error);
-            })
+            const userCreated = await newUser.save()
+            return res.status(200).json({ userCreated })
+        } catch (error) {
+            next(error)
+        }
     },
 
 
@@ -350,7 +350,6 @@ module.exports = {
     updateProfile: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
-            const { firstName, lastName, image } = req.body
             if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
@@ -366,6 +365,9 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
+
+            const { firstName, lastName, image } = req.body
+
             if (!firstName && !lastName && !image) {
                 return res.status(400).json({ message: 'No se ha modificado ningun dato' })
             }
