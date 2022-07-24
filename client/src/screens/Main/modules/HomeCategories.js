@@ -10,13 +10,13 @@ import piano2 from '../../../../assets/instrumentos/piano2.png'
 import ukelele2 from '../../../../assets/instrumentos/ukelele2.png'
 import viento2 from '../../../../assets/instrumentos/viento2.png'
 import violin2 from '../../../../assets/instrumentos/violin2.png'
-import bajo1 from '../../../../assets/instrumentos/bajo.png'
-import guitarra1 from '../../../../assets/instrumentos/guitarra.png'
-import percusion1 from '../../../../assets/instrumentos/percusion.png'
-import piano1 from '../../../../assets/instrumentos/piano.png'
-import ukelele1 from '../../../../assets/instrumentos/ukelele.png'
-import viento1 from '../../../../assets/instrumentos/viento.png'
-import violin1 from '../../../../assets/instrumentos/violin.png'
+import bajo1 from '../../../../assets/instrumentos/bajo3.png'
+import guitarra1 from '../../../../assets/instrumentos/guitarra3.png'
+import percusion1 from '../../../../assets/instrumentos/percusion3.png'
+import piano1 from '../../../../assets/instrumentos/piano3.png'
+import ukelele1 from '../../../../assets/instrumentos/ukelele3.png'
+import viento1 from '../../../../assets/instrumentos/viento3.png'
+import violin1 from '../../../../assets/instrumentos/violin3.png'
 import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Categories.jsx'
 
@@ -56,7 +56,7 @@ const HomeCategories = ({botton}) => {
                     <View>
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3, color: '#DD8643',}}>
                             Guitarra
                         </Text>
                         :
@@ -83,7 +83,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Teclados
                         </Text>
                         :
@@ -108,7 +108,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Bajos
                         </Text>
                         :
@@ -133,7 +133,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Percusión
                         </Text>
                         :
@@ -158,7 +158,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Viento
                         </Text>
                         :
@@ -183,7 +183,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Ukelele
                         </Text>
                         :
@@ -208,7 +208,7 @@ const HomeCategories = ({botton}) => {
                     />
                     {
                         botton? 
-                        <Text style={{fontSize:15, marginRight:20}}>
+                        <Text style={{fontSize:18, marginRight:20, letterSpacing:3,color: '#DD8643',}}>
                             Arco
                         </Text>
                         :
