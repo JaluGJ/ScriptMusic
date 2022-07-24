@@ -23,7 +23,6 @@ export const signinSlice = createSlice({
       state.isLoading = action.payload;
     },
     setUser: (state, action) => {
-      // console.log(action.payload);
       state.user = action.payload;
     },
     updateIMGUser: (state, action) => {
@@ -112,8 +111,8 @@ export const create = (userToken) => (dispatch) => {
   axios
     .get(`${apiUrl}profile`, config)
     .then(async (res) => {
-      let { email, firstName, lastName, id, image , bought } = res.data.user;
-      dispatch(setUser({ email, firstName, lastName, id, image , bought }));
+      let { email, firstName, lastName, id, image, bought } = res.data.user;
+      dispatch(setUser({ email, firstName, lastName, id, image, bought }));
       await AsyncStorage.setItem(
         "@user",
         JSON.stringify({ email, firstName, lastName, id, image })
@@ -170,5 +169,14 @@ export const putLastName = (lastName, userToken) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const forgotPassword = async (email) => {
+  try {
+    let {data} = await axios.post(`${apiUrl}user/forgotPassword`, {email})
+    console.log(data)
+  } catch (error) {
+    console.log(error)
   }
 };

@@ -8,6 +8,7 @@ import NewUser from './components/NewUser/NewUser'
 import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
+import Promos from './pages/promos/Promos';
 import validate from './pages/login/validate.js'
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
                 <Route path='/users' element={<Users/>} />
                 <Route path='/users/new' element={<NewUser/>} />
                 <Route path='/users/:id' element={<UpdateUser/>} />
+                <Route path='/promos' element={<Promos/>} />
               </>
             )
           }
