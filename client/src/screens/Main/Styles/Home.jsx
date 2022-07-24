@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     titleCategories:{
-        color: "#DD8643",
         fontSize:20,
         letterSpacing: 2,
+        fontWeight:'bold'
     },
     containerNewCartegories:{
         backgroundColor:'white',

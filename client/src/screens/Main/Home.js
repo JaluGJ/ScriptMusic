@@ -15,10 +15,8 @@ import HomeCategories from "./modules/HomeCategories.js";
 import ModalFilter from './ModalFilter.js';
 import HomeNav from "./modules/HomeNav";
 import MyCarousel from "./modules/HomeCarousel";
-import HomeItem from "./modules/HomeItem";
 import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
-import { instruments } from './helpers/HomeStylePromos.js'
 import { useNavigation } from '@react-navigation/native'
 import HomePromos from "./modules/HomePromos";
 const Home = () => {
@@ -48,7 +46,7 @@ const Home = () => {
             setModal={setModal}
             submitHandle={submitHandle}
           />
-          {/* <MyCarousel /> */}
+          <MyCarousel />
           <HomeCategories />
           <View style={styles.containerMain}>
 
@@ -95,7 +93,7 @@ const Home = () => {
                   style={{
                     width: '100%',
                     height: vh(30),
-                    borderRadius: 30
+                    borderRadius: 10
                   }}
                 />
 
@@ -104,7 +102,7 @@ const Home = () => {
             </View>
             <View style={styles.containerNewCartegories}>
               <View style={styles.containerTextCategories}>
-                <Text style={styles.titleCategories}>Categorias</Text>
+                <Text style={styles.titleCategories}>Categorías</Text>
               </View>
               <View style={styles.containerBottonCategories}>
                 <HomeCategories botton={true} />
