@@ -19,6 +19,7 @@ import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native'
 import HomePromos from "./modules/HomePromos";
+import {StylesPromos} from './helpers/HomeStylePromos'
 const Home = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
