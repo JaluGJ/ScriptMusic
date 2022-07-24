@@ -22,7 +22,7 @@ const HomePromosItem = ({ img, containerInfo, containerModel, containerText, con
             style={{
               width: vw(90),
               height: vh(45),
-              borderRadius: 10,
+              borderRadius: 25,
               borderWidth: 1,
               position: 'absolute',
 
