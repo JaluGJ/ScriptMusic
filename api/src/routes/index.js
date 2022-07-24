@@ -75,6 +75,8 @@ routes.get('/profile', profile)
 
 routes.put('/profile', updateProfile)
 
+routes.put('/profile/changePassword', resetPassword)
+
 routes.post('/user/forgotPassword', forgotPassword)
 
 routes.get('/user/reset/token/:token', forgotPasswordUser)
