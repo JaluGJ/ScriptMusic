@@ -7,7 +7,7 @@ export const registerSchema = yup.object().shape({
     .required("Ingrese su nombre.")
     .matches(
       /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-      "Ingrese un nombre válido"
+      "Ingrese un nombre válido."
     ),
   lastName: yup
     .string()
@@ -15,7 +15,7 @@ export const registerSchema = yup.object().shape({
     .required("Ingrese su apellido.")
     .matches(
       /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-      "Ingrese un nombre válido"
+      "Ingrese un apellido válido."
     ),
   email: yup
     .string()
