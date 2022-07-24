@@ -10,11 +10,13 @@ import { ScrollView } from "react-native";
 import { Icon } from "@rneui/themed";
 import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
+import ModalPassword from "./ModalPassword"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MyProfile = () => {
   const [modalName, setModalName] = useState(false);
   const [modalLastName, setModalLastName] = useState(false);
+  const [modalPassword, setModalPassword] = useState(false)
   const { user } = useSelector((state) => state.signin);
   const dispatch = useDispatch();
 
@@ -67,6 +69,7 @@ const MyProfile = () => {
       <View>
         <ModalName modal={modalName} setModal={setModalName} />
         <ModalLastName modal={modalLastName} setModal={setModalLastName} />
+        <ModalPassword modal={modalPassword} setModal={setModalPassword} />
         <View style={styles.containerTop}>
           <View>
             <Text style={styles.title}>MI PERFIL</Text>
@@ -121,6 +124,19 @@ const MyProfile = () => {
           <View style={styles.containerEmail}>
             <Text style={styles.titleEmail}>Email</Text>
             <Text style={styles.textEmail}>{user.email}</Text>
+          </View>
+          <View style={styles.containerLastName}>
+            <View>
+              <Text style={styles.titleLastName}>Contraseña</Text>
+              <Text style={styles.textLastName}>********</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setModalPassword(!modalPassword);
+              }}
+            >
+              <Image source={lapiz} style={{ height: 20, width: 20 }} />
+            </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity onPress={() => dispatch(logOut())}>

@@ -18,13 +18,13 @@ export default function ModalName({ modal, setModal }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setErrors({name: "Ingrese un nombre válido"})
+    setErrors({name: "Ingrese un nombre válido."})
   }, [])
 
   let validate = (name) => {
     let errors = {};
     if (name === "" || name === null || name === undefined || name.length < 1) errors.name = "Debes ingresar un nombre.";
-    if (name.length > 15) errors.name = "Máximo 15 caracteres";
+    if (name.length > 15) errors.name = "Máximo 15 caracteres.";
     if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(name)) errors.name = "Ingrese un nombre válido"
     return errors;
   };

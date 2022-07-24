@@ -18,13 +18,13 @@ export default function ModalLastName({ modal, setModal }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setErrors({lastName: "Ingrese un apellido válido"})
+    setErrors({lastName: "Ingrese un apellido válido."})
   }, [])
 
   let validate = (lastName) => {
     let errors = {};
     if (lastName === "" || lastName === null || lastName === undefined || lastName.length < 1) errors.lastName = "Debes ingresar un apellido.";
-    if (lastName.length > 15) errors.lastName = "Máximo 15 caracteres";
+    if (lastName.length > 15) errors.lastName = "Máximo 15 caracteres.";
     if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(lastName)) errors.lastName = "Ingrese un apellido válido"
     return errors;
   };
