@@ -103,18 +103,8 @@ let styles = StyleSheet.create({
   containerFavHome: {
     width: vw(90),
     height: vh(60),
-    borderRadius: 10,
-    marginHorizontal: 20,
-    backgroundColor: '#fafafa',
-    shadowColor: "#00000096",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    marginHorizontal: 5,
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
+    borderRadius: 25,
+    backgroundColor:'#fab25d'
   },
   containerFavTitle:{
     flexDirection:'row',
@@ -125,7 +115,7 @@ let styles = StyleSheet.create({
     fontSize: 20,
     letterSpacing: 6,
     padding: 20,
-    color: "#DD8643",
+    color: "#ffffff",
   },
   productsFavHome: {
     flexDirection: 'row',

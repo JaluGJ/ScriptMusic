@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     containerMain:{
         flex: 1,
-        backgroundColor: "#F9F9F9",
+        backgroundColor: "#fafafa",
         borderTopRightRadius:20,
         borderTopLeftRadius:20,
     },
