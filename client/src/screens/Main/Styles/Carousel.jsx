@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
         // width: "100%",
     },
     image: {
-        width: vw(100),
+        width: vw(80),
         height: vh(25),
-        resizeMode: 'cover',
+        resizeMode: 'contain',
         borderRadius:50,
         borderColor:'white',
         borderWidth:1
