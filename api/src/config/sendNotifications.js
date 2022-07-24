@@ -8,7 +8,7 @@ async function sendMultiplePushNotifications(body) {
       .filter((user) => user.pushToken)
       .map(async (user) => {
         try {
-          await fetch("https://exp.host/--/api/v2/push/send", {
+          let data = await fetch("https://exp.host/--/api/v2/push/send", {
             method: "POST",
             headers: {
               accept: "application/json",
@@ -21,6 +21,7 @@ async function sendMultiplePushNotifications(body) {
               body: `Tenemos una nueva promo disponible: ${body}`,
             }),
           });
+          console.log(data)
         } catch (err) {
           console.log(err);
         }
