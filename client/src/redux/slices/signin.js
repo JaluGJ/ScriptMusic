@@ -34,6 +34,9 @@ export const signinSlice = createSlice({
     updateLastname: (state, action) => {
       state.user = { ...state.user, lastName: action.payload };
     },
+    updatePassword: (state, action) => {
+      state.user = { ...state.user, password: action.payload };
+    },
   },
 });
 
@@ -45,6 +48,7 @@ export const {
   updateIMGUser,
   updateName,
   updateLastname,
+  updatePassword,
 } = signinSlice.actions;
 
 export default signinSlice.reducer;
@@ -60,7 +64,6 @@ export const loginUser = (obj) => (dispatch) => {
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
           dispatch(create(res.data.token));
-          console.log("LOGIN");
         } catch (error) {
           console.log(error);
         }
@@ -69,7 +72,7 @@ export const loginUser = (obj) => (dispatch) => {
     .catch((e) => {
       dispatch(setIsLoading(false));
       dispatch(setErr(e.response.data.message));
-      console.log("LOGIN:", e.response.data.message);
+      console.log("ERROR LOGIN:", e.response.data.message);
     });
 };
 
@@ -82,9 +85,8 @@ export const logOut = () => (dispatch) => {
       dispatch(setIsLoading(false));
       await AsyncStorage.removeItem("@token_id");
       await AsyncStorage.removeItem("@user");
-      console.log("LOGOUT");
     } catch (error) {
-      console.log(error);
+      console.log("ERROR LOGOUT", error);
     }
   }, 500);
 };
@@ -130,7 +132,7 @@ export const updateIMG = (image, userToken) => async (dispatch) => {
   dispatch(updateIMGUser(image));
   try {
     await axios.put(`${apiUrl}profile`, { image }, config);
-    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+    axios.get(`${apiUrl}profile`, config).then(async () => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ image }));
     });
   } catch (error) {
@@ -147,7 +149,7 @@ export const putName = (firstName, userToken) => async (dispatch) => {
   dispatch(updateName(firstName));
   try {
     await axios.put(`${apiUrl}profile`, { firstName }, config);
-    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+    axios.get(`${apiUrl}profile`, config).then(async () => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ firstName }));
     });
   } catch (error) {
@@ -164,8 +166,25 @@ export const putLastName = (lastName, userToken) => async (dispatch) => {
   dispatch(updateLastname(lastName));
   try {
     await axios.put(`${apiUrl}profile`, { lastName }, config);
-    axios.get(`${apiUrl}profile`, config).then(async (res) => {
+    axios.get(`${apiUrl}profile`, config).then(async () => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ lastName }));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const putPassword = (password, userToken) => async (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  dispatch(updatePassword(password));
+  try {
+    await axios.put(`${apiUrl}profile`, { password }, config);
+    axios.get(`${apiUrl}profile`, config).then(async () => {
+      await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
     });
   } catch (error) {
     console.log(error);
@@ -174,9 +193,8 @@ export const putLastName = (lastName, userToken) => async (dispatch) => {
 
 export const forgotPassword = async (email) => {
   try {
-    let {data} = await axios.post(`${apiUrl}user/forgotPassword`, {email})
-    console.log(data)
+    await axios.post(`${apiUrl}user/forgotPassword`, { email });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
