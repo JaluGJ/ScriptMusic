@@ -49,7 +49,7 @@ let styles = StyleSheet.create({
     shadowOpacity: 0.79,
     shadowRadius: 1.65,
     elevation: 1,
-    borderRadius: 30,
+    borderRadius: 10,
     backgroundColor: "#ffffff",
   },
   containerProductInfo: {
@@ -103,7 +103,7 @@ let styles = StyleSheet.create({
   containerFavHome: {
     width: vw(90),
     height: vh(60),
-    borderRadius: 50,
+    borderRadius: 10,
     marginHorizontal: 20,
     backgroundColor: '#fafafa',
     shadowColor: "#00000096",
@@ -139,7 +139,7 @@ let styles = StyleSheet.create({
     elevation:1,
     borderColor:'#36281c7f',
     margin: 3,
-    borderRadius:20,
+    borderRadius:10,
     backgroundColor: '#ffffff',
     
   },

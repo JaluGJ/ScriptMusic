@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         width: vw(80),
         height: vh(25),
         resizeMode: 'contain',
-        borderRadius:30,
+        borderRadius:10,
         borderColor:'white',
         borderWidth:1
     }

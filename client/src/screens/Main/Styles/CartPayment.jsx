@@ -40,7 +40,7 @@ let styles = StyleSheet.create({
         padding: 8,
         textAlign: 'center',
         color: '#DD8643',
-        borderRadius: 30,
+        borderRadius: 8,
     },
     buttoPageText: {
         textAlign: 'center',

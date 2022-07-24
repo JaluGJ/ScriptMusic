@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F9F9F9",
     height: "100%",
-    borderBottomEndRadius: 40,
-    borderBottomStartRadius: 40,
   },
   containerNav: {
     flexDirection: "row",
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#DD8643",
-    borderRadius: 100,
+    borderRadius: 5,
     paddingVertical: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 2,
+    elevation: 1,
     borderRadius: 10,
     marginHorizontal:10,
     borderWidth:1,
