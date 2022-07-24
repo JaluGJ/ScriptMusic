@@ -12,17 +12,20 @@ const useShoppingCart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let isMounted = true;
     AsyncStorage.getItem("@shoppingCart")
       .then((res) => {
-        if (res !== null) {
-          let products = JSON.parse(res);
-          setProductsCart(products);
-          let total = products.reduce((acc, cur) => {
-            return acc + Number(cur.price);
-          }, 0);
-          setTotalPrice(total.toFixed(2));
+        if(isMounted){
+          if (res !== null) {
+            let products = JSON.parse(res);
+            setProductsCart(products);
+            let total = products.reduce((acc, cur) => {
+              return acc + Number(cur.price);
+            }, 0);
+            setTotalPrice(total.toFixed(2));
+          }
         }
-      })
+        })
       .catch((err) => {
         console.log(err);
       });
@@ -30,6 +33,9 @@ const useShoppingCart = () => {
       AsyncStorage.setItem("@shoppingCart", JSON.stringify([])).then(() => {
         setProductsCart([]);
       });
+    }
+    return () => {
+      isMounted = false;
     }
   }, [newItems]);
 
