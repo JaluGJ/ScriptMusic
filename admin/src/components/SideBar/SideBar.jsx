@@ -10,6 +10,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { Link } from "react-router-dom";
 
 const reload = () => {
@@ -55,10 +56,12 @@ export default function SideBar() {
                             <span>Productos</span>
                         </li>
                     </Link>
-                    <li>
-                        <CreditCardOutlinedIcon className='icon' />
-                        <span>Ordenes</span>
-                    </li>
+                    <Link to="/promos" style={{ textDecoration: "none" }}>
+                        <li>
+                            <LocalOfferIcon className='icon' />
+                            <span>Promos</span>
+                        </li>
+                    </Link>
                     <li>
                         <LocalShippingOutlinedIcon className='icon' />
                         <span>Envios</span>

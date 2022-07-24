@@ -13,7 +13,8 @@ import {
     CLEAR_CACHE,
     DELETE_USER,
     BAN_USER,
-    UN_BAN_USER
+    UN_BAN_USER,
+    GET_ALL_PROMOS
 } from "../actions"
 
 const initialState = {
@@ -24,10 +25,14 @@ const initialState = {
     token: [],
     users: [],
     user: [],
+    promos: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        // REDUX PRODUCTS
+
         case GET_ALL_PRODUCTS:
             let types = [...new Set(action.payload.map(product => product.type))]
             let categories = [...new Set(action.payload.map(product => product.category))]
@@ -57,6 +62,11 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 products: state.products.filter(product => product._id !== action.payload._id)
             }
+
+        // REDUX PRODUCTS
+
+        // REDUX USERS
+
         case GET_ALL_USERS:
             return {
                 ...state,
@@ -80,15 +90,18 @@ export const rootReducer = (state = initialState, action) => {
             }
 
         case BAN_USER:
-            return{
+            return {
                 ...state,
             }
 
         case  UN_BAN_USER: 
-        return {
-            ...state,
-            
-        }
+            return {
+                ...state,
+            }
+
+        // REDUX USERS
+
+        // REDUX FUNTIONS
 
         case ADMIN_LOGIN:
             return {
@@ -103,11 +116,22 @@ export const rootReducer = (state = initialState, action) => {
             }
 
         case DELETE_TOKEN:
-            return{
+            return {
                 ...state,
                 token: []
             }
 
+        // REDUX FUNTIONS
+
+        // REDUX PROMOS
+
+        case GET_ALL_PROMOS:
+            return {
+                ...state,
+                promos: action.payload
+            }
+
+        // REDUX PROMOS
         default:
             return state
     }
