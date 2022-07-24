@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     wrapper: {
-        backgroundColor: "#000000",
         height: "100%",
     },
     container: {
@@ -12,8 +11,9 @@ const styles = StyleSheet.create({
     },
     containerMain:{
         flex: 1,
-        borderRadius:40,
         backgroundColor: "#F9F9F9",
+        borderTopRightRadius:20,
+        borderTopLeftRadius:20,
     },
     containerNav: {
         position: 'absolute',
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         padding:15,
         height: 65,
         backgroundColor: "#000000",
-    
     }, 
     textNav: {
         fontSize: 20,
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
         elevation: 5,
         zIndex: 0,
         padding: 10,
-        width: 220,
+        width: 320,
         height:40,
         letterSpacing: 2,
     },

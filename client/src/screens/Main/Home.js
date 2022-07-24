@@ -18,8 +18,9 @@ import MyCarousel from "./modules/HomeCarousel";
 import HomeItem from "./modules/HomeItem";
 import HomeFavorites from "./modules/HomeFavorites";
 import { vh, vw } from "react-native-expo-viewport-units";
-import { instruments } from './modules/HomePromos.js'
+import { instruments } from './helpers/HomeStylePromos.js'
 import { useNavigation } from '@react-navigation/native'
+import HomePromos from "./modules/HomePromos";
 const Home = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -51,63 +52,34 @@ const Home = () => {
           <HomeCategories />
           <View style={styles.containerMain}>
 
+            <TouchableOpacity>
+              <View style={{
+                width: vw(100),
+                height: vh(47),
+                alignItems:'center',
+                marginVertical:20
+              }}>
+                <Image
+                  source={promoFive.img}
+                  style={{
+                    width: vw(90),
+                    height: vh(45),
+                    borderRadius: 50,
+                    borderWidth: 1,
 
-
-            <HomeItem
-              promoimg={promoThree.image}
-              containerInfo={promoThree.containerInfo}
-              id={"62d4db06da220153870d77f3"}
-              button={'Ver mas ofertas'}
-            />
+                  }}
+                  resizeMode='contain'
+                />
+              </View>
+            </TouchableOpacity>
 
 
             <HomeFavorites />
-            <HomeItem
-              promoimg={promoTwo.image}
-              containerInfo={promoTwo.containerInfo}
-              containerText={promoTwo.containerText}
-              containerModel={promoTwo.containerModel}
-              model={'VIOLIN BLACK 1/8 '}
-              button={'Ver mas ofertas'}
-              price={129.99}
-              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996173/script_music_img/STENTOR_ROCK_A_BILLY_Contrabajo_Negro_xy5u2y.png"}
-              id={"62d4dad4da220153870d77e5"}
-            />
 
-            <HomeItem
-              promoimg={promoOne.image}
-              containerInfo={promoOne.containerInfo}
-              containerText={promoOne.containerText}
-              containerImage={promoOne.containerImage}
-              price={4129.99}
-              button={'Ver mas ofertas'}
-              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1658002388/script_music_img/Stomvi_Elite_Fliscorno_Sib_Pabell%C3%B3n_cobre_f2rzvx.png"}
-              id={"62d4dab4da220153870d77dd"}
-            />
-            <HomeItem
-              promoimg={promoFive.image}
-              containerInfo={promoTwo.containerInfo}
-              containerText={promoTwo.containerText}
-              containerImage={promoTwo.containerImage}
-              containerModel={promoTwo.containerModel}
-              model={'SAXOFON'}
-              price={1129.99}
-              button={'Ver mas ofertas'}
-              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657998782/script_music_img/Bressant_AS-220_Saxof%C3%B3n_Alto_iusuyz.png"}
-              id={"62d4dc03da220153870d783a"}
-            />
-            <HomeItem
-              promoimg={promoFor.image}
-              containerInfo={promoOne.containerInfo}
-              containerText={promoOne.containerText}
-              containerImage={promoFive.containerImage}
-              containerModel={promoOne.containerModel}
-              model={'VIOLIN '}
-              price={89.99}
-              button={'Ver mas ofertas'}
-              image={"https://res.cloudinary.com/dzonjuriq/image/upload/v1657996915/script_music_img/Gliga_Gems_II_34_Viol%C3%ADn_jgqygm.png"}
-              id={"62d4db52da220153870d780b"}
-            />
+
+            <HomePromos/>
+            
+            
             <View style={{
               marginHorizontal: 25,
               borderColor: 'white',

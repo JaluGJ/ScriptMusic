@@ -12,11 +12,7 @@ import {
   CardField,
   useConfirmPayment,
 } from "@stripe/stripe-react-native";
-import { fetchPaymentIntent, fetchStatusPayment } from "../helpers/payments.js";
-import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { removeItems } from "../../../redux/slices/products.js";
-import { create } from "../../../redux/slices/signin.js";
 import usePayment from "../../../customHooks/usePayment";
 import styles from "../Styles/CartPayment.jsx";
 import logo from "../../../../assets/instrumentos/logo2.png";

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 import { vh, vw } from "react-native-expo-viewport-units";
 const styles = StyleSheet.create({
     background:{
+        
         alignItems:'center',
     },/* no tocar */
     container: {

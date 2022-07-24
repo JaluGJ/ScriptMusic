@@ -31,28 +31,6 @@ export const FAVORITOS = ({ favorite }) => {
                     borderBottomRightRadius:50,
                     borderTopRightRadius:50,
                 }}/>
-                {/* <View style={{
-                    position: 'absolute',
-                    backgroundColor:'black',
-                    width: vh(14),
-                    height: vh(20),
-                    right: 0,
-                    bottom: 0,
-                    borderBottomRightRadius:50,
-                    borderTopRightRadius:50,
-                }}/> */}
-                {/* <Image
-                    source={logo}
-                    style={{
-                        width: vw(90),
-                        height: vh(55),
-                        position: 'absolute',
-                        left: 0,
-                        bottom: 110,
-
-                    }}
-                    resizeMode="contain"
-                /> */}
                 <View style={styles.containerFavTitle}>
                     <Text style={styles.titleFavHome}>Tus favoritos</Text>
                 </View>
@@ -65,6 +43,10 @@ export const FAVORITOS = ({ favorite }) => {
 
                             return (
                                 <View key={i} style={styles.productFavHome} blurRadius={1}>
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate("Details", { itemId: fav.id })}
+                                    >
+
                                     <View style={styles.imageFav}>
                                         <Image
                                             style={{
@@ -87,24 +69,11 @@ export const FAVORITOS = ({ favorite }) => {
                                             <Text style={styles.price}>${fav.price}</Text>
                                         </View>
                                     </View>
+                                    </TouchableOpacity>
                                 </View>
                             )
                         })
                     }
-                    {/* <TouchableOpacity
-                        onPress={()=> navigation.navigate('Favorites')}
-                    >
-                        <View style={styles.containerFavTitle}>
-
-                            <Text style={{
-                                color: '#DD8643',
-                                letterSpacing: 2,
-                                fontSize: 15
-                            }}>Ver mas favoritos</Text>
-                            <AntDesign name="right" size={20} color="#DD8643" />
-
-                        </View>
-                    </TouchableOpacity> */}
                 </View>
             </View>
         </View>

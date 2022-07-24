@@ -12,8 +12,8 @@ import useCountCart from "../customHooks/useCountCart";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
-  const  [countProducts] = useCountCart();
-  
+  const [countProducts] = useCountCart();
+
   return (
     <Tab.Navigator
       initialRouteName="UserDrawer"
@@ -23,8 +23,15 @@ const AppStack = () => {
         tabBarStyle: {
           height: 55,
           paddingTop: 12,
-          backgroundColor: "#000000",
-          borderTopColor: "#000000",
+          backgroundColor: "#ffffff",
+          shadowColor: "#000000",
+          shadowOffset: {
+            width: 5,
+            height: 5,
+          },
+          shadowOpacity: 0.29,
+          shadowRadius: 1.65,
+          elevation: 10
         },
       }}
     >
@@ -105,12 +112,12 @@ const AppStack = () => {
         name="WrapperCart"
         component={WrapperCart}
         options={{
-        tabBarBadge: countProducts ? countProducts : null,
-        tabBarBadgeStyle: {
-          backgroundColor: "#fff6e8",
-          color: "#DD8643",
-          marginTop: -7,
-        },
+          tabBarBadge: countProducts ? countProducts : null,
+          tabBarBadgeStyle: {
+            backgroundColor: "#DD8643",
+            color: "#ffffff",
+            marginTop: -7,
+          },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
