@@ -28,9 +28,10 @@ export const FAVORITOS = ({ favorite }) => {
                     width: vh(10),
                     height: vh(60),
                     right: 0,
-                    borderBottomRightRadius:10,
-                    borderTopRightRadius:10,
+                    borderBottomRightRadius:25,
+                    borderTopRightRadius:25,
                 }}/>
+                
                 <View style={styles.containerFavTitle}>
                     <Text style={styles.titleFavHome}>Tus favoritos</Text>
                 </View>
