@@ -7,25 +7,31 @@ import styles from "../Styles/Item.jsx";
 export let StylesPromos = [
     promoOne = {
         id: 3,
+        img: promo2,
+        containerInfo: styles.containerInfo,
+        containerModel: styles.containerModel,
+        containerText: styles.containerText,
+    },
+    promoTwo = {
+        id: 2,
         img: promo1,
         containerModel: styles.containerModelUp,
         containerInfo: styles.containerInfoCircle,
         containerText: styles.containerTextCircle,
         containerImage: styles.containerImageCircle,
-    },
-    promoTwo = {
-        id: 2,
-        img: promo2,
-        containerModel: styles.containerModel,
-        containerInfo: styles.containerInfo,
-        containerText: styles.containerText,
+        
     },
     promoThree={ 
         id: 4,
-        img: promo3,
+        img: promo5,
+        containerModel:styles.containerModelOff,
+        containerInfo:styles.containerInfoThree
     },
     promoFor={
         id: 5,
+        containerInfo:styles.containerInfoCenter,
+        containerModel:styles.containerInfoOff,
+        containerText:styles.containerTextOff,
         containerImage: styles.containerImageCircleRotate,
         img: promo4,
     },

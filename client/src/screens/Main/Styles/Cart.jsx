@@ -84,7 +84,7 @@ let styles = StyleSheet.create({
     bottom: 15,
     position: 'absolute',
     backgroundColor: '#f09b59',
-    borderRadius: 50,
+    borderRadius: 2,
   },
   arrowAnimatedModal: {
     right: vw(45),
@@ -128,7 +128,7 @@ let styles = StyleSheet.create({
     marginTop: 25,
     textAlign: 'center',
     color: '#DD8643',
-    borderRadius: 30,
+    borderRadius: 5,
   },
   buttoPageText: {
     textAlign: 'center',
@@ -157,7 +157,7 @@ let styles = StyleSheet.create({
     shadowOpacity: 0.79,
     shadowRadius: 1.65,
     elevation: 1,
-    borderRadius: 30,
+    borderRadius: 10,
     backgroundColor: '#ffffff',
   },
   containerProductsOff: {

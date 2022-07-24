@@ -29,34 +29,7 @@ const Details = ({ route }) => {
   const [showModal, setShowModal] = useState(false);
   const [flag, setFlag] = useState(false);
   const [favourites] = useFavorites();
-  /* console.log(details.ratYCom) */
-
-  let ratYCom = [
-    {
-      "userId": {
-        "lastName": "machao",
-        "image": 'https://i.postimg.cc/rwxFv4SF/machado.png',
-      },
-      "ratting": 4,
-      "comment": "vamooo bocaaa"
-    },
-    {
-      "userId": {
-        "lastName": "Orancio",
-        "image": 'https://i.postimg.cc/fT3bfpyd/hori.png',
-      },
-      "ratting": 5,
-      "comment": "re feas las alertasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-    },
-    {
-      "userId": {
-        "lastName": "Jorge Polo",
-        "image": 'https://i.postimg.cc/FRtbh36W/unknown.png',
-      },
-      "ratting": 2,
-      "comment": "jorge"
-    }
-  ]
+  
 
   return (
     <>

@@ -28,8 +28,8 @@ export const FAVORITOS = ({ favorite }) => {
                     width: vh(10),
                     height: vh(60),
                     right: 0,
-                    borderBottomRightRadius:50,
-                    borderTopRightRadius:50,
+                    borderBottomRightRadius:10,
+                    borderTopRightRadius:10,
                 }}/>
                 <View style={styles.containerFavTitle}>
                     <Text style={styles.titleFavHome}>Tus favoritos</Text>
@@ -56,8 +56,8 @@ export const FAVORITOS = ({ favorite }) => {
                                             resizeMode="contain"
                                             source={{ uri: fav.image }}
                                         />
-                                        <View style={{ position: 'absolute', top: 3, right: 3 }}>
-                                            <Fontisto name="heart" size={34} color="#DD8643" />
+                                        <View style={{ position: 'absolute', top: 10, right: 10 }}>
+                                            <Fontisto name="heart" size={24} color="#DD8643" />
                                         </View>
                                     </View>
 
