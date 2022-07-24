@@ -19,6 +19,7 @@ const { getAllUsers,
     forgotPassword,
     forgotPasswordUser,
     resetPassword,
+    deleteUser,
 } = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
@@ -67,6 +68,8 @@ routes.post('/loginAdmin', loginAdmin)
 routes.get('/user/confirm/token/:token', confirmUser)
 
     //user info
+
+routes.delete('/user/delete', deleteUser)
 
 routes.get('/profile', profile)
 
