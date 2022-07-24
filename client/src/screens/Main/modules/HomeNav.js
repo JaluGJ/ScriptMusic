@@ -5,15 +5,13 @@ import styles from "../Styles/Home.jsx";
 import userIMG from "../../../../assets/user.png";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { cleanProducts } from "../../../redux/slices/products.js";
+import { useSelector } from "react-redux";
+
 
 const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
   let { user } = useSelector((state) => state.signin);
-  const { list: products } = useSelector((state) => state.products);
-
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+
   return (
     <View style={styles.containerNav}>
       <TouchableNativeFeedback

@@ -21,19 +21,6 @@ const CartModalBotton = ({ setModal }) => {
 
   const { handlerPayPress, setEmail, setCardDetails, loading } = usePayment({ setModal });
 
-  useEffect(() => {
-    AsyncStorage.getItem("@shoppingCart")
-      .then((res) => {
-        setBody({
-          items: JSON.parse(res),
-          userId: user.id,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
 
   return (
     <View style={styles.containerCard}>

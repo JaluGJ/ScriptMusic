@@ -3,11 +3,7 @@ import { Icon } from "@rneui/themed";
 import WrapperNotifications from "./WrapperNotifications";
 import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
-import { useSelector } from "react-redux";
 import UserDrawer from "./UserDrawer";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import useFavorites from "../customHooks/useFavorites";
 import useCountCart from "../customHooks/useCountCart";
 
 const Tab = createBottomTabNavigator();
