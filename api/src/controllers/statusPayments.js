@@ -38,7 +38,7 @@ module.exports = {
       if (status === 'Successful') {
         const soldId = []
         const productFinal = []
-        let dateNew = Date().split(" ").slice(2,5).toString()
+        let dateNew = Date().split(" ").slice(1,5)
         const date = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
         items.forEach(async (item) => {
