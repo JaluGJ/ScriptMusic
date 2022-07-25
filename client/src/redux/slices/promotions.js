@@ -13,7 +13,7 @@ export const promotionsSlice = createSlice({
             state.promotions = action.payload;
         },
         setDetails: (state, action) => {
-            state.existingFavourite = action.payload;
+            state.detailsPromotion = action.payload;
         },
         
     }   
@@ -38,10 +38,10 @@ export const getPromotions = (userToken) => async (dispatch) => {
     }
 }
 
-export const getPromoDetails = (id,userToken) => async (dispatch) => {
+export const getPromoDetails = (id,token) => async (dispatch) => {
     const config = {
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          Authorization: `Bearer ${token}`,
         },
       };
     try{
