@@ -6,7 +6,7 @@ const {
      getTemplateUnBanUser, 
      getTemplateForgotPasswordNewPassword, 
      getTemplateForgotPassword,
-     getTemplateChangeEmail
+    //  getTemplateChangeEmail
     } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
@@ -657,28 +657,11 @@ module.exports = {
             if (!isMatch) {
                 return res.status(401).json({ message: 'Email o contraseña incorrecta' })
             }
-            const token = getToken(user.id)
-            const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
-            await sendEmail(email, template)
-            return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
-        } catch (error) {
-            next(error)
-        }
-    },
-
-
-    changeEmailUser : async (req, res, next) => {
-        const { email, token } = req.params
-        try {
-            const data = getTokenData(token)
-            if (!data) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-            }
-            const user = await User.findById(data.id)
-            if (!user) {
-                return res.status(401).json({ message: 'No se ha encontrado al usuario' })
-            }
-            user.email = email
+            // const token = getToken(user.id)
+            // const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
+            // await sendEmail(email, template)
+            // return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
+            user.email = newEmail
             await user.save()
             return res.json({ message: 'Email cambiado' })
         } catch (error) {
@@ -687,7 +670,28 @@ module.exports = {
     },
 
 
+    // changeEmailUser : async (req, res, next) => {
+    //     const { email, token } = req.params
+    //     try {
+    //         const data = getTokenData(token)
+    //         if (!data) {
+    //             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+    //         }
+    //         const user = await User.findById(data.id)
+    //         if (!user) {
+    //             return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+    //         }
+    //         user.email = email
+    //         await user.save()
+    //         return res.json({ message: 'Email cambiado' })
+    //     } catch (error) {
+    //         next(error)
+    //     }
+    // },
+
+
     validateToken: async (req, res, next) => {
+        try {
         const autorization = req.get('Authorization')
         if (!autorization) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -708,5 +712,8 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         return res.json({ user: user.email })
+} catch (error) {
+    next(error)
     }
+}
 }
