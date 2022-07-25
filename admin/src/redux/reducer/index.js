@@ -5,6 +5,7 @@ import {
     ADD_PRODUCT,
     UPDATE_PRODUCT,
     DELETE_PRODUCT,
+    GET_GRAFICO,
     GET_ALL_USERS,
     GET_ONE_USER,
     ADD_USER,
@@ -15,6 +16,7 @@ import {
     BAN_USER,
     UN_BAN_USER,
     GET_ALL_PROMOS
+
 } from "../actions"
 
 const initialState = {
@@ -61,6 +63,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: state.products.filter(product => product._id !== action.payload._id)
+            }
+
+        case GET_GRAFICO:
+            return {
+                ...state,
+                products: action.payload
             }
 
         // REDUX PRODUCTS
