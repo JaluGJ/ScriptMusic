@@ -73,14 +73,11 @@ function handleSubmit(e) {
                 <Link to={'/users'} style={{ textDecoration: 'none' }} >
                     <button> <ArrowBackIcon /> ATRAS</button>
                 </Link>
-                <h1 className="title"> Crear nuevo Usuario </h1>
+                <h1 className="title"> Añadir administrador </h1>
             </div>
             <div className="bottom">
-                <div className="left">
                     <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
-                </div>
-                <div className="rigth">
-                    <form onSubmit={e => handleSubmit(e)}>
+                    <form onSubmit={e => handleSubmit(e)} >
                         <div className="formInput">
 
                             <label>Nombre</label>
@@ -110,7 +107,8 @@ function handleSubmit(e) {
                             <label>Email</label>
                             <input
                                 type="text"
-                                placeholder='hola123@gmail.com'
+                                autoComplete="off"
+                                placeholder='username@scriptmusic.com'
                                 name='email'
                                 value={input.email}
                                  onChange={(e) => handleinput(e)}
@@ -122,6 +120,7 @@ function handleSubmit(e) {
                             <label>Contraseña</label>
                             <input
                                 type="password"
+                                autoComplete="off"
                                 placeholder='1234ABcd'
                                 name='password'
                                 value={input.password}
@@ -139,9 +138,6 @@ function handleSubmit(e) {
                                 value={input.image}
                                 onChange={(e) => handleinput(e)}
                             />
-                            {error.image && (
-                            <p>{error.image}</p>
-                            )}
 
                             {!Object.keys(error).length && !checkprops(input) ?
                                 <button>CREAR</button> :
@@ -149,7 +145,6 @@ function handleSubmit(e) {
                             }
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>

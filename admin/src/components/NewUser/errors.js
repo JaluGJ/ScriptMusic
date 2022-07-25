@@ -19,14 +19,7 @@ export function validate(input){
     if(!emailRegex.test(input.email)){
     error.email = 'el email es requerido'
     }
-    if(!input.image){
-        error.image = 'El campo imagen es obligatorio.'
-    }
 
-    let imgRegex= /(https?:\/\/.*\.(?:png))/i;
-    if (!imgRegex.test(input.image)){
-        error.image = 'El formato debe ser ".png".'
-    }
     return error;
 }
 

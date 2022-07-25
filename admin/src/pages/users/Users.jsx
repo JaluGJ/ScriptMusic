@@ -81,6 +81,9 @@ export default function Users() {
       field: 'isConfirmed', headerName: 'Validado', width: 100, headerAlign: 'center', align: 'center'
     },
     {
+      field: 'isBan', headerName: 'Estado', width: 100, headerAlign: 'center', align: 'center'
+    },
+    {
       field: 'delete', headerName: '', headerAlign: 'center', align: 'center', width: 30,
       renderCell: (cellValues) => {return <DeleteIcon className='delete' onClick={(e) => handleDeleteUser(e, cellValues.row.id)} />}
     },
@@ -103,9 +106,8 @@ export default function Users() {
       <SideBar />
       <ToastContainer />
       <div className="container">
-        {console.log(userToken)}
         <List
-          tipo='Usuario'
+          tipo='Administrador'
           title='Usuarios existentes'
           rows={rows}
           columns={columns}
