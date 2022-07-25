@@ -140,7 +140,7 @@ module.exports = {
             if (!isMatch) {
                 return res.status(401).json({ message: 'E-mail o contraseña incorrecta' })
             }
-            newPassword = await bcrypt.hash(password, 10)
+            newPassword = await bcrypt.hash(newPassword, 10)
             user.password = newPassword
             await user.save()
             return res.json({ message: 'Se ha cambiado la contraseña' })
@@ -652,10 +652,6 @@ module.exports = {
             const newUser = await User.findOne({ email: newEmail })
             if (newUser) {
                 return res.status(401).json({ message: 'El email ya está en uso' })
-            }
-            const user = await User.findOne({ email })
-            if (!user) {
-                return res.status(401).json({ message: 'No se ha encontrado al usuario' })
             }
             const isMatch = await user.isValidPassword(password)
             if (!isMatch) {
