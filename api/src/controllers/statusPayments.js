@@ -85,7 +85,7 @@ module.exports = {
 
         //envio de mail
 
-        const template = getTemplateBougthSuccess(user.firstName)
+        const template = getTemplateBougthSuccess(user.firstName, productFinal, date)
         await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
 
