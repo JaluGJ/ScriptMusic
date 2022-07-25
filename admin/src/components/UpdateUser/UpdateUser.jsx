@@ -15,7 +15,6 @@ export default function UpdateUser({ logout }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const userToken = localStorage.user;
-    const [error, setError] = useState({})
     const [input, setInput] = useState({});
 
     useDispatch(() => {
@@ -48,14 +47,18 @@ export default function UpdateUser({ logout }) {
                     </Link>
                     <h1 className="title">Modificar Usuario</h1>
                 </div>
+
+                {user.length === 0 ? <div >
+                            <img src="https://i.gifer.com/VAyR.gif" alt='image' />
+                        </div> :
                 <div className="bottom">
                     <div className="image">
                         <img src={user.image} alt="LOL" />
                     </div>
                     <div>
-                        {user.length === 0 ? <div >
+                        {/* {user.length === 0 ? <div >
                             <img src="https://i.gifer.com/VAyR.gif" alt='image' />
-                        </div> :
+                        </div> : */}
                             <div className="forminput">
                                 <h1> Nombre </h1>
                                 <h2> {user.firstName} </h2>
@@ -65,13 +68,13 @@ export default function UpdateUser({ logout }) {
                                 <h2> {user.email} </h2>
                                 <h1> Usuario validado </h1>
                                 {user.isConfirmed === true ? <CheckCircleIcon className='validado' /> : <CancelIcon className='novalidado' />}
-                                {user.isAdmin === true ? <button>Remover rol de administrador</button> : <button>Nombrar administrador</button>}
+                                {user.isAdmin === true ? <button>Remover rol de administrador</button> : <button>Asignar rol de administrador</button>}
                             </div>
-                        }
                     </div>
 
                 </div>
 
+                        }
             </div>
         </div>
     )

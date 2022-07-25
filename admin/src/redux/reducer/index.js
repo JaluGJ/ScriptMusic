@@ -121,6 +121,7 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 product: [],
+                user: [],
             }
 
         case DELETE_TOKEN:

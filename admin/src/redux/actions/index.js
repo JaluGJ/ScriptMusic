@@ -195,7 +195,7 @@ export const banUser = (id, userToken) => (dispatch) => {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  axios.post(`${baseUrl}/ban/user/${id}`, config)
+  axios.put(`${baseUrl}/ban/user/${id}`, config)
     .then(res => {
       dispatch({
         type: BAN_USER,
@@ -210,7 +210,7 @@ export const unBanUser = (id, userToken) => (dispatch) => {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  axios.post(`${baseUrl}/unban/user/${id}`, config)
+  axios.put(`${baseUrl}/unban/user/${id}`, config)
     .then(res => {
       dispatch({
         type: UN_BAN_USER,
