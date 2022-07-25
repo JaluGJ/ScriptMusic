@@ -1,56 +1,88 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import SideBar from '../SideBar/SideBar';
+import './Grafico.scss';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { grafico } from '../../redux/actions';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-  {
-    name: 'Guitarra',
-    date: 4000,
-    venta: 2400,
+
+
+// const data = [
+//   {
+//     name: 'Guitarra',
+//     date: "21-07-2022",
+//     venta: 32,
    
-  },
-  {
-    name: 'Teclado',
-    date: 3000,
-    venta: 1398,
+//   },
+//   {
+//     name: 'Teclado',
+//     date: '18-07-2022',
+//     venta: 25,
    
-  },
-  {
-    name: 'Bajos',
-    date: 2000,
-    venta: 9800,
+//   },
+//   {
+//     name: 'Bajos',
+//     date: "19-07-2022",
+//     venta: 29,
     
-  },
-  {
-    name: 'Ukelele',
-    date: 2780,
-    venta: 3908,
+//   },
+//   {
+//     name: 'Ukelele',
+//     date: '20-07.2022',
+//     venta: 19,
   
-  },
-  {
-    name: 'Arco',
-    date: 1890,
-    venta: 4800,
+//   },
+//   {
+//     name: 'Arco',
+//     date: "21-07-2022",
+//     venta: 48,
    
-  },
-  {
-    name: 'Percusión',
-    date: 2390,
-    venta: 3800,
+//   },
+//   {
+//     name: 'Percusión',
+//     date: '22-07-2022',
+//     venta: 38,
   
-  },
-  {
-    name: 'Viento',
-    date: 3490,
-    venta: 4300,
+//   },
+//   {
+//     name: 'Viento',
+//     date: "23-07-2022",
+//     venta: 43,
 
-  },
-];
+//   },
+// ];
 
 
-export default function Grafico () {
+ export default function Grafico () {
+ const dispatch = useDispatch()
+ const graf = useSelector(state => state.graficos);
+ const category = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco'];
+
+ useEffect(()=>{
+ dispatch(grafico())
+ 
+ }, [])
+console.log(graf)
+
+  const data = [];
+  graf.map(item =>{
+  data.push({
+    category: item.items.category,
+    date: item.date,
+    quantity: item.quantity,
+  })
+ })
+ console.log(data);
+
+
     return (
-        <ResponsiveContainer width="100%" height={600}>
+      <div className='contenedor'>
+         <SideBar />
+        <div className='newcontenedor'>
+          <div className='toop'>
+            <h1 className='title'> Grafico de ventas</h1>
+        <ResponsiveContainer width="90%" height={550}>
         <LineChart
           width={800}
           height={500}
@@ -63,8 +95,8 @@ export default function Grafico () {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis dataKey="category" />
+          <YAxis dataKey="quantity"/>
           <Tooltip />
           <Legend />
           <Line
@@ -76,6 +108,10 @@ export default function Grafico () {
           <Line type="monotone" dataKey="venta" stroke="#82ca9d" />
         </LineChart>
         </ResponsiveContainer>
+        </div>
+        </div>
+    
+        </div>
       );
     }
     

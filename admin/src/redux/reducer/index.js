@@ -28,6 +28,7 @@ const initialState = {
     users: [],
     user: [],
     promos: [],
+    graficos: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -68,7 +69,7 @@ export const rootReducer = (state = initialState, action) => {
         case GET_GRAFICO:
             return {
                 ...state,
-                products: action.payload
+                graficos: action.payload
             }
 
         // REDUX PRODUCTS

@@ -60,22 +60,22 @@ const PromoDetail = ({ route }) => {
 
               <View style={styles.minumPlus}>
                 <AntDesign
-                  // onPress={() =>
-                  //   setCountProducts(
-                  //     countProducts > 2 ? countProducts - 1 : 1
-                  //   )
-                  // }
+                  onPress={() =>
+                    setCountProducts(
+                      countProducts > 2 ? countProducts - 1 : 1
+                    )
+                  }
                   name="minuscircleo"
                   size={24}
                   color="#000000e2"
                 />
                 <Text style={styles.num}>{countProducts}</Text>
                 <AntDesign
-                  // onPress={() => {
-                  //   if (details.stock > countProducts) {
-                  //     setCountProducts(countProducts + 1)
-                  //   }
-                  // }}
+                  onPress={() => {
+                    if (detailsPromotion.stock > countProducts) {
+                      setCountProducts(countProducts + 1)
+                    }
+                  }}
                   name="pluscircleo"
                   size={24}
                   color="#000000e2"
@@ -87,7 +87,7 @@ const PromoDetail = ({ route }) => {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  addToCart({ details:PromoDetail });
+                  addToCart({ details:detailsPromotion });
                   navigation.goBack();
                 }}
               >

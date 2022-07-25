@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Cart from "../screens/Main/Cart";
 import Details from "../screens/Main/Details";
 import MyShopping from "../screens/Drawer/MyShopping";
+import PromoDetail from "../screens/Main/PromoDetail";
 const CartStack = createStackNavigator();
 
 const WrapperCart = () => {
@@ -16,6 +17,7 @@ const WrapperCart = () => {
       <CartStack.Screen name="Cart" component={Cart} />
       <CartStack.Screen name="Details" component={Details} />
       <CartStack.Screen name="MyShopping" component={MyShopping} />
+      <CartStack.Screen name="PromoDetail" component={PromoDetail} />
     </CartStack.Navigator>
   );
 };
