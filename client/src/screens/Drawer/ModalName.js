@@ -18,7 +18,7 @@ export default function ModalName({ modal, setModal }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setErrors({email: "Ingrese un nombre válido."})
+    setErrors({name: "Ingrese un nombre válido."})
   }, [])
 
   let validate = (name) => {
