@@ -1,5 +1,13 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword, getTemplateForgotPassword} = require('../config/mail.config.js')
+const {
+     getTemplate,
+     sendEmail,
+     getTemplateBanUser,
+     getTemplateUnBanUser, 
+     getTemplateForgotPasswordNewPassword, 
+     getTemplateForgotPassword,
+     getTemplateChangeEmail
+    } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
@@ -44,13 +52,6 @@ module.exports = {
                 isAdmin,
                 pushToken
             }
-
-            // const ban = await BannedUser.findOne({ email })
-            // if (ban) {
-            //     const template = getTemplateBaned(ban.email)
-            //     await sendEmail(template)
-            //     return res.status(404).json({ message: 'El usuario ha sido baneado' })
-            // }
 
             const userCreated = await User.create(newUser)
             const token = getToken(userCreated._id)
@@ -128,14 +129,14 @@ module.exports = {
 
         let { email, password, newPassword } = req.body
         try {
-            if (!password || !newPassword) {
+            if (!password || !newPassword || !email) {
                 return res.status(404).json({ message: 'Todos los campos son obligatorios' })
             }
             const user = await User.findOne({ email })
             if (!user) {
                 return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
             }
-            const isMatch = await user.comparePassword(password)
+            const isMatch = await user.isValidPassword(password)
             if (!isMatch) {
                 return res.status(401).json({ message: 'E-mail o contraseña incorrecta' })
             }
@@ -419,11 +420,12 @@ module.exports = {
                 if (!userToBan) {
                     return res.status(404).json({ message: 'No se ha encontrado el usuario' })
                 }
+                if(userToBan.isBan){
+                    return res.status(400).json({ message: 'El usuario ya esta baneado' })
+                }
                 const { email, firstName } = userToBan
                 const template = getTemplateBanUser(firstName)
                 await sendEmail(email, 'Hoy tenemos una mala noticia',template)
-                // await BannedUser.create({ email, banID: _id })
-                // await userToBan.remove()
                 userToBan.isBan = true
                 userToBan.save()
                 return res.json({ message: 'Usuario baneado' })   
@@ -455,18 +457,17 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            // const userToUnBan = await BannedUser.findOne({ banID: id })
-            // if (!userToUnBan) {
-            //     return res.status(404).json({ message: 'No se ha encontrado el usuario' })
-            // }
             const userToUnBan = await User.findById(id)
             if (!userToUnBan) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
+            if(!userToUnBan.isBan){
+                return res.status(400).json({ message: 'El usuario no esta baneado' })
+            }
             userToUnBan.isBan = false
             userToUnBan.save()
-            const { email } = userToUnBan
-            const template = getTemplateUnBanUser(email)
+            const { firstName } = userToUnBan
+            const template = getTemplateUnBanUser(firstName)
             await sendEmail(email, 'Hoy tenemos una buena noticia' ,template)
             return res.json({ message: 'Usuario desbaneado' })
         } catch (error) {
@@ -587,6 +588,7 @@ module.exports = {
             })
     },
 
+
     deleteUser: async (req, res, next) => {
         const autorization = req.get('Authorization')
         if (!autorization) {
@@ -616,6 +618,73 @@ module.exports = {
             }
             await user.remove()
             return res.json({ message: 'Usuario eliminado' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    changeEmail: async (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+
+        try {
+            const { email, password, newEmail } = req.body
+        
+            if (email !== user.email || !password) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+
+            const newUser = await User.findOne({ email: newEmail })
+            if (newUser) {
+                return res.status(401).json({ message: 'El email ya está en uso' })
+            }
+            const user = await User.findOne({ email })
+            if (!user) {
+                return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+            }
+            const isMatch = await user.isValidPassword(password)
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Email o contraseña incorrecta' })
+            }
+            const token = getToken(user.id)
+            const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
+            await sendEmail(email, template)
+            return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    changeEmailUser : async (req, res, next) => {
+        const { email, token } = req.params
+        try {
+            const data = getTokenData(token)
+            if (!data) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+            }
+            user.email = email
+            await user.save()
+            return res.json({ message: 'Email cambiado' })
         } catch (error) {
             next(error)
         }
