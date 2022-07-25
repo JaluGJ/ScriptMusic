@@ -677,7 +677,7 @@ module.exports = {
             const tokenData = token.slice(0, token.indexOf('~'))
             const emailData = token.slice(token.indexOf('~') + 1)
 
-            const email = getTokenData(emailData)
+            const email = getTokenData(emailData).id
             const data = getTokenData(tokenData)
 
             if (!data) {
