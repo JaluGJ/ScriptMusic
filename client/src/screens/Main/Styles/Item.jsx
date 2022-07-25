@@ -67,7 +67,16 @@ const styles = StyleSheet.create({
 
     /* Tercer producto */
     containerInfoThree:{
-        marginTop:40
+        marginTop:40,
+        height: vh(40),
+        justifyContent:'center',
+        alignItems:'center',
+        width: vw(75)
+    },
+    containerTextThree:{
+        position: 'absolute',
+        left: -10,
+        transform: [{ rotate: "-25deg" }],
     },
     /* Cuarto producto */
     containerInfoCenter:{

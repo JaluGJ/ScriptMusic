@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  title: {
+  titleMain: {
     fontSize: 20,
     letterSpacing: 6,
     padding: 20,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     marginVertical: 15,
   },
-  containerName: {
+  container: {
     alignItems: "center",
     width: "100%",
     padding: 20,
@@ -73,38 +73,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  titleName: {
+  title: {
     color: "rgba(0,0,0,.5)",
   },
-  textName: {
+  text: {
     fontSize: 20,
-  },
-  containerLastName: {
-    alignItems: "center",
-    width: "100%",
-    padding: 20,
-    paddingTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  titleLastName: {
-    color: "rgba(0,0,0,.5)",
-  },
-  textLastName: {
-    fontSize: 20,
-  },
-  containerEmail: {
-    alignItems: "flex-start",
-    width: "100%",
-    padding: 20,
-    paddingTop: 10,
-  },
-  titleEmail: {
-    color: "rgba(0,0,0,.5)",
-  },
-  textEmail: {
-    fontSize: 20,
-    color: "rgba(0,0,0,.5)",
   },
   containerBottom: {
     alignItems: "flex-start",

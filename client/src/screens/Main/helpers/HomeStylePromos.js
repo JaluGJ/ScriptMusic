@@ -24,8 +24,9 @@ export let StylesPromos = [
     promoThree={ 
         id: 4,
         img: promo5,
-        containerModel:styles.containerModelOff,
-        containerInfo:styles.containerInfoThree
+        containerModel:styles.containerInfoOff,
+        containerInfo:styles.containerInfoThree,
+        containerText:styles.containerTextThree
     },
     promoFor={
         id: 5,

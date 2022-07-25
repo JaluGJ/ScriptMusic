@@ -175,9 +175,8 @@ module.exports = {
         if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
         if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
 
-        if(User.findOne({ email })){
-            return res.status(404).json({ msg: 'El correo electrónico ya existe' });
-        }
+        const userExist = await User.findOne({ email })
+        if (userExist) return res.status(404).json({ msg: 'El correo electrónico ya existe' });
 
         try {
             const newUser = new User({
@@ -289,6 +288,46 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
+            return res.json({ user })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    updateProfileAdmin: async (req, res, next) => {
+
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(404).json({ message: 'No se ha encontrado usuario' })
+        }
+        if (!user.isAdmin) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+
+        try {
+            const { firstName, lastName, image } = req.body
+
+            if(!firstName || !lastName || !image){
+                return res.status(404).json({ message: 'Falta rellenar los campos' })
+            }
+            
+            if (firstName) user.firstName = firstName
+            if (lastName) user.lastName = lastName
+            if (image) user.image = image
+            await user.save()
             return res.json({ user })
         } catch (error) {
             next(error)

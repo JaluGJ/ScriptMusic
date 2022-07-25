@@ -5,9 +5,8 @@ import {
   TouchableOpacity,
   StatusBar,
   ScrollView,
-  Alert,
 } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./styles/Register.jsx";
 import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
@@ -16,51 +15,16 @@ import { registerSchema } from "./validation/schemas/RegisterSchema.js";
 import { Formik } from "formik";
 import { FormikInputValue } from "./validation/FormikInputValue.js";
 import { FormikSubmit } from "./validation/FormikSubmit.js";
-import { cleanCache, postUser } from "../../redux/slices/signup.js";
-import { useDispatch, useSelector } from "react-redux";
-import { errFalse } from "../../redux/slices/signup.js";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import useNotifications from "../../customHooks/useNotifications.js";
+import {  postUser } from "../../redux/slices/signup.js";
+import { useDispatch, } from "react-redux";
+import useRegister from "../../customHooks/useRegister.js";
+
 
 
 export default function Register() {
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  };
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {setPushToken} = useNotifications();
-  const { err, flag } = useSelector((state) => state.signup);
-
-  let handleErrorCheck = (err, flag) => {
-    if (err) {
-      dispatch(errFalse(err));
-      Alert.alert(
-        "Ups...",
-        "Ya existe un usuario registrado con ese email, prueba con otro."
-      );
-    }
-    if (flag) {
-      Alert.alert(
-        "¡Usuario registrado correctamente!",
-        "Te enviamos un correo para verificar que el email te pertenece."
-      );
-      navigation.navigate("Login");
-    }
-  };
-
-  useEffect(() => {
-    handleErrorCheck(err, flag);
-    return dispatch(cleanCache());
-  }, [err, flag]);
-
-  useEffect(() => {
-    setPushToken()
-  }, []);
+  const {initialValues} = useRegister();
 
   return (
     <>
