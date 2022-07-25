@@ -1,11 +1,11 @@
-.new{
+.newUser{
     width: 100%;
     display: flex;
     
-    .newcontainer{
-         flex:6;
+    .newcontainerUser{
+        flex:6;
 
-         .top{
+        .topUser{
             box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
             padding: 10px;
             margin: 20px;
@@ -13,7 +13,7 @@
             justify-content: space-between;
             align-items: center;
 
-            .title{
+            .titleUser{
                 color:#DD8643;
                 font-size: 20px;
                 padding-right: 30px;
@@ -30,12 +30,11 @@
                 align-items: center;
                 justify-content: space-around;
                 display: flex;  
-                border-radius: 10px;
-    
-                
+                border-radius: 10px;                
             }
-         }
-         .bottom{
+        }
+
+         .bottomUser{
             box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
             padding: 10px;
             margin: 20px;
@@ -51,78 +50,73 @@
                 padding-bottom: 25px;
                }
 
-            .title{
+            .titleUser{
                 color:#DD8643;
                 font-size: 20px;
             }         
 
-                form{
-                    width: 60%;
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 30px;
-                    justify-content: space-around;
+            form{
+                width: 60%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: space-around;
+                align-items: center;
+
+                .formInputUser{
+                    width: 40%;
                     align-items: center;
+                    flex-direction: column;
+                    display: flex;
 
-                    .formInput{
-                        width: 60%;
-                        align-items: center;
-                        flex-direction: column;
-                        display: flex;
-
-                        p{
-                            font-size: 10px;
-                            margin-bottom: 5px;
-                            color: red;
+                    p{
+                        font-size: 10px;
+                        margin-bottom: 5px;
+                        color: red;
                             
-                        }
-                        label{
-                            font-size: 18px;
-                            font-weight: bold;
-                            color: #FFC680;
-                        }
-
-                        input{
-                            width: 100%;
-                            padding: 5px;
-                            border: none;
-                            border-bottom: 1px solid gray;
-                            margin-top: 10px;
-                            margin-bottom: 10px;
-                        }
-
-
-                        
                     }
 
-                    button{
-                        width: 150px;
-                        background-color: #DD8643;
-                        padding: 10px;
-                        border: none;
-                        color: white;
+                    label{
+                        font-size: 18px;
                         font-weight: bold;
-                        cursor: pointer;
-                        margin-top: 10px;
-                        border-radius: 10px;
-  
+                        color: #FFC680;
                     }
 
-
-                    button[disabled]{
-                        width: 150px;
-                        background-color: #5b5b5b;
-                        padding: 10px;
+                    input{
+                        width: 80%;
+                        padding: 5px;
                         border: none;
-                        color: white;
-                        font-weight: bold;
+                        border-bottom: 1px solid gray;
                         margin-top: 10px;
-                        border-radius: 10px;
-                        cursor: default;
-                    }
-
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }                        
                 }
-            
+
+                button{
+                    width: 150px;
+                    background-color: #DD8643;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                }
+
+                button[disabled]{
+                    width: 150px;
+                    background-color: #5b5b5b;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    cursor: default;
+                }
+            }            
         }
     }
 

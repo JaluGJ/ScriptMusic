@@ -10,13 +10,15 @@ import { ScrollView } from "react-native";
 import { Icon } from "@rneui/themed";
 import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
-import ModalPassword from "./ModalPassword"
+import ModalPassword from "./ModalPassword";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ModalEmail from "./ModalEmail";
 
 const MyProfile = () => {
   const [modalName, setModalName] = useState(false);
   const [modalLastName, setModalLastName] = useState(false);
-  const [modalPassword, setModalPassword] = useState(false)
+  const [modalPassword, setModalPassword] = useState(false);
+  const [modalEmail, setModalEmail] = useState(false)
   const { user } = useSelector((state) => state.signin);
   const dispatch = useDispatch();
 
@@ -70,9 +72,10 @@ const MyProfile = () => {
         <ModalName modal={modalName} setModal={setModalName} />
         <ModalLastName modal={modalLastName} setModal={setModalLastName} />
         <ModalPassword modal={modalPassword} setModal={setModalPassword} />
+        <ModalEmail modal={modalEmail} setModal={setModalEmail} />
         <View style={styles.containerTop}>
           <View>
-            <Text style={styles.title}>MI PERFIL</Text>
+            <Text style={styles.titleMain}>MI PERFIL</Text>
           </View>
           <View style={{ alignItems: "flex-end", justifyContent: "flex-end" }}>
             <Image
@@ -95,10 +98,10 @@ const MyProfile = () => {
           </View>
         </View>
         <View style={styles.containerMid}>
-          <View style={styles.containerName}>
+          <View style={styles.container}>
             <View>
-              <Text style={styles.titleName}>Nombre</Text>
-              <Text style={styles.textName}>{user.firstName}</Text>
+              <Text style={styles.title}>Nombre</Text>
+              <Text style={styles.text}>{user?.firstName}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -108,10 +111,10 @@ const MyProfile = () => {
               <Image source={lapiz} style={{ height: 20, width: 20 }} />
             </TouchableOpacity>
           </View>
-          <View style={styles.containerLastName}>
+          <View style={styles.container}>
             <View>
-              <Text style={styles.titleLastName}>Apellido</Text>
-              <Text style={styles.textLastName}>{user.lastName}</Text>
+              <Text style={styles.title}>Apellido</Text>
+              <Text style={styles.text}>{user?.lastName}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -121,14 +124,23 @@ const MyProfile = () => {
               <Image source={lapiz} style={{ height: 20, width: 20 }} />
             </TouchableOpacity>
           </View>
-          <View style={styles.containerEmail}>
-            <Text style={styles.titleEmail}>Email</Text>
-            <Text style={styles.textEmail}>{user.email}</Text>
-          </View>
-          <View style={styles.containerLastName}>
+          <View style={styles.container}>
             <View>
-              <Text style={styles.titleLastName}>Contraseña</Text>
-              <Text style={styles.textLastName}>********</Text>
+              <Text style={styles.title}>Email</Text>
+              <Text style={styles.text}>{user?.email.toLowerCase()}</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setModalEmail(!modalEmail);
+              }}
+            >
+              <Image source={lapiz} style={{ height: 20, width: 20 }} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <View>
+              <Text style={styles.title}>Contraseña</Text>
+              <Text style={styles.text}>********</Text>
             </View>
             <TouchableOpacity
               onPress={() => {

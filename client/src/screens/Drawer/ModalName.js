@@ -60,7 +60,7 @@ export default function ModalName({ modal, setModal }) {
                   setModal(!modal);
                   let token = await AsyncStorage.getItem("@token_id");
                   dispatch(putName(name, token));
-                  setErrors({name: "Ingrese un nombre válido."});
+                  setErrors({email: "Ingrese un nombre válido."});
                 }}
               >
                 <Text>ACTUALIZAR</Text>

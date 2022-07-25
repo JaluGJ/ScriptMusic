@@ -1,7 +1,10 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { removeItems } from "../redux/slices/products.js";
-import { fetchPaymentIntent, fetchStatusPayment } from "../screens/Main/helpers/payments";
+import {
+  fetchPaymentIntent,
+  fetchStatusPayment,
+} from "../screens/Main/helpers/payments";
 import { useDispatch, useSelector } from "react-redux";
 import { useConfirmPayment } from "@stripe/stripe-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -27,7 +30,6 @@ const usePayments = ({ modal, setModal }) => {
       });
   }, []);
 
-
   const handlerPayPress = async () => {
     if (!email || !cardDetails?.complete) {
       Alert.alert("Error", "Por favor, complete los datos requeridos");
@@ -47,7 +49,6 @@ const usePayments = ({ modal, setModal }) => {
           },
         });
 
-
         if (error) {
           const { err } = await fetchStatusPayment(body, "Failed");
           if (err) {
@@ -58,24 +59,19 @@ const usePayments = ({ modal, setModal }) => {
         } else if (paymentIntent) {
           setModal(false);
           dispatch(removeItems());
+          Alert.alert("Estado de pago", "Exitoso", [
+            {
+              text: "OK",
+              onPress: () => {},
+            },
+          ]);
           const { msg, err } = await fetchStatusPayment(body, "Successful");
           if (msg) {
             console.log("articulo pagado y agregado correctamente");
           } else if (err) {
             console.log(err);
           }
-
-          Alert.alert("Estado de pago", "Exitoso", [
-            {
-              text: "OK",
-              onPress: () => {
-
-              },
-            },
-          ]);
-
         } else {
-
           await fetchStatusPayment(body, "Failed");
 
           Alert.alert("Estado de pago", "Fallido", [
