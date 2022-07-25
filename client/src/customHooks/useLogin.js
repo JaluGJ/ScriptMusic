@@ -1,11 +1,10 @@
 import{ useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { changeToken, changeUser, cleanErr } from '../redux/slices/signin';
-import { Alert } from 'react-native';
+import { changeToken, changeUser } from '../redux/slices/signin';
 
 const useLogin = () => {
-  let { token, err, isLoading } = useSelector((state) => state.signin);
+  let { token, isLoading } = useSelector((state) => state.signin);
   const dispatch = useDispatch();
 
   let getToken = async () => {
@@ -28,19 +27,6 @@ const useLogin = () => {
   useEffect(() => {
     getToken();
   }, [dispatch]);
-
-  if (err?.includes("incorrectos")) {
-    Alert.alert("Error", "Email o contraseña incorrectos.");
-    dispatch(cleanErr());
-  }
-  if (err?.includes("confirmado")) {
-    Alert.alert("Error", "Debes confirmar tu cuenta para ingresar.");
-    dispatch(cleanErr());
-  }
-  if (err === undefined) {
-    Alert.alert("Error", "El servidor se encuentra caído.");
-    dispatch(cleanErr());
-  }
 
   return [token, isLoading];
 };

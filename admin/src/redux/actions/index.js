@@ -18,7 +18,7 @@ export const DELETE_USER = 'DELETE_USER'
 export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
-export const GET_GRAFICO = "ADD_GRAFICO"
+export const GET_GRAFICO = "GET_GRAFICO"
 
 // PRODUCTS ACTIONS
 
@@ -104,8 +104,8 @@ export const deleteProduct = (id, userToken) => (dispatch) => {
 export const grafico = () => (dispatch) =>{
   axios.get(`${baseUrl}/sold`).then(res =>{
     dispatch({
-      type: 'GET_GRAFICO',
-      payload:res.data.product
+      type: GET_GRAFICO,
+      payload:res.data,
     })
   })
 
@@ -195,7 +195,7 @@ export const banUser = (id, userToken) => (dispatch) => {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  axios.put(`${baseUrl}/ban/user/${id}`, config)
+  axios.put(`${baseUrl}/ban/user/${id}`, null, config)
     .then(res => {
       dispatch({
         type: BAN_USER,
@@ -210,7 +210,7 @@ export const unBanUser = (id, userToken) => (dispatch) => {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  axios.put(`${baseUrl}/unban/user/${id}`, config)
+  axios.put(`${baseUrl}/unban/user/${id}`, null, config)
     .then(res => {
       dispatch({
         type: UN_BAN_USER,
