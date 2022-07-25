@@ -5,6 +5,7 @@ import shoppingCart from "./slices/shoppingCart"
 import signup from './slices/signup'
 import signin from './slices/signin'
 import favourites from './slices/favourites'
+import promotions from './slices/promotions'
 
 export default configureStore({
     reducer:{
@@ -13,6 +14,7 @@ export default configureStore({
         shoppingCart,
         signup,
         signin,
-        favourites
+        favourites,
+        promotions
     }
 })
