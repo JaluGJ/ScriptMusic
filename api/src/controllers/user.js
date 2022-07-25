@@ -175,9 +175,8 @@ module.exports = {
         if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
         if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
 
-        if(User.findOne({ email })){
-            return res.status(404).json({ msg: 'El correo electrónico ya existe' });
-        }
+        const userExist = await User.findOne({ email })
+        if (userExist) return res.status(404).json({ msg: 'El correo electrónico ya existe' });
 
         try {
             const newUser = new User({
