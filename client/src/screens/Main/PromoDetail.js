@@ -87,7 +87,7 @@ const PromoDetail = ({ route }) => {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  addToCart({ details:PromoDetail });
+                  addToCart({ details:detailsPromotion });
                   navigation.goBack();
                 }}
               >
