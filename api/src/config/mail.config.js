@@ -101,9 +101,9 @@ const getTemplateBougthSuccess = (name, products, date) => {
       <div>Fecha de compra: ${date}</div>
       <div>Productos:</div>
       <div>${products?.map(e => `
-      <img style="width:100px;" src="${e.image}" alt="product"><br/>
-      <div>${e.price}</div>
-      <div>${e.count}</div>
+      <img style="width:320px;" src="${e.image}" alt="product"><br/>
+      <div>Precio: ${e.price}$</div>
+      <div>Cantidad: ${e.count}.</div>
       `)}</div>
       <div>Puedes ver mas detalles de la misma en la sección de 'Mis Compras' en la app.</div>
       <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
