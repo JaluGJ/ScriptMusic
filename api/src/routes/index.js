@@ -79,7 +79,7 @@ routes.put('/profile', updateProfile)
 
 routes.put('/profile/changeEmail', changeEmail)
 
-routes.get('/user/change/email/token/:token/data/:email', changeEmailUser)
+routes.get('/user/change/email/token/:token', changeEmailUser)
 
 routes.put('/profile/changePassword', resetPassword)
 

@@ -11,7 +11,6 @@ const {
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
-// const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 
 
@@ -657,10 +656,15 @@ module.exports = {
             if (!isMatch) {
                 return res.status(401).json({ message: 'Email o contraseña incorrecta' })
             }
-            const token = getToken(user.id)
+            const data = getToken(user.id)
+            const emailEncripted = getToken(newEmail)
+            const token = data + '~' + emailEncripted
             const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
-            await sendEmail(email, template)
+            await sendEmail(email, 'Cambio de Email', template)
             return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
+            // user.email = newEmail
+            // await user.save()
+            // return res.json({ message: 'Email cambiado' })
         } catch (error) {
             next(error)
         }
@@ -668,10 +672,18 @@ module.exports = {
 
 
     changeEmailUser : async (req, res, next) => {
-        const { email, token } = req.params
+        const { token } = req.params
         try {
-            const data = getTokenData(token)
+            const tokenData = token.slice(0, token.indexOf('~'))
+            const emailData = token.slice(token.indexOf('~') + 1)
+
+            const email = getTokenData(emailData)
+            const data = getTokenData(tokenData)
+
             if (!data) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            if(!email) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             const user = await User.findById(data.id)
@@ -688,6 +700,7 @@ module.exports = {
 
 
     validateToken: async (req, res, next) => {
+        try {
         const autorization = req.get('Authorization')
         if (!autorization) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -708,5 +721,8 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
         return res.json({ user: user.email })
+} catch (error) {
+    next(error)
     }
+}
 }
