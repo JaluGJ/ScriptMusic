@@ -5,7 +5,6 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
-import { setCurrentPage } from "../redux/slices/pagination";
 import styles from "./styles/Pagination";
 import { AntDesign } from '@expo/vector-icons';
 
