@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const path = require('path')
 const {
      getTemplate,
      sendEmail,
