@@ -18,6 +18,7 @@ export const DELETE_USER = 'DELETE_USER'
 export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
+export const GET_GRAFICO = "ADD_GRAFICO"
 
 // PRODUCTS ACTIONS
 
@@ -97,6 +98,17 @@ export const deleteProduct = (id, userToken) => (dispatch) => {
       })
     })
     .catch(err => console.log(err))
+
+}
+
+export const grafico = () => (dispatch) =>{
+  axios.get(`${baseUrl}/sold`).then(res =>{
+    dispatch({
+      type: 'GET_GRAFICO',
+      payload:res.data.product
+    })
+  })
+
 }
 
 export const clearCache = () => (dispatch) => {
@@ -104,6 +116,8 @@ export const clearCache = () => (dispatch) => {
     type: CLEAR_CACHE,
   });
 };
+
+
 
 // PRODUCTS ACTIONS
 

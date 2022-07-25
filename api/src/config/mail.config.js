@@ -78,7 +78,7 @@ const getTemplateBanUser = (name) => {
 const getTemplateUnBanUser = (name) => {
   return `
   <div>Hola ${name}.</div>
-  <div>Ya puedes volver a registrarte con este correo electronico y seguir disfrutando de ScriptMusic, muchas gracias por elegirnos.</div>
+  <div>Ya puedes volver a seguir disfrutando de los servicios de ScriptMusic, muchas gracias por elegirnos.</div>
   <div>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</div>
 `
 }
@@ -126,6 +126,18 @@ const getTemplateForgotPasswordNewPassword = (name, newPassword) => {
   `
 }
 
+const getTemplateChangeEmail = (name, email, newEmail, token) => {
+  return `
+  <div>Hola ${name}.</div>
+  <div>Hemos recibido una solicitud para cambiar tu email.</div>
+  <div>Anterior email: ${email}</div>
+  <div>Nuevo email: ${newEmail}</div>
+  <div>Para confirmar los cambios, solo presiona el siguiente botón:</div>
+  <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="https://sm.up.railway.app/user/change/email/token/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Cambiar email</button></a><br/>
+  <p>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
+  <p>Saludos, el equipo de ScriptMusic.</p>
+  `
+}
 
 module.exports = {
   sendEmail,
@@ -136,5 +148,6 @@ module.exports = {
   getTemplateBanUser,
   getTemplateUnBanUser,
   getTemplateForgotPassword,
-  getTemplateForgotPasswordNewPassword
+  getTemplateForgotPasswordNewPassword,
+  getTemplateChangeEmail
 };
