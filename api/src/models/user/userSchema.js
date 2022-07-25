@@ -31,6 +31,10 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  isBan: {
+    type: Boolean,
+    default: false
+  },
   favourites: [
     {
       type: Schema.Types.ObjectId,
