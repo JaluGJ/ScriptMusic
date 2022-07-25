@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { vw } from "react-native-expo-viewport-units";
+import { vh, vw } from "react-native-expo-viewport-units";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -157,7 +157,60 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
-
+  containerImgPromo:{
+    height: vh(25),
+    width: "100%",
+  },
+  containerProductsDetails:{
+    width: vw(100),
+    height: vh(60),
+    alignItems:'center',
+    justifyContent:'center',
+    marginVertical:30,
+    paddingBottom:30,
+  },
+  containerProductDetails:{
+    width: vw(80),
+    height: vh(55),
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
+    elevation:2,
+    borderRadius:20,
+  },
+  textNavPromos:{
+    alignItems:'center',
+    textAlign:'center',
+    fontSize: 20,
+    letterSpacing: 3,
+    padding: 20,
+  },
+  imageFav:{
+    alignItems:'center',
+    justifyContent:'center',
+    width: vw(80)
+  },
+  promoText:{
+    letterSpacing:2,
+    fontSize:35,
+    color: '#DD8643',
+    fontWeight:'bold'
+  },
+  brand:{
+    alignItems:'center',
+    textAlign:'center'
+  },
+  modelBrand:{
+    color: '#0000008b'
+  },
+  model:{
+    alignItems:'center',
+    textAlign:'center'
+  },
+  modelText:{
+    letterSpacing:2,
+    fontSize:15
+  }
 });
 
 export default styles;

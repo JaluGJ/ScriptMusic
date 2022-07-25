@@ -24,10 +24,6 @@ const MyCarousel = () => {
         autoplayInterval={7000}
         ref={carousel}
         renderItem={({ item, index }) => {
-          /* console.log(index) */
-          /* if(index>6){
-            return
-          } */
           return (
             <Pressable
             onPress={() =>
