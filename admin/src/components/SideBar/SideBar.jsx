@@ -68,10 +68,12 @@ export default function SideBar() {
                     </li>
 
                     <p className="title">ESTADISTICAS</p>
+                    <Link to="/graficos" style={{ textDecoration: "none" }}>
                     <li>
                         <SignalCellularAltIcon className='icon' />
                         <span>Graficos</span>
                     </li>
+                    </Link>
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon' />
                         <span>Alertas</span>

@@ -1,0 +1,33 @@
+.contenedor {
+        width: 100%;
+        display: flex;
+
+        .newcontenedor{
+            flex:6;
+        
+        
+             .toop{
+                box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+                padding: 10px;
+                margin: 20px;
+                display: flex;
+                //justify-content: space-between;
+                //align-items: center;
+    
+                .title{
+                    color:#DD8643;
+                    font-size: 20px;
+                    padding-right: 50px;
+                }
+    
+             
+            }
+             
+        }
+    
+    }           
+            
+        
+    
+    
+
