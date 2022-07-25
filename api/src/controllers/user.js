@@ -662,9 +662,6 @@ module.exports = {
             const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
             await sendEmail(email, 'Cambio de Email', template)
             return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
-            // user.email = newEmail
-            // await user.save()
-            // return res.json({ message: 'Email cambiado' })
         } catch (error) {
             next(error)
         }
@@ -677,7 +674,7 @@ module.exports = {
             const tokenData = token.slice(0, token.indexOf('~'))
             const emailData = token.slice(token.indexOf('~') + 1)
 
-            const email = getTokenData(emailData)
+            const email = getTokenData(emailData).id
             const data = getTokenData(tokenData)
 
             if (!data) {
@@ -689,6 +686,9 @@ module.exports = {
             const user = await User.findById(data.id)
             if (!user) {
                 return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+            }
+            if(user.email === email) {
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             user.email = email
             await user.save()
