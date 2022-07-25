@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 const apiUrl = "https://sm.up.railway.app/";
 
@@ -37,6 +38,9 @@ export const signinSlice = createSlice({
     updatePassword: (state, action) => {
       state.user = { ...state.user, password: action.payload };
     },
+    updateEmail: (state, action) => {
+      state.user = { ...state.user, email: action.payload };
+    },
   },
 });
 
@@ -49,6 +53,7 @@ export const {
   updateName,
   updateLastname,
   updatePassword,
+  updateEmail,
 } = signinSlice.actions;
 
 export default signinSlice.reducer;
@@ -182,7 +187,6 @@ export const putPassword =
         Authorization: `Bearer ${userToken}`,
       },
     };
-    dispatch(updatePassword(password));
     try {
       await axios.put(
         `${apiUrl}profile/changePassword`,
@@ -192,8 +196,41 @@ export const putPassword =
       axios.get(`${apiUrl}profile`, config).then(async () => {
         await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
       });
+      Alert.alert(
+        "¡Contraseña actualizada!",
+        "Tu contraseña ha sido cambiada con éxito."
+      );
+      dispatch(updatePassword(password));
     } catch (error) {
-      dispatch(setErr(error.response.data.message))
+      console.log(error.response.data.message);
+      Alert.alert("Error", "Ingresa correctamente tu contraseña actual.");
+    }
+  };
+
+export const putEmail =
+  (email, newEmail, password, userToken) => async (dispatch) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    try {
+      await axios.put(
+        `${apiUrl}profile/changeEmail`,
+        { email, newEmail, password },
+        config
+      );
+      axios.get(`${apiUrl}profile`, config).then(async () => {
+        await AsyncStorage.mergeItem("@user", JSON.stringify({ email }));
+      });
+      Alert.alert(
+        "¡Último paso!",
+        "Revisa la bandeja de entrada de tu nuevo email para confirmar los cambios."
+      );
+      dispatch(updateEmail(newEmail));
+    } catch (error) {
+      console.log(error.response.data.message);
+      Alert.alert("Error", "Email o contraseña actuales incorrectos.");
     }
   };
 
