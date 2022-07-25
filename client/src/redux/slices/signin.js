@@ -65,20 +65,18 @@ export const loginUser = (obj) => (dispatch) => {
       dispatch(setIsLoading(true));
       setTimeout(async () => {
         try {
-          console.log(res.data.token);
           await AsyncStorage.setItem("@token_id", res.data.token);
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
           dispatch(create(res.data.token));
         } catch (error) {
-          console.log(error);
+          console.log(error.response);
         }
       }, 500);
     })
     .catch((e) => {
       dispatch(setIsLoading(false));
-      dispatch(setErr(e.response.data.message));
-      console.log("ERROR LOGIN:", e.response.data.message);
+      Alert.alert("Error", e.response.data.message);
     });
 };
 
@@ -92,7 +90,7 @@ export const logOut = () => (dispatch) => {
       await AsyncStorage.removeItem("@token_id");
       await AsyncStorage.removeItem("@user");
     } catch (error) {
-      console.log("ERROR LOGOUT", error);
+      console.log(error.response);
     }
   }, 500);
 };
@@ -126,7 +124,7 @@ export const create = (userToken) => (dispatch) => {
         JSON.stringify({ email, firstName, lastName, id, image })
       );
     })
-    .catch((e) => console.log(e));
+    .catch((error) => console.log(error));
 };
 
 export const updateIMG = (image, userToken) => async (dispatch) => {
@@ -142,7 +140,7 @@ export const updateIMG = (image, userToken) => async (dispatch) => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ image }));
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
@@ -159,7 +157,7 @@ export const putName = (firstName, userToken) => async (dispatch) => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ firstName }));
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
@@ -196,14 +194,10 @@ export const putPassword =
       axios.get(`${apiUrl}profile`, config).then(async () => {
         await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
       });
-      Alert.alert(
-        "¡Contraseña actualizada!",
-        "Tu contraseña ha sido cambiada con éxito."
-      );
+      Alert.alert("¡Contraseña actualizada!", res.data.message);
       dispatch(updatePassword(password));
     } catch (error) {
-      console.log(error.response.data.message);
-      Alert.alert("Error", "Ingresa correctamente tu contraseña actual.");
+      Alert.alert("Error", error.response.data.message);
     }
   };
 
@@ -225,12 +219,11 @@ export const putEmail =
       });
       Alert.alert(
         "¡Último paso!",
-        "Revisa la bandeja de entrada de tu nuevo email para confirmar los cambios."
+        res.data.message
       );
       dispatch(updateEmail(newEmail));
     } catch (error) {
-      console.log(error.response.data.message);
-      Alert.alert("Error", "Email o contraseña actuales incorrectos.");
+      Alert.alert("Error", error.response.data.message);
     }
   };
 

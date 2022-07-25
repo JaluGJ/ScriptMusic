@@ -4,15 +4,16 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Item';
 const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id, typePromo}) => {
-  console.log(id)
   let {model, price, image, type}=items
   const navigation = useNavigation();
+  
   return (
     <View style={styles.background}>
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('PromoDetail', { itemId: id })
-        }
+        onPress={() =>{
+          console.log(id)
+          navigation.navigate('PromoDetail', { id: id })    
+        }}
 
       >
 

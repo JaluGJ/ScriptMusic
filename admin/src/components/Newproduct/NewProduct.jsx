@@ -17,7 +17,6 @@ export default function NewProduct({ logout }) {
     const categories = ['Guitarra', 'Teclado', 'Bajos', 'Percusión', 'Viento', 'Ukelele', 'Arco']
     const userToken = localStorage.user
 
-
     useEffect(() => {
         setError(validate(input))
     }, [])
@@ -75,25 +74,23 @@ export default function NewProduct({ logout }) {
         })
     }
     return (
-        <div className="new">
+        <div className="newProduct">
             <SideBar logout={logout} />
             <ToastContainer />
-            <div className="newcontainer">
-                <div className="top">
+            <div className="newcontainerProduct">
+                <div className="topProduct">
                     <Link to={'/products'} style={{ textDecoration: 'none' }} >
                         <button> <ArrowBackIcon /> ATRAS</button>
                     </Link>
-                    <h1 className="title"> Crear nuevo producto. </h1>
+                    <h1 className="titleProduct"> Crear nuevo producto. </h1>
                 </div>
-                <div className="bottom">
-                    <div className="left">
-                        <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
+                <div className="bottomProduct">
+                    <img src={input.image ? input.image : 'https://www.clipartmax.com/png/full/139-1396744_we-can-help-dropshipping-png.png'} alt="" />
+                    <form onSubmit={e => handleSubmit(e)}>
+                        <div className="formInputProduct">
 
-                    </div>
-                    <div className="rigth">
-                        <form onSubmit={e => handleSubmit(e)}>
-                            <div className="formInput">
-
+                            <div className='leftProduct'>
+        
                                 <label> Imagen </label>
                                 <input
                                     type="text"
@@ -105,8 +102,7 @@ export default function NewProduct({ logout }) {
                                 {error.image && (
                                     <p>{error.image}</p>
                                 )}
-
-
+    
                                 <label>Modelo</label>
                                 <input
                                     type="text"
@@ -117,7 +113,7 @@ export default function NewProduct({ logout }) {
                                 {error.model && (
                                     <p>{error.model}</p>
                                 )}
-
+    
                                 <label>Marca</label>
                                 <input
                                     type="text"
@@ -128,7 +124,7 @@ export default function NewProduct({ logout }) {
                                 {error.brand && (
                                     <p>{error.brand}</p>
                                 )}
-
+    
                                 <label>Precio</label>
                                 <input
                                     type="number"
@@ -139,7 +135,7 @@ export default function NewProduct({ logout }) {
                                 {error.price && (
                                     <p>{error.price}</p>
                                 )}
-
+    
                                 <label>Disponible</label>
                                 <input
                                     type="number"
@@ -150,19 +146,22 @@ export default function NewProduct({ logout }) {
                                 {error.stock && (
                                     <p>{error.stock}</p>
                                 )}
-
+        
+                            </div>
+                                   
+                            <div className='rightProduct'>
+                                
                                 <label>Tipo</label>
-                                <input
-                                    type="text"
-                                    placeholder='Acústico'
-                                    name='type'
-                                    value={input.type}
-                                    onChange={(e) => handleinput(e)} />
-                                {error.type && (
-                                    <p>{error.type}</p>
-                                )}
-
-
+                                    <input
+                                        type="text"
+                                        placeholder='Acústico'
+                                        name='type'
+                                        value={input.type}
+                                        onChange={(e) => handleinput(e)} />
+                                    {error.type && (
+                                        <p>{error.type}</p>
+                                    )}
+                                   
                                 <label> Categoria </label>
                                 <select name='category' defaultValue="Categoria"
                                     onChange={e => handleinput(e)}>
@@ -173,8 +172,7 @@ export default function NewProduct({ logout }) {
                                 {error.category && (
                                     <p>{error.category}</p>
                                 )}
-
-
+    
                                 <label>Descripción</label>
                                 <textarea
                                     placeholder='Descripción del producto, caracteristicas o pie promocional'
@@ -184,15 +182,14 @@ export default function NewProduct({ logout }) {
                                 {error.description && (
                                     <p>{error.description}</p>
                                 )}
-
-
+    
                                 {!Object.keys(error).length && !checkprops(input) ?
                                     <button>CREAR</button> :
                                     <button disabled >CREAR</button>
-                                }
+                                }       
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
