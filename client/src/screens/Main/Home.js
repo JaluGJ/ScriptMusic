@@ -6,10 +6,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  Pressable
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, searchProducts } from "../../redux/slices/products";
 import styles from "./Styles/Home.jsx";
 import HomeCategories from "./modules/HomeCategories.js";
 import ModalFilter from './ModalFilter.js';
@@ -20,17 +17,12 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native'
 import HomePromos from "./modules/HomePromos";
 import {StylesPromos} from './helpers/HomeStylePromos'
+import usePromotions from "../../customHooks/usePromotions.js";
 const Home = () => {
-  const dispatch = useDispatch();
+  const [promotions] = usePromotions()
+  console.log(promotions.length) 
   const [modal, setModal] = useState(false);
-  const [search, setSearch] = useState('');
-  const navigation = useNavigation();
-
-  const submitHandle = (search) => {
-    dispatch(searchProducts(search));
-    setSearch('')
-    navigation.navigate('Products')
-  }
+  
 
 
   return (
@@ -40,12 +32,8 @@ const Home = () => {
       <View style={styles.container}>
         <ScrollView >
           <HomeNav
-
-            search={search}
             modal={modal}
-            setSearch={setSearch}
             setModal={setModal}
-            submitHandle={submitHandle}
           />
           <MyCarousel />
           <HomeCategories />
