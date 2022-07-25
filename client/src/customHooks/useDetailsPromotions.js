@@ -16,9 +16,8 @@ const useDetailsPromotions = ({id}) => {
       })
         return unsubscribe
     }, [navigation])
-    
 
-    return [ detailsPromotion]
+    return [detailsPromotion]
 }
 
 export default useDetailsPromotions

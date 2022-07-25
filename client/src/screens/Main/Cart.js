@@ -13,6 +13,7 @@ import styles from "./Styles/Cart.jsx";
 import CartModalBotton from "./modules/CartModalBotton";
 import CartModalTop from "./modules/CartModalTop";
 import useShoppingCart from "../../customHooks/useShoppingCart";
+import useDetailsPromotions from "../../customHooks/useDetailsPromotions";
 
 export default function EmptyCart() {
   const [modal, setModal] = useState(false);
