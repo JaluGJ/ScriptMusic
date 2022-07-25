@@ -11,7 +11,6 @@ LogBox.ignoreAllLogs();
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    // if we are in the app, will show a notification or not
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
