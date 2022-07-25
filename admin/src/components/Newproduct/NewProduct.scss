@@ -1,11 +1,11 @@
-.new{
+.newProduct{
     width: 100%;
     display: flex;
     
-    .newcontainer{
+    .newcontainerProduct{
          flex:6;
 
-         .top{
+         .topProduct{
             box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
             padding: 10px;
             margin: 20px;
@@ -13,7 +13,7 @@
             justify-content: space-between;
             align-items: center;
 
-            .title{
+            .titleProduct{
                 color:#DD8643;
                 font-size: 20px;
                 padding-right: 30px;
@@ -30,58 +30,89 @@
                 align-items: center;
                 justify-content: space-around;
                 display: flex;  
-                border-radius: 10px;
-    
-                
+                border-radius: 10px;                
             }
          }
-         .bottom{
+
+         .bottomProduct{
             box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
             padding: 10px;
             margin: 20px;
             display: flex;
+            align-items: center;
+            flex-direction: column;
 
-            .title{
-                color:#DD8643;
-                font-size: 20px;
+            img{ 
+                width: 350px;
+                height: 300px;
+                border-radius: 50%;
+                padding-bottom: 25px;
             }
-            .left{
+
+            form{
+                width: 60%;
                 display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: space-around;
                 align-items: center;
-                justify-content: center;
-                flex:1;
 
-                img{ 
-                    width: 250px;
-                    height: 250px;
-                    border-radius:50%;
-                }
-            }
-
-            .rigth{
-                flex:2;               
-
-                form{
+                .formInputProduct{
+                    width: 100%;
+                    align-items: center;
+                    flex-direction: row;
                     display: flex;
-                    flex-wrap: wrap;
-                    gap: 30px;
-                    justify-content: space-around;
 
-                    .formInput{
-                        width: 40%;
-
+                    .leftProduct{
+                        margin-right: 100px;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
+                            
                         p{
                             font-size: 10px;
                             margin-bottom: 5px;
                             color: red;
-                            
                         }
+    
                         label{
                             font-size: 18px;
                             font-weight: bold;
                             color: #FFC680;
                         }
+    
+                        input{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            text-align: center;
+                        }
+                    }
 
+                    .rightProduct{
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
+
+                        p{
+                            font-size: 10px;
+                            margin-bottom: 5px;
+                            color: red;                            
+                        }
+                         
+                        label{
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #FFC680;
+                        }
+                         
                         select{
                             width: 100%;
                             padding: 5px;
@@ -90,8 +121,9 @@
                             margin-top: 10px;
                             margin-bottom: 10px;
                             font-size: 12px;
-
+                            text-align: center;
                         }
+                         
                         input{
                             width: 100%;
                             padding: 5px;
@@ -99,52 +131,46 @@
                             border-bottom: 1px solid gray;
                             margin-top: 10px;
                             margin-bottom: 10px;
+                            text-align: center;
                         }
-
+                         
                         textarea{
+                            height: 150px;
                             width: 100%;
                             padding: 5px;
                             border: none;
                             border-bottom: 1px solid gray;
                             margin-top: 10px;
                             margin-bottom: 10px;
-                            
+                            resize: none;
                         }
+                    }                        
+                }
 
-                        
-                    }
+                button{
+                    width: 150px;
+                    background-color: #DD8643;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    border-radius: 10px;                        
+                }
 
-                    button{
-                        width: 150px;
-                        background-color: #DD8643;
-                        padding: 10px;
-                        border: none;
-                        color: white;
-                        font-weight: bold;
-                        cursor: pointer;
-                        margin-top: 10px;
-                        border-radius: 10px;
-
-                        
-                    }
-
-
-                    button[disabled]{
-                        width: 150px;
-                        background-color: #5b5b5b;
-                        padding: 10px;
-                        border: none;
-                        color: white;
-                        font-weight: bold;
-                        margin-top: 10px;
-                        border-radius: 10px;
-                        cursor: default;
-                    }
-
+                button[disabled]{
+                    width: 150px;
+                    background-color: #5b5b5b;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    cursor: default;
                 }
             }
         }
-    }
-
-    
+    }    
 }
