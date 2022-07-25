@@ -186,7 +186,7 @@ export const putPassword =
       },
     };
     try {
-      await axios.put(
+      let {data} = await axios.put(
         `${apiUrl}profile/changePassword`,
         { password, newPassword, email },
         config
@@ -194,7 +194,7 @@ export const putPassword =
       axios.get(`${apiUrl}profile`, config).then(async () => {
         await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
       });
-      Alert.alert("¡Contraseña actualizada!", res.data.message);
+      Alert.alert("¡Contraseña actualizada!", data.message);
       dispatch(updatePassword(password));
     } catch (error) {
       Alert.alert("Error", error.response.data.message);
@@ -209,7 +209,7 @@ export const putEmail =
       },
     };
     try {
-      await axios.put(
+      let {data} = await axios.put(
         `${apiUrl}profile/changeEmail`,
         { email, newEmail, password },
         config
@@ -217,10 +217,7 @@ export const putEmail =
       axios.get(`${apiUrl}profile`, config).then(async () => {
         await AsyncStorage.mergeItem("@user", JSON.stringify({ email }));
       });
-      Alert.alert(
-        "¡Último paso!",
-        res.data.message
-      );
+      Alert.alert("¡Último paso!", data.message);
       dispatch(updateEmail(newEmail));
     } catch (error) {
       Alert.alert("Error", error.response.data.message);
