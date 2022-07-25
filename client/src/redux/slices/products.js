@@ -1,7 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setCurrentPage } from './pagination';
 
 const apiUrl = 'https://sm.up.railway.app/';
 

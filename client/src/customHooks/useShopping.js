@@ -15,7 +15,7 @@ const useShopping = () => {
         const unsubscribe = navigation.addListener("focus",async () => {
           const config = {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`, 
             },
           };
           const {data} = await axios.get(`${apiUrl}profile`, config)
@@ -24,7 +24,7 @@ const useShopping = () => {
         return unsubscribe;
       }, [navigation]);
 
-      return {bought}
+      return {bought} 
 }
 
 export default useShopping
