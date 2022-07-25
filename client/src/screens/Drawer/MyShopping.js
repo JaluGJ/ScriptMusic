@@ -5,23 +5,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Styles/MyShopping";
-import { useDispatch, useSelector } from "react-redux";
-import { create } from "../../redux/slices/signin";
 import { useNavigation } from "@react-navigation/native";
+import useShopping from "../../customHooks/useShopping";
 
 const MyShopping = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const { user, token } = useSelector((state) => state.signin);
+  const {bought} = useShopping()
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      dispatch(create(token));
-    });
-    return unsubscribe;
-  }, []);
 
   return (
     <View style={{ alignItems: "center", backgroundColor: "#f9f9f9" }}>
@@ -29,7 +21,7 @@ const MyShopping = () => {
         <Text style={styles.title}>MIS COMPRAS</Text>
       </View>
       <FlatList
-        data={user.bought}
+        data={bought}
         contentContainerStyle={{ alignItems: "center", paddingBottom: 75 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
