@@ -29,7 +29,7 @@ export const postUser = (obj) => async (dispatch) => {
 
   axios
     .post(`${apiUrl}signup`, {...obj, pushToken: token})
-    .then((res) => {
+    .then(() => {
       dispatch(setFlag(true));
       dispatch(setErr(false));
       console.log("REGISTER");
