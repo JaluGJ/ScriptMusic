@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     borderRadius: 20,
     elevation: 20,
-    height: 300,
+    height: 360,
   },
   header: {
     width: "100%",
