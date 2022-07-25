@@ -31,7 +31,7 @@ const MyCarousel = () => {
           return (
             <Pressable
             onPress={() =>
-              navigation.navigate('PromoDetail', { itemId: id })
+              navigation.navigate('PromoDetail', { id: item.id })
             }>
               <Image
                 key={index}
