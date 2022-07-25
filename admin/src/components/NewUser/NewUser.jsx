@@ -24,7 +24,7 @@ const [input, setInput] = useState({
    firstName: '',
    lastName: '',
    email: '',
-   image: '',
+   password: '',
 })
 
 function handleinput(e) {
@@ -59,26 +59,26 @@ function handleSubmit(e) {
         firstName: '',
         lastName: '',
         email: '',
-        image: '',
+        password: '',
     })
 
   }
 
   return (
-    <div className="new">
+    <div className="newUser">
         <SideBar logout={logout} />
         <ToastContainer />
-        <div className="newcontainer">
-            <div className="top">
+        <div className="newcontainerUser">
+            <div className="topUser">
                 <Link to={'/users'} style={{ textDecoration: 'none' }} >
                     <button> <ArrowBackIcon /> ATRAS</button>
                 </Link>
-                <h1 className="title"> Añadir administrador </h1>
+                <h1 className="titleUser"> Añadir nuevo administrador </h1>
             </div>
-            <div className="bottom">
-                    <img src={input.image ? input.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
+            <div className="bottomUser">
+                    <img src={input.image ? input.image : 'https://cdn-icons-png.flaticon.com/512/219/219983.png'} alt="" />
                     <form onSubmit={e => handleSubmit(e)} >
-                        <div className="formInput">
+                        <div className="formInputUser">
 
                             <label>Nombre</label>
                             <input
@@ -86,7 +86,7 @@ function handleSubmit(e) {
                                 placeholder= 'Ingrese Nombre'
                                 name='firstName'
                                 value={input.firstName}
-                            onChange={(e) => handleinput(e)}
+                                onChange={(e) => handleinput(e)}
                             />
                             {error.firstName && (
                             <p>{error.firstName}</p>
@@ -107,11 +107,11 @@ function handleSubmit(e) {
                             <label>Email</label>
                             <input
                                 type="text"
-                                autoComplete="off"
+                                autoComplete="Off"
                                 placeholder='username@scriptmusic.com'
                                 name='email'
                                 value={input.email}
-                                 onChange={(e) => handleinput(e)}
+                                onChange={(e) => handleinput(e)}
                             />
                             {error.email && (
                             <p>{error.email}</p>
@@ -120,24 +120,15 @@ function handleSubmit(e) {
                             <label>Contraseña</label>
                             <input
                                 type="password"
-                                autoComplete="off"
+                                autoComplete="Off"
                                 placeholder='1234ABcd'
                                 name='password'
                                 value={input.password}
-                                 onChange={(e) => handleinput(e)}
+                                onChange={(e) => handleinput(e)}
                             />
                             {error.password && (
                             <p>{error.password}</p>
                         )}
-
-                            <label> Imagen </label>
-                                <input
-                                type="text"
-                                placeholder='Agrega imagen'
-                                name='image'
-                                value={input.image}
-                                onChange={(e) => handleinput(e)}
-                            />
 
                             {!Object.keys(error).length && !checkprops(input) ?
                                 <button>CREAR</button> :
