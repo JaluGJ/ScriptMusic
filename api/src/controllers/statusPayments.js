@@ -38,7 +38,8 @@ module.exports = {
       if (status === 'Successful') {
         const soldId = []
         const productFinal = []
-        const date = Date().split(" ").slice(2,5).toString()
+        let dateNew = Date().split(" ").slice(2,5).toString()
+        const date = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
         items.forEach(async (item) => {
           
@@ -54,10 +55,10 @@ module.exports = {
 
             soldId.push(sold._id)
             const product = await Products.findById(item.id)
-
             //----- 
-
-            productFinal.push(product)
+            let productToMail = product
+            productToMail.count = item.count
+            productFinal.push(productToMail)
             const finalStock = product.stock - item.count
 
             //-----actualizacion de stock de producto
