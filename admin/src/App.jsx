@@ -62,7 +62,7 @@ function App() {
                 <Route path='/users/new' element={<NewUser/>} />
                 <Route path='/users/:id' element={<UpdateUser/>} />
                 <Route path='/promos' element={<Promos/>} />
-                <Route path='/grafico' element={<Grafico/>}/>
+                <Route path='/graficos' element={<Grafico/>}/>
               </>
             )
           }
