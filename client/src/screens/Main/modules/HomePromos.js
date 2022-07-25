@@ -1,24 +1,24 @@
 import React from 'react'
-import { promos } from '../../../../promo.js';
-import { vh, vw } from "react-native-expo-viewport-units";
-import { View, Image, TouchableOpacity } from 'react-native';
 import HomePromosItem from './HomePromosItem.js';
-import styles from '../Styles/Item';
+import usePromotions from '../../../customHooks/usePromotions.js';
 const HomePromos = () => {
-
+    //const { promotions } = useSelector((state) => state.promotions);
     /* console.log(promoOne.img) */
+    const [promotions]= usePromotions()
     return (
         <>
             {
-                promos.map((p, i) => {
+                promotions.map((p, i) => {
                     if (i > 3) {
                         return
                     }
-                    /* console.log(p) */
+                    /* console.log(p.promo) */
                     return (
                         <HomePromosItem
                             key={i}
+                            id={p.id}
                             items={p.items[0]}
+                            typePromo={p.promo}
                             img={i===0?promoOne.img:i===1?promoTwo.img:i===2?promoThree.img:promoFor.img}
                             containerInfo={i===0?promoOne.containerInfo:i===1?promoTwo.containerInfo:i===2?promoThree.containerInfo:promoFor.containerInfo}
                             containerModel={i===0?promoOne.containerModel:i===1?promoTwo.containerModel:i===2?promoThree.containerModel:promoFor.containerModel}
