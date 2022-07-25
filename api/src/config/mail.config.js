@@ -133,7 +133,7 @@ const getTemplateChangeEmail = (name, email, newEmail, token) => {
   <div>Anterior email: ${email}</div>
   <div>Nuevo email: ${newEmail}</div>
   <div>Para confirmar los cambios, solo presiona el siguiente botón:</div>
-  <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="http://localhost:3001/user/change/email/token/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Cambiar email</button></a><br/>
+  <a style="color: #000000; font-size: 15px; text-decoration: underline;" href="https://sm.up.railway.app/user/change/email/token/${token}" target="_blank"><button style="background-color: #DD8643; border-radius: 100px; width: 150px; height: 30px; border: 1px solid">Cambiar email</button></a><br/>
   <p>Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
   <p>Saludos, el equipo de ScriptMusic.</p>
   `
