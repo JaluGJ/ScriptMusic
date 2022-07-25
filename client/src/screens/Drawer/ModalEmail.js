@@ -9,38 +9,37 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cleanErr, putPassword } from "../../redux/slices/signin";
+import { cleanErr, putEmail } from "../../redux/slices/signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "./Styles/ModalPassword";
+import styles from "./Styles/ModalEmail";
 
-export default function ModalPassword({ modal, setModal }) {
+export default function ModalEmail({ modal, setModal }) {
   const [errors, setErrors] = useState({});
-  const [password, setPassword] = useState("");
-  const [actualPass, setActualPass] = useState("");
+  const [email, setEmail] = useState("");
+  const [actualEmail, setActualEmail] = useState("");
+  const [password, setPassword] = useState("")
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.signin);
 
   useEffect(() => {
-    setErrors({ password: "Ingrese una contraseña válida." });
+    setErrors({ email: "Ingrese un mail válido." });
   }, []);
 
-  let validate = (password) => {
+  let validate = (email) => {
     let errors = {};
     if (
-      password === "" ||
-      password === null ||
-      password === undefined ||
-      password.length < 1
+      email === "" ||
+      email === null ||
+      email === undefined ||
+      email.length < 1
     )
-      errors.password = "Debes ingresar una contraseña.";
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password))
-      errors.password =
-        "Su contraseña debe incluir, al menos, 8 caracteres, una mayúscula, una minúscula y un número.";
+      errors.email = "Debes ingresar un email.";
+    if (!/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(email))
+      errors.email = "Ingrese un mail válido.";
     return errors;
   };
 
   let handleInputChange = (value) => {
-    setPassword(value);
+    setEmail(value);
     setErrors(validate(value));
   };
 
@@ -56,32 +55,37 @@ export default function ModalPassword({ modal, setModal }) {
             </View>
             <View style={styles.containerInput}>
               <TextInput
-                onChangeText={(value) => setActualPass(value)}
+                onChangeText={(value) => setActualEmail(value)}
+                style={styles.input}
+                placeholder="Email actual"
+              />
+            </View>
+            <View style={styles.containerInput}>
+              <TextInput
+                onChangeText={(value) => setPassword(value)}
                 style={styles.input}
                 placeholder="Contraseña actual"
               />
             </View>
-            {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password}</Text>
+            {errors.email && (
+              <Text style={{ color: "red" }}>{errors.email}</Text>
             )}
             <View style={styles.containerInput}>
               <TextInput
                 onChangeText={(value) => handleInputChange(value)}
                 style={styles.input}
-                placeholder="Nueva contraseña"
+                placeholder="Nuevo email"
               />
             </View>
             <View style={styles.containerButton}>
               <TouchableOpacity
-                style={errors.password ? styles.buttonErr : styles.button}
-                disabled={errors.password}
+                style={errors.email ? styles.buttonErr : styles.button}
+                disabled={errors.email}
                 onPress={async () => {
                   setModal(!modal);
                   let token = await AsyncStorage.getItem("@token_id");
-                  dispatch(
-                    putPassword(actualPass, password, user.email, token)
-                  );
-                  setErrors({ password: "Ingrese una contraseña válida." });
+                  dispatch(putEmail(actualEmail, email, password, token));
+                  setErrors({ email: "Ingrese una contraseña válida." });
                 }}
               >
                 <Text>ACTUALIZAR</Text>
