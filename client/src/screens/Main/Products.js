@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,8 @@ import HomeNav from "./modules/HomeNav.js";
 import Product from "./modules/Product.js";
 import ModalFilter from "./ModalFilter.js";
 import styles from "./Styles/Products";
-import { cleanProducts, searchProducts } from "../../redux/slices/products";
+import { searchProducts } from "../../redux/slices/products";
+import Loading from "../../components/Loading.js";
 
 const Products = ({ navigation }) => {
   const { list: products } = useSelector((state) => state.products);
@@ -62,11 +63,8 @@ const Products = ({ navigation }) => {
               <Text style={styles.notProducts}>No existen coincidencias.</Text>
             </View>
           ) : products.length === 0 ? (
-            <View style={styles.containerNoProducts}>
-              <ActivityIndicator size="large" color="#0000ff" />
-            </View>
+            <Loading/>
           ) : (
-            // statusCode >= 200 && statusCode < 400 ?
             <FlatList
               showsVerticalScrollIndicator={false}
               numColumns={2}
@@ -79,13 +77,7 @@ const Products = ({ navigation }) => {
                 scrollY.setValue(e.nativeEvent.contentOffset.y);
               }}
             />
-          )
-          //      :
-          //      <View style={styles.containerNoProducts}>
-          //      <Text style={styles.notProducts}>Loading...</Text>
-          //  </View>
-        }
-        {/*  <Pagination allInstruments={allInstruments}></Pagination> */}
+          )}
 
         <ModalFilter modal={modal} setModal={setModal} />
       </View>

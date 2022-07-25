@@ -43,7 +43,6 @@ export const getAllProducts = ()=> (dispatch) =>{
     axios.get(`${apiUrl}products`)
     .then(res=>{
         dispatch(setProductsList(res.data))
-        dispatch(setCurrentPage(1))
         dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
@@ -71,12 +70,10 @@ export const searchProducts = (name) => (dispatch) => {
     axios.get(`${apiUrl}products?search=${name}`)
     .then(res =>{
         dispatch(setProductsList(res.data))
-        dispatch(setCurrentPage(1))
         dispatch(setProductsStatusCode(res.status))
     })
     .catch(err=>{
         dispatch(setProductsStatusCode(err.response.status))
-        dispatch(setCurrentPage(1))
         console.log(err)
     })
 }
@@ -88,7 +85,6 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
         axios.get(`${apiUrl}products?category=${category}`)
         .then(res=>{
             dispatch(setCategory(category))
-            dispatch(setCurrentPage(1))
             dispatch(setProductsList(res.data))
             dispatch(setProductsStatusCode(res.status))
         })
@@ -100,7 +96,6 @@ export const getAllFilterProducts = (filter)=> (dispatch) =>{
         .then(res=>{
             dispatch(setCategory(category))
             dispatch(setProductsList(res.data))
-            dispatch(setCurrentPage(1))
             dispatch(setProductsStatusCode(res.status))
         })
         .catch(err=>{
