@@ -60,6 +60,7 @@ export const loginUser = (obj) => (dispatch) => {
       dispatch(setIsLoading(true));
       setTimeout(async () => {
         try {
+          console.log(res.data.token);
           await AsyncStorage.setItem("@token_id", res.data.token);
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));

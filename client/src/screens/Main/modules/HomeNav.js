@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, Image, TouchableNativeFeedback } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../Styles/Home.jsx";
 import userIMG from "../../../../assets/user.png";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { searchProducts } from "../../../redux/slices/products.js";
 
 
-const HomeNav = ({ search, setSearch, setModal, modal, submitHandle }) => {
-  let { user } = useSelector((state) => state.signin);
+const HomeNav = ({ setModal, modal}) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.signin);
+  const [search, setSearch] = useState('');
   const navigation = useNavigation();
+
+  const submitHandle = (search) => {
+    dispatch(searchProducts(search));
+    setSearch('')
+    navigation.navigate('Products')
+  }
 
   return (
     <View style={styles.containerNav}>
