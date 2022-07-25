@@ -93,7 +93,7 @@ const Home = () => {
               <View style={styles.containerTextCategories}>
                 <Text style={styles.titleCategories}>Categorías</Text>
               </View>
-              <View style={styles.containerBottonCategories}>
+              <View>
                 <HomeCategories botton={true} />
               </View>
             </View>

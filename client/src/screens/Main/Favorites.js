@@ -9,7 +9,6 @@ import useFavorites from "../../customHooks/useFavorites";
 
 export default function EmptyFavs() {
   const [favourites,loading] = useFavorites()
-
   return loading ? <Loading/> : favourites.length > 0 ? <FAVORITOS favourites={favourites} /> : <SINFAVORITOS />
 }
 
