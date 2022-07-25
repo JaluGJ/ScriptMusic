@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import {
   SafeAreaView,
   Text,
@@ -14,38 +14,46 @@ import useDetailsPromotions from '../../customHooks/useDetailsPromotions';
 import useShoppingCart from "../../customHooks/useShoppingCart";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
-import { StatusBar } from 'expo-status-bar';
+import DetailProducts from './modules/DetailProducts.js';
 const PromoDetail = ({ route }) => {
-
+  
   const navigation = useNavigation();
   const { id } = route.params;
-  const [detailsPromotion]  = useDetailsPromotions({id})
+  const [detailsPromotion] = useDetailsPromotions({ id })
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
   // console.log(detailsPromotion)
 
   return (
     <ScrollView>
-      <SafeAreaView style={styles.wrapper}>
+      < >
+        <View style={styles.containerImgPromo}>
+          <Image
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+            resizeMode="cover"
+            source={{ uri: detailsPromotion.image }}
+          />
+        </View>
         <View style={styles.container}>
           <View style={styles.containerNav}>
+
             <Pressable onPress={() => navigation.goBack()}>
               <AntDesign name="left" size={27} color="black" />
             </Pressable>
-            <Text style={styles.textNav}>DETALLES</Text>
+
+            <Text style={styles.promoText}>{detailsPromotion.promo}</Text>
+
+            <Pressable onPress={() => navigation.goBack()}>
+              <AntDesign name="right" size={27} color="black" />
+            </Pressable>
           </View>
           <View style={styles.containerMain}>
-            <Text style={styles.model}>NOMBRE PRODUCTO</Text>
-            <View style={styles.containerImg}>
-              <Image
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                resizeMode="contain"
-                source={{ uri: detailsPromotion.image }}
-              /> 
-            </View>
-            <Text style={styles.brand}> {detailsPromotion.brand} </Text>
+            <DetailProducts
+              data={detailsPromotion.items}
+            />
+            <Text style={styles.textNavPromos}>{detailsPromotion.promoName}</Text>
             <View style={styles.containerDescription}>
               <Text style={styles.description}> {detailsPromotion.description}</Text>
             </View>
@@ -60,22 +68,22 @@ const PromoDetail = ({ route }) => {
 
               <View style={styles.minumPlus}>
                 <AntDesign
-                  onPress={() =>
-                    setCountProducts(
-                      countProducts > 2 ? countProducts - 1 : 1
-                    )
-                  }
+                   onPress={() =>
+                     setCountProducts(
+                       countProducts > 2 ? countProducts - 1 : 1
+                     )
+                   }
                   name="minuscircleo"
                   size={24}
                   color="#000000e2"
                 />
                 <Text style={styles.num}>{countProducts}</Text>
                 <AntDesign
-                  onPress={() => {
-                    if (detailsPromotion.stock > countProducts) {
-                      setCountProducts(countProducts + 1)
-                    }
-                  }}
+                   onPress={() => {
+                     if (detailsPromotion.stock > countProducts) {
+                       setCountProducts(countProducts + 1)
+                     }
+                   }}
                   name="pluscircleo"
                   size={24}
                   color="#000000e2"
@@ -87,7 +95,7 @@ const PromoDetail = ({ route }) => {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  addToCart({ details:detailsPromotion });
+                  addToCart({ details: detailsPromotion });
                   navigation.goBack();
                 }}
               >
@@ -96,19 +104,9 @@ const PromoDetail = ({ route }) => {
             </View>
 
           </View>
-         {/* <DetailComment />  */}
+          {/* <DetailComment />  */}
         </View>
-        {/* <CustomAlertComponent
-          visible={showModal}
-          setVisible={setShowModal}
-          setFlag={setFlag}
-          flag={flag}
-          title={!flag ? "¡Producto agregado!" : "¡Producto agregado anteriormente!"}
-          message={"Revise su lista de favoritos"}
-          color={"#DD8643"}
-          iconName={"cards-heart"}
-        /> */}
-      </SafeAreaView>
+      </>
     </ScrollView>
   )
 }
