@@ -94,7 +94,10 @@ const Details = ({ route }) => {
                     />
                     <Text style={styles.num}>{countProducts}</Text>
                     <AntDesign
-                      onPress={() => setCountProducts(countProducts + 1)}
+                      onPress={() =>{
+                        if(details.stock > countProducts){
+                         setCountProducts(countProducts + 1)
+                      }}}
                       name="pluscircleo"
                       size={24}
                       color="#000000e2"
