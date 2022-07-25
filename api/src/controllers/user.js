@@ -36,7 +36,7 @@ module.exports = {
         try {
             const user = await User.findOne({ email })
             if (user) {
-                return res.status(404).json({ message: 'El e-mail ya ha sido tomado' })
+                return res.status(404).json({ message: 'Ya existe un usuario registrado con ese email, prueba con otro.' })
             }
 
             isAdmin === undefined ?
@@ -57,7 +57,7 @@ module.exports = {
             const template = getTemplate(userCreated.firstName, token)
 
             await sendEmail(userCreated.email, 'Confirmar cuenta', template)
-            return res.status(200).json({ userCreated })
+            return res.status(200).json({ userCreated, message: 'Se ha enviado un correo para confirmar la cuenta.' })
         } catch (error) {
             next(error)
         }
@@ -69,7 +69,7 @@ module.exports = {
         try {
             const user = await User.findOne({ email })
             if (!user) {
-                return res.status(404).json({ message: 'El e-mail no existe' })
+                return res.status(404).json({ message: 'El email no existe' })
             }
             const token = getToken(user._id)
             const template = getTemplateForgotPassword(user.firstName, token)
@@ -129,20 +129,20 @@ module.exports = {
         let { email, password, newPassword } = req.body
         try {
             if (!password || !newPassword || !email) {
-                return res.status(404).json({ message: 'Todos los campos son obligatorios' })
+                return res.status(404).json({ message: 'Todos los campos son obligatorios.' })
             }
             const user = await User.findOne({ email })
             if (!user) {
-                return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
+                return res.status(404).json({ message: 'Email o contraseña incorrectos.' })
             }
             const isMatch = await user.isValidPassword(password)
             if (!isMatch) {
-                return res.status(401).json({ message: 'E-mail o contraseña incorrecta' })
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
             }
             newPassword = await bcrypt.hash(newPassword, 10)
             user.password = newPassword
             await user.save()
-            return res.json({ message: 'Se ha cambiado la contraseña' })
+            return res.json({ message: 'Tu contraseña se ha cambiado con éxito.' })
         } catch (error) {
             next(error)
         }
@@ -202,17 +202,17 @@ module.exports = {
             const data = getTokenData(token)
             const user = await User.findById(data.id)
             if (!user) {
-                return res.status(404).json({ message: 'El usuario no existe' })
+                return res.status(404).json({ message: 'El usuario no existe.' })
             }
             if (data === null) {
-                return res.status(404).json({ message: 'El token no existe' })
+                return res.status(404).json({ message: 'El token no existe.' })
             }
             if (user.isConfirmed) {
-                return res.status(404).json({ message: 'El usuario ya ha sido confirmado' })
+                return res.status(404).json({ message: 'El usuario ya ha sido confirmado.' })
             }
             user.isConfirmed = true
             await user.save()
-            return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app' })
+            return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app.' })
         } catch (error) {
             next(error)
         }
@@ -227,17 +227,17 @@ module.exports = {
                 false
                 : await user.isValidPassword(password)
             if (!validate) {
-                return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
+                return res.status(401).json({ message: 'La contraseña o el email son incorrectos.' })
             }
             const token = getToken(user._id)
             if (user.isAdmin) {
                 return res.status(200).json({ token })
             }
             if (!user.isConfirmed) {
-                return res.status(401).json({ message: 'El usuario no ha confirmado su cuenta' })
+                return res.status(401).json({ message: 'El usuario no ha confirmado su cuenta.' })
             }
             if(user.isBan){
-                return res.status(401).json({ message: 'El usuario ha sido baneado' })
+                return res.status(401).json({ message: 'El usuario ha sido baneado.' })
             }
             return res.json({ token })
         } catch (error) {
@@ -254,7 +254,7 @@ module.exports = {
                 false
                 : await user.isValidPassword(password)
             if (!validate) {
-                return res.status(401).json({ message: 'La contraseña o el e-mail son incorrectos' })
+                return res.status(401).json({ message: 'La contraseña o el email son incorrectos' })
             }
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -684,23 +684,23 @@ module.exports = {
             const { email, password, newEmail } = req.body
         
             if (email !== user.email || !password) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
             }
 
             const newUser = await User.findOne({ email: newEmail })
             if (newUser) {
-                return res.status(401).json({ message: 'El email ya está en uso' })
+                return res.status(401).json({ message: 'El email ya está en uso.' })
             }
             const isMatch = await user.isValidPassword(password)
             if (!isMatch) {
-                return res.status(401).json({ message: 'Email o contraseña incorrecta' })
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
             }
             const data = getToken(user.id)
             const emailEncripted = getToken(newEmail)
             const token = data + '~' + emailEncripted
             const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
-            await sendEmail(email, 'Cambio de Email', template)
-            return res.json({ message: 'Se ha enviado un email para confirmar los cambios' })
+            await sendEmail(newEmail, 'Cambio de Email', template)
+            return res.json({ message: 'Revisa la bandeja de entrada de tu nuevo email para confirmar los cambios.' })
         } catch (error) {
             next(error)
         }
@@ -731,7 +731,7 @@ module.exports = {
             }
             user.email = email
             await user.save()
-            return res.json({ message: 'Email cambiado' })
+            return res.json({ message: 'El email se ha cambiado correctamente' })
         } catch (error) {
             next(error)
         }
