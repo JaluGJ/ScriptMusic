@@ -31,7 +31,7 @@ function setPushToken() {
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log('this is the token', token);
+      // console.log('this is the token', token);
     } else {
       return;
     }

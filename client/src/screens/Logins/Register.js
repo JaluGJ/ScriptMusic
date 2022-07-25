@@ -17,12 +17,14 @@ import { FormikInputValue } from "./validation/FormikInputValue.js";
 import { FormikSubmit } from "./validation/FormikSubmit.js";
 import {  postUser } from "../../redux/slices/signup.js";
 import { useDispatch, } from "react-redux";
+import useRegister from "../../customHooks/useRegister.js";
 
 
 
 export default function Register() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {initialValues} = useRegister();
 
   return (
     <>

@@ -45,7 +45,7 @@ const useRegister = () => {
         }
       };
     
-      return {initialValues, handleErrorCheck};
+      return {initialValues};
 }
 
 export default useRegister
