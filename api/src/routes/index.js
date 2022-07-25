@@ -69,11 +69,13 @@ routes.get('/user/confirm/token/:token', confirmUser)
 
     //user info
 
-routes.delete('/user/delete', deleteUser)
+routes.delete('/user/delete/:id', deleteUser)
 
 routes.get('/profile', profile)
 
 routes.put('/profile', updateProfile)
+
+routes.put('/profile/changePassword', resetPassword)
 
 routes.post('/user/forgotPassword', forgotPassword)
 
@@ -90,9 +92,9 @@ routes.get('/admin-profile', profileAdmin)
 
 routes.get('/ban/user', getUserBanned)
 
-routes.post('/ban/user/:id', banUser)
+routes.put('/ban/user/:id', banUser)
 
-routes.post('/unban/user/:id', unBanUser)
+routes.put('/unban/user/:id', unBanUser)
 
 
 // USER BAN

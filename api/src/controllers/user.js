@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt')
-const { getTemplate, sendEmail, getTemplateBaned, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword, getTemplateForgotPassword} = require('../config/mail.config.js')
+const { getTemplate, sendEmail, getTemplateBanUser, getTemplateUnBanUser, getTemplateForgotPasswordNewPassword, getTemplateForgotPassword} = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
-const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
+// const BannedUser = require('../models/bannedUsers/bannedUsersSchema.js')
 
 
 
@@ -45,12 +45,12 @@ module.exports = {
                 pushToken
             }
 
-            const ban = await BannedUser.findOne({ email })
-            if (ban) {
-                const template = getTemplateBaned(ban.email)
-                await sendEmail(template)
-                return res.status(404).json({ message: 'El usuario ha sido baneado' })
-            }
+            // const ban = await BannedUser.findOne({ email })
+            // if (ban) {
+            //     const template = getTemplateBaned(ban.email)
+            //     await sendEmail(template)
+            //     return res.status(404).json({ message: 'El usuario ha sido baneado' })
+            // }
 
             const userCreated = await User.create(newUser)
             const token = getToken(userCreated._id)
@@ -128,23 +128,21 @@ module.exports = {
 
         let { email, password, newPassword } = req.body
         try {
+            if (!password || !newPassword) {
+                return res.status(404).json({ message: 'Todos los campos son obligatorios' })
+            }
             const user = await User.findOne({ email })
             if (!user) {
                 return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
             }
             const isMatch = await user.comparePassword(password)
             if (!isMatch) {
-                return res.status(404).json({ message: 'E-mail o contraseña incorrecta' })
-            }
-            if (email !== user.email) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
-            }
-            if (!password || !newPassword) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.status(401).json({ message: 'E-mail o contraseña incorrecta' })
             }
             newPassword = await bcrypt.hash(password, 10)
-            await User.findByIdAndUpdate(user._id, { password: newPassword })
-            return res.status(200).json({ message: 'Se ha cambiado la contraseña' })
+            user.password = newPassword
+            await user.save()
+            return res.json({ message: 'Se ha cambiado la contraseña' })
         } catch (error) {
             next(error)
         }
@@ -170,30 +168,32 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
 
-        let { email, password, firstName, lastName, image, isAdmin, pushToken } = req.body
+        const { email, password, firstName, lastName, image, pushToken } = req.body
 
         if (!email) return res.status(404).json({ msg: 'Falta enviar correo electrónico' });
         if (!password) return res.status(404).json({ msg: 'Falta rellenar la contraseña' });
         if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
         if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
-        if (!image) return res.status(404).json({ msg: 'Falta ingresar imagen' });
 
-        const userAdd = new User({
-            email,
-            password: await bcrypt.hash(password, 10),
-            firstName,
-            lastName,
-            isAdmin,
-            pushToken,
-        });
+        if(User.findOne({ email })){
+            return res.status(404).json({ msg: 'El correo electrónico ya existe' });
+        }
 
-        userAdd.save()
-            .then(() => {
-                return res.json({ msg: "Usuario guardado", userAdd});
+        try {
+            const newUser = new User({
+                email,
+                password,
+                firstName,
+                lastName,
+                image,
+                isAdmin: true,
+                pushToken
             })
-            .catch((error) => {
-                next(error);
-            })
+            const userCreated = await newUser.save()
+            return res.status(200).json({ userCreated })
+        } catch (error) {
+            next(error)
+        }
     },
 
 
@@ -236,6 +236,9 @@ module.exports = {
             }
             if (!user.isConfirmed) {
                 return res.status(401).json({ message: 'El usuario no ha confirmado su cuenta' })
+            }
+            if(user.isBan){
+                return res.status(401).json({ message: 'El usuario ha sido baneado' })
             }
             return res.json({ token })
         } catch (error) {
@@ -350,7 +353,6 @@ module.exports = {
     updateProfile: async (req, res, next) => {
         try {
             const autorization = req.get('Authorization')
-            const { firstName, lastName, image } = req.body
             if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
@@ -366,6 +368,9 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
+
+            const { firstName, lastName, image } = req.body
+
             if (!firstName && !lastName && !image) {
                 return res.status(400).json({ message: 'No se ha modificado ningun dato' })
             }
@@ -387,8 +392,6 @@ module.exports = {
 
 
     banUser: async (req, res, next) => {
-        try {
-            const { id } = req.params
             const autorization = req.get('Authorization')
             if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -408,19 +411,25 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const userToBan = await User.findById(id)
-            if (!userToBan) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+
+            try {
+                const { id } = req.params
+
+                const userToBan = await User.findById(id)
+                if (!userToBan) {
+                    return res.status(404).json({ message: 'No se ha encontrado el usuario' })
+                }
+                const { email, firstName } = userToBan
+                const template = getTemplateBanUser(firstName)
+                await sendEmail(email, 'Hoy tenemos una mala noticia',template)
+                // await BannedUser.create({ email, banID: _id })
+                // await userToBan.remove()
+                userToBan.isBan = true
+                userToBan.save()
+                return res.json({ message: 'Usuario baneado' })   
+            } catch (error) {
+                next(error)   
             }
-            const { email, firstName, _id } = userToBan
-            const template = getTemplateBanUser(firstName)
-            await sendEmail(email, 'Hoy tenemos una mala noticia',template)
-            await BannedUser.create({ email, banID: _id })
-            await userToBan.remove()
-            return res.json({ message: 'Usuario baneado' })
-        } catch (error) {
-            next(error)
-        }
     },
 
 
@@ -446,14 +455,19 @@ module.exports = {
             if (!user.isAdmin) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
-            const userToUnBan = await BannedUser.findOne({ banID: id })
+            // const userToUnBan = await BannedUser.findOne({ banID: id })
+            // if (!userToUnBan) {
+            //     return res.status(404).json({ message: 'No se ha encontrado el usuario' })
+            // }
+            const userToUnBan = await User.findById(id)
             if (!userToUnBan) {
                 return res.status(404).json({ message: 'No se ha encontrado el usuario' })
             }
+            userToUnBan.isBan = false
+            userToUnBan.save()
             const { email } = userToUnBan
             const template = getTemplateUnBanUser(email)
             await sendEmail(email, 'Hoy tenemos una buena noticia' ,template)
-            await userToUnBan.remove()
             return res.json({ message: 'Usuario desbaneado' })
         } catch (error) {
             next(error)
@@ -462,7 +476,6 @@ module.exports = {
 
 
     getUserBanned: async (req, res, next) => {
-        try {
             const autorization = req.get('Authorization')
             if (!autorization) {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -483,17 +496,14 @@ module.exports = {
                 return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             try {
-                const bannedUsers = await BannedUser.find()
-                if(!bannedUsers || bannedUsers.length === 0) {
-                    return res.status(404).json({ message: 'No se han encontrado usuarios baneados' })
+                const usersBan = await User.find({ isBan: true })
+                if(!usersBan || usersBan.length === 0){
+                    return res.status(404).json({ message: 'No hay usuarios baneados' })
                 }
-                return res.json({ bannedUsers })   
+                return res.json({ usersBan })
             } catch (error) {
                 next(error)
             }
-        } catch (error) {
-            next(error)
-        }
     },
 
 
@@ -578,7 +588,6 @@ module.exports = {
     },
 
     deleteUser: async (req, res, next) => {
-        try {
         const autorization = req.get('Authorization')
         if (!autorization) {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
@@ -599,12 +608,14 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
 
-        let {userDelete} = req.body
-        
-        await User.findByIdAndDelete(userDelete)
-
-        return res.json({ message: "usuario eliminado con exito" })
-            
+        try {
+            const { id } = req.params
+            const user = await User.findById(id)
+            if (!user) {
+                return res.status(404).json({ message: 'No se ha encontrado al usuario' })
+            }
+            await user.remove()
+            return res.json({ message: 'Usuario eliminado' })
         } catch (error) {
             next(error)
         }

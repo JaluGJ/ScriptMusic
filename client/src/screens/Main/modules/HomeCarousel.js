@@ -6,9 +6,11 @@ import styles from '../Styles/Carousel';
 import Carousel from 'react-native-snap-carousel';
 
 
-const MyCarousel =()=>{
-  return(
-    <View style={styles.container}>
+export default class MyCarousel extends React.Component {
+
+  render() {
+    return (
+      <View style={styles.container}>
         <Carousel
           data={promos}
           sliderWidth={vw(100)}
@@ -17,18 +19,16 @@ const MyCarousel =()=>{
           loop={true}
           autoplayDelay={2000}
           autoplayInterval={5000}
-          renderItem={({item, index})=>{
-            return <Image 
+          ref={(c) => { this._carousel = c; }}
+          renderItem={({ item, index }) => {
+            return <Image
               key={index}
               style={styles.image}
-              source={{uri:item.image}}
+              source={{ uri: item.image }}
             />
           }}
         />
       </View>
-  )
+    );
+  }
 }
-
-
-
-export default MyCarousel;
