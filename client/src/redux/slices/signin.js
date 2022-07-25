@@ -170,26 +170,31 @@ export const putLastName = (lastName, userToken) => async (dispatch) => {
       await AsyncStorage.mergeItem("@user", JSON.stringify({ lastName }));
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
-export const putPassword = (password, userToken) => async (dispatch) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${userToken}`,
-    },
+export const putPassword =
+  (password, newPassword, email, userToken) => async (dispatch) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    dispatch(updatePassword(password));
+    try {
+      await axios.put(
+        `${apiUrl}profile/changePassword`,
+        { password, newPassword, email },
+        config
+      );
+      axios.get(`${apiUrl}profile`, config).then(async () => {
+        await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
+      });
+    } catch (error) {
+      dispatch(setErr(error.response.data.message))
+    }
   };
-  dispatch(updatePassword(password));
-  try {
-    await axios.put(`${apiUrl}profile`, { password }, config);
-    axios.get(`${apiUrl}profile`, config).then(async () => {
-      await AsyncStorage.mergeItem("@user", JSON.stringify({ password }));
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const forgotPassword = async (email) => {
   try {
