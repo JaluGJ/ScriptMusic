@@ -17,7 +17,8 @@ const CardProducts = () => {
         renderItem={({ item }) => (
           <TouchableOpacity
             onLongPress={() => {
-              navigation.navigate("Details", { itemId: item.id });
+              item.promo ? navigation.navigate("PromoDetail", { id: item.id }) :
+              navigation.navigate("Details", { itemId: item.id })
             }}
           >
             <View style={styles.containerProduct}>

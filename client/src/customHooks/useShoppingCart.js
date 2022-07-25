@@ -39,21 +39,8 @@ const useShoppingCart = () => {
     };
   }, [newItems]);
 
-  // const { promoName, price, stock, image, promo, items, id} = details;
-  //   const product = {
-  //     model: promoName,
-  //     priceOne: price,
-  //     id:id,
-  //     price: (price*countProducts).toFixed(2),
-  //     stock: stock,
-  //     image: image,
-  //     promo: promo,
-  //     items: items,
-  //     count: countProducts }
-
   const addToCart = async ({ details }) => {
     const { price, id, image, model, brand, stock , promo , items , promoName} = details;
-
     const product = {
       priceOne: price,
       price: (price * countProducts).toFixed(2),
@@ -64,8 +51,8 @@ const useShoppingCart = () => {
       count: countProducts,
       stock:stock,
       items: promo ? items : null,
+      promo: promo ? true : false,
     };
-    console.log(product);
 
     try {
 
