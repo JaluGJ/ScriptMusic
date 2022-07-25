@@ -15,6 +15,10 @@ const Promos = () => {
     const rows = useSelector(state => state.promos)
     const userToken = localStorage.user
 
+    useEffect(() => {
+        dispatch(getAllPromos(userToken));
+    }, [dispatch])
+
     //--------------------------------------------------------------------------------------------------------------------------------
     function handleDeletePromo(e, id){
         e.preventDefault();
@@ -28,32 +32,33 @@ const Promos = () => {
             draggable: true,
             progress: undefined,
         });
-        dispatch(getAllPromos());
+        dispatch(getAllPromos(userToken));
     }
     // PARA IMPLEMENTAR EL DELETEPROMO SE TRAJO EL INPUTS Y SE ELIMINO,
     // PORQUE NO ESTABA RECIBIENDO EL DISPATH PARA REALIZAR LA ACCION.
     let columns = [
-        { 
-            field: 'edit',
-            headerName: '', 
-            headerAlign: 'center', 
-            align: 'center',
-            width: 30,
-            renderCell: (cellValues) => {
-                return <Link style={{ textDecoration: "none", color: 'black'}} to={``}> <ModeEditIcon /> </Link>
-            },
-         },
-        { field: 'promo', headerName: 'Promoción', width: 220, headerAlign: 'center', align: 'left' },
+        // { 
+        //     field: 'edit',
+        //     headerName: '', 
+        //     headerAlign: 'center', 
+        //     align: 'center',
+        //     width: 30,
+        //     renderCell: (cellValues) => {
+        //         return <Link style={{ textDecoration: "none", color: 'black'}} to={``}> <ModeEditIcon /> </Link>
+        //     },
+        //  },
+        { field: 'promoName', headerName: 'Nombre Promoción', width: 220, headerAlign: 'center', align: 'left' },
+        { field: 'promo', headerName: 'Promoción', width: 220, headerAlign: 'center', align: 'center' },
         { field: 'description', headerName: 'Descripción', width: 130, headerAlign: 'center', align: 'center' },
         { field: 'price', type: 'number', headerName: 'Precio', width: 70, headerAlign: 'center', align: 'center' },
         { field: 'stock', type: 'number', headerName: 'Disponible', width: 85, headerAlign: 'center', align: 'center' },    
-        { field: 'items', headerName: 'Productos', width: 100, headerAlign: 'center', align: 'center' },
+        { field: 'items', headerName: 'Productos', width: 250, headerAlign: 'center', align: 'center' },
         { 
             field: 'delete',
-            headerName: '', 
+            headerName: 'Editar', 
             headerAlign: 'center', 
             align: 'center',
-            width: 30,
+            width: 60,
             renderCell: (cellValues) => {
                 return  <Link style={{ textDecoration: "none", color: 'black'}} to={''}><DeleteIcon onClick={(e) => handleDeletePromo(e, cellValues.row.id)} /> </Link>
             },
@@ -61,9 +66,7 @@ const Promos = () => {
     ]
     //--------------------------------------------------------------------------------------------------------------------------------
     
-    useEffect(() => {
-        dispatch(getAllPromos());
-    }, [dispatch])
+
 
     return(
         <div className="promos">

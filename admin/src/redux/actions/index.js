@@ -1,7 +1,7 @@
 import axios from "axios"
 // lo de la linea 3 iria en un .env, solo la parte de localhost:3001, la parte de http si va asi 
-// const baseUrl = "https://sm.up.railway.app"
-const baseUrl = "http://localhost:3001"
+const baseUrl = "https://sm.up.railway.app"
+// const baseUrl = "http://localhost:3001"
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT"
@@ -165,7 +165,7 @@ export const deleteUser = (id, userToken) => (dispatch) => {
       Authorization: `Bearer ${userToken}`,
     },
   };
-  axios.delete(`${baseUrl}/user/${id}`, config)
+  axios.delete(`${baseUrl}/user/delete/${id}`, config)
     .then(res => {
       dispatch({
         type: DELETE_USER,

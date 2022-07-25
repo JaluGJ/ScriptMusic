@@ -71,7 +71,7 @@ export default function Users() {
       align: 'center',
       width: 50,
       renderCell: (cellValues) => {
-        return <Link style={{ textDecoration: "none", color: 'black' }} to={`/users/${cellValues.row.id}`}> <ModeEditIcon /> </Link>
+        return <Link style={{ textDecoration: "none", color: 'black' }} to={`/users/${cellValues.row.id}`}> <ModeEditIcon className='edit' /> </Link>
       },
     },
     { field: 'firstName', headerName: 'Nombre', width: 150, headerAlign: 'center', align: 'center' },
@@ -82,15 +82,15 @@ export default function Users() {
     },
     {
       field: 'delete', headerName: '', headerAlign: 'center', align: 'center', width: 30,
-      renderCell: (cellValues) => {return <DeleteIcon onClick={(e) => handleDeleteUser(e, cellValues.row.id)} />}
+      renderCell: (cellValues) => {return <DeleteIcon className='delete' onClick={(e) => handleDeleteUser(e, cellValues.row.id)} />}
     },
     {
       field: 'banuser', headerName: 'Bloquear', width: 100, headerAlign: 'center', align: 'center',
-      renderCell: (cellValues) => {return <PersonOffIcon onClick={(e) => handleBanUser(e, cellValues.row.id)} className='red'  />}
+      renderCell: (cellValues) => {return <PersonOffIcon onClick={(e) => handleBanUser(e, cellValues.row.id)} className='red' />}
     },
     {
       field: 'unbanuser', headerName: 'Desbloquear', width: 100, headerAlign: 'center', align: 'center',
-      renderCell: (cellValues) => {return <PersonRoundedIcon onClick={(e) => handleUnBanUser(e, cellValues.row.id)} className='green'  />}
+      renderCell: (cellValues) => {return <PersonRoundedIcon onClick={(e) => handleUnBanUser(e, cellValues.row.id)} className='green' />}
     },
   ]
   //--------------------------------------------------------------------------------------------------------------------------------
