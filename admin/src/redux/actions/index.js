@@ -19,6 +19,7 @@ export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 export const GET_GRAFICO = "GET_GRAFICO"
+export const ADD_PROMO = 'ADD_PROMO'
 export const DELETE_PROMO = "DELETE_PROMO"
 export const ADMIN_PROFILE = 'ADMIN_PROFILE'
 
@@ -280,6 +281,22 @@ export const getAllPromos = (userToken) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const addPromo = (promo, userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.post(`${baseUrl}/create-promo`, promo, config)
+    .then(res => {
+      dispatch({
+        type: ADD_PROMO,
+        payload: res.data
+      })
+    })
+    .catch(err => console.log(err))
+}
 
 export const deletePromo = (id, userToken) => (dispatch) => {
   const config = {
