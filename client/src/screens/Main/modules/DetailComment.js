@@ -9,7 +9,7 @@ import { Image } from "@rneui/themed";
 import styles from "../Styles/Detail.jsx";
 const DetailComment = ({ratYcom}) => {
 
-
+    console.log(ratYcom)
     return (
         <View style={styles.containerDetailComment}>
             <View >
