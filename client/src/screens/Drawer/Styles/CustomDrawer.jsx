@@ -7,28 +7,28 @@ const styles = StyleSheet.create({
       height:170,
       marginTop:-5
     },
+    borderUser:{
+      width: 95,
+      height: 95,
+      borderRadius: 50,
+      marginBottom:20
+    },
     userImage: {
-      width: 83,
-      height: 83,
+      width: 88,
+      height: 88,
       borderRadius: 50,
       // borderColor: "white",
       // borderWidth: 1,
-      // backgroundColor: "red",
       // marginBottom: 10,
       // marginLeft: 5,
       // marginTop: 25,
-      position: "absolute",
-      top: 31,
-      left: 21
     },
     progressCircle:{
-      marginTop:10,
-      // position: "absolute",
-      // top: 20,
-      // left: 20
+      position: "absolute",
+      top: -1,
+      right: 2.1,
       // backgroundColor: "green",
-      width: 90,
-      marginBottom: 15,
+      width: 95,
     },
     level:{
       position: "absolute",

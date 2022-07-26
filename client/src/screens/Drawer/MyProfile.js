@@ -1,7 +1,6 @@
 import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import userImage from "../../../assets/user.png";
 import styles from "./Styles/MyProfile";
 import lapiz from "../../../assets/lapiz.png";
 import * as imagePicker from "expo-image-picker";
@@ -12,16 +11,21 @@ import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
 import ModalPassword from "./ModalPassword";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useShopping from "../../customHooks/useShopping.js";
 import ModalEmail from "./ModalEmail";
+import * as Progress from 'react-native-progress';
+const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png"
 
 const MyProfile = () => {
+  const { bought } = useShopping();
   const [modalName, setModalName] = useState(false);
   const [modalLastName, setModalLastName] = useState(false);
   const [modalPassword, setModalPassword] = useState(false);
   const [modalEmail, setModalEmail] = useState(false)
   const { user } = useSelector((state) => state.signin);
   const dispatch = useDispatch();
-
+  var progress = bought.length > 0 ? bought.length / 20 : 0;
+  var status = bought.length > 0 && bought.length <= 2 ? "Level 1" : bought.length > 2 && bought.length <= 6 ? "Level 2" : bought.length > 6 && bought.length <= 10 ? "Level 3" : bought.length > 10 && bought.length <= 15 ? "Level 4" : bought.length > 15 && bought.length <= 20 ? "Level 5" : "Level 0";
   let imgPicker = async () => {
     let permisoResult = await imagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -79,9 +83,12 @@ const MyProfile = () => {
           </View>
           <View style={{ alignItems: "flex-end", justifyContent: "flex-end" }}>
             <Image
-              source={user ? { uri: user.image } : userImage}
+              source={user ? { uri: user.image } : { uri: imageDefault }}
               style={styles.image}
             />
+            <View style={styles.progressCircle}>
+              <Progress.Circle size={200} showsText={false} thickness={5} progress={progress} borderColor="#000000" color='orange' borderWidth={1} strokeCap='square'/>
+            </View>
             <View style={styles.containerLapiz}>
               <TouchableOpacity
                 onPress={() => imgPicker()}
@@ -98,7 +105,11 @@ const MyProfile = () => {
           </View>
         </View>
         <View style={styles.containerMid}>
+          <Text style={styles.level}>
+            {status}
+          </Text>
           <View style={styles.container}>
+
             <View>
               <Text style={styles.title}>Nombre</Text>
               <Text style={styles.text}>{user?.firstName}</Text>
