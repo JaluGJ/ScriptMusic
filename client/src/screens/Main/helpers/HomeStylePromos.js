@@ -11,6 +11,7 @@ export let StylesPromos = [
         img: promo2,
         containerInfo: styles.containerInfo,
         containerModel: styles.containerModel,
+        containerImage: styles.containerImageOne,
         containerText: styles.containerText,
         containerTypePromo:styles.containerTypePromoOne
     },
