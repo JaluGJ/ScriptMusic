@@ -19,6 +19,7 @@ import useDetails from "../../customHooks/useDetails";
 import useFavorites from "../../customHooks/useFavorites";
 import CustomAlertComponent from "../../components/CustomAlert.js";
 import DetailComment from "./modules/DetailComment.js";
+import InputComment from "./modules/InputComment.js";
 const Details = ({ route }) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
@@ -118,6 +119,7 @@ const Details = ({ route }) => {
                 </View>
 
               </View>
+              <InputComment productId={datails.id} />
               <DetailComment
                 ratYcom={details.ratYcom}
               />
