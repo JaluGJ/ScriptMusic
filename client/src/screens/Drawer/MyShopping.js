@@ -81,7 +81,7 @@ const MyShopping = () => {
                         itemId: e.items.id,
                       });
                     }}
-                    key={e.id}
+                    key={e.items.id}
                   >
                     <View style={styles.containerRest}>
                       <View>
