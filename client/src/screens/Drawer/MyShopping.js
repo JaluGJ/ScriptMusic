@@ -53,7 +53,7 @@ const MyShopping = () => {
       <View>
         <Text style={styles.title}>MIS COMPRAS</Text>
       </View>
-      {bought?.lenght === 0 ? (
+      {bought.length < 1 ? (
         <View>
           <Icon
             name="shopping-outline"
@@ -98,7 +98,7 @@ const MyShopping = () => {
                   <View>
                     <Text
                       style={styles.date}
-                    >{`${dia} de ${mes} de ${anio}`}</Text>
+                    >{`${dia} de ${mes} de ${anio}, ${hora[0]}:${hora[1]}hs`}</Text>
                   </View>
                   <View style={styles.lineaDate} />
                 </View>
@@ -128,6 +128,9 @@ const MyShopping = () => {
                             <View>
                               <Text style={styles.brand}>{e.items.brand}</Text>
                             </View>
+                            <View>
+                              <Text style={styles.brand}>${e.items.price}</Text>
+                            </View>
                           </View>
                         </View>
                         <View style={styles.containerQuantity}>
@@ -142,7 +145,7 @@ const MyShopping = () => {
                 <View style={styles.containerDate}>
                   <View style={styles.lineaDate} />
                   <View>
-                    <Text style={styles.date}>{`${hora[0]}:${hora[1]}hs`}</Text>
+                    <Text style={styles.date}>${item.price}</Text>
                   </View>
                   <View style={styles.lineaDate} />
                 </View>
