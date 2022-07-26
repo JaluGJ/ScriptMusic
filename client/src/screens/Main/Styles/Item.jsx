@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
 
 
     /* Primer promo doble circulo */
+    containerTypePromoOne:{
+        position: 'absolute',
+        bottom: vh(3),
+        left: vw(8),
+    },  
     containerModel:{
         position: 'absolute',
         left: vw(10),
@@ -47,7 +52,12 @@ const styles = StyleSheet.create({
         display: 'none'
     },
     /* Segunda promo circulo en medio*/
-   
+    containerTypePromoTwo:{
+        position: 'absolute',
+        top: vh(10),
+        right: vw(8),
+        transform: [{ rotate: "25deg" }],
+    },
     containerInfoCircle:{
         width: vw(70),
         height: vh(25),
@@ -66,6 +76,14 @@ const styles = StyleSheet.create({
     },
 
     /* Tercer producto */
+    containerTypePromoThree:{
+        position: 'absolute',
+        bottom: vh(3),
+        right: vw(17),
+    },
+    containerModalThree:{
+        display: 'none'
+    },
     containerInfoThree:{
         marginTop:40,
         height: vh(40),
@@ -79,6 +97,12 @@ const styles = StyleSheet.create({
         transform: [{ rotate: "-25deg" }],
     },
     /* Cuarto producto */
+    containerTypePromoFor:{
+        position: 'absolute',
+        bottom: vh(6),
+        right: vw(15),
+        transform: [{ rotate: "25deg" }],
+    },
     containerInfoCenter:{
         justifyContent:'center',
         alignItems:'center',
