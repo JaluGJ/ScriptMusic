@@ -4,13 +4,14 @@ import './Grafico.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { grafico } from '../../redux/actions';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 
  export default function Grafico () {
  const dispatch = useDispatch()
  const graf = useSelector(state => state.graficos);
- const userToken = localStorage.user;
+ const userToken = localStorage.user
  
  useEffect(()=>{
  dispatch(grafico(userToken))
@@ -31,27 +32,28 @@ const data= [];
 
     return (
       <div className='contenedor'>
-         <SideBar />
-        <div className='newcontenedor'>
-          <div className='toop'>
-            <h1 className='title'> Grafico de ventas</h1>
-        <ResponsiveContainer className="responsive">
-        <BarChart className='margin'
+        <SideBar />
+       <div className='newcontenedor'>
+          <div className='top'>
+            <h1 className='title'> Gráfico de ventas</h1>
+            </div>
+        <ResponsiveContainer width="95%" height={500}>
+        <BarChart className='barchart'
           data={data}
-          barSize={30}
+          barSize={20}
         >
-          <XAxis dataKey="category" className='x'  />
+          <XAxis dataKey="category" className='x' />
           <YAxis dataKey="ventas"/>
           <Tooltip />
           <Legend />
-          <CartesianGrid strokeDasharray="4 4" />
-          <Bar dataKey="ventas" className='bar' />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Bar dataKey="ventas" fill="#DD8643" background={{ fill: '#eee' }} />
         </BarChart>
         </ResponsiveContainer>
-        </div>
-        </div>
+        
+         </div>
     
-        </div>
+       </div>
       );
     }
     
