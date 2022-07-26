@@ -20,7 +20,7 @@ import {StylesPromos} from './helpers/HomeStylePromos'
 import usePromotions from "../../customHooks/usePromotions.js";
 const Home = () => {
   const [promotions] = usePromotions()
-  console.log(promotions.length) 
+  /* console.log(promotions.length)  */
   const [modal, setModal] = useState(false);
   
 
@@ -35,8 +35,8 @@ const Home = () => {
             modal={modal}
             setModal={setModal}
           />
-          <MyCarousel />
-          <HomeCategories />
+          <MyCarousel promotions={promotions}/> 
+          <HomeCategories/>
           <View style={styles.containerMain}>
 
             <TouchableOpacity>

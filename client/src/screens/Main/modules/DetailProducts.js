@@ -13,7 +13,7 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import Carousel from 'react-native-snap-carousel';
 import styles from "../Styles/Detail.jsx";
 import DetailProduct from './DetailProduct';
-const DetailProducts = ({ data }) => {
+/* const DetailProducts = ({ data }) => {
 
     const carousel = useRef(<Carousel />)
     return (
@@ -41,17 +41,17 @@ const DetailProducts = ({ data }) => {
     )
 }
 
-export default DetailProducts 
-/* export default class DetailProducts extends React.Component {
+export default DetailProducts  */
+export default class DetailProducts extends React.Component {
   
       render (props) {
-        console.log(this.props.data)
+        /* console.log(this.props.data) */
           return (
-          <View style={styles.container}>
+          <View style={styles.containerProductsDetails}>
               <Carousel
                 data={this.props.data}
                 sliderWidth={vw(100)}
-                itemWidth={vw(70)}
+                itemWidth={vw(80)}
                 autoplay={true}
                 loop={true}
                 autoplayDelay={2000}
@@ -69,6 +69,7 @@ export default DetailProducts
                 
               />
               </View>
+
           );
       }
-  } */
+  }

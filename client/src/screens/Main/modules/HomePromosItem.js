@@ -3,16 +3,16 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Item';
-const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id}) => {
-  let {model, price, image, type}=items
+const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id, typePromo, containerTypePromo }) => {
+  let { model, price, image, type } = items
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.background}>
       <TouchableOpacity
-        onPress={() =>{
-          console.log(id)
-          navigation.navigate('PromoDetail', { id: id })    
+        onPress={() => {
+          /* console.log(id) */
+          navigation.navigate('PromoDetail', { id: id })
         }}
 
       >
@@ -32,7 +32,10 @@ const HomePromosItem = ({ img, containerInfo, containerModel, containerText, con
             source={img}
           >
           </Image>
-         <View style={containerInfo}>
+          <View style={containerTypePromo}>
+            <Text style={styles.price}>{typePromo}</Text>
+          </View>
+          <View style={containerInfo}>
             <View style={containerModel}>
               <Text style={styles.price}>{model}</Text>
             </View>
@@ -47,10 +50,10 @@ const HomePromosItem = ({ img, containerInfo, containerModel, containerText, con
 
                 }}
                 resizeMode="contain"
-                source={{uri: image}}
+                source={{ uri: image }}
               />
             </View>
-          </View> 
+          </View>
         </View>
       </TouchableOpacity>
 

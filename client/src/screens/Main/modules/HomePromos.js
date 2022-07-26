@@ -20,6 +20,7 @@ const HomePromos = () => {
                             items={p.items[0]}
                             typePromo={p.promo}
                             img={i===0?promoOne.img:i===1?promoTwo.img:i===2?promoThree.img:promoFor.img}
+                            containerTypePromo={i===0?promoOne.containerTypePromo:i===1?promoTwo.containerTypePromo:i===2?promoThree.containerTypePromo:promoFor.containerTypePromo}
                             containerInfo={i===0?promoOne.containerInfo:i===1?promoTwo.containerInfo:i===2?promoThree.containerInfo:promoFor.containerInfo}
                             containerModel={i===0?promoOne.containerModel:i===1?promoTwo.containerModel:i===2?promoThree.containerModel:promoFor.containerModel}
                             containerText={i===0?promoOne.containerText:i===1?promoTwo.containerText:i===2?promoThree.containerText:promoFor.containerText}
