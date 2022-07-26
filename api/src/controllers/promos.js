@@ -33,7 +33,7 @@ const createPromo = async (req, res, next) => {
 
     const { items, price, stock, description, image, promo, promoName } = req.body;
 
-    if (items.length === 0) return res.status(404).json({ message: 'No se ha añadido productos' })
+    // if (items.length === 0) return res.status(404).json({ message: 'No se ha añadido productos' })
 
     if (!stock) return res.status(404).json({ message: 'No se ha indicado stock' })
 
@@ -46,12 +46,13 @@ const createPromo = async (req, res, next) => {
     if (!promoName) return res.status(404).json({ message: 'No se ha añadido un nombre de promo' })
 
     if (promo === '2X1') {
-      if (items.length > 1) {
-        return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
-      }
+      // if (items.length > 1) {
+      //   return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
+      // }
 
       try {
-        let product = await Product.findById(items[0])
+        // let product = await Product.findById(items[0])
+        let product = await Product.findOne({model: items[0]})
         if (!product) {
           return res.status(404).json({ message: 'No se ha encontrado producto' })
         }
@@ -97,12 +98,12 @@ const createPromo = async (req, res, next) => {
         return res.status(400).json({ message: 'El stock no puede ser 0 o menor' })
       }
 
-      if (items.length === 1) {
-        return res.status(404).json({ message: 'No se ha añadido productos' })
-      }
+      // if (items.length === 1) {
+      //   return res.status(404).json({ message: 'No se ha añadido productos' })
+      // }
 
-      let total = items.map(async (e) => {
-        const data = await Product.findById(e)
+      let total = items?.map(async (e) => {
+        const data = await Product.find({model: e})
         if (!data) {
           return res.status(404).json({ message: 'No se ha encontrado producto' })
         }
@@ -140,11 +141,11 @@ const createPromo = async (req, res, next) => {
 
     if (promo === 'Descuento') {
 
-      if (items.length > 1) {
-        return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
-      }
+      // if (items.length > 1) {
+      //   return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
+      // }
 
-      const product = await Product.findById(items[0])
+      const product = await Product.findOne({model: items[0]})
       if (!product) {
         return res.status(404).json({ message: 'No se ha encontrado producto' })
       }
