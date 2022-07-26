@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams, Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Loading from '../Loading/Loading'
 
 export default function UpdateProduct({ logout }) {
     const { id } = useParams()
@@ -72,137 +73,133 @@ export default function UpdateProduct({ logout }) {
         });
     }
     return (
-
-        // product.length === 0 ? <div >
-        //     <img src="https://i.gifer.com/VAyR.gif" alt='image'/>
-        // </div> :
-        <div className="new">
+        <div className="newUpdateProduct">
             <SideBar logout={logout} />
             <ToastContainer />
-            <div className="newcontainer">
-                <div className="top">
+            <div className="containernewUpdateProduct">
+                <div className="topUpdateProduct">
                     <Link to={'/products'} style={{ textDecoration: 'none' }} >
                         <button> <ArrowBackIcon /> ATRAS</button>
                     </Link>
-                    <h1 className="title"> Actualiza el producto </h1>
+                    <h1 className="titleUpdateProduct"> Actualiza el producto </h1>
                 </div>
-                <div className="bottom">
-                    <div className="left">
-                        <img src={product.image ? product.image : 'https://maxler.com/local/templates/maxler/assets/img/not-found.png'} alt="" />
-
-                    </div>
-                    <div className="rigth">
-                        {product.length === 0 ? <div >
-                            <img src="https://i.gifer.com/VAyR.gif" alt='image' />
-                        </div> :
-                            <form onSubmit={e => handleSubmit(e)}>
-                                <div className="formInput">
-
-                                    <label>Imagen</label>
-                                    <input
-                                        key='Imagen'
-                                        type="text"
-                                        placeholder={product.image}
-                                        name='image'
-                                        value={input.image}
-                                        onChange={(e) => handleinput(e)}
+                {product.length === 0 
+                ? <div className="bottomloa"> <Loading className='loading' /></div>
+                :
+                <div className="bottomUpdateProduct">                        
+                    <img src={input.image ? input.image : 'https://www.clipartmax.com/png/full/139-1396744_we-can-help-dropshipping-png.png'} alt="" />
+                    <form onSubmit={e => handleSubmit(e)}>
+                        <div className="formInputUpdateProduct">
+                                    
+                            <div className="leftUpdateProduct">
+                                
+                                <label>Imagen</label>
+                                <input
+                                    key='Imagen'
+                                    type="text"
+                                    placeholder={product.image}
+                                    name='image'
+                                    value={input.image}
+                                    onChange={(e) => handleinput(e)}
                                     />
-                                    {error.image && (
-                                        <p>{error.image}</p>
-                                    )}
+                                {error.image && (
+                                    <p>{error.image}</p>
+                                )}
+   
+                                <label>Modelo</label>
+                                <input
+                                    key='Modelo'
+                                    type="text"
+                                    placeholder={product.model}
+                                    name='model'
+                                    value={input.model}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.model && (
+                                    <p>{error.model}</p>
+                                )}
 
-                                    <label>Modelo</label>
-                                    <input
-                                        key='Modelo'
-                                        type="text"
-                                        placeholder={product.model}
-                                        name='model'
-                                        value={input.model}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.model && (
-                                        <p>{error.model}</p>
-                                    )}
+                                <label>Marca</label>
+                                <input
+                                    key='Marca'
+                                    type="text"
+                                    placeholder={product.brand}
+                                    name='brand'
+                                    value={input.brand}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.brand && (
+                                    <p>{error.brand}</p>
+                                )}
 
-                                    <label>Marca</label>
-                                    <input
-                                        key='Marca'
-                                        type="text"
-                                        placeholder={product.brand}
-                                        name='brand'
-                                        value={input.brand}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.brand && (
-                                        <p>{error.brand}</p>
-                                    )}
+                                <label>Precio</label>
+                                <input
+                                    key='Precio'
+                                    type="number"
+                                    placeholder={product.price}
+                                    name='price'
+                                    value={input.price}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.price && (
+                                    <p>{error.price}</p>
+                                )}
 
-                                    <label>Precio</label>
-                                    <input
-                                        key='Precio'
-                                        type="number"
-                                        placeholder={product.price}
-                                        name='price'
-                                        value={input.price}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.price && (
-                                        <p>{error.price}</p>
-                                    )}
+                                <label>Disponible</label>
+                                <input
+                                    key='Disponible'
+                                    type="number"
+                                    placeholder={product.stock}
+                                    name='stock'
+                                    value={input.stock}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.stock && (
+                                    <p>{error.stock}</p>
+                                )}
 
-                                    <label>Disponible</label>
-                                    <input
-                                        key='Disponible'
-                                        type="number"
-                                        placeholder={product.stock}
-                                        name='stock'
-                                        value={input.stock}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.stock && (
-                                        <p>{error.stock}</p>
-                                    )}
+                            </div>
+                            
+                            <div className="rigthUpdateProduct">
+                                   
+                                <label>Tipo</label>
+                                <input
+                                    key='Tipo'
+                                    type="text"
+                                    placeholder={product.type}
+                                    name='type'
+                                    value={input.type}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.type && (
+                                    <p>{error.type}</p>
+                                )}
 
-                                    <label>Tipo</label>
-                                    <input
-                                        key='Tipo'
-                                        type="text"
-                                        placeholder={product.type}
-                                        name='type'
-                                        value={input.type}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.type && (
-                                        <p>{error.type}</p>
-                                    )}
+                                <label>Categoria</label>
+                                <select name='category' defaultValue="Categoria"
+                                    onChange={e => handleinput(e)}>
+                                    <option disabled={true}>{input.categories}</option>
+                                    {categories.map(e =>
+                                        <option value={e} key={e}>{e}</option>)}
+                                </select>
+                                {error.category && (
+                                    <p>{error.category}</p>
+                                )}
 
-                                    <label>Categoria</label>
-                                    <select name='category' defaultValue="Categoria"
-                                        onChange={e => handleinput(e)}>
-                                        <option disabled={true}>{input.categories}</option>
-                                        {categories.map(e =>
-                                            <option value={e} key={e}>{e}</option>)}
-                                    </select>
-                                    {error.category && (
-                                        <p>{error.category}</p>
-                                    )}
+                                <label>Descripción</label>
+                                <textarea
+                                    placeholder={product.description}
+                                    name='description'
+                                    value={input.description}
+                                    onChange={(e) => handleinput(e)} />
+                                {error.description && (
+                                    <p>{error.description}</p>
+                                )}
 
-                                    <label>Descripción</label>
-                                    <textarea
-                                        placeholder={product.description}
-                                        name='description'
-                                        value={input.description}
-                                        onChange={(e) => handleinput(e)} />
-                                    {error.description && (
-                                        <p>{error.description}</p>
-                                    )}
-
-                                    {!Object.keys(error).length && !checkprops(input) ?
-                                        <button >ACTUALIZAR PRODUCTO</button> :
-                                        <button disabled >ACTUALIZAR PRODUCTO</button>
-                                    }
-                                </div>
-                            </form>
-                        }
-                    </div>
-
-
+                                {!Object.keys(error).length && !checkprops(input) ?
+                                    <button >ACTUALIZAR PRODUCTO</button> :
+                                    <button disabled >ACTUALIZAR PRODUCTO</button>
+                                }
+                            </div>
+                        </div>
+                    </form>                        
                 </div>
+                }
             </div>
         </div>
     )
