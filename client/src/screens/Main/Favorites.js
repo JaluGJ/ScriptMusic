@@ -1,4 +1,12 @@
-import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StatusBar,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import emptyFav from "../../../assets/fav1.png";
 import styles from "./Styles/Favorites.jsx";
@@ -8,28 +16,30 @@ import FavProducts from "./modules/FavProducts";
 import useFavorites from "../../customHooks/useFavorites";
 
 export default function EmptyFavs() {
-  const [favourites,loading] = useFavorites()
-  return loading ? <Loading/> : favourites.length > 0 ? <FAVORITOS favourites={favourites} /> : <SINFAVORITOS />
+  const [favourites, loading] = useFavorites();
+  return loading ? (
+    <Loading />
+  ) : favourites.length > 0 ? (
+    <FAVORITOS favourites={favourites} />
+  ) : (
+    <SINFAVORITOS />
+  );
 }
 
-export const Loading = () =>{
+export const Loading = () => {
   return (
-    <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator size="large" />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size="large" />
     </View>
-  )
-}
-
+  );
+};
 
 export const FAVORITOS = ({ favourites }) => {
-  
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <StatusBar />
-        <ScrollView >
+        <ScrollView>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>FAVORITOS</Text>
           </View>
@@ -37,23 +47,22 @@ export const FAVORITOS = ({ favourites }) => {
             <Image source={emptyFav} style={styles.image} />
           </View>
           <View>
-            
             {favourites.map((item) => (
-              <FavProducts 
+              <FavProducts
                 key={item.id}
                 id={item.id}
                 model={item.model}
                 brand={item.brand}
                 price={item.price}
                 image={item.image}
-                />
+              />
             ))}
           </View>
         </ScrollView>
       </View>
     </View>
-  )
-}
+  );
+};
 
 export const SINFAVORITOS = () => {
   const navigation = useNavigation();
@@ -74,7 +83,11 @@ export const SINFAVORITOS = () => {
           <Text style={styles.text}>¡Explora nuestros</Text>
           <View style={styles.containerTextLinked}>
             <Text style={styles.text}>productos</Text>
-            <TouchableOpacity onPress={() => { navigation.navigate("Home") }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Home");
+              }}
+            >
               <Text style={styles.textLinked}> aquí</Text>
             </TouchableOpacity>
             <Text style={styles.text}>!</Text>
@@ -82,5 +95,5 @@ export const SINFAVORITOS = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
