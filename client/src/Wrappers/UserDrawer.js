@@ -54,7 +54,7 @@ const UserDrawer = () => {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="PaymentMethods"
         component={PaymentMethods}
         options={{
@@ -83,7 +83,7 @@ const UserDrawer = () => {
             />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="MyShopping"
         component={MyShopping}
