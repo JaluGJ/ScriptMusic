@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         left: vw(8),
     },  
     containerModel:{
+        display: 'none',
         position: 'absolute',
         left: vw(10),
         height: vh(25),
@@ -46,10 +47,15 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     containerText:{
-        justifyContent:'center',
+        position: 'absolute',
+        bottom: vh(3),
+        left: vw(8),
     },
     containerModelUp:{
         display: 'none'
+    },
+    containerImageOne:{
+        marginLeft:vw(15),
     },
     /* Segunda promo circulo en medio*/
     containerTypePromoTwo:{
@@ -99,9 +105,8 @@ const styles = StyleSheet.create({
     /* Cuarto producto */
     containerTypePromoFor:{
         position: 'absolute',
-        bottom: vh(6),
-        right: vw(15),
-        transform: [{ rotate: "25deg" }],
+        right: vw(10),
+        top:'35%'
     },
     containerInfoCenter:{
         justifyContent:'center',

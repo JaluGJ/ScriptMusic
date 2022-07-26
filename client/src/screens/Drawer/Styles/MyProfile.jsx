@@ -101,6 +101,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 5,
   },
+  progressCircle:{
+    position: 'absolute',
+    elevation:6
+  },
+  level:{
+    letterSpacing: 2,
+    fontSize: 22,
+    padding: 10,
+  }
 });
 
 export default styles;
