@@ -46,6 +46,7 @@ const sendEmail = async (email, subject, html) => {
 const getTemplate = (name, token) => {
   return `
   <div id="email___content"
+  <div id="email___content"
         style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; width: 350px;background-color: rgb(221, 221, 221);padding: 5px;">
         <div style="width:100%;margin: auto;">
 
@@ -65,7 +66,9 @@ const getTemplate = (name, token) => {
                 href="https://sm.up.railway.app/user/confirm/token/${token}" target="_blank"><button
                     style="background-color: #000000; border-radius: 5px; width: 150px; height: 30px; border: 1px solid; cursor: pointer;color: white;">Confirmar cuenta</button></a><br />
             <p style="color: #000000;font-size: 15px;">Saludos, el equipo de ScriptMusic.</p>
+
         </div>
+    </div>
     </div>
       `;
 };
