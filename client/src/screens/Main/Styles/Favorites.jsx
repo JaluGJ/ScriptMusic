@@ -104,12 +104,12 @@ let styles = StyleSheet.create({
     width: vw(90),
     height: vh(60),
     borderRadius: 25,
-    backgroundColor:'#fab25d'
+    backgroundColor: "#fab25d",
   },
-  containerFavTitle:{
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center'
+  containerFavTitle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleFavHome: {
     fontSize: 20,
@@ -118,37 +118,36 @@ let styles = StyleSheet.create({
     color: "#ffffff",
   },
   productsFavHome: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent:'center',
-    alignItems:'center'
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
   },
   productFavHome: {
-    width: '48%',
+    width: "48%",
     height: vh(24),
-    elevation:1,
-    borderColor:'#36281c7f',
+    elevation: 1,
+    borderColor: "#36281c7f",
     margin: 3,
-    borderRadius:10,
-    backgroundColor: '#ffffff',
-    
+    borderRadius: 10,
+    backgroundColor: "#ffffff",
   },
-  imageFav:{
-    justifyContent:'center',
-    alignItems:'center'
+  imageFav: {
+    justifyContent: "center",
+    alignItems: "center",
   },
-  textProduct:{
-    height:vh(8),
-    justifyContent:'space-around',
-    alignItems:'center'
+  textProduct: {
+    height: vh(8),
+    justifyContent: "space-around",
+    alignItems: "center",
   },
-  modelText:{
-    fontSize:18
+  modelText: {
+    fontSize: 18,
   },
-  price:{
-    fontSize:15,
-    letterSpacing:2
-  }
+  price: {
+    fontSize: 15,
+    letterSpacing: 2,
+  },
 });
 
 export default styles;

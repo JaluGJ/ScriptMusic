@@ -51,6 +51,23 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 13,
   },
+  text: {
+    fontSize: 20,
+    letterSpacing: 2,
+    textAlign: "center",
+  },
+  textLinked: {
+    fontSize: 20,
+    color: "#DD8643",
+    letterSpacing: 2,
+  },
+  containerText: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  containerTextLinked: {
+    flexDirection: "row",
+  },
 });
 
 export default styles;

@@ -19,7 +19,7 @@ export const Favourites = ({ favourites }) => {
     <View style={styles.wrapper}>
       <View style={styles.container}>
         <StatusBar />
-        <ScrollView >
+        <ScrollView>
           <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>FAVORITOS</Text>
           </View>
@@ -27,23 +27,22 @@ export const Favourites = ({ favourites }) => {
             <Image  source={{uri:emptyFav}} style={styles.image} />
           </View>
           <View>
-            
             {favourites.map((item) => (
-              <FavProducts 
+              <FavProducts
                 key={item.id}
                 id={item.id}
                 model={item.model}
                 brand={item.brand}
                 price={item.price}
                 image={item.image}
-                />
+              />
             ))}
           </View>
         </ScrollView>
       </View>
     </View>
-  )
-}
+  );
+};
 
 export const NoFavourites = () => {
   const navigation = useNavigation();
@@ -64,7 +63,11 @@ export const NoFavourites = () => {
           <Text style={styles.text}>¡Explora nuestros</Text>
           <View style={styles.containerTextLinked}>
             <Text style={styles.text}>productos</Text>
-            <TouchableOpacity onPress={() => { navigation.navigate("Home") }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Home");
+              }}
+            >
               <Text style={styles.textLinked}> aquí</Text>
             </TouchableOpacity>
             <Text style={styles.text}>!</Text>
@@ -72,5 +75,5 @@ export const NoFavourites = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
