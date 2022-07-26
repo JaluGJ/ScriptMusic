@@ -15,20 +15,21 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
     width: vw(95),
-    height: vw(32),
     borderRadius: 15,
     backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 1,
-    },
-    shadowOpacity: 0.79,
-    shadowRadius: 1.65,
-    elevation: 2,
   },
   containerDate: {
-    marginLeft: vw(3),
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  lineaDate: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "rgba(0,0,0,.2)",
+  },
+  date: {
+    textAlign: "center",
+    margin: 8,
   },
   containerRest: {
     flexDirection: "row",
@@ -50,9 +51,6 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 13,
   },
-  date: {
-    margin: 2
-  }
 });
 
 export default styles;

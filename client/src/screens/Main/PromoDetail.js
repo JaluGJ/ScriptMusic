@@ -21,7 +21,6 @@ const PromoDetail = ({ route }) => {
   const { id } = route.params;
   const [detailsPromotion] = useDetailsPromotions({ id })
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
-  // console.log(detailsPromotion)
 
   return (
     <ScrollView>

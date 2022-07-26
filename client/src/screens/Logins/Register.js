@@ -6,7 +6,7 @@ import {
   StatusBar,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles/Register.jsx";
 import logo from "../../../assets/icon.png";
 import { useNavigation } from "@react-navigation/native";
@@ -18,10 +18,12 @@ import { FormikSubmit } from "./validation/FormikSubmit.js";
 import {  postUser } from "../../redux/slices/signup.js";
 import { useDispatch, } from "react-redux";
 import useRegister from "../../customHooks/useRegister.js";
+import useNotifications from "../../customHooks/useNotifications.js";
 
 
 
 export default function Register() {
+  useNotifications()
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {initialValues} = useRegister();

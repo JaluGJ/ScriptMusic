@@ -7,8 +7,7 @@ import { cleanCache, errFalse } from '../redux/slices/signup';
 
 const useRegister = () => {
     const navigation = useNavigation();
-    const dispatch = useDispatch();
-    const {setPushToken} = useNotifications();
+    const dispatch = useDispatch()
     const { err, flag } = useSelector((state) => state.signup);
 
     const initialValues = {
@@ -23,10 +22,6 @@ const useRegister = () => {
         handleErrorCheck(err, flag);
         return dispatch(cleanCache());
       }, [err, flag]);
-    
-      useEffect(() => {
-        setPushToken()
-      }, []);
     
       let handleErrorCheck = (err, flag) => {
         if (err) {
