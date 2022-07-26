@@ -3,20 +3,20 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { cleanProducts, getAllFilterProducts } from '../../../redux/slices/products.js'
-import bajo2 from '../../../../assets/instrumentos/bajo2.png'
-import guitarra2 from '../../../../assets/instrumentos/guitarra2.png'
-import percusion2 from '../../../../assets/instrumentos/percusion2.png'
-import piano2 from '../../../../assets/instrumentos/piano2.png'
-import ukelele2 from '../../../../assets/instrumentos/ukelele2.png'
-import viento2 from '../../../../assets/instrumentos/viento2.png'
-import violin2 from '../../../../assets/instrumentos/violin2.png'
-import bajo1 from '../../../../assets/instrumentos/bajo3.png'
-import guitarra1 from '../../../../assets/instrumentos/guitarra3.png'
-import percusion1 from '../../../../assets/instrumentos/percusion3.png'
-import piano1 from '../../../../assets/instrumentos/piano3.png'
-import ukelele1 from '../../../../assets/instrumentos/ukelele3.png'
-import viento1 from '../../../../assets/instrumentos/viento3.png'
-import violin1 from '../../../../assets/instrumentos/violin3.png'
+const bajo2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658865002/script_music_img/bajo2_ts1gbx.png'
+const guitarra2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864992/script_music_img/guitarra2_oqnz5y.png'
+const percusion2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864993/script_music_img/percusion2_cmtece.png'
+const piano2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864994/script_music_img/piano2_dlzfpz.png'
+const ukelele2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864995/script_music_img/ukelele2_edxksc.png'
+const viento2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864995/script_music_img/viento2_j98nmz.png'
+const violin2 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864996/script_music_img/violin2_ftaz5g.png'
+const bajo1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864992/script_music_img/bajo3_pferld.png'
+const guitarra1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864992/script_music_img/guitarra3_t1q4uu.png'
+const percusion1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864993/script_music_img/percusion3_ck2iwv.png'
+const piano1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864994/script_music_img/piano3_coilox.png'
+const ukelele1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864995/script_music_img/ukelele3_toyc58.png'
+const viento1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864995/script_music_img/viento3_myswnp.png'
+const violin1 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864999/script_music_img/violin3_dy3oks.png'
 import { vh, vw } from "react-native-expo-viewport-units";
 import styles from '../Styles/Categories.jsx'
 
@@ -51,7 +51,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?guitarra1:guitarra2}
+                        source={botton?{uri:guitarra1}:{uri:guitarra2}}
                     />
                     <View>
                     {
@@ -79,7 +79,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?piano1:piano2}
+                        source={botton?{uri:piano1}:{uri:piano2}}
                     />
                     {
                         botton? 
@@ -104,7 +104,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?bajo1:bajo2}
+                        source={botton?{uri:bajo1}:{uri:bajo2}}
                     />
                     {
                         botton? 
@@ -129,7 +129,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?percusion1:percusion2}
+                        source={botton?{uri:percusion1}:{uri:percusion2}}
                     />
                     {
                         botton? 
@@ -154,7 +154,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?viento1:viento2}
+                        source={botton?{uri:viento1}:{uri:viento2}}
                     />
                     {
                         botton? 
@@ -179,7 +179,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?ukelele1:ukelele2}
+                        source={botton?{uri:ukelele1}:{uri:ukelele2}}
                     />
                     {
                         botton? 
@@ -204,7 +204,7 @@ const HomeCategories = ({botton}) => {
                             padding: 10
                         }}
                         resizeMode="contain"
-                        source={botton?violin1:violin2}
+                        source={botton?{uri:violin1}:{uri:violin2}}
                     />
                     {
                         botton? 

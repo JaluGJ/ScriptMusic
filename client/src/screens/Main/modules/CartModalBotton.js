@@ -9,7 +9,7 @@ import React from "react";
 import { CardField } from "@stripe/stripe-react-native";
 import usePayment from "../../../customHooks/usePayment";
 import styles from "../Styles/CartPayment.jsx";
-import logo from "../../../../assets/instrumentos/logo2.png";
+let logo = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658864992/script_music_img/logo2_qh9fuc.png";
 import { vh, vw } from "react-native-expo-viewport-units";
 import Loading from "../../../components/Loading";
 const CartModalBotton = ({ setModal }) => {

@@ -1,8 +1,9 @@
-import promo1 from '../../../../assets/promos/Imagen1.png'
-import promo2 from '../../../../assets/promos/Imagen2.png'
-import promo3 from '../../../../assets/promos/Imagen3.png'
-import promo4 from '../../../../assets/promos/Imagen4.png'
-import promo5 from '../../../../assets/promos/Imagen5.png'
+const promo1 = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658864055/script_music_img/Imagen1_ptd3vj.png"
+const promo2 =  'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864055/script_music_img/Imagen2_i6icps.png'
+const promo3 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864059/script_music_img/Imagen3_m58joz.png'
+const promo4 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864055/script_music_img/Imagen4_jatymw.png'
+const promo5 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864055/script_music_img/Imagen5_u6a52u.png'
+
 import styles from "../Styles/Item.jsx";
 export let StylesPromos = [
     promoOne = {

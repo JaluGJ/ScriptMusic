@@ -1,8 +1,6 @@
 import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useShopping from "../../customHooks/useShopping.js";
-import userImage from "../../../assets/user.png";
 import styles from "./Styles/MyProfile";
 import lapiz from "../../../assets/lapiz.png";
 import * as imagePicker from "expo-image-picker";
@@ -13,8 +11,11 @@ import ModalName from "./ModalName";
 import ModalLastName from "./ModalLastName";
 import ModalPassword from "./ModalPassword";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useShopping from "../../customHooks/useShopping.js";
 import ModalEmail from "./ModalEmail";
 import * as Progress from 'react-native-progress';
+const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png"
+
 const MyProfile = () => {
   const { bought } = useShopping();
   const [modalName, setModalName] = useState(false);
@@ -82,7 +83,7 @@ const MyProfile = () => {
           </View>
           <View style={{ alignItems: "flex-end", justifyContent: "flex-end" }}>
             <Image
-              source={user ? { uri: user.image } : userImage}
+              source={user ? { uri: user.image } : { uri: imageDefault }}
               style={styles.image}
             />
             <View style={styles.progressCircle}>
