@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "ScriptMusic",
-    "slug": "ScriptMusic",
-    "version": "1.0.0",
+    "slug": "script-music",
+    "version": "1.6.0",
     "orientation": "portrait",
     "icon": "./assets/appIcon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.cmacha2.ScriptMusic"
+      "package": "com.cmacha2dev.ScriptMusic"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,9 +34,9 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/appIcon.png",
+          "icon": "./assets/notification-logo.png",
           "color": "#ffffff",
-          "sounds": "./assets/notification-sound.wav"
+          "sounds": ["./assets/notification-sound.wav"]
         }
       ]
     ]

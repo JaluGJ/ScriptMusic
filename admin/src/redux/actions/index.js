@@ -21,6 +21,7 @@ export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 export const GET_GRAFICO = "GET_GRAFICO"
 export const ADD_PROMO = 'ADD_PROMO'
 export const DELETE_PROMO = "DELETE_PROMO"
+export const ADMIN_PROFILE = 'ADMIN_PROFILE'
 
 // PRODUCTS ACTIONS
 
@@ -103,8 +104,13 @@ export const deleteProduct = (id, userToken) => (dispatch) => {
 
 }
 
-export const grafico = () => (dispatch) =>{
-  axios.get(`${baseUrl}/sold`).then(res =>{
+export const grafico = (userToken) => (dispatch) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.get(`${baseUrl}/sold`, config).then(res =>{
     dispatch({
       type: GET_GRAFICO,
       payload:res.data,
@@ -233,6 +239,21 @@ export const adminLogin = (user) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export function adminProfile(userToken){
+  return async function(dispatch){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const json = await axios.get(`${baseUrl}/admin-profile`, config)
+    return dispatch({
+      type: 'ADMIN_PROFILE',
+      payload: json.data
+    })
+  }
+}
 
 export const deleteToken = () => {
   return {

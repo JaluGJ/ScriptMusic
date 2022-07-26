@@ -14,3 +14,5 @@ web-build/
 package-lock.json
 # macOS
 .DS_Store
+eas.*
+google-services.*

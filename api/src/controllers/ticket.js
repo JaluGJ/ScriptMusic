@@ -40,7 +40,7 @@ module.exports = {
             category: 1,
             image: 1,
             description: 1,
-            _id: 0
+            _id: 1
           }
         }
       })

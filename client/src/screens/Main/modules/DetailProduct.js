@@ -16,10 +16,6 @@ const DetailProduct = ({ item }) => {
   return (
     <View style={styles.containerProductDetails}>
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Details", { itemId: fav.id })}
-      >
-
         <View style={styles.imageFav}>
           <Image
             style={{
@@ -39,7 +35,6 @@ const DetailProduct = ({ item }) => {
             <Text style={styles.modelText}>{model}</Text>
           </View>
         </View>
-      </TouchableOpacity>
 
     </View>
 
