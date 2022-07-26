@@ -1,19 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native'
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
 
 const useNotifications = () => {
  
-function setPushToken() {
-   registerForPushNotificationsAsync()
-      .then(async token => {
-        await AsyncStorage.setItem('@pushToken1', token);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  useEffect(() => {
+    registerForPushNotificationsAsync()
+    .then(async token => {
+      await AsyncStorage.setItem('@pushToken1', token);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, [])
+  
 
   async function registerForPushNotificationsAsync() {
     let token;
@@ -47,7 +48,7 @@ function setPushToken() {
     return token;
   }
 
-    return { setPushToken , registerForPushNotificationsAsync};
+    return
 }
 
 export default useNotifications
