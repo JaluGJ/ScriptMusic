@@ -102,8 +102,13 @@ export const deleteProduct = (id, userToken) => (dispatch) => {
 
 }
 
-export const grafico = () => (dispatch) =>{
-  axios.get(`${baseUrl}/sold`).then(res =>{
+export const grafico = (userToken) => (dispatch) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.get(`${baseUrl}/sold`, config).then(res =>{
     dispatch({
       type: GET_GRAFICO,
       payload:res.data,
