@@ -17,6 +17,7 @@ import { logOut } from "../../redux/slices/signin.js";
 import useShopping from "../../customHooks/useShopping.js";
 import * as Progress from 'react-native-progress';
 const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/fav1_zrbowc.png"
+const backgroundIMG = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/menu_n6yo90.png"
 
 const CustomDrawer = (props) => {
   const {bought} = useShopping();
@@ -30,7 +31,7 @@ const CustomDrawer = (props) => {
       {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
       <DrawerContentScrollView {...props}>
         <ImageBackground
-          source={require("../../../assets/menu.png")}
+          source={{ uri: backgroundIMG }}
           style={styles.imgBackground}
         >
           <Image
