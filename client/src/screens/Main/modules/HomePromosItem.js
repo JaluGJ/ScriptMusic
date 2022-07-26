@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Item';
-const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id, typePromo}) => {
+const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id}) => {
   let {model, price, image, type}=items
   const navigation = useNavigation();
   

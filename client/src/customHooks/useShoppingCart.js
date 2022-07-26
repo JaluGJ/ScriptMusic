@@ -40,24 +40,27 @@ const useShoppingCart = () => {
   }, [newItems]);
 
   const addToCart = async ({ details }) => {
-    const { price, id, image, model, brand, stock } = details;
+    const { price, id, image, model, brand, stock , promo , items , promoName} = details;
     const product = {
       priceOne: price,
       price: (price * countProducts).toFixed(2),
-      image,
-      id,
-      model,
-      brand,
+      image: image,
+      id:id,
+      model: promo ? promoName : model, 
+      brand: promo ? null : brand,
       count: countProducts,
-      stock,
+      stock:stock,
+      items: promo ? items : null,
+      promo: promo ? true : false,
     };
+
     try {
 
         let existingCart = await AsyncStorage.getItem("@shoppingCart");
         if (existingCart !== null) {
           let cart = JSON.parse(existingCart);
           let existingProduct = cart.find((product) => {
-            if (stock > countProducts) {
+            if (product.stock > countProducts) {
             if (product.id === id) {
               product.count += countProducts;
               product.price = (product.priceOne * product.count).toFixed(2);
@@ -72,7 +75,6 @@ const useShoppingCart = () => {
           }
           await AsyncStorage.setItem("@shoppingCart", JSON.stringify(cart));
         } else {
-          console.log("primera ves");
           await AsyncStorage.setItem(
             "@shoppingCart",
             JSON.stringify([product])

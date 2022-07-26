@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const path = require('path')
 const {
      getTemplate,
      sendEmail,
@@ -202,17 +203,20 @@ module.exports = {
             const data = getTokenData(token)
             const user = await User.findById(data.id)
             if (!user) {
-                return res.status(404).json({ message: 'El usuario no existe.' })
+                return res.sendFile(path.join(__dirname, '../../public/404.html'))
+                // return res.status(404).json({ message: 'El usuario no existe.' })
             }
             if (data === null) {
-                return res.status(404).json({ message: 'El token no existe.' })
+                return res.sendFile(path.join(__dirname, '../../public/noToken.html'))
+                // return res.status(404).json({ message: 'El token no existe.' })
             }
             if (user.isConfirmed) {
-                return res.status(404).json({ message: 'El usuario ya ha sido confirmado.' })
+                return res.sendFile(path.join(__dirname, '../views/confirm.html'))
             }
             user.isConfirmed = true
             await user.save()
-            return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app.' })
+            return res.sendFile(path.join(__dirname, '../views/confirm.html'))
+            // return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app.' })
         } catch (error) {
             next(error)
         }
@@ -717,21 +721,23 @@ module.exports = {
             const data = getTokenData(tokenData)
 
             if (!data) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+                // return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             if(!email) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
             }
             const user = await User.findById(data.id)
             if (!user) {
-                return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
             }
             if(user.email === email) {
-                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
             }
             user.email = email
             await user.save()
-            return res.json({ message: 'El email se ha cambiado correctamente' })
+            return res.sendFile(path.join(__dirname, '../views/changeEmail.html'))
+            // return res.json({ message: 'El email se ha cambiado correctamente' })
         } catch (error) {
             next(error)
         }
