@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { View, TextInput, Image, TouchableNativeFeedback } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../Styles/Home.jsx";
-import userIMG from "../../../../assets/user.png";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { searchProducts } from "../../../redux/slices/products.js";
-
+const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png"
 
 const HomeNav = ({ setModal, modal}) => {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ const HomeNav = ({ setModal, modal}) => {
             height: 50,
             borderRadius: 100,
           }}
-          source={user ? { uri: user.image } : userIMG}
+          source={user ? { uri: user.image } : { uri: imageDefault }}
         />
       </TouchableNativeFeedback>
       <TextInput

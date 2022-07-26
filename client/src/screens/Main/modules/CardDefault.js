@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, Image, StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import emptyCart from "../../../../assets/carrito1.png";
 import styles from "../Styles/CardDefault.jsx";
+const emptyCart = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/carrito1_h3316r.png'
 
 const CardDefault = () => {
     const navigation = useNavigation();
@@ -11,7 +11,7 @@ const CardDefault = () => {
     <View>
       <View style={styles.container}>
         <View style={{ alignItems: "center" }}>
-          <Image source={emptyCart} style={styles.image} />
+          <Image source={{uri:emptyCart}} style={styles.image} />
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={styles.text}>Tu carrito está vacío.</Text>
