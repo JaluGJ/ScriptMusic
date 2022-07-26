@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../redux/slices/signin.js";
 import useShopping from "../../customHooks/useShopping.js";
 import * as Progress from 'react-native-progress';
+const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/fav1_zrbowc.png"
 
 const CustomDrawer = (props) => {
   const {bought} = useShopping();
@@ -33,7 +34,7 @@ const CustomDrawer = (props) => {
           style={styles.imgBackground}
         >
           <Image
-            source={user ? {uri: user.image} : require("../../../assets/user.png")}
+            source={user ? {uri: user.image} : {uri: imageDefault}}
             style={styles.userImage}
           />
           <View style={styles.progressCircle}>    
