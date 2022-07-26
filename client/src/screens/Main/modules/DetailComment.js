@@ -18,8 +18,8 @@ const DetailComment = ({ratYcom}) => {
             <View>
                 {
 
-                    ratYcom.length > 0 ?
-                        ratYCom.map((c, i) => {
+                    ratYcom?.length > 0 ?
+                    ratYcom?.map((c, i) => {
                             /* console.log(c.comment.img) */
                             return (
                                 <View style={styles.containerComment} key={i}>
