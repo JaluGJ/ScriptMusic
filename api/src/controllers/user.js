@@ -180,6 +180,9 @@ module.exports = {
             if (!isMatch) {
                 return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
             }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
             newPassword = await bcrypt.hash(newPassword, 10)
             user.password = newPassword
             await user.save()
