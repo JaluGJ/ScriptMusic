@@ -273,6 +273,18 @@ const getTemplateChangeEmail = (name, email, newEmail, token) => {
   `;
 };
 
+const getTemplateAdminRegister = (name) => {
+  return `
+  <div>Hola, ${name}</div>
+  <div>Bienvenido al panel de administrador de ScriptMusic.</div>
+  <div>Para acceder, ingresa con tu email y contraseña al siguiente enlace</div>
+  <a>https://sm.up.railway.app/admin  "aca va ir el link del deploy mas actual, hacelo como un botonsito :)"</a>
+  <div>Saludos, el equipo de ScriptMusic.</div>
+  `;
+}
+
+
+
 module.exports = {
   sendEmail,
   getTemplate,
@@ -284,4 +296,5 @@ module.exports = {
   getTemplateForgotPassword,
   getTemplateForgotPasswordNewPassword,
   getTemplateChangeEmail,
+  getTemplateAdminRegister
 };

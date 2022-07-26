@@ -32,7 +32,7 @@ module.exports = {
 
     registerUser: async (req, res, next) => {
 
-        let { email, password, firstName, lastName, isAdmin, pushToken } = req.body
+        const { email, password, firstName, lastName, pushToken } = req.body
 
         try {
             const user = await User.findOne({ email })
@@ -40,16 +40,11 @@ module.exports = {
                 return res.status(404).json({ message: 'Ya existe un usuario registrado con ese email, prueba con otro.' })
             }
 
-            isAdmin === undefined ?
-                isAdmin = false :
-                isAdmin = true
-
             const newUser = {
                 email,
                 password: await bcrypt.hash(password, 10),
                 firstName,
                 lastName,
-                isAdmin,
                 pushToken
             }
 
@@ -150,6 +145,54 @@ module.exports = {
     },
 
 
+    resetPasswordAdmin: async (req, res, next) => {
+        
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(404).json({ message: 'El usuario no existe' })
+        }
+        if(!user.isAdmin){
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+
+        let { email, password, newPassword } = req.body
+        try {
+            if (!password || !newPassword || !email) {
+                return res.status(404).json({ message: 'Todos los campos son obligatorios.' })
+            }
+            const user = await User.findOne({ email })
+            if (!user) {
+                return res.status(404).json({ message: 'Email o contraseña incorrectos.' })
+            }
+            const isMatch = await user.isValidPassword(password)
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
+            }
+            if(!user.isAdmin){
+                return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+            }
+            newPassword = await bcrypt.hash(newPassword, 10)
+            user.password = newPassword
+            await user.save()
+            return res.json({ message: 'Tu contraseña se ha cambiado con éxito.' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
     addUserFromAdmin: async (req, res, next) => {
 
         const autorization = req.get('Authorization')
@@ -169,28 +212,31 @@ module.exports = {
             return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
         }
 
-        const { email, password, firstName, lastName, image, pushToken } = req.body
-
-        if (!email) return res.status(404).json({ msg: 'Falta enviar correo electrónico' });
-        if (!password) return res.status(404).json({ msg: 'Falta rellenar la contraseña' });
-        if (!firstName) return res.status(404).json({ msg: 'Falta enviar el nombre' });
-        if (!lastName) return res.status(404).json({ msg: 'Falta enviar el apellido' });
-
-        const userExist = await User.findOne({ email })
-        if (userExist) return res.status(404).json({ msg: 'El correo electrónico ya existe' });
-
         try {
+
+            const { email, password, firstName, lastName } = req.body
+
+            if (!email || !password || !firstName || !lastName) {
+                return res.status(404).json({ message: 'Todos los campos son obligatorios.' })
+            }
+    
+            const userExist = await User.findOne({ email })
+
+            if (userExist) return res.status(404).json({ msg: 'El correo electrónico ya existe' });
+
             const newUser = new User({
                 email,
-                password,
+                password: await bcrypt.hash(password, 10),
                 firstName,
                 lastName,
-                image,
                 isAdmin: true,
-                pushToken
+                isConfirmed: true
             })
+
             const userCreated = await newUser.save()
-            return res.status(200).json({ userCreated })
+            const template = getTemplateAdminRegister(userCreated.firstName)
+            await sendEmail(userCreated.email, 'Bienvenido a la plataforma de gestión de proyectos', template)
+            return res.json({ userCreated })
         } catch (error) {
             next(error)
         }
@@ -204,11 +250,9 @@ module.exports = {
             const user = await User.findById(data.id)
             if (!user) {
                 return res.sendFile(path.join(__dirname, '../../public/404.html'))
-                // return res.status(404).json({ message: 'El usuario no existe.' })
             }
             if (data === null) {
                 return res.sendFile(path.join(__dirname, '../../public/noToken.html'))
-                // return res.status(404).json({ message: 'El token no existe.' })
             }
             if (user.isConfirmed) {
                 return res.sendFile(path.join(__dirname, '../views/confirm.html'))
@@ -216,7 +260,6 @@ module.exports = {
             user.isConfirmed = true
             await user.save()
             return res.sendFile(path.join(__dirname, '../views/confirm.html'))
-            // return res.status(200).json({ message: 'El usuario ha sido confirmado, ya puedes logearte en la app.' })
         } catch (error) {
             next(error)
         }
@@ -711,6 +754,54 @@ module.exports = {
     },
 
 
+    changeEmailAdmin: async (req, res, next) => {
+        const autorization = req.get('Authorization')
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if (!user.isAdmin) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+
+        try {
+            const { email, password, newEmail } = req.body
+        
+            if (email !== user.email || !password) {
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
+            }
+
+            const newUser = await User.findOne({ email: newEmail })
+            if (newUser) {
+                return res.status(401).json({ message: 'El email ya está en uso.' })
+            }
+            const isMatch = await user.isValidPassword(password)
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Email o contraseña incorrectos.' })
+            }
+            const data = getToken(user.id)
+            const emailEncripted = getToken(newEmail)
+            const token = data + '~' + emailEncripted
+            const template = getTemplateChangeEmail(user.firstName, email, newEmail, token)
+            await sendEmail(newEmail, 'Cambio de Email', template)
+            return res.json({ message: 'Revisa la bandeja de entrada de tu nuevo email para confirmar los cambios.' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
     changeEmailUser : async (req, res, next) => {
         const { token } = req.params
         try {
@@ -722,7 +813,6 @@ module.exports = {
 
             if (!data) {
                 return res.sendFile(path.join(__dirname, '../views/404.html'))
-                // return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
             }
             if(!email) {
                 return res.sendFile(path.join(__dirname, '../views/404.html'))
@@ -737,7 +827,40 @@ module.exports = {
             user.email = email
             await user.save()
             return res.sendFile(path.join(__dirname, '../views/changeEmail.html'))
-            // return res.json({ message: 'El email se ha cambiado correctamente' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+    changeEmailAdminEmail : async (req, res, next) => {
+        const { token } = req.params
+        try {
+            const tokenData = token.slice(0, token.indexOf('~'))
+            const emailData = token.slice(token.indexOf('~') + 1)
+
+            const email = getTokenData(emailData).id
+            const data = getTokenData(tokenData)
+
+            if (!data) {
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+            }
+            if(!email) {
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+            }
+            const user = await User.findById(data.id)
+            if (!user) {
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+            }
+            if(!user.isAdmin) {
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+            }
+            if(user.email === email) {
+                return res.sendFile(path.join(__dirname, '../views/404.html'))
+            }
+            user.email = email
+            await user.save()
+            return res.sendFile(path.join(__dirname, '../views/changeEmail.html'))
         } catch (error) {
             next(error)
         }
