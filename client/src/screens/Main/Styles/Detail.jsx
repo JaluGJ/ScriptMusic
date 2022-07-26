@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     letterSpacing: 6,
     padding: 20,
   },
-  model: {
+  modelDetail: {
     textAlign: "center",
     fontSize: 25,
     marginTop: 10,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     height: 500,
     width: "100%",
   },
-  brand: {
+  brandDetail: {
     marginTop: 15,
     fontSize: 23,
     fontWeight: "bold",

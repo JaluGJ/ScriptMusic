@@ -5,11 +5,10 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { cleanErr, putPassword } from "../../redux/slices/signin";
+import { useDispatch } from "react-redux";
+import { putPassword } from "../../redux/slices/signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./Styles/ModalPassword";
 
@@ -17,8 +16,8 @@ export default function ModalPassword({ modal, setModal }) {
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
   const [actualPass, setActualPass] = useState("");
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.signin);
 
   useEffect(() => {
     setErrors({ password: "Ingrese una contraseña válida." });
@@ -56,6 +55,13 @@ export default function ModalPassword({ modal, setModal }) {
             </View>
             <View style={styles.containerInput}>
               <TextInput
+                onChangeText={(value) => setEmail(value)}
+                style={styles.input}
+                placeholder="Email actual"
+              />
+            </View>
+            <View style={styles.containerInput}>
+              <TextInput
                 onChangeText={(value) => setActualPass(value)}
                 style={styles.input}
                 placeholder="Contraseña actual"
@@ -78,9 +84,10 @@ export default function ModalPassword({ modal, setModal }) {
                 onPress={async () => {
                   setModal(!modal);
                   let token = await AsyncStorage.getItem("@token_id");
-                  dispatch(
-                    putPassword(actualPass, password, user.email, token)
-                  );
+                  dispatch(putPassword(actualPass, password, email, token));
+                  setActualPass("");
+                  setEmail("");
+                  setPassword("");
                   setErrors({ password: "Ingrese una contraseña válida." });
                 }}
               >

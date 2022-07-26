@@ -61,6 +61,10 @@ function handleSubmit(e) {
         email: '',
         password: '',
     })
+    setTimeout(() => {
+        navigate('/users')
+      }, 1000);
+    
 
   }
 

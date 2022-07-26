@@ -57,7 +57,7 @@ const Details = ({ route }) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.containerMain}>
-                <Text style={styles.model}>{details.model}</Text>
+                <Text style={styles.modelDetail}>{details.model}</Text>
                 <View style={styles.containerImg}>
                   <Image
                     style={{
@@ -68,7 +68,7 @@ const Details = ({ route }) => {
                     source={{ uri: details.image }}
                   />
                 </View>
-                <Text style={styles.brand}>{details.brand}</Text>
+                <Text style={styles.brandDetail}>{details.brand}</Text>
                 <View style={styles.containerDescription}>
                   <Text style={styles.description}>{details.description}</Text>
                 </View>

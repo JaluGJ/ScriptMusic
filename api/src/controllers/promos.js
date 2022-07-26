@@ -212,7 +212,7 @@ const getPromos = async (req, res, next) => {
       return res.status(404).json({ message: 'No se ha encontrado usuario' })
     }
 
-    const promos = await promosProductModel.find({}).populate('items', { _id: 0, user: 0 })
+    const promos = await promosProductModel.find({}).populate('items', {user: 0 })
     if (!promos || promos.length === 0) {
       return res.status(404).json({ message: 'No se han encontrado promociones' })
     }
@@ -251,7 +251,7 @@ const getPromoById = async (req, res, next) => {
       return res.status(404).json({ message: 'No se ha encontrado usuario' })
     }
 
-    const promo = await promosProductModel.findById(id).populate('items', { _id: 0, user: 0 })
+    const promo = await promosProductModel.findById(id).populate('items', {user: 0 })
     if (!promo) {
       return res.status(404).json({ message: 'No se ha encontrado promocion' })
     }

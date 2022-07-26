@@ -9,8 +9,10 @@ import Login from './pages/login/Login';
 import Products from './pages/products/Products';
 import Users from './pages/users/Users';
 import Promos from './pages/promos/Promos';
+import NewPromo from './components/NewPromo/NewPromo';
 import Grafico from './components/Grafico/Grafico';
 import validate from './pages/login/validate.js';
+import AdminProfile from './pages/adminprofile/AdminProfile';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -62,7 +64,9 @@ function App() {
                 <Route path='/users/new' element={<NewUser/>} />
                 <Route path='/users/:id' element={<UpdateUser/>} />
                 <Route path='/promos' element={<Promos/>} />
+                <Route path='/promos/new' element={<NewPromo/>} />
                 <Route path='/graficos' element={<Grafico/>}/>
+                <Route path='/profile' element={<AdminProfile/>}/>
               </>
             )
           }

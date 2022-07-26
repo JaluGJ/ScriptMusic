@@ -11,6 +11,7 @@ export let StylesPromos = [
         containerInfo: styles.containerInfo,
         containerModel: styles.containerModel,
         containerText: styles.containerText,
+        containerTypePromo:styles.containerTypePromoOne
     },
     promoTwo = {
         id: 2,
@@ -19,22 +20,25 @@ export let StylesPromos = [
         containerInfo: styles.containerInfoCircle,
         containerText: styles.containerTextCircle,
         containerImage: styles.containerImageCircle,
+        containerTypePromo:styles.containerTypePromoTwo
         
     },
     promoThree={ 
         id: 4,
         img: promo5,
-        containerModel:styles.containerInfoOff,
+        containerModel:styles.containerModalThree,
         containerInfo:styles.containerInfoThree,
-        containerText:styles.containerTextThree
+        containerText:styles.containerTextThree,
+        containerTypePromo:styles.containerTypePromoThree
     },
     promoFor={
         id: 5,
+        img: promo4,
         containerInfo:styles.containerInfoCenter,
         containerModel:styles.containerInfoOff,
         containerText:styles.containerTextOff,
         containerImage: styles.containerImageCircleRotate,
-        img: promo4,
+        containerTypePromo:styles.containerTypePromoFor,
     },
     promoFive={
         img:promo3
