@@ -39,6 +39,7 @@ module.exports = {
       if (status === 'Successful') {
         const soldId = []
         const productFinal = []
+        let price = []
         let dateNew = Date().split(" ").slice(1, 5)
         const date = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
@@ -100,6 +101,7 @@ module.exports = {
               await Products.findByIdAndUpdate(item.id, { $set: { stock: finalStock } }, { new: true })
               await sold.save()
             }
+            price.push(item.priceOne)
 
 
             //error dentro del forEach
@@ -112,7 +114,8 @@ module.exports = {
         const ticket = new Ticket({
           userId: userId,
           bought: soldId,
-          date: date
+          date: date,
+          price: price.reduce((a,b)=>a+b)
         })
         ticket.save()
         //se actualiza al usario con las compras hechas
