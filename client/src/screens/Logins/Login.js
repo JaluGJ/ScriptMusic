@@ -77,10 +77,10 @@ export default function Login() {
           }}
         </Formik>
 
-        <FormikSubmit
+        {/* <FormikSubmit
           // onPress={() => }
           name="Acá va ingresar con Google"
-        />
+        /> */}
 
         <TouchableOpacity
           onPress={() => navigation.navigate("ForgotPassword")}

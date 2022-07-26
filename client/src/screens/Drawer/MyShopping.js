@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  Image,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import styles from "./Styles/MyShopping";
 import { useNavigation } from "@react-navigation/native";
@@ -12,11 +6,49 @@ import useShopping from "../../customHooks/useShopping";
 
 const MyShopping = () => {
   const navigation = useNavigation();
-  const {bought} = useShopping()
+  const { bought } = useShopping();
 
+  let tradDate = (mes) => {
+    if (mes === "Jan") {
+      return (mes = "Enero");
+    }
+    if (mes === "Feb") {
+      return (mes = "Febrero");
+    }
+    if (mes === "Mar") {
+      return (mes = "Marzo");
+    }
+    if (mes === "Apr") {
+      return (mes = "Abril");
+    }
+    if (mes === "May") {
+      return (mes = "Mayo");
+    }
+    if (mes === "Jun") {
+      return (mes = "Junio");
+    }
+    if (mes === "Jul") {
+      return (mes = "Julio");
+    }
+    if (mes === "Aug") {
+      return (mes = "Agosto");
+    }
+    if (mes === "Sep") {
+      return (mes = "Septiembre");
+    }
+    if (mes === "Oct") {
+      return (mes = "Octubre");
+    }
+    if (mes === "Nov") {
+      return (mes = "Noviembre");
+    }
+    if (mes === "Dec") {
+      return (mes = "Diciembre");
+    }
+  };
 
   return (
-    <View style={{ alignItems: "center", backgroundColor: "#f9f9f9" }}>
+    <View style={{ alignItems: "center", backgroundColor: "#f0f0f0" }}>
       <View>
         <Text style={styles.title}>MIS COMPRAS</Text>
       </View>
@@ -25,46 +57,65 @@ const MyShopping = () => {
         contentContainerStyle={{ alignItems: "center", paddingBottom: 75 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          let dateFormat = item.date.split(" ");
-          if (dateFormat[1] === "Jan") {
-            dateFormat[1] = "Ene";
-          }
-          let date = `${dateFormat[2]} de ${dateFormat[1]}, ${dateFormat[3]}`;
-
+          let fecha = item.date.split(",").shift().split(" ");
+          let dia = fecha[0];
+          let mes = tradDate(fecha[1]);
+          let anio = fecha[2];
+          let hora = item.date.split(",").pop().split(":");
           return (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate("Details", { itemId: item.items.id });
-              }}
-            >
-              <View style={styles.container}>
-                <View style={styles.containerDate}>
-                  <Text style={styles.date}>{date}</Text>
+            <View style={styles.container}>
+              <View style={styles.containerDate}>
+                <View style={styles.lineaDate} />
+                <View>
+                  <Text
+                    style={styles.date}
+                  >{`${dia} de ${mes} de ${anio}`}</Text>
                 </View>
-                <View style={styles.containerRest}>
-                  <View>
-                    <Image
-                      source={{ uri: item.items.image }}
-                      style={styles.image}
-                      resizeMode="contain"
-                    />
-                  </View>
-                  <View>
-                    <View>
+                <View style={styles.lineaDate} />
+              </View>
+              {item.bought?.map((e) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Details", {
+                        itemId: e.items.id,
+                      });
+                    }}
+                    key={e.id}
+                  >
+                    <View style={styles.containerRest}>
                       <View>
-                        <Text style={styles.model}>{item.items.model}</Text>
+                        <Image
+                          source={{ uri: e.items.image }}
+                          style={styles.image}
+                          resizeMode="contain"
+                        />
                       </View>
                       <View>
-                        <Text style={styles.brand}>{item.items.brand}</Text>
+                        <View>
+                          <View>
+                            <Text style={styles.model}>{e.items.model}</Text>
+                          </View>
+                          <View>
+                            <Text style={styles.brand}>{e.items.brand}</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={styles.containerQuantity}>
+                        <Text style={styles.quantity}>Cant. {e.quantity}</Text>
                       </View>
                     </View>
-                  </View>
-                  <View style={styles.containerQuantity}>
-                    <Text style={styles.quantity}>Cant. {item.quantity}</Text>
-                  </View>
+                  </TouchableOpacity>
+                );
+              })}
+              <View style={styles.containerDate}>
+                <View style={styles.lineaDate} />
+                <View>
+                  <Text style={styles.date}>{`${hora[0]}:${hora[1]}hs`}</Text>
                 </View>
+                <View style={styles.lineaDate} />
               </View>
-            </TouchableWithoutFeedback>
+            </View>
           );
         }}
       />
