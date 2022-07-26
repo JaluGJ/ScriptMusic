@@ -30,10 +30,13 @@ module.exports={
         return res.status(401).json({ msg: 'No tienes permiso para hacer esto' })
       }
       //logica de si va todo bien
-      const {rating, comment, productId} = req.body 
+      const {rating, comment, productId, date} = req.body 
       //rating debe ser un numero entre 1 y 10 
       //comment debe ser una string. 
       //el id del producto debe encontrarse entre los id comprados por el usuario
+
+      let dateNew = date.split(" ").slice(1, 5)
+      const dated = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
       if (!rating){
         return res.status(404).json({msg: 'Es necesario que des una puntuación'})
@@ -47,7 +50,7 @@ module.exports={
           rating,
           userId: data.id,
           productId,
-          date: Date()
+          date: dated
         })
         //guardar el woComment._id en los productos
         let prod = await Products.findById(productId)
@@ -63,7 +66,7 @@ module.exports={
         userId: data.id,
         productId,
         comment,
-        date: Date()
+        date: dated
       })
       let prod = await Products.findById(productId)
       await Products.findByIdAndUpdate(productId, {$set: {ratYCom: [...prod.ratYCom, wComment._id]}})

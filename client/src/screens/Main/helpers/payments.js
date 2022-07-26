@@ -10,9 +10,12 @@ export const fetchPaymentIntent = async (body) => {
 
 
 export const fetchStatusPayment = async (body,statusPay) => {
+    let date = Date()
+    console.log(date)
     let newBody = {
         ...body,
-        status: statusPay
+        status: statusPay,
+        date: date
     }
     const {data} = await axios.post(`${API_URL}/status-payment`,newBody)
     const {msg,error} = data
