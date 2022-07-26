@@ -89,13 +89,13 @@ export const rootReducer = (state = initialState, action) => {
         case ADD_USER:
             return {
                 ...state,
-                users: [...state.users, action.payload]
+                users: state.users
             }
 
         case DELETE_USER:
             return {
                 ...state,
-                users: state.users.filter(user => user._id !== action.payload._id)
+                users: state.users
             }
 
         case BAN_USER:
@@ -123,6 +123,7 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 product: [],
                 user: [],
+                users:[],
             }
 
         case DELETE_TOKEN:

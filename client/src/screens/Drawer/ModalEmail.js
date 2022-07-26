@@ -17,7 +17,7 @@ export default function ModalEmail({ modal, setModal }) {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState("");
   const [actualEmail, setActualEmail] = useState("");
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -85,6 +85,9 @@ export default function ModalEmail({ modal, setModal }) {
                   setModal(!modal);
                   let token = await AsyncStorage.getItem("@token_id");
                   dispatch(putEmail(actualEmail, email, password, token));
+                  setEmail("");
+                  setActualEmail("");
+                  setPassword("");
                   setErrors({ email: "Ingrese una contraseña válida." });
                 }}
               >
