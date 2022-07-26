@@ -7,7 +7,8 @@ const {
      getTemplateUnBanUser, 
      getTemplateForgotPasswordNewPassword, 
      getTemplateForgotPassword,
-     getTemplateChangeEmail
+     getTemplateChangeEmail,
+     getTemplateAdminRegister
     } = require('../config/mail.config.js')
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
