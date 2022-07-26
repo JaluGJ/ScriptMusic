@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginValidate from './inputs.js'
 import validate from './validate.js'
+// import { adminLogin, adminProfile } from '../../redux/actions';
 
 const Login = () => {
 
@@ -83,6 +84,7 @@ const Login = () => {
         e.preventDefault();
         const token = await loginValidate(input);
         if (token){
+            // dispatch(adminProfile(token));
             console.log("TOKEEEEEN")
             const e = await validate(token)
             if (e === input.email) {

@@ -36,6 +36,10 @@ const ticketSchema = new Schema({
   date: {
     type: String,
     required: true
+  },
+  price: {
+    type: Number,
+    required: false
   }
 })
 

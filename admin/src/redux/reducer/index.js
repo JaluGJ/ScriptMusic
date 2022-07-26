@@ -16,7 +16,9 @@ import {
     BAN_USER,
     UN_BAN_USER,
     GET_ALL_PROMOS,
-    DELETE_PROMO
+    ADD_PROMO,
+    DELETE_PROMO,
+    ADMIN_PROFILE,
 } from "../actions"
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
     user: [],
     promos: [],
     graficos: [],
+    adminprofile: [],
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -118,6 +121,12 @@ export const rootReducer = (state = initialState, action) => {
                 token: action.payload
             }
 
+        case ADMIN_PROFILE:
+            return{
+                ...state,
+                adminprofile: action.payload.user
+            }
+
         case CLEAR_CACHE: 
             return {
                 ...state,
@@ -140,6 +149,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 promos: action.payload
+            }
+
+        case ADD_PROMO:
+            return {
+                ...state,
+                promos: state.promos
             }
         
         case DELETE_PROMO:

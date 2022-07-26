@@ -19,6 +19,7 @@ import useDetails from "../../customHooks/useDetails";
 import useFavorites from "../../customHooks/useFavorites";
 import CustomAlertComponent from "../../components/CustomAlert.js";
 import DetailComment from "./modules/DetailComment.js";
+import InputComment from "./modules/InputComment.js";
 const Details = ({ route }) => {
   const { itemId } = route.params;
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Details = ({ route }) => {
   const [flag, setFlag] = useState(false);
   const [favourites] = useFavorites();
   
-
+  console.log(details)
   return (
     <>
       {statusCode ? (
@@ -118,7 +119,10 @@ const Details = ({ route }) => {
                 </View>
 
               </View>
-              <DetailComment/>
+              <InputComment productId={details.id} />
+              <DetailComment
+                ratYcom={details.ratYcom}
+              />
             </View>
             <CustomAlertComponent
               visible={showModal}

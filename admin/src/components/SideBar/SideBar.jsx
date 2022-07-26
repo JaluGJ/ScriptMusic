@@ -6,13 +6,26 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { adminProfile } from '../../redux/actions';
+import { useEffect } from 'react';
+
 
 const reload = () => {
     localStorage.clear('user')
     window.location.reload();
 }
 
+
 export default function SideBar() {
+    const dispatch = useDispatch()
+    const profile = useSelector(state => state.adminprofile)
+    const userToken = localStorage.user
+
+    useEffect(() => {
+        dispatch(adminProfile(userToken))
+    },[])
+
     return (
         <div className='sidebar'>
             <div className="items">
