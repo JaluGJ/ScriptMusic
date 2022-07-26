@@ -39,7 +39,6 @@ module.exports = {
       if (status === 'Successful') {
         const soldId = []
         const productFinal = []
-        let price = []
         let dateNew = Date().split(" ").slice(1, 5)
         const date = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
@@ -48,15 +47,15 @@ module.exports = {
           try {
             //logica de si es una promo.
             if (item.promo) {
-              item.items.forEach(async (e) => {
+              item.items.forEach(async (prod) => {
                 try {
                   const sold = new Sold({
-                    items: e.id,
+                    items: prod.id,
                     quantity: item.count,
                     user: userId,
                     date: date
                   })
-  
+
                   soldId.push(sold._id)
                   await sold.save()
                 } catch (error) {
@@ -67,14 +66,16 @@ module.exports = {
 
               let prod = {
                 image: item.image,
-                price: item.price,
+                price: (item.priceOne * item.count),
                 count: item.count,
               }
 
-              let promo = await Promo.findById(item.id)
-              await Promo.findByIdAndUpdate(item.id, { $set: { stock: promo.stock - item.count } }, {new : true})
-
               productFinal.push(prod)
+
+              const promo = await Promo.findById(item.id)
+              let finalStock = promo.stock - item.count
+              await Promo.findByIdAndUpdate(item.id, { $set: { stock: finalStock } }, { new: true })
+
 
 
             } else {
@@ -88,21 +89,19 @@ module.exports = {
               })
 
               soldId.push(sold._id)
-              
+
               const product = await Products.findById(item.id)
               //----- 
               let productToMail = product
               productToMail.count = item.count
               productFinal.push(productToMail)
               let finalStock = product.stock - item.count
-  
+
               //-----actualizacion de stock de producto
-  
+
               await Products.findByIdAndUpdate(item.id, { $set: { stock: finalStock } }, { new: true })
               await sold.save()
             }
-            price.push(item.priceOne)
-
 
             //error dentro del forEach
           } catch (error) {
@@ -111,13 +110,17 @@ module.exports = {
         })
         //---- añadir logica de que se cree un ticket
         //meter el arreglo de soldId en un nuevo esquema de ticket
+
+        // console.log("pricea",pricea)
+        let priceT = items.map(prod => prod.priceOne * prod.count).reduce((a,b)=>a+b)
+        console.log("priceT", priceT)
         const ticket = new Ticket({
           userId: userId,
           bought: soldId,
           date: date,
-          price: price.reduce((a,b)=>a+b)
+          price: priceT
         })
-        ticket.save()
+        await ticket.save()
         //se actualiza al usario con las compras hechas
 
         const user = await User.findById(userId)
@@ -134,7 +137,7 @@ module.exports = {
         const user = await User.findById(userId)
         const template = getTemplateBougthFail(user.firstName)
         await sendEmail(user.email, 'Fallo de pago', template)
-        res.json({ error: 'Payment Failed' })
+        res.status(400).json({ error: 'Payment Failed' })
       }
 
     } catch (error) {//error
