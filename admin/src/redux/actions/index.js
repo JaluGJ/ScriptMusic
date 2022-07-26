@@ -20,6 +20,7 @@ export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 export const GET_GRAFICO = "GET_GRAFICO"
 export const DELETE_PROMO = "DELETE_PROMO"
+export const ADMIN_PROFILE = 'ADMIN_PROFILE'
 
 // PRODUCTS ACTIONS
 
@@ -237,6 +238,21 @@ export const adminLogin = (user) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export function adminProfile(userToken){
+  return async function(dispatch){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const json = await axios.get(`${baseUrl}/admin-profile`, config)
+    return dispatch({
+      type: 'ADMIN_PROFILE',
+      payload: json.data
+    })
+  }
+}
 
 export const deleteToken = () => {
   return {
