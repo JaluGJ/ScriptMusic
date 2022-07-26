@@ -22,7 +22,10 @@ const { getAllUsers,
     deleteUser,
     changeEmail,
     changeEmailUser,
-    updateProfileAdmin
+    updateProfileAdmin,
+    changeEmailAdmin,
+    changeEmailAdminEmail,
+    resetPasswordAdmin
 } = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
@@ -94,7 +97,13 @@ routes.get('/user/:id', getOneUser)
 
 routes.get('/admin-profile', profileAdmin)
 
-routes.put('/admin-profile', updateProfile)
+routes.put('/admin-profile', updateProfileAdmin)
+
+routes.put('/admin/changeEmail', changeEmailAdmin)
+
+routes.get('/admin/change/email/token/:token', changeEmailAdminEmail)
+
+routes.put('/admin/changePassword', resetPasswordAdmin)
 
      //favs
 // USER BAN

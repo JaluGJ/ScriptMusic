@@ -19,6 +19,7 @@ export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 export const GET_GRAFICO = "GET_GRAFICO"
+export const DELETE_PROMO = "DELETE_PROMO"
 
 // PRODUCTS ACTIONS
 
@@ -258,5 +259,20 @@ export const getAllPromos = (userToken) => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const deletePromo = (id, userToken) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.delete(`${baseUrl}/delete-promo/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: DELETE_PROMO,
+        payload: res.data
+      })
+    })
+}
 
 // PROMOS ACTIONS

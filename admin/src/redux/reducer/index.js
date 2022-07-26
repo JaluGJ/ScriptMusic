@@ -15,8 +15,8 @@ import {
     DELETE_USER,
     BAN_USER,
     UN_BAN_USER,
-    GET_ALL_PROMOS
-
+    GET_ALL_PROMOS,
+    DELETE_PROMO
 } from "../actions"
 
 const initialState = {
@@ -140,6 +140,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 promos: action.payload
+            }
+        
+        case DELETE_PROMO:
+            return {
+                ...state,
+                promos: state.promos
             }
 
         // REDUX PROMOS
