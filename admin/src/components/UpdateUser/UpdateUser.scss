@@ -2,8 +2,10 @@
     display: flex;
     width: 100%;
 
+
     .container{
         flex: 6;
+
 
         .top{
             box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
@@ -37,6 +39,18 @@
         }
 
         }
+        .bottomloa{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
         .bottom{
            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
            padding: 10px;
