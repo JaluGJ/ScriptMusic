@@ -9,6 +9,8 @@ import './UpdateUser.scss'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Loading from '../Loading/Loading'
+
 
 export default function UpdateUser({ logout }) {
     const { id } = useParams();
@@ -38,7 +40,6 @@ export default function UpdateUser({ logout }) {
     return (
         <div className="updateuser">
             <SideBar logout={logout} />
-            {console.log(user)}
             <div className="container">
 
                 <div className="top">
@@ -48,17 +49,14 @@ export default function UpdateUser({ logout }) {
                     <h1 className="title">Modificar Usuario</h1>
                 </div>
 
-                {user.length === 0 ? <div >
-                            <img src="https://i.gifer.com/VAyR.gif" alt='image' />
-                        </div> :
-                <div className="bottom">
-                    <div className="image">
-                        <img src={user.image} alt="LOL" />
-                    </div>
-                    <div>
-                        {/* {user.length === 0 ? <div >
-                            <img src="https://i.gifer.com/VAyR.gif" alt='image' />
-                        </div> : */}
+                
+                {user.length === 0 
+                ? <div className="bottomloa"> <Loading className='loading' /> </div>
+                : <div className="bottom">
+                        <div className="image">
+                            <img src={user.image} alt="LOL" />
+                        </div>
+                        <div>
                             <div className="forminput">
                                 <h1> Nombre </h1>
                                 <h2> {user.firstName} </h2>
@@ -70,11 +68,10 @@ export default function UpdateUser({ logout }) {
                                 {user.isConfirmed === true ? <CheckCircleIcon className='validado' /> : <CancelIcon className='novalidado' />}
                                 {user.isAdmin === true ? <button>Remover rol de administrador</button> : <button>Asignar rol de administrador</button>}
                             </div>
+                        </div>
                     </div>
+}
 
-                </div>
-
-                        }
             </div>
         </div>
     )
