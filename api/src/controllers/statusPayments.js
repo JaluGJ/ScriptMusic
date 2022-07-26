@@ -34,13 +34,13 @@ const { getTemplateBougthFail, getTemplateBougthSuccess, sendEmail } = require('
 */
 module.exports = {
   statusPayment: async (req, res, next) => {
-    const { items, userId, status } = req.body
+    const { items, userId, status, date } = req.body
     try {
       if (status === 'Successful') {
         const soldId = []
         const productFinal = []
-        let dateNew = Date().split(" ").slice(1, 5)
-        const date = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
+        let dateNew = date.split(" ").slice(1, 5)
+        const dated = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
         items.forEach(async (item) => {
 
@@ -53,7 +53,7 @@ module.exports = {
                     items: prod.id,
                     quantity: item.count,
                     user: userId,
-                    date: date
+                    date: dated
                   })
 
                   soldId.push(sold._id)
@@ -85,7 +85,7 @@ module.exports = {
                 items: item.id,
                 quantity: item.count,
                 user: userId,
-                date: date,
+                date: dated,
               })
 
               soldId.push(sold._id)
@@ -117,7 +117,7 @@ module.exports = {
         const ticket = new Ticket({
           userId: userId,
           bought: soldId,
-          date: date,
+          date: dated,
           price: priceT
         })
         await ticket.save()
@@ -128,7 +128,7 @@ module.exports = {
 
         //envio de mail
 
-        const template = getTemplateBougthSuccess(user.firstName, productFinal, date)
+        const template = getTemplateBougthSuccess(user.firstName, productFinal, dated)
         await sendEmail(user.email, 'Confirmación de pago', template)
         res.json({ msg: 'Payment Successful' })
 
