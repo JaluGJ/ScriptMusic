@@ -17,7 +17,7 @@ export default function SideBar() {
         <div className='sidebar'>
             <div className="items">
                 <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" className="avatar" />
-            </div>                
+            </div>
             <div className="top">
                 <span className="logo">ADMIN PANEL</span>
             </div>
@@ -25,35 +25,44 @@ export default function SideBar() {
             <div className="center">
                 <ul>
                     <p className="title">LISTADO</p>
+
                     <Link to="/users" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlinedIcon className='icon' />
                             <span>Usuarios</span>
                         </li>
                     </Link>
+
                     <Link to="/products" style={{ textDecoration: "none" }}>
                         <li>
                             <StoreMallDirectoryOutlinedIcon className='icon' />
                             <span>Productos</span>
                         </li>
                     </Link>
+
                     <Link to="/promos" style={{ textDecoration: "none" }}>
                         <li>
                             <LocalOfferIcon className='icon' />
                             <span>Promos</span>
                         </li>
                     </Link>
+
                     <Link to="/graficos" style={{ textDecoration: "none" }}>
-                    <li>
-                        <SignalCellularAltIcon className='icon' />
-                        <span>Graficos</span>
-                    </li>
+                        <li>
+                            <SignalCellularAltIcon className='icon' />
+                            <span>Graficos</span>
+                        </li>
                     </Link>
+
+
                     <p className="title">USUARIO</p>
-                    <li>
-                        <AccountCircleOutlinedIcon className='icon' />
-                        <span>Perfil</span>
-                    </li>
+
+                    <Link to="/profile" style={{ textDecoration: "none" }}>
+                        <li>
+                            <AccountCircleOutlinedIcon className='icon' />
+                            <span>Perfil</span>
+                        </li>
+                    </Link>
                     <li>
                         <LogoutOutlinedIcon className='icon' />
                         <span onClick={() => reload()}>Desconectarse</span>
