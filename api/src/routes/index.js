@@ -1,20 +1,20 @@
 const { Router } = require('express')
 //importar los componentes donde tienen todas las rutas
 const { getAllProducts, getProductById, updateProduct, uploadProduct, deleteProduct } = require('../controllers/products')
-const { getAllUsers, 
-    registerUser, 
-    loginUser, 
-    loginAdmin, 
-    confirmUser, 
-    profile, 
-    profileAdmin, 
-    updateProfile, 
-    googleLogin, 
-    validateToken, 
-    getOneUser, 
-    banUser, 
-    unBanUser, 
-    getUserBanned, 
+const { getAllUsers,
+    registerUser,
+    loginUser,
+    loginAdmin,
+    confirmUser,
+    profile,
+    profileAdmin,
+    updateProfile,
+    googleLogin,
+    validateToken,
+    getOneUser,
+    banUser,
+    unBanUser,
+    getUserBanned,
     addUserFromAdmin,
     forgotPassword,
     forgotPasswordUser,
@@ -30,7 +30,7 @@ const { getAllUsers,
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
 const { statusPayment } = require('../controllers/statusPayments')
-const { soldProducts } = require('../controllers/soldInfo')
+const { soldProducts, soldProductById } = require('../controllers/soldInfo')
 const { newFavourite, getFavourites, deleteFavoutite } = require('../controllers/favourites')
 const { addRating } = require('../controllers/rating')
 const { getTickets } = require('../controllers/ticket')
@@ -53,7 +53,7 @@ routes.delete('/products/:id', deleteProduct)
 
 routes.put('/products/:id', updateProduct)
 
-    // rating & comment
+// rating & comment
 
 routes.post('/rating', addRating)
 
@@ -61,7 +61,7 @@ routes.post('/rating', addRating)
 
 // USER ROUTES
 
-    //login & signup
+//login & signup
 
 routes.post('/login', loginUser)
 
@@ -73,7 +73,7 @@ routes.post('/loginAdmin', loginAdmin)
 
 routes.get('/user/confirm/token/:token', confirmUser)
 
-    //user info
+//user info
 
 routes.delete('/user/delete/:id', deleteUser)
 
@@ -105,7 +105,7 @@ routes.get('/admin/change/email/token/:token', changeEmailAdminEmail)
 
 routes.put('/admin/changePassword', resetPasswordAdmin)
 
-     //favs
+//favs
 // USER BAN
 
 routes.get('/ban/user', getUserBanned)
@@ -134,15 +134,17 @@ routes.delete('/profile/favs', deleteFavoutite)
 
 // PAYMENT ROUTES
 
-routes.post('/create-payment-intents', paymentCard )
+routes.post('/create-payment-intents', paymentCard)
 
-routes.post('/status-payment', statusPayment )
+routes.post('/status-payment', statusPayment)
 
 // PAYMENT ROUTES
 
 // SOLD ROUTES
 
-routes.get('/sold', soldProducts )
+routes.get('/sold', soldProducts)
+
+routes.get('/sold/:id', soldProductById)
 
 // SOLD ROUTES
 
