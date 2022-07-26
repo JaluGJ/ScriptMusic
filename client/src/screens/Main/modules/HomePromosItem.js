@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { vh, vw } from "react-native-expo-viewport-units";
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Item';
+
 const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id, typePromo, containerTypePromo }) => {
   let { model, price, image, type } = items
   const navigation = useNavigation();
@@ -29,7 +30,7 @@ const HomePromosItem = ({ img, containerInfo, containerModel, containerText, con
 
             }}
             resizeMode='contain'
-            source={img}
+            source={{uri: img}}
           >
           </Image>
           <View style={containerTypePromo}>

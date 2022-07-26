@@ -1,40 +1,20 @@
-import {
-  View,
-  Text,
-  Image,
-  StatusBar,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
-import emptyFav from "../../../assets/fav1.png";
+import { View, Text, Image, StatusBar, TouchableOpacity, ScrollView } from "react-native";
+import React from "react";
 import styles from "./Styles/Favorites.jsx";
-import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import FavProducts from "./modules/FavProducts";
 import useFavorites from "../../customHooks/useFavorites";
+import Loading from "../../components/Loading.js";
+const emptyFav = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/fav1_zrbowc.png'
 
 export default function EmptyFavs() {
-  const [favourites, loading] = useFavorites();
-  return loading ? (
-    <Loading />
-  ) : favourites.length > 0 ? (
-    <FAVORITOS favourites={favourites} />
-  ) : (
-    <SINFAVORITOS />
-  );
+  const [favourites,loading] = useFavorites()
+  return loading ? <Loading/> : favourites.length > 0 ? <Favourites favourites={favourites} /> : <NoFavourites />
 }
 
-export const Loading = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" />
-    </View>
-  );
-};
 
-export const FAVORITOS = ({ favourites }) => {
+export const Favourites = ({ favourites }) => {
+  
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
@@ -44,7 +24,7 @@ export const FAVORITOS = ({ favourites }) => {
             <Text style={styles.title}>FAVORITOS</Text>
           </View>
           <View style={{ alignItems: "center" }}>
-            <Image source={emptyFav} style={styles.image} />
+            <Image  source={{uri:emptyFav}} style={styles.image} />
           </View>
           <View>
             {favourites.map((item) => (
@@ -64,7 +44,7 @@ export const FAVORITOS = ({ favourites }) => {
   );
 };
 
-export const SINFAVORITOS = () => {
+export const NoFavourites = () => {
   const navigation = useNavigation();
 
   return (
@@ -74,7 +54,7 @@ export const SINFAVORITOS = () => {
           <Text style={styles.title}>FAVORITOS</Text>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Image source={emptyFav} style={styles.image} />
+          <Image source={{uri:emptyFav}} style={styles.image} />
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={styles.text}>Aún no tienes productos favoritos.</Text>

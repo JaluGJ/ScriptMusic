@@ -18,6 +18,8 @@ import { useNavigation } from '@react-navigation/native'
 import HomePromos from "./modules/HomePromos";
 import {StylesPromos} from './helpers/HomeStylePromos'
 import usePromotions from "../../customHooks/usePromotions.js";
+const promo3 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864059/script_music_img/Imagen3_m58joz.png'
+
 const Home = () => {
   const [promotions] = usePromotions()
   /* console.log(promotions.length)  */
@@ -47,7 +49,7 @@ const Home = () => {
                 marginVertical:20
               }}>
                 <Image
-                  source={promoFive.img}
+                  source={{uri:promo3}}
                   style={{
                     width: vw(90),
                     height: vh(45),
@@ -78,7 +80,7 @@ const Home = () => {
               <TouchableOpacity>
 
                 <Image
-                  source={{ uri: 'https://i.postimg.cc/qvD87Mgj/Negro-y-Celeste-Cl-sico-Negro-y-Ne-n-Electr-nica-y-Electrodom-sticos-Banner-2.png' }}
+                  source={{ uri:promo3}}
                   style={{
                     width: '100%',
                     height: vh(30),
