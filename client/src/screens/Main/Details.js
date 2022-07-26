@@ -30,7 +30,7 @@ const Details = ({ route }) => {
   const [flag, setFlag] = useState(false);
   const [favourites] = useFavorites();
   
-
+  console.log(details)
   return (
     <>
       {statusCode ? (
@@ -118,7 +118,9 @@ const Details = ({ route }) => {
                 </View>
 
               </View>
-              <DetailComment/>
+              <DetailComment
+                ratYcom={details.ratYcom}
+              />
             </View>
             <CustomAlertComponent
               visible={showModal}
