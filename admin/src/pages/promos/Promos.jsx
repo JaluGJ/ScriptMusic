@@ -2,9 +2,8 @@ import './Promos.scss'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SideBar from '../../components/SideBar/SideBar';
-import { getAllPromos } from '../../redux/actions';
+import { getAllPromos, deletePromo } from '../../redux/actions';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import List from '../../components/tablepromos/listPromos'
@@ -37,16 +36,6 @@ const Promos = () => {
     // PARA IMPLEMENTAR EL DELETEPROMO SE TRAJO EL INPUTS Y SE ELIMINO,
     // PORQUE NO ESTABA RECIBIENDO EL DISPATH PARA REALIZAR LA ACCION.
     let columns = [
-        // { 
-        //     field: 'edit',
-        //     headerName: '', 
-        //     headerAlign: 'center', 
-        //     align: 'center',
-        //     width: 30,
-        //     renderCell: (cellValues) => {
-        //         return <Link style={{ textDecoration: "none", color: 'black'}} to={``}> <ModeEditIcon /> </Link>
-        //     },
-        //  },
         { field: 'promoName', headerName: 'Nombre Promoción', width: 220, headerAlign: 'center', align: 'left' },
         { field: 'promo', headerName: 'Promoción', width: 220, headerAlign: 'center', align: 'center' },
         { field: 'description', headerName: 'Descripción', width: 130, headerAlign: 'center', align: 'center' },
@@ -65,8 +54,6 @@ const Promos = () => {
          }
     ]
     //--------------------------------------------------------------------------------------------------------------------------------
-    
-
 
     return(
         <div className="promos">

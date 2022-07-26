@@ -8,7 +8,7 @@ export default function List({ rows, columns, title, tipo }) {
         <div className="listPromos">
             <div className="topPromos">
                 <h1 className="titlePromos"> {title} </h1>
-                <Link to="/promo/new" style={{ textDecoration: "none" }}>
+                <Link to="/promos/new" style={{ textDecoration: "none" }}>
                     <button className="btnPromos">  
                         <AddBoxIcon /> Añadir {tipo}
                     </button>
