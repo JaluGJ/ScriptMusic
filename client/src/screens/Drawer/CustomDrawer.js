@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../redux/slices/signin.js";
 import useShopping from "../../customHooks/useShopping.js";
 import * as Progress from 'react-native-progress';
-const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/fav1_zrbowc.png"
+const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png"
 const backgroundIMG = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861360/script_music_img/menu_n6yo90.png"
 
 const CustomDrawer = (props) => {
@@ -28,7 +28,6 @@ const CustomDrawer = (props) => {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* <StatusBar backgroundColor="white" barStyle="dark-content" /> */}
       <DrawerContentScrollView {...props}>
         <ImageBackground
           source={{ uri: backgroundIMG }}
@@ -59,18 +58,6 @@ const CustomDrawer = (props) => {
 
       <View style={styles.drawerFooter}>
         <View style={styles.containerFooter}>
-          {/* <TouchableOpacity
-            onPress={() => props.navigation.navigate("AboutUs")}
-          >
-            <View style={styles.containerAbout}>
-              <Icon
-                name="help-circle-outline"
-                type="material-community"
-                size={24}
-              />
-              <Text style={styles.about}>Sobre nosotros</Text>
-            </View>
-          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => dispatch(logOut())}>
             <View style={styles.containerSignOff}>
               <Icon name="login-variant" type="material-community" size={24} />
