@@ -172,18 +172,20 @@ const getTemplateBougthSuccess = (name, products, date) => {
         </div>
         <div style="background-color: white;padding: 4px;border-radius: 30px 30px 0px 0px;">
             <p style="color: #141414;font-size: 20px; font-weight: bold;text-align: center;">Hola, ${name}</p>
-            <p style="color: #141414;font-size: 15px; text-align: center;">Hemos recibido tu orden de compra y todo se ha procesado correctamente.</p>
+            <p style="color: #141414;font-size: 15px; text-align: center;">Hemos recibido tu orden de compra y todo se
+                ha procesado correctamente.</p>
             <p style="color: #000000;font-size: 15px;text-align: center;">Fecha de compra: ${date}</p>
             <p style="color: #000000;font-size: 15px;text-align: center;">Productos:</p>
-            <div style="display: flex;flex-wrap: wrap;margin-left: 9px;">
+            <div style="margin-left: 10px;">
                 ${products?.map(
-    (e) =>`
-      <div style="border-bottom: #00000080 1px solid;width: 150px;margin: 4px;border-radius: 20px;">
-        <img style="width:100px;margin-left: 20px;" src="${e.image}" alt="product" /><br />
-        <p style="color: #000000;font-size: 15px;text-align: center;">Precio: ${e.price}$</p>
-        <p style="color: #000000;font-size: 15px;text-align: center;">Cantidad: ${e.count}.</p>
-      </div>
-  `)} 
+    (e) => `
+                <div style="border-bottom: #00000080 1px solid;width: 300px;margin: 4px;border-radius: 20px;">
+                    <img style="width:150px;margin-left: 70px;" src="${e.image}" alt="product" /><br />
+                    <p style="color: #000000;font-size: 15px;text-align: center;">Precio: ${e.price}$</p>
+                    <p style="color: #000000;font-size: 15px;text-align: center;">Cantidad: ${e.count}.</p>
+                </div>
+                
+                `)}
             </div>
             <p style="color: #141414;font-size: 15px;text-align: center;">Si tienes problemas o alguna pregunta,
                 responde este mail, siempre estaremos felices de poder ayudarte.</p>
