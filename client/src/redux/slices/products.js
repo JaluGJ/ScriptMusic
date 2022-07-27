@@ -42,7 +42,7 @@ export const productsSlice = createSlice({
     }   
 });
 
-export const {setUpdateRate,setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setSaveProducts} = productsSlice.actions;
+export const {setUpdateRate,setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setSaveProducts,setCommit} = productsSlice.actions;
 
 export default productsSlice.reducer;
 

@@ -12,7 +12,7 @@ import { getProductDetails, updateCommit } from '../../../redux/slices/products.
 const DetailComment = () => {
     const dispatch = useDispatch();
     const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png";
-    const { ratYCom, updateRate} = useSelector((state) => state.products);
+    const {details, ratYCom, updateRate} = useSelector((state) => state.products);
 
     useEffect(() => {
         if(updateRate>0){
