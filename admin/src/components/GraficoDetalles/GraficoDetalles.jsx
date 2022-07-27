@@ -3,8 +3,9 @@ import SideBar from '../SideBar/SideBar';
 import './GraficoDetalles.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {grafico, graficoById } from '../../redux/actions';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
@@ -17,35 +18,39 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
  
  useEffect(()=>{
  dispatch(grafico(userToken))
- dispatch(graficoById('62d4d94dda220153870d778e', userToken))
+ dispatch(graficoById(id, userToken))
  }, [])
 console.log('que llega aqui', graficoId)
 
   
-const data= [];
- for(let i= 0; i< graficoId.length; i++){
-    data.push({
-        quantity: graficoId[i].quantity,
-        date: graficoId[i].date,
-    })
- }
+    const data= [];
+    for(let i = 0; i < graficoId.length; i++){
+        data.push({
+            date: graficoId[i].date,
+            quantity: graficoId[i].quantity,
+        })
+    }
+ 
  console.log(data);
 
 
 
     return (
-      <div className='contenedor'>
+      <div className='coontenedor'>
         <SideBar />
-       <div className='newcontenedor'>
-          <div className='top'>
-            <h1 className='title'> Gráfico de {graficoId.model}</h1>
+       <div className='neewcontenedor'>
+          <div className='toop'>
+          <Link to={'/products'} style={{ textDecoration: 'none' }} >
+                        <button> <ArrowBackIcon /> ATRAS</button>
+                    </Link>
+            <h1 className='tiitle'> Gráfico de {graficoId.model}</h1>
             </div>
         <ResponsiveContainer width="95%" height={500}>
-        <BarChart className='barchart'
+        <BarChart className='baarchart'
           data={data}
           barSize={20}
         >
-          <XAxis dataKey="date" className='x' />
+          <XAxis dataKey="date" className='xx' />
           <YAxis dataKey="quantity"/>
           <Tooltip />
           <Legend />
