@@ -275,11 +275,25 @@ const getTemplateChangeEmail = (name, email, newEmail, token) => {
 
 const getTemplateAdminRegister = (name) => {
   return `
-  <div>Hola, ${name}</div>
-  <div>Bienvenido al panel de administrador de ScriptMusic.</div>
-  <div>Para acceder, ingresa con tu email y contraseña al siguiente enlace</div>
-  <a>https://sm.up.railway.app/admin  "aca va ir el link del deploy mas actual, hacelo como un botonsito :)"</a>
-  <div>Saludos, el equipo de ScriptMusic.</div>
+  <div id="email___content"
+    style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; width: 350px;background-color: rgb(231, 231, 231);">
+    <div style="width:100%;">
+
+        <img style="width:150px;padding: 5px;margin-left: 95px;" src="https://i.postimg.cc/pTcwbcgr/Sm-Logo02-PNG.png"
+            alt=""><br />
+        <p style="color: #141414;font-size: 32px; font-weight: bold;text-align: center;">¡Bienvenido Admin!</p>
+    </div>
+    <div style="background-color: white;padding: 4px;border-radius: 30px 30px 0px 0px;">
+        <p style="color: #141414;font-size: 20px; font-weight: bold;text-align: center;">Hola, ${name}</p>
+        <p style="color: #141414;font-size: 15px; text-align: center;">Para acceder, ingresa con tu email y contraseña
+            al siguiente enlace</p>
+        <a style="color: #141414; font-size: 15px; text-decoration: underline;margin-left: 95px;"
+            href="https://sm.up.railway.app/admin" target="_blank"><button
+                style="background-color: #141414; border-radius: 5px; width: 150px; height: 35px; border: 1px solid; cursor: pointer;color: rgb(240, 240, 240);">Ingresar</button></a><br />
+        <p style="color: #141414;font-size: 15px;text-align: center;">Saludos, el equipo de ScriptMusic.</p>
+
+    </div>
+</div>
   `;
 }
 
