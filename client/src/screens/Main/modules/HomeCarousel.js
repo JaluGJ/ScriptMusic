@@ -61,7 +61,7 @@ export default class MyCarousel extends React.Component {
                 return (
 
                     <HomeCarouselImg
-                      img={item.image}
+                      item={item}
                     />
                 )
             }}

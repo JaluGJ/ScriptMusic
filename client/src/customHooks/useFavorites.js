@@ -11,9 +11,10 @@ const useFavorites = () => {
   useEffect(()=>{
     const unsubscribe = navigation.addListener('focus', () => {
       dispatch(getFavourites(token));
+      console.log('testing')
     })
     return unsubscribe;
-  },[navigation]);
+  },[navigation,favourites]);
   return [favourites,loading];
 }
 

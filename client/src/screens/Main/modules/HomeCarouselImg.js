@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Carousel';
-const HomeCarouselImg = ({ img }) => {
+const HomeCarouselImg = ({ item }) => {
     const navigation = useNavigation();
     return (
         <Pressable
@@ -11,7 +11,7 @@ const HomeCarouselImg = ({ img }) => {
             }>
             <Image
                 style={styles.image}
-                source={{ uri: img }}
+                source={{ uri: item.image }}
             />
         </Pressable>
     )
