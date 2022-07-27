@@ -19,7 +19,7 @@ import HomePromos from "./modules/HomePromos";
 import {StylesPromos} from './helpers/HomeStylePromos'
 import usePromotions from "../../customHooks/usePromotions.js";
 const promo3 = 'https://res.cloudinary.com/dzonjuriq/image/upload/v1658864059/script_music_img/Imagen3_m58joz.png'
-
+const cartel = 'https://i.postimg.cc/LXG86wPS/cartel.png'
 const Home = () => {
   const [promotions] = usePromotions()
   /* console.log(promotions.length)  */
@@ -80,7 +80,7 @@ const Home = () => {
               <TouchableOpacity>
 
                 <Image
-                  source={{ uri:promo3}}
+                  source={{ uri:cartel}}
                   style={{
                     width: '100%',
                     height: vh(30),
