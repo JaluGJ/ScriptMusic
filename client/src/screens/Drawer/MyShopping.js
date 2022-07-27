@@ -8,18 +8,18 @@ import Loading from "../../components/Loading";
 
 const MyShopping = () => {
   const navigation = useNavigation();
-  const { bought, tradDate } = useShopping();
+  const { bought, tradDate , status} = useShopping();
 
   return (
     <>
-      {bought.length === 0 ? (
+      {status === 0 ? (
         <Loading />
       ) : (
         <View style={{ alignItems: "center", backgroundColor: "#f0f0f0" }}>
           <View>
             <Text style={styles.title}>MIS COMPRAS</Text>
           </View>
-          {bought.length < 1 ? (
+          {bought.length === 0 ? (
             <View>
               <Icon
                 name="shopping-outline"

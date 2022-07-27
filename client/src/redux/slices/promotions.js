@@ -51,3 +51,7 @@ export const getPromoDetails = (id,token) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const cleanPromoDetails = () => (dispatch) => {
+    dispatch(setDetails({}));
+}

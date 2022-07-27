@@ -8,6 +8,7 @@ const apiUrl = "https://sm.up.railway.app/";
 
 const useShopping = () => {
   const [bought, setBought] = useState([]);
+  const [status,setStatus] = useState(0);
   const navigation = useNavigation();
   const { token } = useSelector((state) => state.signin);
 
@@ -18,7 +19,8 @@ const useShopping = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(`${apiUrl}tickets`, config);
+      const {status,data} = await axios.get(`${apiUrl}tickets`, config);
+      setStatus(status);
       setBought(data?.reverse());
     });
     return unsubscribe;
@@ -63,7 +65,7 @@ const useShopping = () => {
     }
   };
 
-  return { bought , tradDate};
+  return { bought , tradDate , status};
 };
 
 export default useShopping;
