@@ -59,9 +59,8 @@ export default class MyCarousel extends React.Component {
             ref={(c) => { this._carousel = c; }}
             renderItem={({ item}) => {
                 return (
-
                     <HomeCarouselImg
-                      img={item.image}
+                      item={item}
                     />
                 )
             }}
