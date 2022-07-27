@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
       width: 95,
       height: 95,
       borderRadius: 50,
-      marginBottom:20
+      marginBottom:10
     },
     userImage: {
       width: 88,

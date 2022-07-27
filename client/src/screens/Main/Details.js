@@ -31,7 +31,7 @@ const Details = ({ route }) => {
   const [flag, setFlag] = useState(false);
   const [favourites] = useFavorites();
   
-  console.log(details)
+  /* console.log(details.ratYCom) */
   return (
     <>
       {statusCode ? (
@@ -121,7 +121,7 @@ const Details = ({ route }) => {
               </View>
               <InputComment productId={details.id} />
               <DetailComment
-                ratYcom={details.ratYcom}
+                ratYCom={details.ratYCom}
               />
             </View>
             <CustomAlertComponent
