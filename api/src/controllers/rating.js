@@ -43,7 +43,7 @@ module.exports={
       }
       let compro = user.bought.find(elem => elem.items.toString() === productId)
       if (!compro){
-        return res.status(404).json({msg: 'el usuario no ha comprado este articulo'})
+        return res.status(404).json({msg: 'Para opinar sobre este producto, primero debes comprarlo'})
       }
       if (!comment){ //si no tiene comentario, se guarda sin comentario.
         let woComment = new Rating ({
