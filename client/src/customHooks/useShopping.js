@@ -24,7 +24,46 @@ const useShopping = () => {
     return unsubscribe;
   }, [navigation]);
 
-  return { bought };
+  let tradDate = (mes) => {
+    if (mes === "Jan") {
+      return (mes = "Enero");
+    }
+    if (mes === "Feb") {
+      return (mes = "Febrero");
+    }
+    if (mes === "Mar") {
+      return (mes = "Marzo");
+    }
+    if (mes === "Apr") {
+      return (mes = "Abril");
+    }
+    if (mes === "May") {
+      return (mes = "Mayo");
+    }
+    if (mes === "Jun") {
+      return (mes = "Junio");
+    }
+    if (mes === "Jul") {
+      return (mes = "Julio");
+    }
+    if (mes === "Aug") {
+      return (mes = "Agosto");
+    }
+    if (mes === "Sep") {
+      return (mes = "Septiembre");
+    }
+    if (mes === "Oct") {
+      return (mes = "Octubre");
+    }
+    if (mes === "Nov") {
+      return (mes = "Noviembre");
+    }
+    if (mes === "Dec") {
+      return (mes = "Diciembre");
+    }
+  };
+
+  return { bought , tradDate};
 };
 
 export default useShopping;
