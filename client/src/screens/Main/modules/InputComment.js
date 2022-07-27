@@ -13,9 +13,9 @@ export default function InputComment({ productId }) {
 
   return (
     <View>
-      <View style={{ margin: 10, flexDirection:'row', justifyContent:'space-between',  }}>
-        <Text style={{ fontSize: 22, height:32,}}>Deja tu opinión</Text>
-        <View style={{ height:32, }}>
+      <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-between', }}>
+        <Text style={{ fontSize: 22, height: 32, }}>Deja tu opinión</Text>
+        <View style={{ height: 32, }}>
           <AirbnbRating
             defaultRating={0}
             size={24}
@@ -39,18 +39,10 @@ export default function InputComment({ productId }) {
           multiline={true}
           numberOfLines={6}
           style={{
-            borderWidth:1,
+            borderWidth: 1,
             borderRadius: 10,
-    padding: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 1.84,
-    elevation:1,
-    borderColor: "#00000053",
+            padding: 5,
+            borderColor: "#00000053",
           }}
           onChangeText={(value) => setComment(value)}
         />
