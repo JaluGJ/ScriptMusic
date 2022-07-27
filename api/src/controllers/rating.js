@@ -25,7 +25,7 @@ module.exports={
         return res.status(401).json({ msg: 'No tienes permisos para hacer esto' })
       } 
       //busqueda de usuario
-      const user = await User.findById(data.id)
+      const user = await User.findById(data.id).populate("bought", {_id:0})
       if (!user) {
         return res.status(401).json({ msg: 'No tienes permiso para hacer esto' })
       }
@@ -41,7 +41,7 @@ module.exports={
       if (!rating){
         return res.status(404).json({msg: 'Es necesario que des una puntuación'})
       }
-      let compro = user.bought.find(elem => elem._id.toString() === productId)
+      let compro = user.bought.find(elem => elem.items.toString() === productId)
       if (!compro){
         return res.status(404).json({msg: 'el usuario no ha comprado este articulo'})
       }

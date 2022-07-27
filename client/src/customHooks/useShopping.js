@@ -8,6 +8,7 @@ const apiUrl = "https://sm.up.railway.app/";
 
 const useShopping = () => {
   const [bought, setBought] = useState([]);
+  const [status,setStatus] = useState(0);
   const navigation = useNavigation();
   const { token } = useSelector((state) => state.signin);
 
@@ -18,13 +19,53 @@ const useShopping = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(`${apiUrl}tickets`, config);
+      const {status,data} = await axios.get(`${apiUrl}tickets`, config);
+      setStatus(status);
       setBought(data?.reverse());
     });
     return unsubscribe;
   }, [navigation]);
 
-  return { bought };
+  let tradDate = (mes) => {
+    if (mes === "Jan") {
+      return (mes = "Enero");
+    }
+    if (mes === "Feb") {
+      return (mes = "Febrero");
+    }
+    if (mes === "Mar") {
+      return (mes = "Marzo");
+    }
+    if (mes === "Apr") {
+      return (mes = "Abril");
+    }
+    if (mes === "May") {
+      return (mes = "Mayo");
+    }
+    if (mes === "Jun") {
+      return (mes = "Junio");
+    }
+    if (mes === "Jul") {
+      return (mes = "Julio");
+    }
+    if (mes === "Aug") {
+      return (mes = "Agosto");
+    }
+    if (mes === "Sep") {
+      return (mes = "Septiembre");
+    }
+    if (mes === "Oct") {
+      return (mes = "Octubre");
+    }
+    if (mes === "Nov") {
+      return (mes = "Noviembre");
+    }
+    if (mes === "Dec") {
+      return (mes = "Diciembre");
+    }
+  };
+
+  return { bought , tradDate , status};
 };
 
 export default useShopping;

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPromoDetails } from "../redux/slices/promotions";
+import { cleanPromoDetails, getPromoDetails } from "../redux/slices/promotions";
 
 
 const useDetailsPromotions = ({id}) => {
@@ -16,6 +16,10 @@ const useDetailsPromotions = ({id}) => {
       })
         return unsubscribe
     }, [navigation])
+
+    useEffect(() => {
+      return dispatch(cleanPromoDetails());
+    }, [])
 
     return [detailsPromotion]
 }
