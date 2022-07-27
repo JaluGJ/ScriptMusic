@@ -66,6 +66,7 @@ export const loginUser = (obj) => (dispatch) => {
       setTimeout(async () => {
         try {
           await AsyncStorage.setItem("@token_id", res.data.token);
+          console.log(res.data.token)
           dispatch(setToken(res.data.token));
           dispatch(setIsLoading(false));
           dispatch(create(res.data.token));
@@ -186,7 +187,7 @@ export const putPassword =
       },
     };
     try {
-      let {data} = await axios.put(
+      let { data } = await axios.put(
         `${apiUrl}profile/changePassword`,
         { password, newPassword, email },
         config
@@ -209,7 +210,7 @@ export const putEmail =
       },
     };
     try {
-      let {data} = await axios.put(
+      let { data } = await axios.put(
         `${apiUrl}profile/changeEmail`,
         { email, newEmail, password },
         config
@@ -231,3 +232,4 @@ export const forgotPassword = async (email) => {
     console.log(error);
   }
 };
+
