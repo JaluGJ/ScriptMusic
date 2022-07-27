@@ -5,7 +5,7 @@ import { getFavourites } from '../redux/slices/favourites';
 
 const useFavorites = () => {
   const navigation = useNavigation();
-  const {favourites,loading} = useSelector((state) => state.favourites);
+  const {favourites,loading,watched} = useSelector((state) => state.favourites);
   const {token} = useSelector(state => state.signin);
 
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const useFavorites = () => {
       dispatch(getFavourites(token));
     })
     return unsubscribe;
-  },[navigation]);
+  },[navigation,watched]);
 
   return [favourites,loading];
 }

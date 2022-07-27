@@ -29,7 +29,7 @@ const Details = ({ route }) => {
   const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
   const [flag, setFlag] = useState(false);
-  const [favourites,setUpdate,update] = useFavorites();
+  const [favourites] = useFavorites();
   function alert(){
     if(flag===true){
       Alert.alert('¡Producto agregado anteriormente!')
@@ -53,7 +53,6 @@ const Details = ({ route }) => {
                 <TouchableOpacity
                   onPress={() => {
                     const existente = favourites.find((item) => item.id === details.id);
-                    console.log(existente)
                     if (existente) {
                       setFlag(true);
                     } else {
