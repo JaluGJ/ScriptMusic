@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     borderColor: "#00000053",
   },
   containerComment: {
-    marginVertical: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -154,8 +153,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   rattingNum: {
-    position: "absolute",
-    right: 0,
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
   containerImgPromo: {
     height: vh(25),
@@ -231,6 +230,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+  },
+  textDate: {
+    color: "rgba(0,0,0,.5)",
+    fontSize: 12,
+    marginLeft: 4,
+    marginBottom: 5
   },
 });
 
