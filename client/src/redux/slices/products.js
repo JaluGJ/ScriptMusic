@@ -121,3 +121,19 @@ export const cleanProducts = () => (dispatch) =>{
     dispatch(setProductsStatusCode(0))
 }
 
+export const addRating = (rating, comment, productId, date, userToken) => (dispatch) =>{
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        };
+        axios
+          .post(`${apiUrl}rating`, { rating, comment, productId, date }, config)
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((e) => {
+            console.log(e.response.data);
+          });
+    
+}

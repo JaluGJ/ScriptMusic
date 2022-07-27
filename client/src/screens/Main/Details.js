@@ -120,9 +120,7 @@ const Details = ({ route }) => {
 
               </View>
               <InputComment productId={details.id} />
-              <DetailComment
-               
-              />
+              <DetailComment/>
             </View>
             <CustomAlertComponent
               visible={showModal}
