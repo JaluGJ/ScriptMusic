@@ -10,12 +10,15 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useNavigate, Link} from 'react-router-dom';
 import { addPromo, getAllProducts, getAllPromos } from "../../redux/actions";
 
-
 export default function NewPromo({logout}){
     const dispatch = useDispatch();
     const userToken = localStorage.user
-    // console.log(stock)
     const promoProducts = useSelector(state => state.products)
+    const sortProd = promoProducts.sort((a,b) => {
+        if (a.model > b.model) return 1;
+        if (a.model < b.model) return -1;
+        return 0;
+    })
     const promoType = ['Descuento', '2X1', 'Combo']
     useEffect(() => {
         dispatch(getAllProducts())
@@ -32,22 +35,7 @@ export default function NewPromo({logout}){
         stock: '',
         image: '',
         items: []
-    })
-
-
-    // TIENEN QUE CHECAR ESO DE ELIMINAR EL PRODUCTO QUE TENES EN LA LISTA
-
-    // const validateStock = (products) => {
-    //     if(input.products === 0){
-    //         return true
-    //     }
-    //     input.items.forEach(product => {
-    //         if(input.stock < product.stock){
-    //             return false
-    //         }
-    //     })
-    //     return true
-    // }
+    })   
 
     function handleinput(e) {
         setInput({
@@ -109,41 +97,33 @@ export default function NewPromo({logout}){
                 progress: undefined,
             });
         }
-        setInput({
-            ...input,
-            items: [...input.items, product]
-        })
-        setError(validate({
-            ...input,
-            items: [...input.items, product]
-        }))
+
+        if (input.items.includes(e.target.value)) {
+            for (let i = 0; i < input.items.length; i++) {
+              if (input.items[i] === e.target.value) {
+                input.items.splice(i, 1);
+              }
+            }
+            setInput({
+              ...input,
+              items: input.items,
+            });
+            setError(validate({
+                ...input,
+            }))
+            e.target.value = "Productos";
+          } else {
+            setInput({
+              ...input,
+              items: [...input.items, e.target.value],
+            });
+            setError(validate({
+                ...input,
+                items: e.target.value
+            }))
+            e.target.value = "Productos";
+          }
     }
-        // if (input.products.includes(e.target.value)) {
-        //     for (let i = 0; i < input.products.length; i++) {
-        //       if (input.products[i] === e.target.value) {
-        //         input.products.splice(i, 1);
-        //       }
-        //     }
-        //     setInput({
-        //       ...input,
-        //       products: input.products,
-        //     });
-        //     setError(validate({
-        //         ...input,
-        //     }))
-        //     e.target.value = "Productos";
-        //   } else {
-        //     setInput({
-        //       ...input,
-        //       products: [...input.products, e.target.value],
-        //     });
-        //     setError(validate({
-        //         ...input,
-        //         products: e.target.value
-        //     }))
-        //     e.target.value = "Productos";
-        //   }
-        // }
 
         const handleDeleteProduct = (e) => {
             const newProducts = input.items.filter(product => product.id !== e.target.value)
@@ -156,8 +136,6 @@ export default function NewPromo({logout}){
                 items: newProducts
             }))
         }
-    
-        // console.log(input)
 
     return (
         <div className="newPromo">
@@ -187,20 +165,15 @@ export default function NewPromo({logout}){
                             )}    
 
                             <label>Productos</label>
-
                             <select 
                                 name='items'
                                 defaultValue="Productos"
                                 onChange={(e) => handleSelectProduct(e)}>
                                 <option disabled={true} hidden>Productos</option>
-                                {promoProducts.map((e) =>
+                                {sortProd.map((e) =>
                                     <option value={e.id} key={e.id}>{e.model}</option>)}
                             </select>
-
-                            {/* <ul>{input.items.map((e) => <b> <li key={e.id}>{e.model}</li> <button onClick={() => handleDeleteProduct(e.id)}>X</button>  </b>)}</ul> */}
-                            <div>
-                                {input.items.map((e) => <button key={e.id} onClick={() => handleDeleteProduct(e.id)}>{e.model}</button> )}
-                            </div>
+                                <ul>{input.items.map((e) => <li key={e.id} onClick={() => handleDeleteProduct(e.id)}>{e.model}</li>)}</ul>
                             {error.items && (
                                 <p>{error.items}</p>
                             )}
