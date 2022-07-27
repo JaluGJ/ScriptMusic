@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/Item';
 
 const HomePromosItem = ({ img, containerInfo, containerModel, containerText, containerImage, items, id, typePromo, containerTypePromo }) => {
-  let { model, price, image, type } = items
+  let { model, image} = items
   const navigation = useNavigation();
 
   return (
@@ -39,9 +39,6 @@ const HomePromosItem = ({ img, containerInfo, containerModel, containerText, con
           <View style={containerInfo}>
             <View style={containerModel}>
               <Text style={styles.price}>{model}</Text>
-            </View>
-            <View style={containerText}>
-              <Text style={styles.price}>${price}</Text>
             </View>
             <View style={containerImage}>
               <Image

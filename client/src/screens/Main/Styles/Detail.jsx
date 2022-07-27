@@ -211,9 +211,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   commentInput: {
-    borderWidth: 1,
     borderRadius: 10,
     padding: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.84,
+    elevation:1
   },
   containerSendComment: {
     backgroundColor: "#DD8643",
@@ -221,7 +228,8 @@ const styles = StyleSheet.create({
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 5,
+    marginTop:10,
   },
   containerSendCommentDisabled: {
     backgroundColor: "#a9a9a9",
@@ -229,14 +237,25 @@ const styles = StyleSheet.create({
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 5,
+    marginTop:10,
   },
-  textDate: {
-    color: "rgba(0,0,0,.5)",
-    fontSize: 12,
-    marginLeft: 4,
-    marginBottom: 5
+  textButtonDisableComment: {
+    color: "#14100b",
+    textAlign: "center",
+    shadowColor: "#171717",
+    fontSize: 16,
+    letterSpacing: 2,
+    
   },
+  textButtonComment:{
+    color: "#FFC680",
+    textAlign: "center",
+    shadowColor: "#171717",
+    fontSize: 16,
+    letterSpacing: 2,
+    
+  }
 });
 
 export default styles;

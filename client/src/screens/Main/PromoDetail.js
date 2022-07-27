@@ -45,7 +45,7 @@ const PromoDetail = ({ route }) => {
             <Text style={styles.promoText}>{detailsPromotion.promo}</Text>
 
             <Pressable onPress={() => navigation.goBack()}>
-              <AntDesign name="right" size={27} color="black" />
+              <AntDesign name="right" size={27} color="white" />
             </Pressable>
           </View>
           <View style={styles.containerMain}>
