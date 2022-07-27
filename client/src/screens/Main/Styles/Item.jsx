@@ -106,16 +106,17 @@ const styles = StyleSheet.create({
     containerTypePromoFor:{
         position: 'absolute',
         right: vw(10),
-        top:'35%'
+        bottom:10,
     },
     containerInfoCenter:{
         justifyContent:'center',
         alignItems:'center',
-        height: vh(44),
+        height: vh(45),
     },
     containerInfoOff:{
         position: 'absolute',
         bottom:0,
+        display: 'none',
     },
     containerTextOff:{
         position: 'absolute',

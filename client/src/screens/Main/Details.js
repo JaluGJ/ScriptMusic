@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
   ActivityIndicator,
+  Alert
 } from "react-native";
 import { Image } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
@@ -27,10 +28,16 @@ const Details = ({ route }) => {
   const { token } = useSelector((state) => state.signin);
   const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
-  const [showModal, setShowModal] = useState(false);
   const [flag, setFlag] = useState(false);
   const [favourites,setUpdate,update] = useFavorites();
-  
+  function alert(){
+    if(flag===true){
+      Alert.alert('¡Producto agregado anteriormente!')
+    }
+    if(flag===false){
+      Alert.alert('¡Producto agregado!')
+    }
+  }
 
   return (
     <>
@@ -46,12 +53,13 @@ const Details = ({ route }) => {
                 <TouchableOpacity
                   onPress={() => {
                     const existente = favourites.find((item) => item.id === details.id);
+                    console.log(existente)
                     if (existente) {
                       setFlag(true);
                     } else {
                       dispatch(postFavourite(token, details.id));
                     }
-                    setShowModal(true);
+                    alert()
                   }}
                 >
                   <AntDesign name="hearto" size={27} color="black" />
@@ -122,7 +130,7 @@ const Details = ({ route }) => {
               <InputComment productId={details.id} />
               <DetailComment/>
             </View>
-            <CustomAlertComponent
+            {/* <CustomAlertComponent
               visible={showModal}
               setVisible={setShowModal}
               setFlag={setFlag}
@@ -131,7 +139,7 @@ const Details = ({ route }) => {
               message={"Revise su lista de favoritos"}
               color={"#DD8643"}
               iconName={"cards-heart"}
-            />
+            /> */}
           </SafeAreaView>
         </ScrollView>
       ) : (
