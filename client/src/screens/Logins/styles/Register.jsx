@@ -7,8 +7,9 @@ let styles = StyleSheet.create({
     marginBottom: 5,
   },
   logo: {
-    height: 75,
-    width: 75,
+    height: 120,
+    width: 120,
+    marginVertical: 10
   },
   text: {
     fontSize: 20,
