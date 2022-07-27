@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "@rneui/themed";
-import WrapperNotifications from "./WrapperNotifications";
 import WrapperFavorites from "./WrapperFavorites";
 import WrapperCart from "./WrapperCart";
 import UserDrawer from "./UserDrawer";
 import useCountCart from "../customHooks/useCountCart";
+import WrapperShopping from "./WrapperNotifications";
 
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
@@ -83,20 +83,20 @@ const AppStack = () => {
         }}
       />
       <Tab.Screen
-        name="WrapperNotifications"
-        component={WrapperNotifications}
+        name="WrapperShopping"
+        component={WrapperShopping}
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Icon
-                name="bell"
+                name="shopping"
                 type="material-community"
                 size={30}
                 color="#DD8643"
               />
             ) : (
               <Icon
-                name="bell-outline"
+                name="shopping-outline"
                 type="material-community"
                 size={30}
                 color="#DD8643"
