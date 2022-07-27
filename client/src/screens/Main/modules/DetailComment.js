@@ -31,7 +31,7 @@ const DetailComment = () => {
 
                     ratYCom?.length > 0 ?
                     ratYCom?.map((c, i) => {
-                            let ratingg = c.rating ? c.rating / 2 : 0
+                            let ratingg = c.rating 
                             return (
                                 <View style={styles.containerComment} key={i}>
                                     <View style={styles.containerInfoComment}>

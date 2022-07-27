@@ -5,6 +5,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import useShoppingCart from "../../../customHooks/useShoppingCart.js";
+import useDiscount from "../../../customHooks/useDiscount.js";
+import useShopping from "../../../customHooks/useShopping.js";
 
 const CardProducts = () => {
   const navigation = useNavigation();
