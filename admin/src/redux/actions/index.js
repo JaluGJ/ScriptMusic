@@ -1,7 +1,7 @@
 import axios from "axios"
 // lo de la linea 3 iria en un .env, solo la parte de localhost:3001, la parte de http si va asi 
-const baseUrl = "https://sm.up.railway.app"
-// const baseUrl = "http://localhost:3001"
+// const baseUrl = "https://sm.up.railway.app"
+const baseUrl = "http://localhost:3001"
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT"
@@ -19,6 +19,7 @@ export const BAN_USER = 'BAN_USER'
 export const UN_BAN_USER = 'UN_BAN_USER'
 export const GET_ALL_PROMOS = "GET_ALL_PROMOS"
 export const GET_GRAFICO = "GET_GRAFICO"
+export const GRAFICO_ID= "GRAFICO_ID"
 export const ADD_PROMO = 'ADD_PROMO'
 export const DELETE_PROMO = "DELETE_PROMO"
 export const ADMIN_PROFILE = 'ADMIN_PROFILE'
@@ -116,7 +117,22 @@ export const grafico = (userToken) => (dispatch) =>{
       payload:res.data,
     })
   })
+  .catch(err => console.log(err))
+}
 
+export const graficoById = (id, userToken) => (dispatch) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+    },
+  };
+  axios.get(`${baseUrl}/sold/${id}`, config).then(res =>{
+    dispatch({
+      type: GRAFICO_ID,
+      payload:res.data,
+    })
+  })
+  .catch(err => console.log(err))
 }
 
 export const clearCache = () => (dispatch) => {

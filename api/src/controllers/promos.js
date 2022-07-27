@@ -33,7 +33,7 @@ const createPromo = async (req, res, next) => {
 
     const { items, price, stock, description, image, promo, promoName } = req.body;
 
-    // if (items.length === 0) return res.status(404).json({ message: 'No se ha añadido productos' })
+    if (items.length === 0) return res.status(404).json({ message: 'No se ha añadido productos' })
 
     if (!stock) return res.status(404).json({ message: 'No se ha indicado stock' })
 
@@ -45,17 +45,21 @@ const createPromo = async (req, res, next) => {
 
     if (!promoName) return res.status(404).json({ message: 'No se ha añadido un nombre de promo' })
 
+    if (!price) return res.status(404).json({ message: 'No se ha indicado precio' })
+
     if (promo === '2X1') {
-      // if (items.length > 1) {
-      //   return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
-      // }
+      if (items.length > 1) {
+        return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
+      }
+
 
       try {
-        // let product = await Product.findById(items[0])
-        let product = await Product.findOne({model: items[0]})
+        let product = await Product.findById(items[0].id)
+        // let product = await Product.findOne({model: items[0]})
         if (!product) {
           return res.status(404).json({ message: 'No se ha encontrado producto' })
         }
+
 
         if (stock === 0 || stock < 0) {
           return res.status(400).json({ message: 'El stock no puede ser 0 o menor' })
@@ -65,15 +69,15 @@ const createPromo = async (req, res, next) => {
           return res.status(400).json({ message: 'No hay stock suficiente' })
         }
 
-        if (product.stock < (2 * stock)) {
-          return res.status(400).json({ message: 'No hay stock suficiente' })
-        }
+        // if (product.stock < (2 * stock)) {
+        //   return res.status(400).json({ message: 'No hay stock suficiente' })
+        // }
 
-        product.stock = product.stock - (2 * stock)
-        product.save()
+        // product.stock = product.stock - (2 * stock)
+        // product.save()
         const newPromo = new promosProductModel({
-          items,
-          price: product.price,
+          items: product._id,
+          price,
           stock,
           description,
           image,
@@ -88,8 +92,6 @@ const createPromo = async (req, res, next) => {
       }
     }
 
-    if (!price) return res.status(404).json({ message: 'No se ha indicado precio' })
-
 
 
     if (promo === 'Combo') {
@@ -98,12 +100,12 @@ const createPromo = async (req, res, next) => {
         return res.status(400).json({ message: 'El stock no puede ser 0 o menor' })
       }
 
-      // if (items.length === 1) {
-      //   return res.status(404).json({ message: 'No se ha añadido productos' })
-      // }
+      if (items.length === 1) {
+        return res.status(404).json({ message: 'No se ha añadido productos' })
+      }
 
       let total = items?.map(async (e) => {
-        const data = await Product.find({model: e})
+        const data = await Product.findById(e.id)
         if (!data) {
           return res.status(404).json({ message: 'No se ha encontrado producto' })
         }
@@ -112,12 +114,12 @@ const createPromo = async (req, res, next) => {
           return res.status(400).json({ message: 'No hay stock suficiente' })
         }
 
-        if (data.stock < stock) {
-          return res.status(400).json({ message: 'No hay stock suficiente' })
-        }
+        // if (data.stock < stock) {
+        //   return res.status(400).json({ message: 'No hay stock suficiente' })
+        // }
 
-        data.stock = data.stock - stock
-        data.save()
+        // data.stock = data.stock - stock
+        // data.save()
         return data
       })
 
@@ -141,11 +143,11 @@ const createPromo = async (req, res, next) => {
 
     if (promo === 'Descuento') {
 
-      // if (items.length > 1) {
-      //   return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
-      // }
+      if (items.length > 1) {
+        return res.status(400).json({ message: 'No se puede seleccionar mas de un item' })
+      }
 
-      const product = await Product.findOne({model: items[0]})
+      const product = await Product.findById(items[0].id)
       if (!product) {
         return res.status(404).json({ message: 'No se ha encontrado producto' })
       }
@@ -158,19 +160,19 @@ const createPromo = async (req, res, next) => {
         return res.status(400).json({ message: 'No hay stock suficiente' })
       }
 
-      if (product.stock < stock) {
-        return res.status(400).json({ message: 'No hay stock suficiente' })
-      }
+      // if (product.stock < stock) {
+      //   return res.status(400).json({ message: 'No hay stock suficiente' })
+      // }
 
-      if (price > product.price) {
-        return res.status(400).json({ message: 'El precio del descuento no puede ser mayor al precio del producto' })
-      }
+      // if (price > product.price) {
+      //   return res.status(400).json({ message: 'El precio del descuento no puede ser mayor al precio del producto' })
+      // }
 
-      product.stock = product.stock - stock
-      product.save()
+      // product.stock = product.stock - stock
+      // product.save()
 
       const newPromo = new promosProductModel({
-        items,
+        items: product._id,
         price,
         stock,
         description,
@@ -217,7 +219,8 @@ const getPromos = async (req, res, next) => {
     if (!promos || promos.length === 0) {
       return res.status(404).json({ message: 'No se han encontrado promociones' })
     }
-
+    const toDelete = promos.filter(e => e.stock < 1)
+    toDelete.forEach(e => e.remove())
     return res.json(promos)
   } catch (error) {
     next(error)
@@ -228,9 +231,6 @@ const getPromos = async (req, res, next) => {
 
 const getPromoById = async (req, res, next) => {
   try {
-
-    const {id} = req.params
-    if(!id) return res.status(404).json({ message: 'No se ha indicado id' })
     
     const autorization = req.get('Authorization')
     if (!autorization) {
@@ -251,6 +251,10 @@ const getPromoById = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: 'No se ha encontrado usuario' })
     }
+    
+    const {id} = req.params
+
+    if(!id) return res.status(404).json({ message: 'No se ha indicado id' })
 
     const promo = await promosProductModel.findById(id).populate('items', {user: 0 })
     if (!promo) {

@@ -186,7 +186,7 @@ export const putPassword =
       },
     };
     try {
-      let {data} = await axios.put(
+      let { data } = await axios.put(
         `${apiUrl}profile/changePassword`,
         { password, newPassword, email },
         config
@@ -209,7 +209,7 @@ export const putEmail =
       },
     };
     try {
-      let {data} = await axios.put(
+      let { data } = await axios.put(
         `${apiUrl}profile/changeEmail`,
         { email, newEmail, password },
         config
@@ -231,3 +231,4 @@ export const forgotPassword = async (email) => {
     console.log(error);
   }
 };
+

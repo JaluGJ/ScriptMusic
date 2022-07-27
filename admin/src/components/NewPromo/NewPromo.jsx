@@ -10,18 +10,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useNavigate, Link} from 'react-router-dom';
 import { addPromo, getAllProducts, getAllPromos } from "../../redux/actions";
 
-
 export default function NewPromo({logout}){
     const dispatch = useDispatch();
     const userToken = localStorage.user
-    const promoProducts = useSelector(state => state.products.map(r => r.model))
-    const sortProducts = promoProducts.sort((a, b) => {
-        if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
+    const promoProducts = useSelector(state => state.products)
+    const sortProd = promoProducts.sort((a,b) => {
+        if (a.model > b.model) return 1;
+        if (a.model < b.model) return -1;
+        return 0;
     })
     const promoType = ['Descuento', '2X1', 'Combo']
-
     useEffect(() => {
         dispatch(getAllProducts())
         dispatch(getAllPromos(userToken));
@@ -30,13 +28,14 @@ export default function NewPromo({logout}){
 
     const [error, setError] = useState({})
     const [input, setInput] = useState({
-        namePromo: '',
-        typePromo: '',
+        promoName: '',
+        promo: '',
         description: '',
         price: '',
         stock: '',
-        products: [],
-    })
+        image: '',
+        items: []
+    })   
 
     function handleinput(e) {
         setInput({
@@ -53,8 +52,15 @@ export default function NewPromo({logout}){
     function handleSubmit(e) {
         e.preventDefault()
         if (Object.keys(error).length > 0) {
-            window.location.reload()
-            return alert('Por favor verifique los campos')
+            return toast.error('Por favor, revise los campos en rojo', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
         dispatch(addPromo(input, userToken))
         toast.success('Promoción agregada exitosamente', {
@@ -67,25 +73,40 @@ export default function NewPromo({logout}){
             progress: undefined,
         });
         setInput({
-            namePromo: '',
-            typePromo: '',
+            promoName: '',
+            promo: '',
             description: '',
             price: '',
             stock: '',
-            products: [],
+            image: '',
+            items: [],
         })
     }
 
     function handleSelectProduct(e) {
-        if (input.products.includes(e.target.value)) {
-            for (let i = 0; i < input.products.length; i++) {
-              if (input.products[i] === e.target.value) {
-                input.products.splice(i, 1);
+        const product = promoProducts.find(product => product.id === e.target.value)
+        const data = input.items.find(product => product.id === e.target.value)
+        if (data) {
+            return toast.error('El producto ya esta en la lista', {
+                position: "top-center",
+                autoClose: 800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
+        if (input.items.includes(e.target.value)) {
+            for (let i = 0; i < input.items.length; i++) {
+              if (input.items[i] === e.target.value) {
+                input.items.splice(i, 1);
               }
             }
             setInput({
               ...input,
-              products: input.products,
+              items: input.items,
             });
             setError(validate({
                 ...input,
@@ -94,15 +115,27 @@ export default function NewPromo({logout}){
           } else {
             setInput({
               ...input,
-              products: [...input.products, e.target.value],
+              items: [...input.items, e.target.value],
             });
             setError(validate({
                 ...input,
-                products: e.target.value
+                items: e.target.value
             }))
             e.target.value = "Productos";
           }
     }
+
+        const handleDeleteProduct = (e) => {
+            const newProducts = input.items.filter(product => product.id !== e.target.value)
+            setInput({
+                ...input,
+                items: newProducts
+            })
+            setError(validate({
+                ...input,
+                items: newProducts
+            }))
+        }
 
     return (
         <div className="newPromo">
@@ -117,46 +150,57 @@ export default function NewPromo({logout}){
                 </div>
                 <div className="bottomPromo">
                     <img src={input.image ? input.image : 'https://www.pngkey.com/png/full/339-3394994_png-promotion-taps.png'} alt="" />
-                    <form onSubmit={e => handleSubmit(e)}>
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <div className="formInputPromo">
+
+                        <label>Imagen</label>
+                            <input
+                                type="text"
+                                placeholder='URL de la imagen'
+                                name='image'
+                                value={input.image}
+                                onChange={(e) => handleinput(e)} />
+                            {error.image && (
+                                <p>{error.image }</p>
+                            )}    
 
                             <label>Productos</label>
                             <select 
-                                name='products'
+                                name='items'
                                 defaultValue="Productos"
                                 onChange={(e) => handleSelectProduct(e)}>
                                 <option disabled={true} hidden>Productos</option>
-                                {sortProducts.map((e, i) =>
-                                    <option value={e} key={i}>{e}</option>)}
+                                {sortProd.map((e) =>
+                                    <option value={e.id} key={e.id}>{e.model}</option>)}
                             </select>
-                            <ul>{input.products.map((e, i) => <b><li key={i}>{e}</li></b>)}</ul>
-                            {error.products && (
-                                <p>{error.products}</p>
+                                <ul>{input.items.map((e) => <li key={e.id} onClick={() => handleDeleteProduct(e.id)}>{e.model}</li>)}</ul>
+                            {error.items && (
+                                <p>{error.items}</p>
                             )}
 
                             <label>Nombre Promoción</label>
                             <input 
                                 type='text'
                                 placeholder='Nombre de la promoción'
-                                name='namePromo'
-                                value={input.namePromo}
+                                name='promoName'
+                                value={input.promoName}
                                 onChange={(e) => handleinput(e)}
                             />
-                            {error.namePromo && (
-                                <p>{error.namePromo}</p>
+                            {error.promoName && (
+                                <p>{error.promoName}</p>
                             )}
 
                             <label>Promoción</label>
                             <select 
-                                name='typePromo'
+                                name='promo'
                                 defaultValue="Promoción"
                                 onChange={e => handleinput(e)}>
                                 <option disabled={true} hidden>Promoción</option>
                                 {promoType.map((e, i) =>
                                     <option value={e} key={i}>{e}</option>)}
                             </select>
-                            {error.typePromo && (
-                                <p>{error.typePromo}</p>
+                            {error.promo && (
+                                <p>{error.promo}</p>
                             )}
 
                             <label>Descripción</label>
@@ -191,7 +235,7 @@ export default function NewPromo({logout}){
                                 onChange={(e) => handleinput(e)} />
                             {error.stock && (
                                 <p>{error.stock}</p>
-                            )}                            
+                            )}                       
 
                             {!Object.keys(error).length && !checkprops(input) ?
                                 <button>CREAR</button> :

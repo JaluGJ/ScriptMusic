@@ -11,6 +11,7 @@ import Users from './pages/users/Users';
 import Promos from './pages/promos/Promos';
 import NewPromo from './components/NewPromo/NewPromo';
 import Grafico from './components/Grafico/Grafico';
+import GraficoById from './components/GraficoDetalles/GraficoDetalles';
 import validate from './pages/login/validate.js';
 import AdminProfile from './pages/adminprofile/AdminProfile';
 
@@ -66,6 +67,7 @@ function App() {
                 <Route path='/promos' element={<Promos/>} />
                 <Route path='/promos/new' element={<NewPromo/>} />
                 <Route path='/graficos' element={<Grafico/>}/>
+                <Route path='/graficos/:id' element={<GraficoById/>} />
                 <Route path='/profile' element={<AdminProfile/>}/>
               </>
             )

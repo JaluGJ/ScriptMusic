@@ -6,6 +6,7 @@ import './Products.scss';
 import { getAllProducts } from '../../redux/actions'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { deleteProduct } from '../../redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -44,6 +45,18 @@ const Products = () => {
                 return <Link style={{ textDecoration: "none", color: 'black'}} to={`/products/${cellValues.row.id}`}> <ModeEditIcon /> </Link>
             },
          },
+         { 
+            field: 'grafico',
+            headerName: '', 
+            headerAlign: 'center', 
+            align: 'center',
+            width: 30,
+            renderCell: (cellValues) => {
+                return <Link style={{ textDecoration: "none", color: 'black'}} to={`/graficos/${cellValues.row.id}`}> <SignalCellularAltIcon /> </Link>
+            },
+         },
+
+
         { field: 'model', headerName: 'Modelo', width: 220, headerAlign: 'center', align: 'left' },
         { field: 'brand', headerName: 'Marca', width: 130, headerAlign: 'center', align: 'center' },
         { field: 'price', type: 'number', headerName: 'Precio', width: 70, headerAlign: 'center', align: 'center' },

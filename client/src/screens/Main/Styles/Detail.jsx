@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 2,
   },
-  containerDetailComment:{
-    backgroundColor: 'white',
+  containerDetailComment: {
+    backgroundColor: "white",
     marginVertical: 35,
     shadowColor: "#000",
     shadowOffset: {
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 1,
     borderRadius: 10,
-    marginHorizontal:10,
-    borderWidth:1,
-    borderColor:'#00000053'
+    marginHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#00000053",
   },
-  containerComment:{
-    marginVertical:5,
+  containerComment: {
+    marginVertical: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -134,83 +134,104 @@ const styles = StyleSheet.create({
     shadowRadius: 1.84,
     elevation: 1,
   },
-  commentTitle:{
-    fontSize:20,
+  commentTitle: {
+    fontSize: 20,
     letterSpacing: 2,
     padding: 20,
   },
-  containerInfoComment:{
-    flexDirection:'row',
+  containerInfoComment: {
+    flexDirection: "row",
     padding: 25,
   },
-  containerImgComment:{
-    borderRadius:100,
-    marginRight:25,
+  containerImgComment: {
+    borderRadius: 100,
+    marginRight: 25,
   },
-  commentText:{
+  commentText: {
     width: vw(50),
-  },  
-  nameComment:{
-    fontSize:18,
   },
-  rattingNum:{
-    position: 'absolute',
+  nameComment: {
+    fontSize: 18,
+  },
+  rattingNum: {
+    position: "absolute",
     right: 0,
   },
-  containerImgPromo:{
+  containerImgPromo: {
     height: vh(25),
     width: "100%",
   },
-  containerProductsDetails:{
+  containerProductsDetails: {
     width: vw(100),
     height: vh(60),
-    alignItems:'center',
-    justifyContent:'center',
-    marginVertical:30,
-    paddingBottom:30,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 30,
+    paddingBottom: 30,
   },
-  containerProductDetails:{
+  containerProductDetails: {
     width: vw(80),
     height: vh(55),
-    backgroundColor:'white',
-    alignItems:'center',
-    justifyContent:'center',
-    elevation:2,
-    borderRadius:20,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 2,
+    borderRadius: 20,
   },
-  textNavPromos:{
-    alignItems:'center',
-    textAlign:'center',
+  textNavPromos: {
+    alignItems: "center",
+    textAlign: "center",
     fontSize: 20,
     letterSpacing: 3,
     padding: 20,
   },
-  imageFav:{
-    alignItems:'center',
-    justifyContent:'center',
-    width: vw(80)
+  imageFav: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: vw(80),
   },
-  promoText:{
-    letterSpacing:2,
-    fontSize:35,
-    color: '#DD8643',
-    fontWeight:'bold'
+  promoText: {
+    letterSpacing: 2,
+    fontSize: 35,
+    color: "#DD8643",
+    fontWeight: "bold",
   },
-  brand:{
-    alignItems:'center',
-    textAlign:'center'
+  brand: {
+    alignItems: "center",
+    textAlign: "center",
   },
-  modelBrand:{
-    color: '#0000008b'
+  modelBrand: {
+    color: "#0000008b",
   },
-  model:{
-    alignItems:'center',
-    textAlign:'center'
+  model: {
+    alignItems: "center",
+    textAlign: "center",
   },
-  modelText:{
-    letterSpacing:2,
-    fontSize:15
-  }
+  modelText: {
+    letterSpacing: 2,
+    fontSize: 15,
+  },
+  commentInput: {
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 5,
+  },
+  containerSendComment: {
+    backgroundColor: "#DD8643",
+    height: 30,
+    width: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+  },
+  containerSendCommentDisabled: {
+    backgroundColor: "#a9a9a9",
+    height: 30,
+    width: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+  },
 });
 
 export default styles;

@@ -1,23 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Details from '../screens/Main/Details'
-import Notifications from '../screens/Main/Notifications'
+import MyShopping from '../screens/Drawer/MyShopping'
 const NotificationsStack = createStackNavigator()
-
-const WrapperNotifications = () => {
+const WrapperShopping = () => {
 
   return (
     <NotificationsStack.Navigator screenOptions={{
       headerShown: false,
     }}>
-      <NotificationsStack.Screen name="Notifications" component={Notifications} />
+      <NotificationsStack.Screen name="MyShopping" component={MyShopping} />
       <NotificationsStack.Screen name="Details" component={Details} />
     </NotificationsStack.Navigator>
   )
 }
 
-export default WrapperNotifications
-
-const styles = StyleSheet.create({})
+export default WrapperShopping
