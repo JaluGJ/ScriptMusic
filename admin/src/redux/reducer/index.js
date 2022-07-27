@@ -6,6 +6,7 @@ import {
     UPDATE_PRODUCT,
     DELETE_PRODUCT,
     GET_GRAFICO,
+    GRAFICO_ID,
     GET_ALL_USERS,
     GET_ONE_USER,
     ADD_USER,
@@ -31,6 +32,7 @@ const initialState = {
     user: [],
     promos: [],
     graficos: [],
+    graficosId: {},
     adminprofile: [],
 }
 
@@ -73,6 +75,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 graficos: action.payload
+            }
+
+            case GRAFICO_ID:
+            return {
+                ...state,
+                graficosId: action.payload
             }
 
         // REDUX PRODUCTS
