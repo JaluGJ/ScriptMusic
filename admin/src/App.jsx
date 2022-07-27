@@ -57,7 +57,7 @@ function App() {
           {
             auth && (
               <>
-                <Route path="/" element={<Home/>} />
+                <Route path="/" element={<Products/>} />
                 <Route path='/products' element={<Products/>} />
                 <Route path='/products/new' element={<NewProduct/>} />
                 <Route path='/products/:id' element={<UpdateProduct/>} />
@@ -72,7 +72,7 @@ function App() {
               </>
             )
           }
-          <Route path="*" element={auth ? <Users/> : <Login/>} />
+          <Route path="*" element={auth ? <Products/> : <Login/>} />
         </Routes>
     </div>
   )
