@@ -146,7 +146,7 @@ module.exports = {
         populate: {
           path: "userId",
           select: {
-            fisrtName: 1,
+            firstName: 1,
             lastName: 1,
             image: 1,
             _id: 0
