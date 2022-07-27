@@ -13,10 +13,12 @@ import styles from "./Styles/Cart.jsx";
 import CartModalBotton from "./modules/CartModalBotton";
 import CartModalTop from "./modules/CartModalTop";
 import useShoppingCart from "../../customHooks/useShoppingCart";
+import useDiscount from "../../customHooks/useDiscount";
 
 export default function EmptyCart() {
   const [modal, setModal] = useState(false);
   const { productsCart, totalPrice } = useShoppingCart();
+  const [status, finalPrice , descuento] = useDiscount({totalPrice});
 
   return (
     <View style={styles.wrapper}>
@@ -48,6 +50,9 @@ export default function EmptyCart() {
                       <CartModalTop
                         setModal={setModal}
                         totalPrice={totalPrice}
+                        status={status}
+                        finalPrice={finalPrice}
+                        descuento={descuento}
                       />
                       <CartModalBotton
                         modal={modal}

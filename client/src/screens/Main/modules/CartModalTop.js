@@ -4,8 +4,8 @@ import { AntDesign } from '@expo/vector-icons';
 import styles from "../Styles/Cart.jsx";
 import useShopping from '../../../customHooks/useShopping.js';
 import useDiscount from '../../../customHooks/useDiscount.js';
-const CartModalTop = ({setModal,totalPrice}) => {
-    const [status, finalPrice , descuento] = useDiscount({totalPrice});
+const CartModalTop = ({setModal,totalPrice,status,finalPrice,descuento}) => {
+  
 
     return (
         <>
