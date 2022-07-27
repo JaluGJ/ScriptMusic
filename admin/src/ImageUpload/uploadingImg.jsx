@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { translationEs, stylesColor } from "./uploadingConfig";
 
+//import { validate } from "../components/Newproduct/errors";
+
 import Button from "@mui/material/Button";
 
-export default function UploadImg({ setimgUp }) {
+export default function UploadImg({ setInput, input, setError, validate }) {
   const [myWidget, setmyWidget] = useState({});
 
   useEffect(() => {
@@ -19,7 +21,8 @@ export default function UploadImg({ setimgUp }) {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          setimgUp(result.info.url);
+          setInput({...input, image: result.info.url});
+          setError(validate({...input, image: result.info.url}))
         }
       }
     );
