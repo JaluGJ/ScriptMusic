@@ -96,8 +96,6 @@ module.exports = {
 
       const sold = await Sold.find({}).populate("items", { model: 1, category: 1, _id: 1 })
 
-      console.log(id)
-
       let soldProd = sold.filter((prod) => prod.items.id === id )
 
       if (soldProd.length === 0) {
