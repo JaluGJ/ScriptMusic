@@ -13,7 +13,6 @@ const Promos = () => {
     const dispatch = useDispatch()
     const rows = useSelector(state => state.promos)
     const userToken = localStorage.user
-
     useEffect(() => {
         dispatch(getAllPromos(userToken));
     }, [dispatch])
