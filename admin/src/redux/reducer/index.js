@@ -20,6 +20,8 @@ import {
     ADD_PROMO,
     DELETE_PROMO,
     ADMIN_PROFILE,
+    ADMIN_EMAIL_CHANGE,
+    ADMIN_PASSWORD_CHANGE,
 } from "../actions"
 
 const initialState = {
@@ -133,6 +135,16 @@ export const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 adminprofile: action.payload.user
+            }
+
+        case ADMIN_EMAIL_CHANGE:
+            return{
+                ...state
+            }
+
+        case ADMIN_PASSWORD_CHANGE:
+            return{
+                ...state
             }
 
         case CLEAR_CACHE: 
