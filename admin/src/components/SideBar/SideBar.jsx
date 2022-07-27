@@ -24,15 +24,17 @@ export default function SideBar() {
 
     useEffect(() => {
         dispatch(adminProfile(userToken))
-    },[])
+    }, [])
 
     return (
         <div className='sidebar'>
             <div className="items">
-                <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="avatar" className="avatar" />
+                <img src={profile.image ? profile.image : "https://cdn-icons-png.flaticon.com/512/147/147144.png"} alt="avatar" className="avatar" />
             </div>
+
             <div className="top">
-                <span className="logo">ADMIN PANEL</span>
+                <span className="logo">{profile.firstName ? profile.firstName + ' ' + profile.lastName : 'PANEL ADMIN'}</span>
+
             </div>
             <hr />
             <div className="center">

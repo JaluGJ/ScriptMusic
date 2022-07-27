@@ -23,6 +23,8 @@ export const GRAFICO_ID= "GRAFICO_ID"
 export const ADD_PROMO = 'ADD_PROMO'
 export const DELETE_PROMO = "DELETE_PROMO"
 export const ADMIN_PROFILE = 'ADMIN_PROFILE'
+export const ADMIN_EMAIL_CHANGE = 'ADMIN_EMAIL_CHANGE'
+export const ADMIN_PASSWORD_CHANGE = 'ADMIN_PASSWORD_CHANGE'
 
 // PRODUCTS ACTIONS
 
@@ -265,7 +267,36 @@ export function adminProfile(userToken){
     };
     const json = await axios.get(`${baseUrl}/admin-profile`, config)
     return dispatch({
-      type: 'ADMIN_PROFILE',
+      type: ADMIN_PROFILE,
+      payload: json.data
+    })
+  }
+}
+
+export function changeEmailAdmin(input, userToken){
+  return async function(dispatch){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const json = await axios.put(`${baseUrl}/admin/changeEmail`, input, config)
+    return dispatch({
+      type: ADMIN_EMAIL_CHANGE,
+      payload: json.data
+    })
+  }
+}
+export function changePasswordAdmin(input, userToken){
+  return async function(dispatch){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const json = await axios.put(`${baseUrl}/admin/changePassword`, input, config)
+    return dispatch({
+      type: ADMIN_PASSWORD_CHANGE,
       payload: json.data
     })
   }
