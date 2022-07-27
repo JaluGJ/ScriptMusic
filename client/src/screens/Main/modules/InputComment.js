@@ -22,7 +22,7 @@ export default function InputComment({ productId }) {
     axios
       .post(`${apiUrl}rating`, { rating, comment, productId, date }, config)
       .then((res) => {
-        console.log(res);
+        console.log(res)
       })
       .catch((e) => {
         console.log(e.response.data);

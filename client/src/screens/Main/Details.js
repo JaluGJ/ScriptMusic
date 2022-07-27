@@ -29,9 +29,9 @@ const Details = ({ route }) => {
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
   const [showModal, setShowModal] = useState(false);
   const [flag, setFlag] = useState(false);
-  const [favourites] = useFavorites();
+  const [favourites,setUpdate,update] = useFavorites();
   
-  /* console.log(details.ratYCom) */
+
   return (
     <>
       {statusCode ? (
@@ -121,7 +121,7 @@ const Details = ({ route }) => {
               </View>
               <InputComment productId={details.id} />
               <DetailComment
-                ratYCom={details.ratYCom}
+               
               />
             </View>
             <CustomAlertComponent

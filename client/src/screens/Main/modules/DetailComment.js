@@ -7,12 +7,10 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import { AirbnbRating } from '@rneui/themed';
 import { Image } from "@rneui/themed";
 import styles from "../Styles/Detail.jsx";
-const DetailComment = ({ ratYCom }) => {
-
+const DetailComment = () => {
     const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png";
-  
-    
-
+    const { details } = useSelector((state) => state.products);
+    const {ratYCom} = details
     return (
         <View style={styles.containerDetailComment}>
             <View >
