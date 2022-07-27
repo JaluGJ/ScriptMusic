@@ -1,0 +1,46 @@
+.contenedor {
+    width: 100%;
+    display: flex;
+    
+
+   .newcontenedor{
+      flex: 6;
+   
+      
+       .top{
+          box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+          padding: 10px;
+          margin: 20px;
+          display: flex;
+        
+       
+        .title{
+              
+               color: black;
+               font-size: 20px;
+               padding-right: 30px;
+           }
+     
+       }
+
+       .barchart{
+           width: 500;
+           height: 300;
+           margin-top: 5;
+           margin-right: 30;
+           margin-left: 20;
+           margin-bottom: 5;
+           
+       
+       }
+       .x{
+           scale: 'point';
+           padding-left: 10;
+           padding-right: 10;
+       }
+      
+        
+   }
+
+}           
+       

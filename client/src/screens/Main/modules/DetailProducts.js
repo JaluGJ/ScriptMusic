@@ -49,7 +49,7 @@ export default class DetailProducts extends React.Component {
           return (
           <View style={styles.containerProductsDetails}>
               <Carousel
-                data={this.props.data}
+                data={this.props.data ? this.props.data : []}
                 sliderWidth={vw(100)}
                 itemWidth={vw(80)}
                 autoplay={true}
