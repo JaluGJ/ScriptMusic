@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "../Styles/Detail";
 import { AirbnbRating } from "@rneui/themed";
 import { useDispatch, useSelector } from "react-redux";
+import { addRating } from "../../../redux/slices/products";
 
 export default function InputComment({ productId }) {
   const [comment, setComment] = useState("");
@@ -51,7 +52,7 @@ export default function InputComment({ productId }) {
             disabled={!comment || rating < 1 || comment[0] === " "}
             onPress={() => {
               let date = Date();
-              dispatch(addComment(rating, comment, productId, date, token))
+              dispatch(addRating(rating, comment, productId, date, token))
             }}
           >
             <Text style={{ letterSpacing: 2 }}>Enviar</Text>
