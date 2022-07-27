@@ -28,16 +28,7 @@ const Details = ({ route }) => {
   const { token } = useSelector((state) => state.signin);
   const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
-  const [flag, setFlag] = useState(false);
-  const [favourites,setUpdate,update] = useFavorites();
-  function alert(){
-    if(flag===true){
-      Alert.alert('¡Producto agregado anteriormente!')
-    }
-    if(flag===false){
-      Alert.alert('¡Producto agregado!')
-    }
-  }
+  const [favourites] = useFavorites()
 
   return (
     <>
@@ -53,13 +44,12 @@ const Details = ({ route }) => {
                 <TouchableOpacity
                   onPress={() => {
                     const existente = favourites.find((item) => item.id === details.id);
-                    console.log(existente)
                     if (existente) {
-                      setFlag(true);
+                      return Alert.alert('¡Producto agregado anteriormente!');
                     } else {
                       dispatch(postFavourite(token, details.id));
+                      Alert.alert('¡Producto agregado!')
                     }
-                    alert()
                   }}
                 >
                   <AntDesign name="hearto" size={27} color="black" />

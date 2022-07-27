@@ -14,18 +14,6 @@ const Product = ({ item }) => {
   const [favourites] = useFavorites();
   const navigation = useNavigation();
   const dispatch = useDispatch();
- /*  const [showModal, setShowModal] = useState(false); */
-  const [flag, setFlag] = useState(false);
-
-  function alert(flag){
-    console.log(flag)
-    if(flag===true){
-      Alert.alert('¡Producto agregado anteriormente!')
-    }
-    if(flag===false){
-      Alert.alert('¡Producto agregado!')
-    }
-  }
 
   return (
     <TouchableOpacity
@@ -44,14 +32,14 @@ const Product = ({ item }) => {
         <TouchableOpacity
           style={{ position: "absolute", top: 3, right: -1 }}
           onPress={() => {
-            const existente = favourites.find((item) => item.id === id);
-            if (existente) {
-              setFlag(true);
-            } else {
-              dispatch(postFavourite(token, id));
-            }
-            alert(flag)
-          }}
+                    const existente = favourites.find((item) => item.id === id);
+                    if (existente) {
+                      return Alert.alert('¡Producto agregado anteriormente!');
+                    } else {
+                      dispatch(postFavourite(token, id));
+                      Alert.alert('¡Producto agregado!')
+                    }
+                  }}
         >
           <AntDesign name="hearto" size={24} color="black" />
         </TouchableOpacity>
