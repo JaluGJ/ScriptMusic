@@ -210,18 +210,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
   },
-  commentInput: {
-    borderRadius: 10,
-    padding: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 1.84,
-    elevation:1
-  },
   containerSendComment: {
     backgroundColor: "#DD8643",
     height: 30,
