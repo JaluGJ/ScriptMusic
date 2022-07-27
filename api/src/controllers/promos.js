@@ -219,8 +219,8 @@ const getPromos = async (req, res, next) => {
     if (!promos || promos.length === 0) {
       return res.status(404).json({ message: 'No se han encontrado promociones' })
     }
-    const toDelete = promos.filter(e => e.stock < 1)
-    toDelete.forEach(e => e.remove())
+    // const toDelete = promos.filter(e => e.stock < 1)
+    // toDelete.forEach(e => e.remove())
     return res.json(promos)
   } catch (error) {
     next(error)
