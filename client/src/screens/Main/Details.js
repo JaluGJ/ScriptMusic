@@ -75,9 +75,7 @@ const Details = ({ route }) => {
 
                 <View style={styles.containerStockSum}>
                   <View>
-                    <Text style={styles.stock}>
-                      {details.stock}u disponibles
-                    </Text>
+                    <Text style={styles.stock}>{details.stock===0 && 'No disponible'}</Text>
                   </View>
 
                   <View style={styles.minumPlus}>
@@ -91,7 +89,7 @@ const Details = ({ route }) => {
                       size={24}
                       color="#000000e2"
                     />
-                    <Text style={styles.num}>{countProducts}</Text>
+                    <Text style={styles.num}>{details.stock ? countProducts : 0}</Text>
                     <AntDesign
                       onPress={() =>{
                         if(details.stock > countProducts){
@@ -111,6 +109,7 @@ const Details = ({ route }) => {
                       addToCart({ details });
                       navigation.goBack();
                     }}
+                    disabled={details.stock===0}
                   >
                     <Text style={styles.buttonText}>AL CARRITO</Text>
                   </TouchableOpacity>
