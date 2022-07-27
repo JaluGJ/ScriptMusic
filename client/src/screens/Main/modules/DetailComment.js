@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Text,
     View
@@ -7,10 +7,18 @@ import { vh, vw } from "react-native-expo-viewport-units";
 import { AirbnbRating } from '@rneui/themed';
 import { Image } from "@rneui/themed";
 import styles from "../Styles/Detail.jsx";
-const DetailComment = ({ ratYCom }) => {
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductDetails, updateCommit } from '../../../redux/slices/products.js';
+const DetailComment = () => {
+    const dispatch = useDispatch();
     const imageDefault = "https://res.cloudinary.com/dzonjuriq/image/upload/v1658861361/script_music_img/user_g8vdpj.png";
-  
+    const {details, ratYCom, updateRate} = useSelector((state) => state.products);
+
+    useEffect(() => {
+        if(updateRate>0){
+            dispatch(updateCommit(details.id));
+        }
+    }, [updateRate])
     
 
     return (
@@ -22,7 +30,7 @@ const DetailComment = ({ ratYCom }) => {
                 {
 
                     ratYCom?.length > 0 ?
-                        ratYCom?.map((c, i) => {
+                    ratYCom?.map((c, i) => {
                             let ratingg = c.rating ? c.rating / 2 : 0
                             return (
                                 <View style={styles.containerComment} key={i}>

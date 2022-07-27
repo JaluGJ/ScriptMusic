@@ -9,8 +9,10 @@ export const productsSlice = createSlice({
         list: [],
         statusCode: 0,
         details: {},
+        ratYCom: [],
         category: 'Todos',
         newItems: 0,
+        updateRate:0,
     },
     reducers: {
         setProductsList: (state, action)=>{
@@ -31,10 +33,16 @@ export const productsSlice = createSlice({
         remItems: (state, action)=>{
             state.newItems =  action.payload;
         },
+        setUpdateRate: (state, action)=>{
+            state.updateRate = state.updateRate+=action.payload;
+        },
+        setCommit: (state, action)=>{
+            state.ratYCom = action.payload;
+        }
     }   
 });
 
-export const {setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setSaveProducts} = productsSlice.actions;
+export const {setUpdateRate,setProductsList,setProductsStatusCode,setProductsDetails,setCategory,setItems,remItems,setSaveProducts,setCommit} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -57,6 +65,7 @@ export const getProductDetails = (id)=> (dispatch) =>{
     .then(res=>{
         dispatch(setProductsStatusCode(res.status))
         dispatch(setProductsDetails(res.data.product))
+        dispatch(setCommit(res.data.product.ratYCom))
     })
     .catch(err=>{
         console.log(err)
@@ -121,3 +130,29 @@ export const cleanProducts = () => (dispatch) =>{
     dispatch(setProductsStatusCode(0))
 }
 
+export const addRating = (rating, comment, productId, date, userToken) => (dispatch) =>{
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        };
+        axios
+          .post(`${apiUrl}rating`, { rating, comment, productId, date }, config)
+          .then((res) => {
+            dispatch(setUpdateRate(1))
+          })
+          .catch((e) => {
+            console.log(e.response.data);
+          });
+    
+}
+
+export const updateCommit = (id) => (dispatch) =>{
+    axios.get(`${apiUrl}products/${id}`)
+    .then(res=>{
+        dispatch(setCommit(res.data.product.ratYCom))
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}

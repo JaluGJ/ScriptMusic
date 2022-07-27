@@ -3,31 +3,13 @@ import React, { useState } from "react";
 import styles from "../Styles/Detail";
 import { AirbnbRating } from "@rneui/themed";
 import { useDispatch, useSelector } from "react-redux";
-import { rate } from "../../../redux/slices/signin";
-import axios from "axios";
-
-const apiUrl = "https://sm.up.railway.app/";
+import { addRating } from "../../../redux/slices/products";
 
 export default function InputComment({ productId }) {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const { token } = useSelector((state) => state.signin);
-
-  let rate = async (rating, comment, productId, date, userToken) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    };
-    axios
-      .post(`${apiUrl}rating`, { rating, comment, productId, date }, config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
-  };
+  const dispatch = useDispatch();
 
   return (
     <View>
@@ -70,7 +52,7 @@ export default function InputComment({ productId }) {
             disabled={!comment || rating < 1 || comment[0] === " "}
             onPress={() => {
               let date = Date();
-              rate(rating, comment, productId, date, token);
+              dispatch(addRating(rating, comment, productId, date, token))
             }}
           >
             <Text style={{ letterSpacing: 2 }}>Enviar</Text>
