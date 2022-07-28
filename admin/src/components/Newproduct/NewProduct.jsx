@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import UploadImg from '../../ImageUpload/uploadingImg';
 
 export default function NewProduct({ logout }) {
     const types = useSelector(state => state.types)
@@ -20,7 +21,7 @@ export default function NewProduct({ logout }) {
     useEffect(() => {
         setError(validate(input))
     }, [])
-
+    
     const [error, setError] = useState({})
     const [file, setFile] = useState('')
     const [input, setInput] = useState({
@@ -33,6 +34,7 @@ export default function NewProduct({ logout }) {
         image: '',
         description: '',
     })
+    
 
     function handleinput(e) {
         setInput({
@@ -45,7 +47,7 @@ export default function NewProduct({ logout }) {
             [e.target.name]: e.target.value
         }))
     }
-
+    
     function handleSubmit(e) {
         e.preventDefault()
         if (Object.keys(error).length > 0) {
@@ -73,6 +75,7 @@ export default function NewProduct({ logout }) {
             description: '',
         })
     }
+    
     return (
         <div className="newProduct">
             <SideBar logout={logout} />
@@ -92,13 +95,14 @@ export default function NewProduct({ logout }) {
                             <div className='leftProduct'>
         
                                 <label> Imagen </label>
-                                <input
+                                {/* <input
                                     type="text"
                                     placeholder='Agrega un link de imagen'
                                     name='image'
                                     value={input.image}
                                     onChange={(e) => handleinput(e)}
-                                />
+                                /> */}
+                                <UploadImg setInput={setInput} input={input} setError={setError} validate={validate}/>
                                 {error.image && (
                                     <p>{error.image}</p>
                                 )}

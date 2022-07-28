@@ -14,8 +14,6 @@ const Product = ({ item }) => {
   const [favourites] = useFavorites();
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
-  const [flag, setFlag] = useState(false);
 
   return (
     <TouchableOpacity
@@ -34,14 +32,14 @@ const Product = ({ item }) => {
         <TouchableOpacity
           style={{ position: "absolute", top: 3, right: -1 }}
           onPress={() => {
-            const existente = favourites.find((item) => item.id === id);
-            if (existente) {
-              setFlag(true);
-            } else {
-              dispatch(postFavourite(token, id));
-            }
-            setShowModal(true);
-          }}
+                    const existente = favourites.find((item) => item.id === id);
+                    if (existente) {
+                      return Alert.alert('¡Producto agregado anteriormente!');
+                    } else {
+                      dispatch(postFavourite(token, id));
+                      Alert.alert('¡Producto agregado!')
+                    }
+                  }}
         >
           <AntDesign name="hearto" size={24} color="black" />
         </TouchableOpacity>
@@ -58,7 +56,7 @@ const Product = ({ item }) => {
           <Text style={styles.price}>${price}</Text>
         </View>
       </View>
-      <CustomAlertComponent
+      {/* <CustomAlertComponent
         visible={showModal}
         setVisible={setShowModal}
         setFlag={setFlag}
@@ -69,7 +67,7 @@ const Product = ({ item }) => {
         message={"Revise su lista de favoritos"}
         color={"#DD8643"}
         iconName={"cards-heart"}
-      />
+      /> */}
     </TouchableOpacity>
   );
 };

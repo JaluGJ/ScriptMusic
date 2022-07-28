@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useDebugValue } from 'react'
 import {Text, View, Pressable} from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import styles from "../Styles/Cart.jsx";
-const CartModalTop = ({setModal,totalPrice}) => {
+import useShopping from '../../../customHooks/useShopping.js';
+import useDiscount from '../../../customHooks/useDiscount.js';
+const CartModalTop = ({setModal,totalPrice,status,finalPrice,descuento}) => {
+  
+
     return (
         <>
             <Pressable onPress={() => {
@@ -17,12 +21,12 @@ const CartModalTop = ({setModal,totalPrice}) => {
                 <Text style={styles.textPrice}>${totalPrice}</Text>
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.textCart}>Envio:</Text>
-                <Text style={styles.textPrice}>-$2̶0̶</Text>
+                <Text style={styles.textCart}>{status}</Text>
+                <Text style={styles.textPrice}>-{descuento}%</Text>
             </View>
             <View style={styles.textContainerTotal}>
                 <Text style={styles.textCart}>Total:</Text>
-                <Text style={styles.textPrice}>${totalPrice - 20}</Text>
+                <Text style={styles.textPrice}>${finalPrice}</Text>
             </View>
         </>
     )

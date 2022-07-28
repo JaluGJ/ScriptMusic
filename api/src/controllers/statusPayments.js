@@ -113,7 +113,7 @@ module.exports = {
 
         // console.log("pricea",pricea)
         let priceT = items.map(prod => prod.priceOne * prod.count).reduce((a,b)=>a+b)
-        console.log("priceT", priceT)
+        //console.log("priceT", priceT)
         const ticket = new Ticket({
           userId: userId,
           bought: soldId,

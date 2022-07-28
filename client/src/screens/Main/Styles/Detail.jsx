@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     borderColor: "#00000053",
   },
   containerComment: {
-    marginVertical: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -154,8 +153,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   rattingNum: {
-    position: "absolute",
-    right: 0,
+    alignItems: "flex-start",
+    flexDirection: "row",
   },
   containerImgPromo: {
     height: vh(25),
@@ -211,18 +210,14 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 15,
   },
-  commentInput: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
-  },
   containerSendComment: {
     backgroundColor: "#DD8643",
     height: 30,
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 5,
+    marginTop:10,
   },
   containerSendCommentDisabled: {
     backgroundColor: "#a9a9a9",
@@ -230,8 +225,25 @@ const styles = StyleSheet.create({
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    borderRadius: 5,
+    marginTop:10,
   },
+  textButtonDisableComment: {
+    color: "#14100b",
+    textAlign: "center",
+    shadowColor: "#171717",
+    fontSize: 16,
+    letterSpacing: 2,
+    
+  },
+  textButtonComment:{
+    color: "#FFC680",
+    textAlign: "center",
+    shadowColor: "#171717",
+    fontSize: 16,
+    letterSpacing: 2,
+    
+  }
 });
 
 export default styles;

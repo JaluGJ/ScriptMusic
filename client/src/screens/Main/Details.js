@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
   ActivityIndicator,
+  Alert
 } from "react-native";
 import { Image } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
@@ -27,11 +28,8 @@ const Details = ({ route }) => {
   const { token } = useSelector((state) => state.signin);
   const { details, statusCode } = useDetails({ itemId });
   const { addToCart, countProducts, setCountProducts } = useShoppingCart();
-  const [showModal, setShowModal] = useState(false);
-  const [flag, setFlag] = useState(false);
-  const [favourites] = useFavorites();
-  
-  /* console.log(details.ratYCom) */
+  const [favourites] = useFavorites()
+
   return (
     <>
       {statusCode ? (
@@ -47,11 +45,11 @@ const Details = ({ route }) => {
                   onPress={() => {
                     const existente = favourites.find((item) => item.id === details.id);
                     if (existente) {
-                      setFlag(true);
+                      return Alert.alert('¡Producto agregado anteriormente!');
                     } else {
                       dispatch(postFavourite(token, details.id));
+                      Alert.alert('¡Producto agregado!')
                     }
-                    setShowModal(true);
                   }}
                 >
                   <AntDesign name="hearto" size={27} color="black" />
@@ -77,9 +75,7 @@ const Details = ({ route }) => {
 
                 <View style={styles.containerStockSum}>
                   <View>
-                    <Text style={styles.stock}>
-                      {details.stock}u disponibles
-                    </Text>
+                    <Text style={styles.stock}>{details.stock===0 && 'No disponible'}</Text>
                   </View>
 
                   <View style={styles.minumPlus}>
@@ -93,7 +89,7 @@ const Details = ({ route }) => {
                       size={24}
                       color="#000000e2"
                     />
-                    <Text style={styles.num}>{countProducts}</Text>
+                    <Text style={styles.num}>{details.stock ? countProducts : 0}</Text>
                     <AntDesign
                       onPress={() =>{
                         if(details.stock > countProducts){
@@ -113,6 +109,7 @@ const Details = ({ route }) => {
                       addToCart({ details });
                       navigation.goBack();
                     }}
+                    disabled={details.stock===0}
                   >
                     <Text style={styles.buttonText}>AL CARRITO</Text>
                   </TouchableOpacity>
@@ -120,11 +117,9 @@ const Details = ({ route }) => {
 
               </View>
               <InputComment productId={details.id} />
-              <DetailComment
-                ratYCom={details.ratYCom}
-              />
+              <DetailComment/>
             </View>
-            <CustomAlertComponent
+            {/* <CustomAlertComponent
               visible={showModal}
               setVisible={setShowModal}
               setFlag={setFlag}
@@ -133,7 +128,7 @@ const Details = ({ route }) => {
               message={"Revise su lista de favoritos"}
               color={"#DD8643"}
               iconName={"cards-heart"}
-            />
+            /> */}
           </SafeAreaView>
         </ScrollView>
       ) : (

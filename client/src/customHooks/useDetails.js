@@ -6,7 +6,7 @@ import { getProductDetails } from '../redux/slices/products';
 const useDetails = ({itemId}) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const { details, statusCode } = useSelector((state) => state.products);
+    const { details, statusCode  } = useSelector((state) => state.products);
 
     useEffect(() => {
         const unsubscribe = navigation.addListener("focus", () => {

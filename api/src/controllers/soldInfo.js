@@ -1,4 +1,5 @@
 const Sold = require('../models/sold/soldSchema.js')
+const Product = require('../models/product/productSchema.js')
 const User = require('../models/user/userSchema.js')
 const { getTokenData } = require('../config/jwt.config.js')
 const { estructurador } = require('../middlewares/soldStructurer.js')
@@ -95,12 +96,24 @@ module.exports = {
 
       const sold = await Sold.find({}).populate("items", { model: 1, category: 1, _id: 1 })
 
-      console.log(id)
-
       let soldProd = sold.filter((prod) => prod.items.id === id )
 
-      if (soldProd.length === 0) return res.status(404).json({message: "no se ha vendido nada de este articulo"})
+      if (soldProd.length === 0) {
+        const product = await Product.findById(id)
+        if (!product) {
+          return res.status(404).json({ message: 'No se ha encontrado producto' })
+        }
+        let dateNew = Date().split(" ").slice(1,5)
+        const dates = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
+        let estructura = {
+          model: product.model,
+          quantity: 0,
+          date: dates
+      }
+      return res.json(estructura)
+    }
+    
       let estructura = {}
 
       estructura.model = soldProd[0].items?.model

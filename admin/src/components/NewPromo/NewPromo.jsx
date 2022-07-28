@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useNavigate, Link} from 'react-router-dom';
 import { addPromo, getAllProducts, getAllPromos } from "../../redux/actions";
+import UploadImg from '../../ImageUpload/uploadingImg';
 
 export default function NewPromo({logout}){
     const dispatch = useDispatch();
@@ -154,12 +155,13 @@ export default function NewPromo({logout}){
                         <div className="formInputPromo">
 
                         <label>Imagen</label>
-                            <input
+                            {/* <input
                                 type="text"
                                 placeholder='URL de la imagen'
                                 name='image'
                                 value={input.image}
-                                onChange={(e) => handleinput(e)} />
+                                onChange={(e) => handleinput(e)} /> */}
+                            <UploadImg setInput={setInput} input={input} setError={setError} validate={validate}/>
                             {error.image && (
                                 <p>{error.image }</p>
                             )}    

@@ -39,11 +39,11 @@ module.exports={
       const dated = `${dateNew[1]} ${dateNew[0]} ${dateNew[2]}, ${dateNew[3]}`
 
       if (!rating){
-        return res.status(404).json({msg: 'Es necesario que des una puntuación'})
+        return res.status(404).json({msg: 'Es necesario que des una puntuación.'})
       }
       let compro = user.bought.find(elem => elem.items.toString() === productId)
       if (!compro){
-        return res.status(404).json({msg: 'el usuario no ha comprado este articulo'})
+        return res.status(404).json({msg: 'Para opinar sobre este producto, primero debes comprarlo.'})
       }
       if (!comment){ //si no tiene comentario, se guarda sin comentario.
         let woComment = new Rating ({
@@ -57,7 +57,7 @@ module.exports={
         await Products.findByIdAndUpdate(productId, {$set: {ratYCom: [...prod.ratYCom, woComment._id]}})
 
         await woComment.save()
-        return  res.json({msg: 'El usuario guardo el rating con exito'})
+        return  res.json({msg: 'El usuario guardo el rating con exito.'})
 
       }
       //Si tiene comentario, se guarda con comentario.
@@ -72,7 +72,7 @@ module.exports={
       await Products.findByIdAndUpdate(productId, {$set: {ratYCom: [...prod.ratYCom, wComment._id]}})
 
       await wComment.save()
-      return res.json({msg: 'El usuario guardó el rating y el comentario con exito'})
+      return res.json({msg: 'El usuario guardó el rating y el comentario con exito.'})
 
     } catch (error) {
       next(error)

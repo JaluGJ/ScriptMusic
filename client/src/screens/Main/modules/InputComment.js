@@ -3,50 +3,22 @@ import React, { useState } from "react";
 import styles from "../Styles/Detail";
 import { AirbnbRating } from "@rneui/themed";
 import { useDispatch, useSelector } from "react-redux";
-import { rate } from "../../../redux/slices/signin";
-import axios from "axios";
-
-const apiUrl = "https://sm.up.railway.app/";
+import { addRating } from "../../../redux/slices/products";
 
 export default function InputComment({ productId }) {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const { token } = useSelector((state) => state.signin);
-
-  let rate = async (rating, comment, productId, date, userToken) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    };
-    axios
-      .post(`${apiUrl}rating`, { rating, comment, productId, date }, config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
-  };
+  const dispatch = useDispatch();
 
   return (
     <View>
-      <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 20, marginTop: 50 }}>Deja tu opinión</Text>
-      </View>
-      <View style={{ margin: 10 }}>
-        <TextInput
-          placeholder="Comentario..."
-          maxLength={200}
-          multiline={true}
-          numberOfLines={6}
-          style={styles.commentInput}
-          onChangeText={(value) => setComment(value)}
-        />
-        <View style={{ alignItems: "flex-start" }}>
+      <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-between', }}>
+        <Text style={{ fontSize: 22, height: 32, }}>Deja tu opinión</Text>
+        <View style={{ height: 32, }}>
           <AirbnbRating
             defaultRating={0}
-            size={20}
+            size={24}
             reviews={[
               "Terrible",
               "Malo",
@@ -59,6 +31,21 @@ export default function InputComment({ productId }) {
             starContainerStyle={{ marginVertical: 10 }}
           />
         </View>
+      </View>
+      <View style={{ margin: 10 }}>
+        <TextInput
+          placeholder="Comentario..."
+          maxLength={200}
+          multiline={true}
+          numberOfLines={6}
+          style={{
+            borderWidth: 1,
+            borderRadius: 10,
+            padding: 5,
+            borderColor: "#00000053",
+          }}
+          onChangeText={(value) => setComment(value)}
+        />
         <View
           style={
             !comment || rating < 1 || comment[0] === " "
@@ -70,10 +57,12 @@ export default function InputComment({ productId }) {
             disabled={!comment || rating < 1 || comment[0] === " "}
             onPress={() => {
               let date = Date();
-              rate(rating, comment, productId, date, token);
+              dispatch(addRating(rating, comment, productId, date, token))
             }}
           >
-            <Text style={{ letterSpacing: 2 }}>Enviar</Text>
+            <Text style={!comment || rating < 1 || comment[0] === " "
+              ? styles.textButtonDisableComment
+              : styles.textButtonComment}>Enviar</Text>
           </TouchableOpacity>
         </View>
       </View>

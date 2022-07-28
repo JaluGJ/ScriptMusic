@@ -135,6 +135,8 @@ module.exports = {
   getProductById: async (req, res, next) => {
     try {
       const { id } = req.params
+      const existencia = await Product.findById(id)
+      if (!existencia) return res.status(404).json({ message: 'No se ha encontrado el producto' })
       const product = await Product.findById(id).populate({
         path: "ratYCom",
         select: {
@@ -146,7 +148,7 @@ module.exports = {
         populate: {
           path: "userId",
           select: {
-            fisrtName: 1,
+            firstName: 1,
             lastName: 1,
             image: 1,
             _id: 0

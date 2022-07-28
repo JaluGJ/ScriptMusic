@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useParams, Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Loading from '../Loading/Loading'
+import UploadImg from '../../ImageUpload/uploadingImg';
 
 export default function UpdateProduct({ logout }) {
     const { id } = useParams()
@@ -94,14 +95,15 @@ export default function UpdateProduct({ logout }) {
                             <div className="leftUpdateProduct">
                                 
                                 <label>Imagen</label>
-                                <input
+                                {/* <input
                                     key='Imagen'
                                     type="text"
                                     placeholder={product.image}
                                     name='image'
                                     value={input.image}
                                     onChange={(e) => handleinput(e)}
-                                    />
+                                    /> */}
+                                <UploadImg setInput={setInput} input={input} setError={setError} validate={validate}/>
                                 {error.image && (
                                     <p>{error.image}</p>
                                 )}
