@@ -42,7 +42,8 @@ export default function Grafico() {
         <div className="top">
           <h1 className="title"> Gráfico de ventas</h1>
         </div>
-        <ResponsiveContainer width="98%" height={500}>
+        <div className="bottom">
+        <ResponsiveContainer width="70%" height={500}>
           <BarChart className="barchart" data={data} barSize={20}>
             <XAxis dataKey="category" className="x" />
             <YAxis dataKey="ventas" />
@@ -56,6 +57,7 @@ export default function Grafico() {
             />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
