@@ -868,6 +868,54 @@ module.exports = {
     },
 
 
+    changeRoles : async (req, res, next) => {
+        const autorization = req.get('Authorization')
+
+        if (!autorization) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        if (autorization.split(' ')[0].toLowerCase() !== 'bearer') {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const token = autorization.split(' ')[1]
+        const data = getTokenData(token)
+        if (!data) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+        const user = await User.findById(data.id)
+        if (!user) {
+            return res.status(401).json({ message: 'No se ha encontrado al usuario' })
+        }
+        if (!user.isAdmin) {
+            return res.status(401).json({ message: 'No tienes permisos para hacer esto' })
+        }
+
+        const { id } = req.params
+        try {
+            const user = await User.findById(id)
+            if (!user) {
+                return res.status(404).json({ message: 'No se ha encontrado al usuario' })
+            }
+            if (user.isAdmin) {
+                user.isAdmin = false
+                await user.save()
+                return res.json({ message: 'El usuario ha sido cambiado' })
+            }
+            if (!user.isAdmin) {
+                user.isAdmin = true
+                await user.save()
+                const template = getTemplateAdminRegister(user.firstName)
+                await sendEmail(user.email, 'Has sido registrado como administrador', template)
+                return res.json({ message: 'El usuario ha sido cambiado' })
+            }
+            return res.json({ message: 'El usuario no se ha cambiado' })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+
     validateToken: async (req, res, next) => {
         try {
         const autorization = req.get('Authorization')

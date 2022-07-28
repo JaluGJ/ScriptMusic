@@ -25,7 +25,8 @@ const { getAllUsers,
     updateProfileAdmin,
     changeEmailAdmin,
     changeEmailAdminEmail,
-    resetPasswordAdmin
+    resetPasswordAdmin,
+    changeRoles
 } = require('../controllers/user')
 const { createPromo, deletePromo, getPromos, getPromoById } = require('../controllers/promos')
 const { paymentCard } = require('../controllers/payment')
@@ -104,6 +105,8 @@ routes.put('/admin/changeEmail', changeEmailAdmin)
 routes.get('/admin/change/email/token/:token', changeEmailAdminEmail)
 
 routes.put('/admin/changePassword', resetPasswordAdmin)
+
+routes.put('/admin/change-roles/:id', changeRoles)
 
 //favs
 // USER BAN
