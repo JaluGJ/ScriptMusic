@@ -4,13 +4,7 @@ import "./GraficoDetalles.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
-import {
-  grafico,
-  graficoById,
-  clearCache,
-  getAllProducts,
-} from "../../redux/actions";
+import { graficoById, clearCache } from "../../redux/actions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Loading from "../Loading/Loading";
 import {
@@ -32,6 +26,9 @@ export default function GraficoById() {
 
   useEffect(() => {
     dispatch(graficoById(id, userToken));
+    return () => {
+      dispatch(clearCache());
+    };
   }, []);
 
   const data = [];
@@ -52,26 +49,15 @@ export default function GraficoById() {
               <ArrowBackIcon /> ATRAS
             </button>
           </Link>
-          <h1 className="titleGraficoId"> Gráfico de {graficoId.model}</h1>
+          <h1 className="titleGraficoId"> Gráfico de {graficoId.model} </h1>
         </div>
         {data.length === 0 ? (
           <div className="buttonloading">
             <Loading className="loading" />
           </div>
         ) : (
-          <ResponsiveContainer width="95%" height="80%">
-            <BarChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-              barSize={30}
-            >
+          <ResponsiveContainer width="98%" height={500}>
+            <BarChart className="baarchart" data={data} barSize={30}>
               <XAxis className="xx" dataKey="date" />
               <YAxis dataKey="vendidos" />
               <Tooltip />
