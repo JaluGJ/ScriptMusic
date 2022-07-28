@@ -10,16 +10,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useNavigate, Link} from 'react-router-dom';
 import { addPromo, getAllProducts, getAllPromos } from "../../redux/actions";
 import UploadImg from '../../ImageUpload/uploadingImg';
+import { Button } from '@mui/material';
 
 export default function NewPromo({logout}){
     const dispatch = useDispatch();
     const userToken = localStorage.user
     const promoProducts = useSelector(state => state.products)
-    const sortProd = promoProducts.sort((a,b) => {
-        if (a.model > b.model) return 1;
-        if (a.model < b.model) return -1;
-        return 0;
-    })
+    
     const promoType = ['Descuento', '2X1', 'Combo']
     useEffect(() => {
         dispatch(getAllProducts())
@@ -85,8 +82,8 @@ export default function NewPromo({logout}){
     }
 
     function handleSelectProduct(e) {
-        const product = promoProducts.find(product => product.id === e.target.value)
-        const data = input.items.find(product => product.id === e.target.value)
+        const product = promoProducts.find(r => r.id === e.target.value)
+        const data = input.items.find(r => r.id === e.target.value)
         if (data) {
             return toast.error('El producto ya esta en la lista', {
                 position: "top-center",
@@ -97,37 +94,20 @@ export default function NewPromo({logout}){
                 draggable: true,
                 progress: undefined,
             });
-        }
-
-        if (input.items.includes(e.target.value)) {
-            for (let i = 0; i < input.items.length; i++) {
-              if (input.items[i] === e.target.value) {
-                input.items.splice(i, 1);
-              }
-            }
+        } 
             setInput({
               ...input,
-              items: input.items,
+              items: [...input.items, product],
             });
             setError(validate({
                 ...input,
+                items: product
             }))
             e.target.value = "Productos";
-          } else {
-            setInput({
-              ...input,
-              items: [...input.items, e.target.value],
-            });
-            setError(validate({
-                ...input,
-                items: e.target.value
-            }))
-            e.target.value = "Productos";
-          }
     }
 
         const handleDeleteProduct = (e) => {
-            const newProducts = input.items.filter(product => product.id !== e.target.value)
+            const newProducts = input.items.filter(r => r.id !== e)
             setInput({
                 ...input,
                 items: newProducts
@@ -137,6 +117,8 @@ export default function NewPromo({logout}){
                 items: newProducts
             }))
         }
+
+        console.log(input)
 
     return (
         <div className="newPromo">
@@ -172,10 +154,10 @@ export default function NewPromo({logout}){
                                 defaultValue="Productos"
                                 onChange={(e) => handleSelectProduct(e)}>
                                 <option disabled={true} hidden>Productos</option>
-                                {sortProd.map((e) =>
+                                {promoProducts.map((e) =>
                                     <option value={e.id} key={e.id}>{e.model}</option>)}
                             </select>
-                                <ul>{input.items.map((e) => <li key={e.id} onClick={() => handleDeleteProduct(e.id)}>{e.model}</li>)}</ul>
+                                <ul>{input.items.map((e) => <Button key={e.id} onClick={() => handleDeleteProduct(e.id)}>{e.model}</Button>)}</ul>
                             {error.items && (
                                 <p>{error.items}</p>
                             )}

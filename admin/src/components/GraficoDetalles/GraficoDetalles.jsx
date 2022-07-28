@@ -18,7 +18,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function GraficoById() {
+export default function GraficoById({ logout }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const graficoId = useSelector((state) => state.graficosId);
@@ -41,7 +41,7 @@ export default function GraficoById() {
 
   return (
     <div className="coontenedor">
-      <SideBar />
+      <SideBar logout={logout}/>
       <div className="neewcontenedor">
         <div className="topgrafic">
           <Link to={"/products"} style={{ textDecoration: "none" }}>
@@ -49,13 +49,14 @@ export default function GraficoById() {
               <ArrowBackIcon /> ATRAS
             </button>
           </Link>
-          <h1 className="titleGraficoId"> Gráfico de {graficoId.model} </h1>
+          {/* <h1 className="titleGraficoId"> Gráfico de {graficoId.model} </h1> */}
         </div>
         {data.length === 0 ? (
           <div className="buttonloading">
             <Loading className="loading" />
           </div>
         ) : (
+          <div className="bottom">
           <ResponsiveContainer width="98%" height={500}>
             <BarChart className="baarchart" data={data} barSize={30}>
               <XAxis className="xx" dataKey="date" />
@@ -67,9 +68,10 @@ export default function GraficoById() {
                 dataKey="vendidos"
                 fill="#DD8643"
                 background={{ fill: "#eee" }}
-              />
+                />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         )}
       </div>
     </div>

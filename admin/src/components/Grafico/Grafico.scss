@@ -18,19 +18,20 @@
       }
     }
 
-    .barchart {
-      box-shadow: 4px 4px 10px 1px rgba(140, 139, 139, 0.47);
-      width: 500;
-      height: 300;
-      margin-top: 5;
-      margin-right: 30;
-      margin-left: 30;
-      margin-bottom: 5;
-    }
-    .x {
-      scale: "point";
-      padding-left: 10;
-      padding-right: 10;
-    }
+    .bottom{
+      box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+
+      .barchart {
+        margin-top: 8px;
+      }
+
+      .x {
+        scale: "point";
+      }
+  }
   }
 }

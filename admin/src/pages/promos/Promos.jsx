@@ -12,6 +12,7 @@ const Promos = () => {
 
     const dispatch = useDispatch()
     const rows = useSelector(state => state.promos)
+    const prods = rows.map(r => r.items.map(t => t.model))
     const userToken = localStorage.user
     useEffect(() => {
         dispatch(getAllPromos(userToken));
@@ -40,7 +41,16 @@ const Promos = () => {
         { field: 'description', headerName: 'Descripción', width: 130, headerAlign: 'center', align: 'center' },
         { field: 'price', type: 'number', headerName: 'Precio', width: 70, headerAlign: 'center', align: 'center' },
         { field: 'stock', type: 'number', headerName: 'Disponible', width: 85, headerAlign: 'center', align: 'center' },    
-        { field: 'items', headerName: 'Productos', width: 250, headerAlign: 'center', align: 'center' },
+        { 
+            field: 'items', 
+            headerName: 'Productos', 
+            width: 250, 
+            headerAlign: 'center', 
+            align: 'center', 
+            renderCell: (val) => {
+                return <Link style={{ textDecoration: "none", color: 'black'}} to={''}>{val.row.items.map(r => r.model).join(', ')}</Link>
+            }
+        },
         { 
             field: 'delete',
             headerName: 'Editar', 

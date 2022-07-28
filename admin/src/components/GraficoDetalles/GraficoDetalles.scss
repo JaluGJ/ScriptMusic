@@ -16,7 +16,6 @@
       .titleGraficoId {
         color: #dd8643;
         font-size: 20px;
-        padding-right: 30px;
       }
 
       button {
@@ -46,19 +45,19 @@
       height: 80%;
     }
 
+    .bottom{
+      box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+
     .baarchart {
-      box-shadow: 4px 4px 10px 1px rgba(140, 139, 139, 0.47);
-      width: 500;
-      height: 300;
-      margin-top: 5;
-      margin-right: 30;
-      margin-left: 20;
-      margin-bottom: 5;
+      margin-top: 8px;
     }
     .xx {
       scale: "point";
-      padding-left: 10;
-      padding-right: 10;
+    }
     }
   }
 }
