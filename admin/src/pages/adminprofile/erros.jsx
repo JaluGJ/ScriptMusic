@@ -18,10 +18,10 @@ export  function validate(input) {
         errors.newEmail = 'Por favor escriba una nueva direccion de correo electronico.'
     }
 
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.email)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.email)) {
         errors.email = 'Por favor escriba una dirección de correo electronico valida.'
     }
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.newEmail)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.newEmail)) {
         errors.newEmail = 'Por favor escriba una dirección de correo electronico valida.'
     }
 
@@ -34,7 +34,7 @@ export  function validate2(input) {
         errors.email = 'El campo correo electronico es obligatorio.'
     }
   
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.email)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(input.email)) {
         errors.email = 'Por favor escriba una dirección valida.'
     }
 
@@ -51,4 +51,12 @@ export  function validate2(input) {
     }
 
     return errors;
+}
+
+export function checkprops(obj) {
+    for (var key in obj) {
+        if (obj[key] !== null && obj[key] !== '')
+            return false;
+    }
+    return true;
 }

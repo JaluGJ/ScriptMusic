@@ -34,14 +34,21 @@ export default function UpdateUser({ logout }) {
             image: user.image,
             isAdmin: user.isAdmin
         })
-    }, [user])
+    }, [])
 
     useEffect(() => {
         dispatch(getOneUser(id, userToken))
+        setInput({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            image: user.image,
+            isAdmin: user.isAdmin
+        })
         return () => {
             dispatch(clearCache())
         }
-    }, [dispatch])
+    }, [])
 
     function adminRol(e) {
         e.preventDefault()
@@ -90,7 +97,7 @@ export default function UpdateUser({ logout }) {
                     </Link>
                     <h1 className="title">Modificar Usuario</h1>
                 </div>
-
+{console.log(input)}
 
                 {user.length === 0
                     ? <div className="bottomloa"> <Loading className='loading' /> </div>

@@ -5,7 +5,7 @@ import Loading from '../../components/Loading/Loading'
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { changeEmailAdmin, changePasswordAdmin } from '../../redux/actions';
-import {validate, validate2} from './erros.jsx'
+import { validate, validate2, checkprops } from './erros.jsx'
 
 function AdminProfile() {
     const dispatch = useDispatch();
@@ -19,10 +19,10 @@ function AdminProfile() {
     const [error1, setError1] = useState({});
     const [error2, setError2] = useState({});
 
-    function handleInput1(e){
+    function handleInput1(e) {
         setInput1({
             ...input1,
-            [e.target.name] : e.target.value,
+            [e.target.name]: e.target.value,
         })
 
         setError1(validate({
@@ -31,10 +31,10 @@ function AdminProfile() {
         }))
     }
 
-    function handleInput2(e){
+    function handleInput2(e) {
         setInput2({
             ...input2,
-            [e.target.name] : e.target.value,
+            [e.target.name]: e.target.value,
         })
 
         setError2(validate2({
@@ -43,7 +43,7 @@ function AdminProfile() {
         }))
     }
 
-    function handleSubmitEmail(e){
+    function handleSubmitEmail(e) {
         e.preventDefault()
         dispatch(changeEmailAdmin(input1, userToken))
         toast.success('¡Email se a cambiado con éxito!', {
@@ -56,7 +56,7 @@ function AdminProfile() {
             progress: undefined,
         });
     }
-    function handleSubmitPassword(e){
+    function handleSubmitPassword(e) {
         e.preventDefault()
         dispatch(changePasswordAdmin(input2, userToken))
         toast.success('¡Contraseña se a cambiado con éxito!', {
@@ -73,7 +73,7 @@ function AdminProfile() {
     return (
         // <Loading />
         <div className="profile">
-            <ToastContainer/>
+            <ToastContainer />
             <SideBar />
             <div className="container">
                 <div className="top">MODIFICAR PERFIL DE ADMINISTRADOR</div>
@@ -89,46 +89,53 @@ function AdminProfile() {
                         <h3>Rol</h3>
                         <p>{profile.isAdmin === true ? 'Administrador' : 'Usuario regular'}</p>
                     </div>
-                    
+
                     <div className="rigth" >
                         <form onSubmit={e => handleSubmitEmail(e)}>
                             <h3>Cambiar correo electronico</h3>
                             <label>Correo actual</label>
                             <input name='email' onChange={e => handleInput1(e)} type="text" />
-                            {error1.email && 
+                            {error1.email &&
                                 (<p>{error1.email}</p>)
                             }
                             <label> Contraseña</label>
                             <input name='password' onChange={e => handleInput1(e)} type="password" />
-                            {error1.password && 
+                            {error1.password &&
                                 (<p>{error1.password}</p>)
                             }
                             <label>Nuevo Correo</label>
                             <input name='newEmail' onChange={e => handleInput1(e)} type="text" />
-                            {error1.newEmail && 
+                            {error1.newEmail &&
                                 (<p>{error1.newEmail}</p>)
                             }
-                            <button>Cambiar Correo</button>
+                            {!Object.keys(error1).length && !checkprops(input1) ?
+                                <button >Cambiar correo</button> :
+                                <button disabled >Cambiar correo</button>
+                            }
                         </form>
 
                         <form onSubmit={e => handleSubmitPassword(e)}>
                             <h3>Cambiar contraseña</h3>
                             <label>Correo actual</label>
                             <input type="text" name='email' onChange={e => handleInput2(e)} />
-                            {error2.email && 
+                            {error2.email &&
                                 (<p>{error2.email}</p>)
                             }
                             <label> Contraseña</label>
                             <input type="password" name='password' onChange={e => handleInput2(e)} />
-                            {error2.email && 
+                            {error2.email &&
                                 (<p>{error2.password}</p>)
                             }
                             <label>Nueva contraseña</label>
                             <input type="password" name='newPassword' onChange={e => handleInput2(e)} />
-                            {error2.email && 
+                            {error2.email &&
                                 (<p>{error2.newPassword}</p>)
                             }
-                            <button>Cambiar contraseña</button>
+                            {!Object.keys(error2).length && !checkprops(input2) ?
+                                <button >Cambiar contraseña</button> :
+                                <button disabled >Cambiar contraseña</button>
+                            }
+
                         </form>
                     </div>
 
