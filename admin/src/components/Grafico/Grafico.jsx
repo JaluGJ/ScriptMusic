@@ -3,6 +3,8 @@ import SideBar from "../SideBar/SideBar";
 import "./Grafico.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { grafico } from "../../redux/actions";
 import {
   BarChart,
@@ -35,11 +37,12 @@ export default function Grafico() {
   return (
     <div className="contenedor">
       <SideBar />
+      <ToastContainer />
       <div className="newcontenedor">
         <div className="top">
           <h1 className="title"> Gráfico de ventas</h1>
         </div>
-        <ResponsiveContainer width="95%" height={500}>
+        <ResponsiveContainer width="98%" height={500}>
           <BarChart className="barchart" data={data} barSize={20}>
             <XAxis dataKey="category" className="x" />
             <YAxis dataKey="ventas" />
