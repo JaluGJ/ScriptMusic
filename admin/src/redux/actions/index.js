@@ -25,6 +25,8 @@ export const DELETE_PROMO = "DELETE_PROMO"
 export const ADMIN_PROFILE = 'ADMIN_PROFILE'
 export const ADMIN_EMAIL_CHANGE = 'ADMIN_EMAIL_CHANGE'
 export const ADMIN_PASSWORD_CHANGE = 'ADMIN_PASSWORD_CHANGE'
+export const ADMIN_CHANGE_ROLE = 'ADMIN_CHANGE_ROLE'
+
 
 // PRODUCTS ACTIONS
 
@@ -297,6 +299,20 @@ export function changePasswordAdmin(input, userToken){
     const json = await axios.put(`${baseUrl}/admin/changePassword`, input, config)
     return dispatch({
       type: ADMIN_PASSWORD_CHANGE,
+      payload: json.data
+    })
+  }
+}
+export function changeRoles(id, userToken){
+  return async function(dispatch){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+    const json = await axios.put(`${baseUrl}/admin/change-roles/${id}`, null, config)
+    return dispatch({
+      type: ADMIN_CHANGE_ROLE,
       payload: json.data
     })
   }

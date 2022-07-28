@@ -21,6 +21,7 @@ import {
   ADMIN_PROFILE,
   ADMIN_EMAIL_CHANGE,
   ADMIN_PASSWORD_CHANGE,
+  ADMIN_CHANGE_ROLE
 } from "../actions";
 
 const initialState = {
@@ -147,6 +148,11 @@ export const rootReducer = (state = initialState, action) => {
       };
 
     case ADMIN_PASSWORD_CHANGE:
+      return {
+        ...state,
+      };
+      
+    case ADMIN_CHANGE_ROLE:
       return {
         ...state,
       };
