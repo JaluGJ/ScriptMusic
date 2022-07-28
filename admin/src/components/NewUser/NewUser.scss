@@ -1,0 +1,124 @@
+.newUser{
+    width: 100%;
+    display: flex;
+    
+    .newcontainerUser{
+        flex:6;
+
+        .topUser{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .titleUser{
+                color:#DD8643;
+                font-size: 20px;
+                padding-right: 30px;
+            }
+
+            button{
+                width: 120px;
+                background-color: #DD8643;
+                padding: 7px;
+                border: none;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                align-items: center;
+                justify-content: space-around;
+                display: flex;  
+                border-radius: 10px;                
+            }
+        }
+
+         .bottomUser{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+
+            img{
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                padding-bottom: 25px;
+               }
+
+            .titleUser{
+                color:#DD8643;
+                font-size: 20px;
+            }         
+
+            form{
+                width: 60%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: space-around;
+                align-items: center;
+
+                .formInputUser{
+                    width: 40%;
+                    align-items: center;
+                    flex-direction: column;
+                    display: flex;
+
+                    p{
+                        font-size: 10px;
+                        margin-bottom: 5px;
+                        color: red;
+                            
+                    }
+
+                    label{
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: #FFC680;
+                    }
+
+                    input{
+                        width: 80%;
+                        padding: 5px;
+                        border: none;
+                        border-bottom: 1px solid gray;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }                        
+                }
+
+                button{
+                    width: 150px;
+                    background-color: #DD8643;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                }
+
+                button[disabled]{
+                    width: 150px;
+                    background-color: #5b5b5b;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    cursor: default;
+                }
+            }            
+        }
+    }
+
+    
+}

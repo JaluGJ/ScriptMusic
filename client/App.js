@@ -1,11 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import store from "./src/redux/store.js";
+import AppWrapped from "./AppWrapped";
+import { StripeProvider } from '@stripe/stripe-react-native'; 
+import { LogBox } from 'react-native';
+import * as Notifications from 'expo-notifications';
+LogBox.ignoreAllLogs();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   return (
-    <View>
-      <Text>PROYECTO FINAL</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <SafeAreaProvider>
+      <StripeProvider publishableKey='pk_test_51LIhHqGv8AEygBrRyJ33qbsZN0YWhpj5AJM6W0MHlK9uPXHaYv9IA9YYEtPgLxx9pO3l0fzMZMhGXa5HKS1bCyKB00Fsn7S6pq'>
+        <NavigationContainer>
+          <AppWrapped />
+        </NavigationContainer>
+        </StripeProvider>
+      </SafeAreaProvider>
+    </Provider>
   );
 }

@@ -1,0 +1,25 @@
+.users{
+    display: flex;
+}
+
+.container{
+    flex: 6;
+}
+
+.red{
+    color: red;
+    cursor: pointer;
+}
+
+.green{
+    color: green;
+    cursor: pointer;
+}
+
+.delete{
+    cursor: pointer;
+}
+
+.edit{
+    color: rgb(46, 124, 228);
+}

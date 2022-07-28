@@ -1,5 +1,7 @@
 node_modules/
 .expo/
+.env
+img
 dist/
 npm-debug.*
 *.jks
@@ -9,6 +11,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+package-lock.json
 # macOS
 .DS_Store
+eas.*
+google-services.*

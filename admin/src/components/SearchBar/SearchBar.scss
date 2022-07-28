@@ -1,0 +1,38 @@
+.navbar{   
+    border-bottom: 0.5px solid rgb(226, 226, 226);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #DD8643;
+
+    .wrapper{
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #2B2B2B;
+
+        .search{
+            display: flex;
+            align-items: center;
+            border: 0.5px solid lightgray;
+            padding: 3px;
+            
+
+            input{
+                border: none;
+                outline: none;
+                background: transparent;
+                color: #FEFEFE;
+                
+
+                &::placeholder{
+                    font-size: 12px;
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,175 @@
+.newProduct{
+    width: 100%;
+    display: flex;
+    
+    .newcontainerProduct{
+         flex:6;
+
+         .topProduct{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .titleProduct{
+                color:#DD8643;
+                font-size: 20px;
+                padding-right: 30px;
+            }
+
+            button{
+                width: 120px;
+                background-color: #DD8643;
+                padding: 7px;
+                border: none;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                align-items: center;
+                justify-content: space-around;
+                display: flex;  
+                border-radius: 10px;                
+            }
+         }
+
+         .bottomProduct{
+            box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            img{ 
+                width: 350px;
+                height: 300px;
+                padding-bottom: 25px;
+            }
+
+            form{
+                width: 60%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                justify-content: space-around;
+                align-items: center;
+
+                .formInputProduct{
+                    width: 100%;
+                    align-items: center;
+                    flex-direction: row;
+                    display: flex;
+
+                    .leftProduct{
+                        margin-right: 100px;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
+                            
+                        p{
+                            font-size: 10px;
+                            margin-bottom: 5px;
+                            color: red;
+                        }
+    
+                        label{
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #FFC680;
+                        }
+    
+                        input{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            text-align: center;
+                        }
+                    }
+
+                    .rightProduct{
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
+
+                        p{
+                            font-size: 10px;
+                            margin-bottom: 5px;
+                            color: red;                            
+                        }
+                         
+                        label{
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #FFC680;
+                        }
+                         
+                        select{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            font-size: 12px;
+                            text-align: center;
+                        }
+                         
+                        input{
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            text-align: center;
+                        }
+                         
+                        textarea{
+                            height: 150px;
+                            width: 100%;
+                            padding: 5px;
+                            border: none;
+                            border-bottom: 1px solid gray;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                            resize: none;
+                        }
+                    }                        
+                }
+
+                button{
+                    width: 150px;
+                    background-color: #DD8643;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    border-radius: 10px;                        
+                }
+
+                button[disabled]{
+                    width: 150px;
+                    background-color: #5b5b5b;
+                    padding: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                    cursor: default;
+                }
+            }
+        }
+    }    
+}
