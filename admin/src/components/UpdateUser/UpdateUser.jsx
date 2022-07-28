@@ -97,7 +97,6 @@ export default function UpdateUser({ logout }) {
                     </Link>
                     <h1 className="title">Modificar Usuario</h1>
                 </div>
-{console.log(input)}
 
                 {user.length === 0
                     ? <div className="bottomloa"> <Loading className='loading' /> </div>

@@ -118,7 +118,6 @@ export default function NewPromo({logout}){
             }))
         }
 
-        console.log(input)
 
     return (
         <div className="newPromo">

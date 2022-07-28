@@ -85,7 +85,6 @@ const Login = () => {
         const token = await loginValidate(input);
         if (token){
             // dispatch(adminProfile(token));
-            console.log("TOKEEEEEN")
             const e = await validate(token)
             if (e === input.email) {
                 localStorage.setItem('user', token)
@@ -104,7 +103,6 @@ const Login = () => {
         }
         const data = localStorage.getItem('user')
         if(data !== "null"){
-            console.log("WTF", token)
             toast.done('TODO OK.', {
                 position: "top-center",
                 autoClose: 5000,
