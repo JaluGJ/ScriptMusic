@@ -1,46 +1,64 @@
 .coontenedor {
-    width: 100%;
-    display: flex;
-    
+  width: 100%;
+  display: flex;
 
-   .neewcontenedor{
-      flex: 6;
-   
-      
-       .toop{
-          box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
-          padding: 10px;
-          margin: 20px;
-          display: flex;
-        
-       
-        .tiitle{
-              
-               color: black;
-               font-size: 20px;
-               padding-right: 30px;
-           }
-     
-       }
+  .neewcontenedor {
+    flex: 6;
 
-       .baarchart{
-           width: 500;
-           height: 300;
-           margin-top: 5;
-           margin-right: 30;
-           margin-left: 20;
-           margin-bottom: 5;
-           
-       
-       }
-       .xx{
-           scale: 'point';
-           padding-left: 10;
-           padding-right: 10;
-       }
-      
-        
-   }
+    .topgrafic {
+      box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-}           
-       
+      .titleGraficoId {
+        color: #dd8643;
+        font-size: 20px;
+        padding-right: 30px;
+      }
+
+      button {
+        width: 120px;
+        background-color: #dd8643;
+        padding: 7px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        align-items: center;
+        justify-content: space-around;
+        display: flex;
+        border-radius: 10px;
+      }
+    }
+
+    .buttonloading {
+      box-shadow: 2px 4px 10px 1px rgba(140, 139, 139, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 80%;
+    }
+
+    //    .baarchart{
+    //        width: 500;
+    //        height: 300;
+    //        margin-top: 5;
+    //        margin-right: 30;
+    //        margin-left: 20;
+    //        margin-bottom: 5;
+
+    //    }
+    .xx {
+      scale: "point";
+      padding-left: 10;
+      padding-right: 10;
+    }
+  }
+}
