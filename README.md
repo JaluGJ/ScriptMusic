@@ -2,7 +2,7 @@
 
 <br>
 
-# Script Muisc
+# Script Music
 
 <p>Este proyecto está destinado a distribuidoras y tiendas de instrumentos. El proyecto presentado nace de la necesidad de otorgar una solución a tener un mejor control de stock junto a las ventas de instrumentos musicales para una ditribuidora de los mismos, y también ingresar a la empresa al mercado virtual, permitiendo una mayor comodidad para la compra y venta de instumentos. Teniendo un panel del administrador cómodo y útil desde la web, también le otorgamos una gran comodidad al cliente teniendo una aplicación móvil en la que puede revisar los productos diponibles junto a ofertas y efectuar compras al simple movimiento del dedo. Se implementó Stripe como medio para facilitar pagos. </p>
 
