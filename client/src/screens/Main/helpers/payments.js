@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const API_URL = 'https://sm.up.railway.app';
+const API_URL = 'https://script-music.herokuapp.com';
 
 export const fetchPaymentIntent = async (body) => {
     const {data} = await axios.post(`${API_URL}/create-payment-intents`, body);
