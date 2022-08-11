@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = "https://sm.up.railway.app/loginAdmin"
+const url = "https://script-music.herokuapp.com/loginAdmin"
 
 const loginValidate = async (values) => {
     try{

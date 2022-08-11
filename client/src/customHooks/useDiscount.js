@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-const apiUrl = "https://sm.up.railway.app/";
+const apiUrl = "https://script-music.herokuapp.com/";
 
 const useDiscount = ({totalPrice}) => {
     const [countBought, setCountBought] = useState(0);

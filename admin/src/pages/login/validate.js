@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = "https://sm.up.railway.app/validate-token"
+const baseURL = "https://script-music.herokuapp.com/validate-token"
 
 const validateToken = async (userToken) => {
     try{

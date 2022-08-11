@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { create } from "../redux/slices/signin";
 import axios from "axios";
-const apiUrl = "https://sm.up.railway.app/";
+const apiUrl = "https://script-music.herokuapp.com/";
 
 const useShopping = () => {
   const [bought, setBought] = useState([]);
