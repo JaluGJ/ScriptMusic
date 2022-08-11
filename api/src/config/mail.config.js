@@ -59,7 +59,7 @@ const getTemplate = (name, token) => {
 
             <p style="color: #141414;font-size: 15px;text-align: center;">Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
             <a style="color: #141414; font-size: 15px; text-decoration: underline;margin-left: 95px;"
-                href="https://sm.up.railway.app/user/confirm/token/${token}" target="_blank"><button
+                href="https://script-music.herokuapp.com/user/confirm/token/${token}" target="_blank"><button
                     style="background-color: #141414; border-radius: 5px; width: 150px; height: 30px; border: 1px solid; cursor: pointer;color: white;">Confirmar cuenta</button></a><br />
             <p style="color: #141414;font-size: 15px;text-align: center;">Saludos, el equipo de ScriptMusic.</p>
 
@@ -211,7 +211,7 @@ const getTemplateForgotPassword = (name, token) => {
         <p style="color: #141414;font-size: 15px; text-align: center;">Hemos recibido una solicitud para restablecer tu contraseña.</p>
         <p style="color: #141414;font-size: 15px; text-align: center;">Si solicitaste restablecer tu contraseña, presiona el siguiente botón. Si no hiciste esta solicitud, por favor, ignora este mail.</p>
         <a style="color: #141414; font-size: 15px; text-decoration: underline;margin-left: 95px;"
-                href="https://sm.up.railway.app/user/reset/token/${token}" target="_blank"><button
+                href="https://script-music.herokuapp.com/user/reset/token/${token}" target="_blank"><button
                     style="background-color: #141414; border-radius: 5px; width: 150px; height: 35px; border: 1px solid; cursor: pointer;color: white;">Restablecer contraseña</button></a><br />
             <p style="color: #141414;font-size: 15px;text-align: center;">Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
             
@@ -262,7 +262,7 @@ const getTemplateChangeEmail = (name, email, newEmail, token) => {
         <p style="color: #141414;font-size: 15px; text-align: center;">Nuevo email: ${newEmail}</p>
         <p style="color: #141414;font-size: 15px; text-align: center;">Si solicitaste cambiar tu email, presiona el siguiente botón. Si no hiciste esta solicitud, por favor, ignora este mail.</p>
         <a style="color: #141414; font-size: 15px; text-decoration: underline;margin-left: 95px;"
-                href="https://sm.up.railway.app/user/change/email/token/${token}" target="_blank"><button
+                href="https://script-music.herokuapp.com/user/change/email/token/${token}" target="_blank"><button
                     style="background-color: #141414; border-radius: 5px; width: 150px; height: 35px; border: 1px solid; cursor: pointer;color: white;">Cambiar email</button></a><br />
             <p style="color: #141414;font-size: 15px;text-align: center;">Si tienes problemas o alguna pregunta, responde este mail, siempre estaremos felices de poder ayudarte.</p>
             
@@ -288,7 +288,7 @@ const getTemplateAdminRegister = (name) => {
         <p style="color: #141414;font-size: 15px; text-align: center;">Para acceder, ingresa con tu email y contraseña
             al siguiente enlace</p>
         <a style="color: #141414; font-size: 15px; text-decoration: underline;margin-left: 95px;"
-            href="https://sm.up.railway.app/admin" target="_blank"><button
+            href="https://script-music.herokuapp.com/admin" target="_blank"><button
                 style="background-color: #141414; border-radius: 5px; width: 150px; height: 35px; border: 1px solid; cursor: pointer;color: rgb(240, 240, 240);">Ingresar</button></a><br />
         <p style="color: #141414;font-size: 15px;text-align: center;">Saludos, el equipo de ScriptMusic.</p>
 

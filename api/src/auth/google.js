@@ -10,7 +10,7 @@
 //     {
 //         clientID:"61373446418-l6s22h7k8dbslkpdt3bq8ikp8u1rna5v.apps.googleusercontent.com",
 //         clientSecret:"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",
-//         callbackURL: "https://sm.up.railway.app/auth/google",
+//         callbackURL: "https://script-music.herokuapp.com/auth/google",
 //     }, async (accessToken, refreshToken, profile, done)=>{
 //         try {
 //             const user = await User.findOne({email: profile.emails[0].value})

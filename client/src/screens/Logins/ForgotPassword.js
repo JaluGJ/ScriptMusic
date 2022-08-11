@@ -12,7 +12,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
-const apiUrl = "https://sm.up.railway.app/";
+const apiUrl = "https://script-music.herokuapp.com/";
 
 const ForgotPassword = () => {
   const [errors, setErrors] = useState({});

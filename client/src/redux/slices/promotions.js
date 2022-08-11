@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-const apiUrl = 'https://sm.up.railway.app/';
+const apiUrl = 'https://script-music.herokuapp.com/';
 
 export const promotionsSlice = createSlice({
     name: 'promotions',

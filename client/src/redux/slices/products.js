@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Alert } from "react-native";
 
-const apiUrl = "https://sm.up.railway.app/";
+const apiUrl = "https://script-music.herokuapp.com/";
 
 export const productsSlice = createSlice({
   name: "products",
