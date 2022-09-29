@@ -1,22 +1,4 @@
-const bcrypt = require('bcrypt')
-const path = require('path')
-const {
-     getTemplate,
-     sendEmail,
-     getTemplateBanUser,
-     getTemplateUnBanUser, 
-     getTemplateForgotPasswordNewPassword, 
-     getTemplateForgotPassword,
-     getTemplateChangeEmail,
-     getTemplateAdminRegister
-    } = require('../config/mail.config.js')
-const getToken = require('../config/jwt.config.js').getToken
-const getTokenData = require('../config/jwt.config.js').getTokenData
-const User = require('../models/user/userSchema.js')
 
-
-
-module.exports = {
 
 
     googleLogin: async (req, res, next) => {
