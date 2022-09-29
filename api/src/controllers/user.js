@@ -13,8 +13,7 @@ const {
 const getToken = require('../config/jwt.config.js').getToken
 const getTokenData = require('../config/jwt.config.js').getTokenData
 const User = require('../models/user/userSchema.js')
-
-
+putos de mierda
 
 module.exports = {
 
